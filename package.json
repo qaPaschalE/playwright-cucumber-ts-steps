@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "docs": "typedoc src",
+    "docs": "typedoc src --out temp-docs/playwright-cucumber-ts-steps/docs",
     "prepare": "husky",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
@@ -100,6 +100,7 @@
     "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
+    "typedoc": "^0.28.5",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1"
   }

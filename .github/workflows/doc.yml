@@ -27,7 +27,7 @@ jobs:
       - name: 📘 Generate docs with TypeDoc
         run: |
           mkdir -p temp-docs/playwright-cucumber-ts-steps/docs
-          npm run docs -- --out temp-docs/playwright-cucumber-ts-steps/docs
+          npm run docs
 
       - name: 🚀 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
