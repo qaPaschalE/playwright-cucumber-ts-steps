@@ -24,6 +24,6 @@ module.exports = [
     },
   },
   {
-    ignores: ["lib/**", "node_modules/**"],
+    ignores: ["lib/**", "node_modules/**", "playwright/**"],
   },
 ];
