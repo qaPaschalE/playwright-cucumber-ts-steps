@@ -2,9 +2,7 @@
 module.exports = {
   default: {
     paths: ["playwright/e2e/features/*.feature"],
-    require: [
-      "src/register.ts", // or your register file
-    ],
+    require: ["lib/register.js"],
     requireModule: ["ts-node/register"],
     format: [
       "progress-bar",

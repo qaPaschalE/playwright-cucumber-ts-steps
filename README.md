@@ -9,10 +9,6 @@
 
 > A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.
 
-Here's the updated **README** with all the latest features and corrections integrated into your `playwright-cucumber-ts-steps` package:
-
----
-
 ## ✨ Features
 
 - 🧩 Plug-and-play Cucumber step definitions
@@ -229,8 +225,9 @@ const ARTIFACT_DIR = process.env.TEST_ARTIFACT_DIR || "test-artifacts";
 const defaultWorldParams = {
   artifactDir: ARTIFACT_DIR,
   payloadDir: "payloads",
-  enableScreenshots: process.env.ENABLE_SCREENSHOTS !== "false",
-  enableVideos: process.env.ENABLE_VIDEOS !== "false",
+  enableTrace: process.env.ENABLE_TRACE || "fail", // "false" | "fail" | "all"
+  enableScreenshots: process.env.ENABLE_SCREENSHOTS || "fail", // "false" | "fail" | "all"
+  enableVideos: process.env.ENABLE_VIDEOS || "all", // "false" | "fail" | "all"
   enableVisualTest: process.env.ENABLE_VISUAL_TEST === "true",
   device: process.env.MOBILE_DEVICE || undefined, // e.g., "Pixel 5"
 };
