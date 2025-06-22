@@ -1,0 +1,36 @@
+name: 📘 Generate & Deploy Docs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write # Needed for Pages deployment
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📘 Generate docs with TypeDoc
+        run: |
+          mkdir -p temp-docs/playwright-cucumber-ts-steps/docs
+          npm run docs -- --out temp-docs/playwright-cucumber-ts-steps/docs
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./temp-docs

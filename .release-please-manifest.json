@@ -1,0 +1,8 @@
+{
+  "release-type": "node",
+  "bump-minor-pre-major": true,
+  "bump-patch-pre-minor": true,
+  "bump-patch-pre-major": true,
+  "changelog-path": "CHANGELOG.md",
+  "include-v-in-tag": false
+}

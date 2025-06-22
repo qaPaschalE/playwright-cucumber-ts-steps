@@ -1,0 +1,19 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: "Release type (default: node)"
+        required: false
+        default: node
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: google-github-actions/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: ${{ github.event.inputs.release-type }}

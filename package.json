@@ -1,0 +1,106 @@
+{
+  "name": "playwright-cucumber-ts-steps",
+  "version": "0.1.7",
+  "description": "A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.",
+  "type": "commonjs",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js"
+    },
+    "./register": {
+      "import": "./lib/register.js"
+    }
+  },
+  "sideEffects": false,
+  "typesVersions": {
+    "*": {
+      "*": [
+        "lib/*"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "docs": "typedoc src",
+    "prepare": "husky",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "lint:tsc": "tsc --noEmit",
+    "format": "prettier --write .",
+    "clean": "rm -rf playwright/report",
+    "test": "npm run clean && cucumber-js --config playwright/config/cucumber.js",
+    "commitlint": "commitlint --edit"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,md}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qaPaschalE/playwright-cucumber-ts-steps.git"
+  },
+  "keywords": [
+    "playwright",
+    "cucumber",
+    "typescript",
+    "e2e",
+    "steps",
+    "step-definitions",
+    "testing",
+    "automation",
+    "bdd",
+    "api",
+    "ui",
+    "web",
+    "end-to-end",
+    "behavior-driven",
+    "mobile",
+    "visual-testing"
+  ],
+  "author": "qaPaschalE <paschal.enyimiri@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues"
+  },
+  "homepage": "https://github.com/qaPaschalE/playwright-cucumber-ts-steps#readme",
+  "peerDependencies": {
+    "@cucumber/cucumber": "*",
+    "@playwright/test": "*"
+  },
+  "dependencies": {
+    "@cucumber/tag-expressions": "^6.2.0",
+    "@faker-js/faker": "^9.8.0",
+    "dayjs": "^1.11.13",
+    "dotenv-cli": "^8.0.0",
+    "glob": "^11.0.3",
+    "parse": "^6.1.1",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@types/pngjs": "^6.0.5",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.32.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.1"
+  }
+}

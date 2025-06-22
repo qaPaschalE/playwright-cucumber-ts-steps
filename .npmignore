@@ -1,0 +1,85 @@
+# =========================
+# Ignore files/folders not needed in npm package
+# =========================
+
+# Ignore examples and internal test projects
+examples/
+e2e/
+tests/
+coverage/
+scripts/
+traces/
+playwright
+.release-please-manifest.json
+
+# Ignore dev/test-only files
+.vscode/
+.env
+.env.* 
+*.log
+*.test.*
+*.spec.*
+
+# Ignore build tools
+tsconfig.json
+tsconfig.*.json
+jest.config.*
+cucumber.*
+playwright.config.*
+*.config.js
+*.config.ts
+
+# Ignore version control and CI/CD configs
+.git
+.gitignore
+.gitattributes
+.github/
+.gitlab/
+.gitlab-ci.yml
+
+# Ignore documentation (optional)
+
+CHANGELOG.md
+
+# Ignore videos, screenshots, snapshots, and reports
+screenshots/
+videos/
+snapshots/
+report/
+*.mp4
+*.webm
+*.png
+*.jpg
+*.jpeg
+*.diff.*
+
+# Ignore TypeScript source if you're only publishing JS
+
+support/
+step_definitions/
+
+# Ignore node_modules just in case
+node_modules/
+node_modules
+
+# # Ignore build artifacts
+# dist/
+# lib/
+# Ignore Playwright artifacts
+playwright-report/  
+# Ignore husky hooks
+.husky/
+
+# Ignore prettier config if not needed
+.prettierrc
+.prettierignore
+
+# Ignore ESLint config if not needed
+.eslintrc.js
+.eslintrc.json
+.eslintignore   
+.eslint.config.js
+commitlint.config.js
+
+# Ignore package-lock.json if you want to avoid it
+package-lock.json
