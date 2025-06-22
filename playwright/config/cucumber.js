@@ -2,7 +2,7 @@
 module.exports = {
   default: {
     paths: ["playwright/e2e/features/*.feature"],
-    require: ["playwright/e2e/steps/index.ts"],
+    require: ["src/register.ts"],
     requireModule: ["ts-node/register"],
     format: [
       "progress-bar",
@@ -16,7 +16,7 @@ module.exports = {
       enableScreenshots: process.env.ENABLE_SCREENSHOTS || "fail",
       enableVideos: process.env.ENABLE_VIDEOS || "all",
       enableVisualTest: true,
-      artifactDir: "playwright",
+      artifactDir: "playwright-report",
     },
     formatOptions: {
       snippetInterface: "async-await",

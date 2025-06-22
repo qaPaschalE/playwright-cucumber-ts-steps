@@ -1,1 +1,1 @@
-import "../../../lib";
+import "../../../src/register";
