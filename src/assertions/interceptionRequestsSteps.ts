@@ -1,7 +1,6 @@
 import { Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import type { CustomWorld } from "../helpers/world";
-// Accessing the Last Response
 
 Then("I should see response status {int}", function (expectedStatus: number) {
   expect(this.data.lastResponse?.status).toBe(expectedStatus);
@@ -12,23 +11,28 @@ Then("I should see response body contains {string}", function (expectedText: str
   expect(this.data.lastResponse?.body).toContain(expectedText);
   this.log(`Verified response body contains "${expectedText}"`);
 });
+
 Then("I see response body {string}", async function (this: CustomWorld, expected: string) {
   const res = this.data.lastResponse;
   const body = await res.text();
   if (body !== expected) throw new Error(`Expected body "${expected}", got "${body}"`);
 });
+
 Then("I see response body contains {string}", async function (this: CustomWorld, part: string) {
   const res = this.data.lastResponse;
   const body = await res.text();
   if (!body.includes(part)) throw new Error(`Body does not contain "${part}"`);
 });
+
+// Dynamically import Ajv for JSON schema validation
 Then(
   "I see response body matches JSON schema {string}",
   async function (this: CustomWorld, schemaPath: string) {
     const res = this.data.lastResponse;
     const body = await res.text();
-    const schema = require(schemaPath); // Assuming schema is a JSON file
-    const Ajv = require("ajv");
+    const schema = await import(schemaPath).then((m) => m.default || m); // ESM dynamic import
+    const AjvModule = await import("ajv");
+    const Ajv = AjvModule.default || AjvModule;
     const ajv = new Ajv();
     const validate = ajv.compile(schema);
     const valid = validate(JSON.parse(body));
@@ -37,6 +41,7 @@ Then(
     }
   }
 );
+
 Then(
   "I see response header {string} equals {string}",
   async function (this: CustomWorld, headerName: string, expectedValue: string) {
@@ -50,6 +55,7 @@ Then(
     this.log(`Verified response header "${headerName}" equals "${expectedValue}"`);
   }
 );
+
 Then(
   "I see response header {string} contains {string}",
   async function (this: CustomWorld, headerName: string, expectedValue: string) {
@@ -63,6 +69,7 @@ Then(
     this.log(`Verified response header "${headerName}" contains "${expectedValue}"`);
   }
 );
+
 Then(
   "I see response header {string} does not contain {string}",
   async function (this: CustomWorld, headerName: string, unexpectedValue: string) {
@@ -76,6 +83,7 @@ Then(
     this.log(`Verified response header "${headerName}" does not contain "${unexpectedValue}"`);
   }
 );
+
 Then(
   "I see response header {string} does not equal {string}",
   async function (this: CustomWorld, headerName: string, unexpectedValue: string) {
@@ -89,6 +97,7 @@ Then(
     this.log(`Verified response header "${headerName}" does not equal "${unexpectedValue}"`);
   }
 );
+
 Then(
   "I see response header {string} exists",
   async function (this: CustomWorld, headerName: string) {
@@ -100,6 +109,7 @@ Then(
     this.log(`Verified response header "${headerName}" exists`);
   }
 );
+
 Then(
   "I see response header {string} does not exist",
   async function (this: CustomWorld, headerName: string) {
@@ -111,23 +121,28 @@ Then(
     this.log(`Verified response header "${headerName}" does not exist`);
   }
 );
+
 Then("I see response status {int}", async function (this: CustomWorld, status: number) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
   const actual = res.status();
   if (actual !== status) throw new Error(`Expected status ${status}, got ${actual}`);
 });
+
 Then("I see response status is not {int}", async function (this: CustomWorld, status: number) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
   const actual = res.status();
   if (actual === status) throw new Error(`Expected status not to be ${status}, but it is`);
 });
+
+// Dynamically import Ajv for JSON schema validation
 Then("I see response body matches JSON schema", async function (this: CustomWorld, schema: object) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
   const body = await res.text();
-  const Ajv = require("ajv");
+  const AjvModule = await import("ajv");
+  const Ajv = AjvModule.default || AjvModule;
   const ajv = new Ajv();
   const validate = ajv.compile(schema);
   const valid = validate(JSON.parse(body));
@@ -136,6 +151,7 @@ Then("I see response body matches JSON schema", async function (this: CustomWorl
   }
   this.log(`Response body matches JSON schema`);
 });
+
 Then("I see response body is empty", async function (this: CustomWorld) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
@@ -145,6 +161,7 @@ Then("I see response body is empty", async function (this: CustomWorld) {
   }
   this.log(`Verified response body is empty`);
 });
+
 Then("I see response body is not empty", async function (this: CustomWorld) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
@@ -154,6 +171,7 @@ Then("I see response body is not empty", async function (this: CustomWorld) {
   }
   this.log(`Verified response body is not empty`);
 });
+
 Then("I see response body matches {string}", async function (this: CustomWorld, expected: string) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
@@ -163,6 +181,7 @@ Then("I see response body matches {string}", async function (this: CustomWorld, 
   }
   this.log(`Verified response body matches: ${expected}`);
 });
+
 Then("I see response body contains {string}", async function (this: CustomWorld, part: string) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
@@ -172,6 +191,7 @@ Then("I see response body contains {string}", async function (this: CustomWorld,
   }
   this.log(`Verified response body contains: ${part}`);
 });
+
 Then(
   "I see response body does not contain {string}",
   async function (this: CustomWorld, part: string) {
@@ -184,6 +204,7 @@ Then(
     this.log(`Verified response body does not contain: ${part}`);
   }
 );
+
 Then("I see response body is JSON", async function (this: CustomWorld) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
@@ -199,6 +220,7 @@ Then("I see response body is JSON", async function (this: CustomWorld) {
     }
   }
 });
+
 Then("I see response body is not JSON", async function (this: CustomWorld) {
   const res = this.data.lastResponse;
   if (!res) throw new Error("No response available");
