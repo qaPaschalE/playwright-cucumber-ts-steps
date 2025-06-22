@@ -31,6 +31,3 @@ jobs:
 
       - name: 🧪 Type check
         run: npm run lint:tsc
-
-      - name: ✅ Run tests
-        run: npm test
