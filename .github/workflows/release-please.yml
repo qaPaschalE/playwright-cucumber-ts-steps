@@ -8,12 +8,17 @@ on:
         required: false
         default: node
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - name: 🔖 Manual Release
+        uses: google-github-actions/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: ${{ github.event.inputs.release-type }}
