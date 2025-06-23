@@ -1,0 +1,228 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>playwright-cucumber-ts-steps</title><meta name="description" content="Documentation for playwright-cucumber-ts-steps"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css?cache=1750712655619"/><link rel="stylesheet" href="assets/highlight.css?cache=1750712655619"/><script defer src="assets/main.js?cache=1750712655619"></script><script async src="assets/icons.js?cache=1750712655619" id="tsd-icons-script"></script><script async src="assets/search.js?cache=1750712655619" id="tsd-search-script"></script><script async src="assets/navigation.js?cache=1750712655619" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">playwright-cucumber-ts-steps</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>playwright-cucumber-ts-steps</h1></div><div class="tsd-panel tsd-typography"><h1 id="🎭-playwright-cucumber-ts-steps" class="tsd-anchor-link">🎭 playwright-cucumber-ts-steps<a href="#🎭-playwright-cucumber-ts-steps" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p><a href="https://www.npmjs.com/package/playwright-cucumber-ts-steps"><img src="https://img.shields.io/npm/v/playwright-cucumber-ts-steps.svg" alt="npm version"></a>
+<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/playwright-cucumber-ts-steps.svg" alt="license"></a>
+<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions"><img src="https://img.shields.io/github/actions/workflow/status/qaPaschalE/playwright-cucumber-ts-steps/build.yml?branch=main" alt="build"></a>
+<a href="https://www.npmjs.com/package/playwright-cucumber-ts-steps"><img src="https://img.shields.io/npm/types/playwright-cucumber-ts-steps.svg" alt="types"></a>
+<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues"><img src="https://img.shields.io/github/issues/qaPaschalE/playwright-cucumber-ts-steps" alt="GitHub issues"></a>
+<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers"><img src="https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps" alt="GitHub stars"></a></p>
+<blockquote>
+<p>A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.</p>
+</blockquote>
+<h2 id="✨-features" class="tsd-anchor-link">✨ Features<a href="#✨-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>🧩 Plug-and-play Cucumber step definitions</li>
+<li>🎯 Support for <strong>UI</strong>, <strong>API</strong>, <strong>mobile</strong>, <strong>iframe</strong>, <strong>hybrid login</strong>, and <strong>visual testing</strong></li>
+<li>🧠 Smart <strong>session management</strong> via storageState, <code>localStorage</code>, <code>sessionStorage</code>, and alias reuse</li>
+<li>🗂️ <strong>Alias</strong>, <strong>Faker</strong>, <code>.env</code>, and dynamic JSON fixture support</li>
+<li>📸 <strong>Screenshot</strong> on failure, 🎥 <strong>video recording</strong>, and 🖼️ <strong>visual diff</strong> with baseline comparison</li>
+<li>📤 Supports <strong>file upload</strong>, <strong>drag-and-drop</strong>, and <strong>multi-user session flows</strong></li>
+<li>🌐 Fully supports <strong>API requests with inline assertions</strong>, payload from custom folders, and session injection</li>
+<li>✅ Compatible with both <code>Page</code> and <code>FrameLocator</code> contexts (iframe-aware)</li>
+</ul>
+<h2 id="📦-installation" class="tsd-anchor-link">📦 Installation<a href="#📦-installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">playwright-cucumber-ts-steps</span>
+</code><button type="button">Copy</button></pre>
+
+<p>or</p>
+<pre><code class="bash"><span class="hl-0">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">playwright-cucumber-ts-steps</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="🧠-prerequisites" class="tsd-anchor-link">🧠 Prerequisites<a href="#🧠-prerequisites" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Ensure your project is already set up with:</p>
+<ul>
+<li><a href="https://playwright.dev/"><code>@playwright/test</code></a></li>
+<li><a href="https://github.com/cucumber/cucumber-js"><code>@cucumber/cucumber</code></a></li>
+<li>TypeScript</li>
+<li>Cucumber IDE plugin (Optional), but Highly recommended</li>
+</ul>
+<p>If not, run:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-3">--save-dev</span><span class="hl-1"> </span><span class="hl-2">@playwright/test</span><span class="hl-1"> </span><span class="hl-2">@cucumber/cucumber</span><span class="hl-1"> </span><span class="hl-2">typescript</span><span class="hl-1"> </span><span class="hl-2">ts-node</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">install</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="📘-step-definition-documentation" class="tsd-anchor-link">📘 Step Definition Documentation<a href="#📘-step-definition-documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>📄 See docs:<br>
+👉 <a href="https://qapaschale.github.io/playwright-cucumber-ts-steps/">View Steps Documentation</a> and <a href="https://github.com/qaPaschale/playwright-cucumber-ts-steps/tree/master/playwright/e2e">examples</a>.</p>
+<hr>
+<h2 id="🛠️-usage" class="tsd-anchor-link">🛠️ Usage<a href="#🛠️-usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ol>
+<li>
+<p><strong>Load step definitions</strong> from the package:</p>
+<pre><code class="ts"><span class="hl-4">// e2e/steps/index.ts</span><br/><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps/register&quot;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p><strong>Use step definitions in your feature files</strong>:</p>
+<pre><code class="gherkin"><span class="hl-3">Feature</span><span class="hl-1">:</span><span class="hl-2"> Login</span><br/><br/><span class="hl-1">  </span><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> User logs in</span><br/><span class="hl-1">    </span><span class="hl-3">Given </span><span class="hl-1">I visit </span><span class="hl-2">&quot;/login&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">When </span><span class="hl-1">I find input by name </span><span class="hl-2">&quot;Email&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">And </span><span class="hl-1">I type </span><span class="hl-2">&quot;user@example.com&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">And </span><span class="hl-1">I click button </span><span class="hl-2">&quot;Login&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">Then </span><span class="hl-1">I see visible text </span><span class="hl-2">&quot;Welcome&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">Then </span><span class="hl-1">I do not see URL contains </span><span class="hl-2">&quot;/login&quot;</span><br/>
+</code><button type="button">Copy</button></pre>
+
+</li>
+</ol>
+<hr>
+<h2 id="🧪-step-categories" class="tsd-anchor-link">🧪 Step Categories<a href="#🧪-step-categories" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>✅ <strong>Assertions</strong>: <code>I see text</code>, <code>I do not see text</code>, <code>I see button</code>, <code>I see value</code>, etc.</li>
+<li>🎬 <strong>Actions</strong>: <code>I click</code>, <code>I type</code>, <code>I wait</code>, <code>I switch to iframe</code>, etc.</li>
+<li>📄 <strong>Forms</strong>: <code>I fill the following</code>, aliasing, dynamic faker values</li>
+<li>🌐 <strong>API</strong>: Request mocking, assertions, response validation</li>
+<li>📱 <strong>Mobile support</strong>: Enable with <code>@mobile</code> tag (iPhone 13 emulation)</li>
+<li>👁️ <strong>Visual testing</strong>: Enable with <code>@visual</code> tag (pixelmatch diff)</li>
+</ul>
+<hr>
+<h2 id="🧰-customization" class="tsd-anchor-link">🧰 Customization<a href="#🧰-customization" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>You can extend the base <code>CustomWorld</code> and define your own steps:</p>
+<pre><code class="ts"><span class="hl-4">// custom-world.ts</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">CustomWorld</span><span class="hl-1"> </span><span class="hl-5">as</span><span class="hl-1"> </span><span class="hl-6">BaseWorld</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">CustomWorld</span><span class="hl-1"> </span><span class="hl-3">extends</span><span class="hl-1"> </span><span class="hl-7">BaseWorld</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">// Add your custom context or helpers here</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h2 id="🔍-tags--aliases" class="tsd-anchor-link">🔍 Tags &amp; Aliases<a href="#🔍-tags--aliases" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>
+<p>Use aliases with <code>@alias</code> syntax:</p>
+<pre><code class="gherkin"><span class="hl-3">Given </span><span class="hl-1">I get element by selector </span><span class="hl-2">&quot;[type=&#39;text_selector&#39;]&quot;</span><br/><span class="hl-3">And </span><span class="hl-1">I store element text as </span><span class="hl-2">&quot;welcomeText&quot;</span><br/><span class="hl-3">Then </span><span class="hl-1">I see </span><span class="hl-2">&quot;@welcomeText&quot;</span><span class="hl-1"> in the element</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+<li>
+<p>Use faker:</p>
+<pre><code class="gherkin"><span class="hl-1">// Here below </span><span class="hl-2">&quot;Email&quot;</span><span class="hl-1"> represents a faker variable </span><span class="hl-2">&quot;Email: () =&gt; faker.internet.email()&quot;</span><span class="hl-1">, Continue button containing text with action click, best for Forms</span><br/><br/><span class="hl-1"> </span><span class="hl-3">When </span><span class="hl-1">I fill the following </span><span class="hl-2">&quot;example form page&quot;</span><span class="hl-1"> form data:</span><br/><span class="hl-5">    | Target         | Value            |</span><br/><span class="hl-5">    | [name=&#39;email&#39;] | Email            |</span><br/><span class="hl-5">    | Continue       | Click            |</span>
+</code><button type="button">Copy</button></pre>
+
+</li>
+</ul>
+<hr>
+<h2 id="📸-advanced-usage" class="tsd-anchor-link">📸 Advanced Usage<a href="#📸-advanced-usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>These features are <strong>optional</strong> and can be implemented in your own <code>cucumber.js</code>:</p>
+<ul>
+<li>📷 <strong>Visual regression testing</strong> with pixelmatch</li>
+<li>🎥 <strong>Video recording per scenario</strong></li>
+<li>🔐 <strong>Session reuse</strong> using <code>storageState</code></li>
+</ul>
+<hr>
+<hr>
+<h3 id="✅-additional-supported-step-features" class="tsd-anchor-link">✅ Additional Supported Step Features<a href="#✅-additional-supported-step-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Feature Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fill form data</code></td>
+<td>Use <code>When I fill the following &quot;Login&quot; form data:</code> to perform actions like:</td>
+</tr>
+<tr>
+<td></td>
+<td>- <code>fill</code>, <code>click</code>, <code>check</code>, <code>select</code>, <code>upload:&lt;file&gt;</code></td>
+</tr>
+<tr>
+<td></td>
+<td>- <code>drag:&lt;targetSelector&gt;</code> for drag-and-drop</td>
+</tr>
+<tr>
+<td></td>
+<td>- <code>assert:visible</code>, <code>assert:text:&lt;value&gt;</code></td>
+</tr>
+<tr>
+<td></td>
+<td>- <code>request:&lt;METHOD&gt;:&lt;URL&gt;:&lt;payload&gt;.json</code></td>
+</tr>
+<tr>
+<td></td>
+<td>- <code>set:localStorage:&lt;key&gt;</code>, <code>set:sessionStorage:&lt;key&gt;</code></td>
+</tr>
+<tr>
+<td></td>
+<td>- <code>wait:&lt;ms&gt;</code>, <code>reload</code>, and use alias <code>@aliasName</code></td>
+</tr>
+<tr>
+<td>Session Handling</td>
+<td>Steps like <code>I login with a session data &quot;admin.json&quot;</code>, <code>I save session as &quot;customer&quot;</code></td>
+</tr>
+<tr>
+<td>Session Restore</td>
+<td><code>I restore session cookies &quot;customer&quot; [with reload] [using localStorage]</code></td>
+</tr>
+<tr>
+<td>API Assertions</td>
+<td>Validate JSON response with <code>assert:json:key=expectedValue</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="✅-extended-usage-examples" class="tsd-anchor-link">✅ Extended Usage Examples<a href="#✅-extended-usage-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="gherkin"><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Login and save session</span><br/><span class="hl-1">  </span><span class="hl-3">When </span><span class="hl-1">I fill the following </span><span class="hl-2">&quot;Login&quot;</span><span class="hl-1"> form data:</span><br/><span class="hl-5">    | input[name=&#39;email&#39;]        | test@example.com            |</span><br/><span class="hl-5">    | input[name=&#39;password&#39;]     | @userPassword               |</span><br/><span class="hl-5">    | input[type=&#39;checkbox&#39;]     | check                       |</span><br/><span class="hl-5">    | button:has-text(&quot;Sign In&quot;) | click                       |</span><br/><span class="hl-5">    | .welcome                   | assert:visible              |</span><br/><span class="hl-5">    | .role                      | assert:text:Admin           |</span><br/><span class="hl-1">  </span><span class="hl-3">And </span><span class="hl-1">I save session as </span><span class="hl-2">&quot;admin&quot;</span><br/><br/><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Restore user session</span><br/><span class="hl-1">  </span><span class="hl-3">Given </span><span class="hl-1">I restore session cookies </span><span class="hl-2">&quot;admin&quot;</span><span class="hl-1"> with reload using localStorage</span><br/><span class="hl-1">  </span><span class="hl-3">When </span><span class="hl-1">I visit </span><span class="hl-2">&quot;/dashboard&quot;</span><br/><span class="hl-1">  </span><span class="hl-3">Then </span><span class="hl-1">I see text </span><span class="hl-2">&quot;Welcome back&quot;</span><br/><br/><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> API login + inject session</span><br/><span class="hl-1">  </span><span class="hl-3">When </span><span class="hl-1">I fill the following </span><span class="hl-2">&quot;Login&quot;</span><span class="hl-1"> form data:</span><br/><span class="hl-5">    | request:POST:/api/login:adminPayload.json | saveAs:loginData     |</span><br/><span class="hl-5">    | set:localStorage:token                    | @loginData.token     |</span><br/><span class="hl-5">    | save session as                           | adminViaAPI          |</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h3 id="✅-folder-structure-suggestion" class="tsd-anchor-link">✅ Folder Structure Suggestion<a href="#✅-folder-structure-suggestion" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="text">e2e/
+├── features/                        # .feature files
+├── step_definitions/
+│   └── index.ts                    # import from this package
+├── support/
+│   ├── world.ts                    # CustomWorld extends with iframe support
+│   ├── hooks.ts                    # artifact &amp; session manager
+│   └── helpers/
+│       └── resolveUtils.ts        # alias/env/json resolver
+├── test-data/                      # JSON fixtures
+├── payload/                        # API request payloads
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<p>Here’s a full <code>cucumber.js</code> config file that includes <strong>all the configurable options</strong> integrated so far. This supports:</p>
+<ul>
+<li>✅ CLI/env override for artifact directories</li>
+<li>✅ Visual testing toggle</li>
+<li>✅ Screenshot and video toggle</li>
+<li>✅ Device emulation via <code>MOBILE_DEVICE</code> env or world param</li>
+<li>✅ Multiple profiles (<code>default</code>, <code>mobile</code>, <code>visual</code>, <code>ci</code>)</li>
+<li>✅ Parallel test execution and ts-node for TypeScript support</li>
+</ul>
+<hr>
+<h3 id="✅-cucumberjs" class="tsd-anchor-link">✅ <code>cucumber.js</code><a href="#✅-cucumberjs" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="js"><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-6">path</span><span class="hl-1"> </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;path&quot;</span><span class="hl-1">;</span><br/><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-6">dotenv</span><span class="hl-1"> </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;dotenv&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-6">dotenv</span><span class="hl-1">.</span><span class="hl-0">config</span><span class="hl-1">();</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-1"> = </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">TEST_ARTIFACT_DIR</span><span class="hl-1"> || </span><span class="hl-2">&quot;test-artifacts&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">defaultWorldParams</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-6">artifactDir:</span><span class="hl-1"> </span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">payloadDir:</span><span class="hl-1"> </span><span class="hl-2">&quot;payloads&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">enableTrace:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_TRACE</span><span class="hl-1"> || </span><span class="hl-2">&quot;fail&quot;</span><span class="hl-1">, </span><span class="hl-4">// &quot;false&quot; | &quot;fail&quot; | &quot;all&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">enableScreenshots:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_SCREENSHOTS</span><span class="hl-1"> || </span><span class="hl-2">&quot;fail&quot;</span><span class="hl-1">, </span><span class="hl-4">// &quot;false&quot; | &quot;fail&quot; | &quot;all&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">enableVideos:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_VIDEOS</span><span class="hl-1"> || </span><span class="hl-2">&quot;all&quot;</span><span class="hl-1">, </span><span class="hl-4">// &quot;false&quot; | &quot;fail&quot; | &quot;all&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">enableVisualTest:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_VISUAL_TEST</span><span class="hl-1"> === </span><span class="hl-2">&quot;true&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">device:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">MOBILE_DEVICE</span><span class="hl-1"> || </span><span class="hl-3">undefined</span><span class="hl-1">, </span><span class="hl-4">// e.g., &quot;Pixel 5&quot;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-5">default</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">default:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">, </span><span class="hl-2">`html:</span><span class="hl-3">${</span><span class="hl-6">path</span><span class="hl-9">.</span><span class="hl-0">join</span><span class="hl-9">(</span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-9">, </span><span class="hl-2">&quot;report.html&quot;</span><span class="hl-9">)</span><span class="hl-3">}</span><span class="hl-2">`</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">parallel:</span><span class="hl-1"> </span><span class="hl-10">2</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> </span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">  },</span><br/><br/><span class="hl-1">  </span><span class="hl-6">mobile:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">parallel:</span><span class="hl-1"> </span><span class="hl-10">1</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">tags:</span><span class="hl-1"> </span><span class="hl-2">&quot;@mobile&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> {</span><br/><span class="hl-1">      ...</span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">device:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">MOBILE_DEVICE</span><span class="hl-1"> || </span><span class="hl-2">&quot;iPhone 13 Pro&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">  },</span><br/><br/><span class="hl-1">  </span><span class="hl-6">visual:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">tags:</span><span class="hl-1"> </span><span class="hl-2">&quot;@visual&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> {</span><br/><span class="hl-1">      ...</span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableVisualTest:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">  },</span><br/><br/><span class="hl-1">  </span><span class="hl-6">ci:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">, </span><span class="hl-2">`json:</span><span class="hl-3">${</span><span class="hl-6">path</span><span class="hl-9">.</span><span class="hl-0">join</span><span class="hl-9">(</span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-9">, </span><span class="hl-2">&quot;report.json&quot;</span><span class="hl-9">)</span><span class="hl-3">}</span><span class="hl-2">`</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">parallel:</span><span class="hl-1"> </span><span class="hl-10">4</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> {</span><br/><span class="hl-1">      ...</span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableScreenshots:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableVideos:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableVisualTest:</span><span class="hl-1"> </span><span class="hl-3">false</span><span class="hl-1">,</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">};</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h3 id="✅-usage-examples" class="tsd-anchor-link">✅ Usage Examples<a href="#✅-usage-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="bash"><span class="hl-4"># Run default suite</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><br/><br/><span class="hl-4"># Run mobile tests with device from env</span><br/><span class="hl-6">MOBILE_DEVICE</span><span class="hl-1">=</span><span class="hl-2">&quot;Pixel 5&quot;</span><span class="hl-1"> </span><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><span class="hl-1"> </span><span class="hl-3">--profile</span><span class="hl-1"> </span><span class="hl-2">mobile</span><br/><br/><span class="hl-4"># Run visual regression tests</span><br/><span class="hl-6">ENABLE_VISUAL_TEST</span><span class="hl-1">=</span><span class="hl-2">true</span><span class="hl-1"> </span><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><span class="hl-1"> </span><span class="hl-3">--profile</span><span class="hl-1"> </span><span class="hl-2">visual</span><br/><br/><span class="hl-4"># Run in CI profile with JSON output</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><span class="hl-1"> </span><span class="hl-3">--profile</span><span class="hl-1"> </span><span class="hl-2">ci</span>
+</code><button type="button">Copy</button></pre>
+
+<hr>
+<h3 id="✅-summary-of-supported-options" class="tsd-anchor-link">✅ Summary of Supported Options<a href="#✅-summary-of-supported-options" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>CLI/Env Variable</th>
+<th><code>worldParameters</code> Key</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Screenshot toggle</td>
+<td><code>ENABLE_SCREENSHOTS</code></td>
+<td><code>enableScreenshots</code></td>
+<td>Capture screenshots on failure</td>
+</tr>
+<tr>
+<td>Video toggle</td>
+<td><code>ENABLE_VIDEOS</code></td>
+<td><code>enableVideos</code></td>
+<td>Enable/disable video recording</td>
+</tr>
+<tr>
+<td>Visual testing</td>
+<td><code>ENABLE_VISUAL_TEST</code></td>
+<td><code>enableVisualTest</code></td>
+<td>Capture and compare visual snapshots</td>
+</tr>
+<tr>
+<td>Artifact directory</td>
+<td><code>TEST_ARTIFACT_DIR</code></td>
+<td><code>artifactDir</code></td>
+<td>Where to save screenshots, videos, etc.</td>
+</tr>
+<tr>
+<td>Mobile device emu</td>
+<td><code>MOBILE_DEVICE</code></td>
+<td><code>device</code></td>
+<td>Device name for Playwright mobile emulation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="🧾-license" class="tsd-anchor-link">🧾 License<a href="#🧾-license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p><a href="media/LICENSE">MIT</a></p>
+<hr>
+<h2 id="🙋♂️-contributing" class="tsd-anchor-link">🙋‍♂️ Contributing<a href="#🙋♂️-contributing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Contributions, improvements, and suggestions are welcome! Feel free to open an issue or pull request.</p>
+<hr>
+<h2 id="💬-questions" class="tsd-anchor-link">💬 Questions?<a href="#💬-questions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Open an issue on <a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues">GitHub Issues</a> or reach out via discussions.</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#🎭-playwright-cucumber-ts-steps"><span>🎭 playwright-<wbr/>cucumber-<wbr/>ts-<wbr/>steps</span></a><ul><li><a href="#✨-features"><span>✨ <wbr/>Features</span></a></li><li><a href="#📦-installation"><span>📦 <wbr/>Installation</span></a></li><li><a href="#🧠-prerequisites"><span>🧠 <wbr/>Prerequisites</span></a></li><li><a href="#📘-step-definition-documentation"><span>📘 <wbr/>Step <wbr/>Definition <wbr/>Documentation</span></a></li><li><a href="#🛠️-usage"><span>🛠️ <wbr/>Usage</span></a></li><li><a href="#🧪-step-categories"><span>🧪 <wbr/>Step <wbr/>Categories</span></a></li><li><a href="#🧰-customization"><span>🧰 <wbr/>Customization</span></a></li><li><a href="#🔍-tags--aliases"><span>🔍 <wbr/>Tags &amp; <wbr/>Aliases</span></a></li><li><a href="#📸-advanced-usage"><span>📸 <wbr/>Advanced <wbr/>Usage</span></a></li><li><ul><li><a href="#✅-additional-supported-step-features"><span>✅ <wbr/>Additional <wbr/>Supported <wbr/>Step <wbr/>Features</span></a></li><li><a href="#✅-extended-usage-examples"><span>✅ <wbr/>Extended <wbr/>Usage <wbr/>Examples</span></a></li><li><a href="#✅-folder-structure-suggestion"><span>✅ <wbr/>Folder <wbr/>Structure <wbr/>Suggestion</span></a></li><li><a href="#✅-cucumberjs"><span>✅ cucumber.js</span></a></li><li><a href="#✅-usage-examples"><span>✅ <wbr/>Usage <wbr/>Examples</span></a></li><li><a href="#✅-summary-of-supported-options"><span>✅ <wbr/>Summary of <wbr/>Supported <wbr/>Options</span></a></li></ul></li><li><a href="#🧾-license"><span>🧾 <wbr/>License</span></a></li><li><a href="#🙋♂️-contributing"><span>🙋‍♂️ <wbr/>Contributing</span></a></li><li><a href="#💬-questions"><span>💬 <wbr/>Questions?</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">playwright-cucumber-ts-steps</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
