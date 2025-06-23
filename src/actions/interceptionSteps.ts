@@ -278,7 +278,7 @@ export async function When_I_make_HTTP_request_with_options(
         try {
           options.body = JSON.stringify(JSON.parse(val)); // Parse then stringify for valid JSON body
         } catch (e) {
-          throw new Error(`Invalid JSON body provided in data table for request: ${val}`);
+          throw new Error(`${e}Invalid JSON body provided in data table for request: ${val}`);
         }
       } else {
         // Treat as headers for now. Can be expanded for other options (e.g., credentials, mode)

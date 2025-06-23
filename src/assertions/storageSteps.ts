@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { When, Then } from "@cucumber/cucumber";
+// import fs from "fs";
+// import path from "path";
+import { Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test"; // Import expect for assertions
 import type { CustomWorld } from "../helpers/world"; // Assuming this path is correct
 

@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/playwright-cucumber-ts-steps.svg)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
 [![license](https://img.shields.io/npm/l/playwright-cucumber-ts-steps.svg)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/blob/main/LICENSE)
-[![build](https://img.shields.io/github/actions/workflow/status/qaPaschalE/playwright-cucumber-ts-steps/ci.yml?branch=main)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions)
+[![build](https://img.shields.io/github/actions/workflow/status/qaPaschalE/playwright-cucumber-ts-steps/build.yml?branch=main)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions)
 [![types](https://img.shields.io/npm/types/playwright-cucumber-ts-steps.svg)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
 [![GitHub issues](https://img.shields.io/github/issues/qaPaschalE/playwright-cucumber-ts-steps)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues)
 [![GitHub stars](https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers)
@@ -49,6 +49,11 @@ If not, run:
 npm install --save-dev @playwright/test @cucumber/cucumber typescript ts-node
 npx playwright install
 ```
+
+## 📘 Step Definition Documentation
+
+📄 See docs:  
+👉 [View Steps Documentation](https://qapaschale.github.io/playwright-cucumber-ts-steps/) and [examples](https://github.com/qaPaschale/playwright-cucumber-ts-steps/tree/master/playwright/e2e).
 
 ---
 

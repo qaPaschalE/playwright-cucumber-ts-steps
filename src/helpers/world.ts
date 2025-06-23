@@ -10,11 +10,11 @@ const slowMo = process.env.SLOWMO ? Number(process.env.SLOWMO) : 0;
 
 // Define a minimal interface for the clock object you expect
 // This is to help TypeScript understand the shape of context.clock
-interface PlaywrightClock {
-  setFixedTime(time: number | Date): Promise<void>;
-  tick(ms: number): Promise<void>;
-  restore(): Promise<void>;
-}
+// interface PlaywrightClock {
+//   setFixedTime(time: number | Date): Promise<void>;
+//   tick(ms: number): Promise<void>;
+//   restore(): Promise<void>;
+// }
 
 // If you need to extend the Clock type, do it via module augmentation with compatible types.
 // Otherwise, do not redeclare the 'clock' property to avoid type conflicts.

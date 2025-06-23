@@ -1,7 +1,7 @@
 import { Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import type { CustomWorld } from "../helpers/world";
-import Ajv from "ajv"; // Assuming Ajv is installed (npm install ajv)
+// import Ajv from "ajv"; // Assuming Ajv is installed (npm install ajv)
 
 // Define a type for the expected structure of lastResponse for consistency
 interface LastResponse {
@@ -280,6 +280,7 @@ export function Then_I_see_response_body_is_not_JSON(this: CustomWorld) {
     JSON.parse(res.body);
   } catch (e) {
     isJson = false;
+    e instanceof Error ? e.message : String(e);
   }
   if (isJson) {
     throw new Error(`Expected response body to not be JSON, but it is.`);

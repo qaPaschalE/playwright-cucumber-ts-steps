@@ -90,7 +90,7 @@ export async function When_I_fill_the_following_form_data(
     const target = row.Target.trim();
     const rawValue = row.Value.trim();
     // Resolve value early if it's not an action that prevents it (like `click`)
-    const value = resolveLoginValue(rawValue, this);
+    resolveLoginValue(rawValue, this);
 
     // --- Special Actions (not directly on a locator) ---
 

@@ -27,6 +27,7 @@
   "scripts": {
     "build": "tsc",
     "docs": "typedoc",
+    "docs:deploy": "gh-pages -d temp-docs",
     "prepare": "husky",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",

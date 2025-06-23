@@ -1,6 +1,8 @@
 {
   "cacheBust": true,
   "entryPoints": ["src/actions", "src/assertions"],
+  "out": "temp-docs/docs",
+
   "highlightLanguages": [
     "css",
     "gherkin",
