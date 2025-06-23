@@ -31,8 +31,10 @@ jobs:
         run: |
           mkdir -p temp-docs
           echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=./docs/index.html" /></head><body></body></html>' > temp-docs/index.html
-      - name: 🚀 Deploy doc
+      - name: 🚀 Deploy docs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx gh-pages -d temp-docs -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>" -r https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/qaPaschalE/playwright-cucumber-ts-steps.git
+          npx gh-pages -d temp-docs \
+            -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>" \
+            -r https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/qaPaschalE/playwright-cucumber-ts-steps.git
