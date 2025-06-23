@@ -1,13 +1,22 @@
 # 🎭 playwright-cucumber-ts-steps
 
-[![npm version](https://img.shields.io/npm/v/playwright-cucumber-ts-steps.svg)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
-[![license](https://img.shields.io/npm/l/playwright-cucumber-ts-steps.svg)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/blob/main/LICENSE)
-[![build](https://img.shields.io/github/actions/workflow/status/qaPaschalE/playwright-cucumber-ts-steps/build.yml?branch=main)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions)
-[![types](https://img.shields.io/npm/types/playwright-cucumber-ts-steps.svg)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
-[![GitHub issues](https://img.shields.io/github/issues/qaPaschalE/playwright-cucumber-ts-steps)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues)
-[![GitHub stars](https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers)
+[![NPM](https://nodei.co/npm/playwright-cucumber-ts-steps.png?downloads=true&downloadRank=true&stars=true&height=3)](https://nodei.co/npm/playwright-cucumber-ts-steps/)
+
+<table align="center" style="margin-bottom:30px;"><tr><td align="center" width="9999" heigth="9999" >
+ <img src="https://github.com/qaPaschalE/k6-cucumber-steps/blob/main/assets/paschal%20logo%20(2).png?raw=true" alt="paschal Logo" style="margin-top:25px;" align="center"/>
+</td></tr></table>
+
+[![npm](https://img.shields.io/npm/v/playwright-cucumber-ts-steps?logo=npm)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
+[![License](https://img.shields.io/github/license/qaPaschalE/playwright-cucumber-ts-steps?logo=github)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/blob/main/LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E=18-green?logo=node.js)](https://nodejs.org/)
+[![Build Status](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions)
+[![TypeScript](https://img.shields.io/badge/types-TypeScript-blue?logo=typescript)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
+[![Issues](https://img.shields.io/github/issues/qaPaschalE/playwright-cucumber-ts-steps?logo=github)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues)
+[![Stars](https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps?logo=github)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers)
 
 > A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.
+
+> **Note:** This package is designed for advanced Cucumber+Playwright+TypeScript setups. For basic Playwright usage, see the [official Playwright docs](https://playwright.dev/).
 
 ## ✨ Features
 
@@ -52,7 +61,6 @@ npx playwright install
 
 ## 📘 Step Definition Documentation
 
-📄 See docs:  
 👉 [View Steps Documentation](https://qapaschale.github.io/playwright-cucumber-ts-steps/) and [examples](https://github.com/qaPaschale/playwright-cucumber-ts-steps/tree/master/playwright/e2e).
 
 ---
