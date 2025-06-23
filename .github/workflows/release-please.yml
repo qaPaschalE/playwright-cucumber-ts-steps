@@ -20,5 +20,5 @@ jobs:
       - name: 🔖 Manual Release
         uses: google-github-actions/release-please-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.RELEASE_TOKEN}}
           release-type: ${{ github.event.inputs.release-type }}
