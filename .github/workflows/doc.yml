@@ -36,5 +36,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx gh-pages -d temp-docs \
-            -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>" \
-            -r https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/qaPaschalE/playwright-cucumber-ts-steps.git
+            --repo=https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/qaPaschalE/playwright-cucumber-ts-steps.git \
+            --git-user-name="github-actions[bot]" \
+            --git-user-email="github-actions[bot]@users.noreply.github.com"
