@@ -1,0 +1,16 @@
+{
+  "cacheBust": true,
+  "entryPoints": ["src/actions", "src/assertions"],
+  "highlightLanguages": [
+    "css",
+    "gherkin",
+    "html",
+    "javascript",
+    "json",
+    "json5",
+    "jsonc",
+    "shellscript",
+    "tsx",
+    "typescript"
+  ]
+}

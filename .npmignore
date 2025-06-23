@@ -83,3 +83,7 @@ commitlint.config.js
 
 # Ignore package-lock.json if you want to avoid it
 package-lock.json
+
+# Ignore typedoc output if not needed
+typedoc.json
+docs/

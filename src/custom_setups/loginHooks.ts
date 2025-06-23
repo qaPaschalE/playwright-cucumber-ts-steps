@@ -25,7 +25,12 @@ When(
   }
 );
 
-// Step 2: Save current context as session
+/**
+ * @step
+ * @description Saves the current browser context (cookies, localStorage, sessionStorage) as a session file.
+ * @example
+ * When I save session as "my-session"
+ */
 When(/^I save session as "([^"]+)"$/, async function (this: CustomWorld, sessionName: string) {
   const sessionPath = resolveSessionPath(this, sessionName);
 
@@ -56,7 +61,13 @@ When(/^I save session as "([^"]+)"$/, async function (this: CustomWorld, session
     this.log?.(`❌ Failed to save session "${sessionName}": ${(err as Error).message}`);
   }
 });
-// Step 3: Remove a session
+
+/**
+ * @step
+ * @description Removes a session file with the given name.
+ * @example
+ * When I clear session "my-session"
+ */
 When("I clear session {string}", function (this: CustomWorld, sessionName: string) {
   const sessionPath = resolveSessionPath(this, sessionName);
   if (fs.existsSync(sessionPath)) {
@@ -66,6 +77,14 @@ When("I clear session {string}", function (this: CustomWorld, sessionName: strin
     this.log?.(`⚠️ Session not found: ${sessionPath}`);
   }
 });
+
+/**
+ * @step
+ * @description Restores cookies, localStorage, and sessionStorage from a session file. Optionally reloads the page.
+ * @example
+ * When I restore session cookies "my-session"
+ * When I restore session cookies "my-session" with reload "false"
+ */
 When(
   /^I restore session cookies "([^"]+)"(?: with reload "(true|false)")?$/,
   async function (this: CustomWorld, sessionName: string, reload = "true") {

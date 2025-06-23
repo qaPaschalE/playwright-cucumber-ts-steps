@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "docs": "typedoc src/**/*.ts --out temp-docs/playwright-cucumber-ts-steps/docs",
+    "docs": "typedoc",
     "prepare": "husky",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
@@ -79,6 +79,10 @@
     "@cucumber/cucumber": "*",
     "@playwright/test": "*"
   },
+  "files": [
+    "lib/",
+    "src/"
+  ],
   "dependencies": {
     "@cucumber/tag-expressions": "^6.2.0",
     "@faker-js/faker": "^9.8.0",

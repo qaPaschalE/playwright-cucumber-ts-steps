@@ -145,3 +145,4 @@ coverage/
 scripts/
 traces/
 lib/
+playwright-report
