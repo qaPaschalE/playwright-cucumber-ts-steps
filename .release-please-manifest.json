@@ -5,5 +5,5 @@
   "bump-patch-pre-major": true,
   "changelog-path": "CHANGELOG.md",
   "include-v-in-tag": false,
-  ".": "1.0.0"
+  ".": "1.0.1"
 }
