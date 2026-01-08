@@ -13,6 +13,11 @@
 [![TypeScript](https://img.shields.io/badge/written%20in-TypeScript-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![GitHub stars](https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers)
 
+> A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.
+
+> **Note:** This package is designed for advanced Cucumber+Playwright+TypeScript setups. For basic Playwright usage, see the [official Playwright docs](https://playwright.dev/).
+
+
 **The "Low-Code" BDD Framework for Playwright.**
 
 Write powerful end-to-end tests in plain English using Gherkin syntax, without managing complex glue code. `playwright-cucumber-ts-steps` provides a pre-built library of robust steps for UI, API, and Authentication testing, running natively inside Playwright.
@@ -35,10 +40,19 @@ Write powerful end-to-end tests in plain English using Gherkin syntax, without m
 ```bash
 npm install playwright-cucumber-ts-steps @playwright/test
 ```
+or
 
+```bash
+yarn add playwright-cucumber-ts-steps @playwright/test
+```
 ```bash
 npx playwright install
 ```
+
+
+## 📘 Step Definition Documentation
+
+👉 [View Steps Documentation](https://qapaschale.github.io/playwright-cucumber-ts-steps/) and [examples](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/tree/main/examples).
 
 ---
 
