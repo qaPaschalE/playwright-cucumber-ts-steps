@@ -1,235 +1,300 @@
-<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>playwright-cucumber-ts-steps</title><meta name="description" content="Documentation for playwright-cucumber-ts-steps"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css?cache=1750856171770"/><link rel="stylesheet" href="assets/highlight.css?cache=1750856171770"/><script defer src="assets/main.js?cache=1750856171770"></script><script async src="assets/icons.js?cache=1750856171770" id="tsd-icons-script"></script><script async src="assets/search.js?cache=1750856171770" id="tsd-search-script"></script><script async src="assets/navigation.js?cache=1750856171770" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">playwright-cucumber-ts-steps</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>playwright-cucumber-ts-steps</h1></div><div class="tsd-panel tsd-typography"><h1 id="🎭-playwright-cucumber-ts-steps" class="tsd-anchor-link">🎭 playwright-cucumber-ts-steps<a href="#🎭-playwright-cucumber-ts-steps" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p><a href="https://nodei.co/npm/playwright-cucumber-ts-steps/"><img src="https://nodei.co/npm/playwright-cucumber-ts-steps.png?downloads=true&amp;downloadRank=true&amp;stars=true&amp;height=3" alt="NPM"></a></p>
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Playwright Cucumber TS Steps</title><meta name="description" content="Documentation for Playwright Cucumber TS Steps"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css?cache=1767893249779"/><link rel="stylesheet" href="assets/highlight.css?cache=1767893249779"/><script defer src="assets/main.js?cache=1767893249779"></script><script async src="assets/icons.js?cache=1767893249779" id="tsd-icons-script"></script><script async src="assets/search.js?cache=1767893249779" id="tsd-search-script"></script><script async src="assets/navigation.js?cache=1767893249779" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">Playwright Cucumber TS Steps</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>Playwright Cucumber TS Steps</h1></div><div class="tsd-panel tsd-typography"><h1 id="🎭-playwright-cucumber-ts-steps" class="tsd-anchor-link">🎭 Playwright Cucumber TS Steps<a href="#🎭-playwright-cucumber-ts-steps" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1><p><a href="https://nodei.co/npm/playwright-cucumber-ts-steps/"><img src="https://nodei.co/npm/playwright-cucumber-ts-steps.png?downloads=true&amp;downloadRank=true&amp;stars=true&amp;height=3" alt="NPM"></a></p>
 <table align="center" style="margin-bottom:30px;"><tr><td align="center" width="9999" heigth="9999" >
  <img src="https://github.com/qaPaschalE/k6-cucumber-steps/blob/main/assets/paschal%20logo%20(2).png?raw=true" alt="paschal Logo" style="margin-top:25px;" align="center"/>
 </td></tr></table>
-<p><a href="https://www.npmjs.com/package/playwright-cucumber-ts-steps"><img src="https://img.shields.io/npm/v/playwright-cucumber-ts-steps?logo=npm" alt="npm"></a>
-<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/blob/main/LICENSE"><img src="https://img.shields.io/github/license/qaPaschalE/playwright-cucumber-ts-steps?logo=github" alt="License"></a>
-<a href="https://nodejs.org/"><img src="https://img.shields.io/badge/node-%3E=18-green?logo=node.js" alt="Node.js"></a>
-<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions"><img src="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions/workflows/build.yml/badge.svg?branch=main" alt="Build Status"></a>
-<a href="https://www.npmjs.com/package/playwright-cucumber-ts-steps"><img src="https://img.shields.io/badge/types-TypeScript-blue?logo=typescript" alt="TypeScript"></a>
-<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues"><img src="https://img.shields.io/github/issues/qaPaschalE/playwright-cucumber-ts-steps?logo=github" alt="Issues"></a>
-<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers"><img src="https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps?logo=github" alt="Stars"></a></p>
-<blockquote>
-<p>A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.</p>
-</blockquote>
-<blockquote>
-<p><strong>Note:</strong> This package is designed for advanced Cucumber+Playwright+TypeScript setups. For basic Playwright usage, see the <a href="https://playwright.dev/">official Playwright docs</a>.</p>
-</blockquote>
-<h2 id="✨-features" class="tsd-anchor-link">✨ Features<a href="#✨-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
-<li>🧩 Plug-and-play Cucumber step definitions</li>
-<li>🎯 Support for <strong>UI</strong>, <strong>API</strong>, <strong>mobile</strong>, <strong>iframe</strong>, <strong>hybrid login</strong>, and <strong>visual testing</strong></li>
-<li>🧠 Smart <strong>session management</strong> via storageState, <code>localStorage</code>, <code>sessionStorage</code>, and alias reuse</li>
-<li>🗂️ <strong>Alias</strong>, <strong>Faker</strong>, <code>.env</code>, and dynamic JSON fixture support</li>
-<li>📸 <strong>Screenshot</strong> on failure, 🎥 <strong>video recording</strong>, and 🖼️ <strong>visual diff</strong> with baseline comparison</li>
-<li>📤 Supports <strong>file upload</strong>, <strong>drag-and-drop</strong>, and <strong>multi-user session flows</strong></li>
-<li>🌐 Fully supports <strong>API requests with inline assertions</strong>, payload from custom folders, and session injection</li>
-<li>✅ Compatible with both <code>Page</code> and <code>FrameLocator</code> contexts (iframe-aware)</li>
-</ul>
-<h2 id="📦-installation" class="tsd-anchor-link">📦 Installation<a href="#📦-installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">playwright-cucumber-ts-steps</span>
-</code><button type="button">Copy</button></pre>
-
-<p>or</p>
-<pre><code class="bash"><span class="hl-0">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">playwright-cucumber-ts-steps</span>
-</code><button type="button">Copy</button></pre>
-
+<p><a href="https://www.npmjs.com/package/playwright-cucumber-ts-steps"><img src="https://img.shields.io/npm/v/playwright-cucumber-ts-steps?style=flat-square&amp;color=blue" alt="npm version"></a>
+<a href="https://www.npmjs.com/package/playwright-cucumber-ts-steps"><img src="https://img.shields.io/npm/dm/playwright-cucumber-ts-steps?style=flat-square" alt="Downloads"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT"></a>
+<a href="https://playwright.dev"><img src="https://img.shields.io/badge/tested%20with-Playwright-blueviolet?style=flat-square&amp;logo=playwright" alt="Playwright"></a>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/written%20in-TypeScript-blue?style=flat-square&amp;logo=typescript" alt="TypeScript"></a>
+<a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers"><img src="https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps" alt="GitHub stars"></a></p>
+<p><strong>The &quot;Low-Code&quot; BDD Framework for Playwright.</strong></p>
+<p>Write powerful end-to-end tests in plain English using Gherkin syntax, without managing complex glue code. <code>playwright-cucumber-ts-steps</code> provides a pre-built library of robust steps for UI, API, and Authentication testing, running natively inside Playwright.</p>
 <hr>
-<h2 id="🧠-prerequisites" class="tsd-anchor-link">🧠 Prerequisites<a href="#🧠-prerequisites" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Ensure your project is already set up with:</p>
-<ul>
-<li><a href="https://playwright.dev/"><code>@playwright/test</code></a></li>
-<li><a href="https://github.com/cucumber/cucumber-js"><code>@cucumber/cucumber</code></a></li>
-<li>TypeScript</li>
-<li>Cucumber IDE plugin (Optional), but Highly recommended</li>
-</ul>
-<p>If not, run:</p>
-<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-3">--save-dev</span><span class="hl-1"> </span><span class="hl-2">@playwright/test</span><span class="hl-1"> </span><span class="hl-2">@cucumber/cucumber</span><span class="hl-1"> </span><span class="hl-2">typescript</span><span class="hl-1"> </span><span class="hl-2">ts-node</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">install</span>
-</code><button type="button">Copy</button></pre>
-
-<h2 id="📘-step-definition-documentation" class="tsd-anchor-link">📘 Step Definition Documentation<a href="#📘-step-definition-documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>👉 <a href="https://qapaschale.github.io/playwright-cucumber-ts-steps/">View Steps Documentation</a> and <a href="https://github.com/qaPaschale/playwright-cucumber-ts-steps/tree/master/playwright/e2e">examples</a>.</p>
-<hr>
-<h2 id="🛠️-usage" class="tsd-anchor-link">🛠️ Usage<a href="#🛠️-usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ol>
-<li>
-<p><strong>Load step definitions</strong> from the package:</p>
-<pre><code class="ts"><span class="hl-4">// e2e/steps/index.ts</span><br/><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps/register&quot;</span><span class="hl-1">;</span>
-</code><button type="button">Copy</button></pre>
-
-</li>
-<li>
-<p><strong>Use step definitions in your feature files</strong>:</p>
-<pre><code class="gherkin"><span class="hl-3">Feature</span><span class="hl-1">:</span><span class="hl-2"> Login</span><br/><br/><span class="hl-1">  </span><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> User logs in</span><br/><span class="hl-1">    </span><span class="hl-3">Given </span><span class="hl-1">I visit </span><span class="hl-2">&quot;/login&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">When </span><span class="hl-1">I find input by name </span><span class="hl-2">&quot;Email&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">And </span><span class="hl-1">I type </span><span class="hl-2">&quot;user@example.com&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">And </span><span class="hl-1">I click button </span><span class="hl-2">&quot;Login&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">Then </span><span class="hl-1">I see visible text </span><span class="hl-2">&quot;Welcome&quot;</span><br/><span class="hl-1">    </span><span class="hl-3">Then </span><span class="hl-1">I do not see URL contains </span><span class="hl-2">&quot;/login&quot;</span><br/>
-</code><button type="button">Copy</button></pre>
-
-</li>
-</ol>
-<hr>
-<h2 id="🧪-step-categories" class="tsd-anchor-link">🧪 Step Categories<a href="#🧪-step-categories" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
-<li>✅ <strong>Assertions</strong>: <code>I see text</code>, <code>I do not see text</code>, <code>I see button</code>, <code>I see value</code>, etc.</li>
-<li>🎬 <strong>Actions</strong>: <code>I click</code>, <code>I type</code>, <code>I wait</code>, <code>I switch to iframe</code>, etc.</li>
-<li>📄 <strong>Forms</strong>: <code>I fill the following</code>, aliasing, dynamic faker values</li>
-<li>🌐 <strong>API</strong>: Request mocking, assertions, response validation</li>
-<li>📱 <strong>Mobile support</strong>: Enable with <code>@mobile</code> tag (iPhone 13 emulation)</li>
-<li>👁️ <strong>Visual testing</strong>: Enable with <code>@visual</code> tag (pixelmatch diff)</li>
+<h2 id="🚀-features" class="tsd-anchor-link">🚀 Features<a href="#🚀-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li><strong>Zero Boilerplate:</strong> Install and start writing <code>.feature</code> files immediately.</li>
+<li><strong>Hybrid Testing:</strong> Mix <strong>UI</strong>, <strong>API</strong>, and <strong>Database</strong> steps in a single scenario.</li>
+<li><strong>Smart Auth:</strong> Login once, save the session, and reuse it across thousands of tests.</li>
+<li><strong>Native Performance:</strong> Runs purely on Playwright (no heavy Cucumber-JS wrapper), giving you Parallelism, Tracing, and Retries out of the box.</li>
+<li><strong>Tag Filtering:</strong> Run specific tests like <code>@smoke</code> or <code>@regression</code> easily.</li>
+<li><strong>Auto-Reporting:</strong> Built-in helper for HTML and Slack reports with <strong>screenshots on failure</strong>.</li>
 </ul>
 <hr>
-<h2 id="🧰-customization" class="tsd-anchor-link">🧰 Customization<a href="#🧰-customization" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>You can extend the base <code>CustomWorld</code> and define your own steps:</p>
-<pre><code class="ts"><span class="hl-4">// custom-world.ts</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">CustomWorld</span><span class="hl-1"> </span><span class="hl-5">as</span><span class="hl-1"> </span><span class="hl-6">BaseWorld</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">CustomWorld</span><span class="hl-1"> </span><span class="hl-3">extends</span><span class="hl-1"> </span><span class="hl-7">BaseWorld</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">// Add your custom context or helpers here</span><br/><span class="hl-1">}</span>
+<h2 id="📦-installation" class="tsd-anchor-link">📦 Installation<a href="#📦-installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">playwright-cucumber-ts-steps</span><span class="hl-1"> </span><span class="hl-2">@playwright/test</span>
+</code><button type="button">Copy</button></pre>
+
+<pre><code class="bash"><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">install</span>
 </code><button type="button">Copy</button></pre>
 
 <hr>
-<h2 id="🔍-tags--aliases" class="tsd-anchor-link">🔍 Tags &amp; Aliases<a href="#🔍-tags--aliases" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
-<li>
-<p>Use aliases with <code>@alias</code> syntax:</p>
-<pre><code class="gherkin"><span class="hl-3">Given </span><span class="hl-1">I get element by selector </span><span class="hl-2">&quot;[type=&#39;text_selector&#39;]&quot;</span><br/><span class="hl-3">And </span><span class="hl-1">I store element text as </span><span class="hl-2">&quot;welcomeText&quot;</span><br/><span class="hl-3">Then </span><span class="hl-1">I see </span><span class="hl-2">&quot;@welcomeText&quot;</span><span class="hl-1"> in the element</span>
+<h2 id="⚡-quick-start-guide" class="tsd-anchor-link">⚡ Quick Start Guide<a href="#⚡-quick-start-guide" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><h3 id="1-configure-playwright" class="tsd-anchor-link">1. Configure Playwright<a href="#1-configure-playwright" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Update <code>playwright.config.ts</code> to use the built-in reporting helper.</p>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">defineConfig</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;@playwright/test&quot;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">getReporters</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">export</span><span class="hl-1"> </span><span class="hl-3">default</span><span class="hl-1"> </span><span class="hl-0">defineConfig</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-4">testDir:</span><span class="hl-1"> </span><span class="hl-2">&quot;./tests&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">// Sets up HTML report + Console list automatically</span><br/><span class="hl-1">  </span><span class="hl-4">reporter:</span><span class="hl-1"> </span><span class="hl-0">getReporters</span><span class="hl-1">({ </span><span class="hl-4">on:</span><span class="hl-1"> [</span><span class="hl-2">&quot;html&quot;</span><span class="hl-1">] }),</span><br/><span class="hl-1">  </span><span class="hl-4">use:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">// We handle screenshots manually in the runner,</span><br/><span class="hl-1">    </span><span class="hl-5">// but this is good as a backup</span><br/><span class="hl-1">    </span><span class="hl-4">screenshot:</span><span class="hl-1"> </span><span class="hl-2">&quot;only-on-failure&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">});</span>
 </code><button type="button">Copy</button></pre>
 
-</li>
-<li>
-<p>Use faker:</p>
-<pre><code class="gherkin"><span class="hl-1">// Here below </span><span class="hl-2">&quot;Email&quot;</span><span class="hl-1"> represents a faker variable </span><span class="hl-2">&quot;Email: () =&gt; faker.internet.email()&quot;</span><span class="hl-1">, Continue button containing text with action click, best for Forms</span><br/><br/><span class="hl-1"> </span><span class="hl-3">When </span><span class="hl-1">I fill the following </span><span class="hl-2">&quot;example form page&quot;</span><span class="hl-1"> form data:</span><br/><span class="hl-5">    | Target         | Value            |</span><br/><span class="hl-5">    | [name=&#39;email&#39;] | Email            |</span><br/><span class="hl-5">    | Continue       | Click            |</span>
+<h3 id="2-create-the-runner" class="tsd-anchor-link">2. Create the Runner<a href="#2-create-the-runner" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Create a file at <code>tests/bdd.spec.ts</code>. This is the entry point.</p>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">runTests</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Runs all feature files in the &#39;features&#39; folder</span><br/><span class="hl-0">runTests</span><span class="hl-1">(</span><span class="hl-2">&quot;features/*.feature&quot;</span><span class="hl-1">);</span>
 </code><button type="button">Copy</button></pre>
 
-</li>
-</ul>
+<h3 id="3-write-your-feature" class="tsd-anchor-link">3. Write Your Feature<a href="#3-write-your-feature" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Create <code>features/login.feature</code>:</p>
+<pre><code class="gherkin"><span class="hl-6">Feature</span><span class="hl-1">:</span><span class="hl-2"> User Authentication</span><br/><br/><span class="hl-1">  </span><span class="hl-7">@smoke</span><br/><span class="hl-1">  </span><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Successful Login</span><br/><span class="hl-1">    </span><span class="hl-6">Given </span><span class="hl-1">I visit </span><span class="hl-2">&quot;[https://the-internet.herokuapp.com/login](https://the-internet.herokuapp.com/login)&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">When </span><span class="hl-1">I fill </span><span class="hl-2">&quot;#username&quot;</span><span class="hl-1"> with </span><span class="hl-2">&quot;tomsmith&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I fill </span><span class="hl-2">&quot;#password&quot;</span><span class="hl-1"> with </span><span class="hl-2">&quot;SuperSecretPassword!&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I click </span><span class="hl-2">&quot;button[type=&#39;submit&#39;]&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">Then </span><span class="hl-1">I expect </span><span class="hl-2">&quot;#flash&quot;</span><span class="hl-1"> to contain text </span><span class="hl-2">&quot;You logged into a secure area!&quot;</span><br/>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="4-run-tests" class="tsd-anchor-link">4. Run Tests<a href="#4-run-tests" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="bash"><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">test</span>
+</code><button type="button">Copy</button></pre>
+
 <hr>
-<h2 id="📸-advanced-usage" class="tsd-anchor-link">📸 Advanced Usage<a href="#📸-advanced-usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>These features are <strong>optional</strong> and can be implemented in your own <code>cucumber.js</code>:</p>
-<ul>
-<li>📷 <strong>Visual regression testing</strong> with pixelmatch</li>
-<li>🎥 <strong>Video recording per scenario</strong></li>
-<li>🔐 <strong>Session reuse</strong> using <code>storageState</code></li>
-</ul>
-<hr>
-<hr>
-<h3 id="✅-additional-supported-step-features" class="tsd-anchor-link">✅ Additional Supported Step Features<a href="#✅-additional-supported-step-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<h2 id="🏷️-tag-filtering-new" class="tsd-anchor-link">🏷️ Tag Filtering (New!)<a href="#🏷️-tag-filtering-new" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>We support a <strong>Friendly Syntax</strong> for filtering tests via the <code>TAGS</code> environment variable.</p>
+<table>
 <thead>
 <tr>
-<th>Feature Type</th>
+<th>Logic</th>
+<th>Symbol</th>
+<th>Example</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>fill form data</code></td>
-<td>Use <code>When I fill the following &quot;Login&quot; form data:</code> to perform actions like:</td>
+<td><strong>AND</strong></td>
+<td><code>,</code></td>
+<td><code>@login,@signup</code></td>
+<td>Run tests that have <code>@login</code> <strong>AND</strong> <code>@signup</code>.</td>
 </tr>
 <tr>
 <td></td>
-<td>- <code>fill</code>, <code>click</code>, <code>check</code>, <code>select</code>, <code>upload:&lt;file&gt;</code></td>
-</tr>
-<tr>
 <td></td>
-<td>- <code>drag:&lt;targetSelector&gt;</code> for drag-and-drop</td>
-</tr>
-<tr>
 <td></td>
-<td>- <code>assert:visible</code>, <code>assert:text:&lt;value&gt;</code></td>
-</tr>
-<tr>
 <td></td>
-<td>- <code>request:&lt;METHOD&gt;:&lt;URL&gt;:&lt;payload&gt;.json</code></td>
 </tr>
 <tr>
-<td></td>
-<td>- <code>set:localStorage:&lt;key&gt;</code>, <code>set:sessionStorage:&lt;key&gt;</code></td>
-</tr>
-<tr>
-<td></td>
-<td>- <code>wait:&lt;ms&gt;</code>, <code>reload</code>, and use alias <code>@aliasName</code></td>
-</tr>
-<tr>
-<td>Session Handling</td>
-<td>Steps like <code>I login with a session data &quot;admin.json&quot;</code>, <code>I save session as &quot;customer&quot;</code></td>
-</tr>
-<tr>
-<td>Session Restore</td>
-<td><code>I restore session cookies &quot;customer&quot; [with reload] [using localStorage]</code></td>
-</tr>
-<tr>
-<td>API Assertions</td>
-<td>Validate JSON response with <code>assert:json:key=expectedValue</code></td>
+<td><strong>MIX</strong></td>
+<td><code>,</code></td>
+<td><code>@a,@b, @c</code></td>
+<td>Run tests with (<code>@a</code> AND <code>@b</code>) <strong>OR</strong> just <code>@c</code>.</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<h3 id="✅-extended-usage-examples" class="tsd-anchor-link">✅ Extended Usage Examples<a href="#✅-extended-usage-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="gherkin"><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Login and save session</span><br/><span class="hl-1">  </span><span class="hl-3">When </span><span class="hl-1">I fill the following </span><span class="hl-2">&quot;Login&quot;</span><span class="hl-1"> form data:</span><br/><span class="hl-5">    | input[name=&#39;email&#39;]        | test@example.com            |</span><br/><span class="hl-5">    | input[name=&#39;password&#39;]     | @userPassword               |</span><br/><span class="hl-5">    | input[type=&#39;checkbox&#39;]     | check                       |</span><br/><span class="hl-5">    | button:has-text(&quot;Sign In&quot;) | click                       |</span><br/><span class="hl-5">    | .welcome                   | assert:visible              |</span><br/><span class="hl-5">    | .role                      | assert:text:Admin           |</span><br/><span class="hl-1">  </span><span class="hl-3">And </span><span class="hl-1">I save session as </span><span class="hl-2">&quot;admin&quot;</span><br/><br/><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Restore user session</span><br/><span class="hl-1">  </span><span class="hl-3">Given </span><span class="hl-1">I restore session cookies </span><span class="hl-2">&quot;admin&quot;</span><span class="hl-1"> with reload using localStorage</span><br/><span class="hl-1">  </span><span class="hl-3">When </span><span class="hl-1">I visit </span><span class="hl-2">&quot;/dashboard&quot;</span><br/><span class="hl-1">  </span><span class="hl-3">Then </span><span class="hl-1">I see text </span><span class="hl-2">&quot;Welcome back&quot;</span><br/><br/><span class="hl-3">Scenario</span><span class="hl-1">:</span><span class="hl-2"> API login + inject session</span><br/><span class="hl-1">  </span><span class="hl-3">When </span><span class="hl-1">I fill the following </span><span class="hl-2">&quot;Login&quot;</span><span class="hl-1"> form data:</span><br/><span class="hl-5">    | request:POST:/api/login:adminPayload.json | saveAs:loginData     |</span><br/><span class="hl-5">    | set:localStorage:token                    | @loginData.token     |</span><br/><span class="hl-5">    | save session as                           | adminViaAPI          |</span>
+<p><strong>Usage:</strong></p>
+<pre><code class="bash"><span class="hl-5"># Run only smoke tests</span><br/><span class="hl-4">TAGS</span><span class="hl-1">=</span><span class="hl-2">&#39;@smoke&#39;</span><span class="hl-1"> </span><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">test</span><br/><span class="hl-0">OR</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">test</span><span class="hl-1"> </span><span class="hl-6">-g</span><span class="hl-1"> </span><span class="hl-2">&quot;@smoke&quot;</span><br/><br/><span class="hl-5"># Run smoke tests that are also critical</span><br/><span class="hl-4">TAGS</span><span class="hl-1">=</span><span class="hl-2">&#39;@smoke,@critical&#39;</span><span class="hl-1"> </span><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">test</span><br/><span class="hl-0">OR</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">playwright</span><span class="hl-1"> </span><span class="hl-2">test</span><span class="hl-1"> </span><span class="hl-6">-g</span><span class="hl-1"> </span><span class="hl-2">&quot;@smoke|@critical&quot;</span><br/>
+</code><button type="button">Copy</button></pre>
+
+<p><em>(On Windows PowerShell, use <code>$env:TAGS=&quot;@smoke&quot;; npx playwright test</code>)</em></p>
+<p><strong>In your Test Runner (<code>tests/bdd.spec.ts</code>):</strong></p>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">runTests</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// OPTION 1: Run Everything</span><br/><span class="hl-5">// runTests(&#39;features/*.feature&#39;);</span><br/><br/><span class="hl-5">// OPTION 2: Run only Smoke tests</span><br/><span class="hl-0">runTests</span><span class="hl-1">(</span><span class="hl-2">&quot;features/*.feature&quot;</span><span class="hl-1">, { </span><span class="hl-4">tags:</span><span class="hl-1"> </span><span class="hl-2">&quot;@smoke&quot;</span><span class="hl-1"> });</span>
 </code><button type="button">Copy</button></pre>
 
 <hr>
-<h3 id="✅-folder-structure-suggestion" class="tsd-anchor-link">✅ Folder Structure Suggestion<a href="#✅-folder-structure-suggestion" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="text">e2e/
-├── features/                        # .feature files
-├── step_definitions/
-│   └── index.ts                    # import from this package
-├── support/
-│   ├── world.ts                    # CustomWorld extends with iframe support
-│   ├── hooks.ts                    # artifact &amp; session manager
-│   └── helpers/
-│       └── resolveUtils.ts        # alias/env/json resolver
-├── test-data/                      # JSON fixtures
-├── payload/                        # API request payloads
+<h2 id="💡-various-usage-examples" class="tsd-anchor-link">💡 Various Usage Examples<a href="#💡-various-usage-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><h3 id="1-api-testing-backend-validation" class="tsd-anchor-link">1. API Testing (Backend Validation)<a href="#1-api-testing-backend-validation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>You can validate your backend directly without opening a browser, or mix it with UI tests.</p>
+<pre><code class="gherkin"><span class="hl-6">Feature</span><span class="hl-1">:</span><span class="hl-2"> User API</span><br/><br/><span class="hl-1">  </span><span class="hl-7">@api</span><br/><span class="hl-1">  </span><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Create and Verify User</span><br/><span class="hl-1">    </span><span class="hl-6">When </span><span class="hl-1">I make a POST request to </span><span class="hl-2">&quot;[https://reqres.in/api/users](https://reqres.in/api/users)&quot;</span><span class="hl-1"> with body </span><span class="hl-2">&#39;{&quot;name&quot;: &quot;Morpheus&quot;, &quot;job&quot;: &quot;Leader&quot;}&#39;</span><br/><span class="hl-1">    </span><span class="hl-6">Then </span><span class="hl-1">I expect the response status to be 201</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I expect the response property </span><span class="hl-2">&quot;name&quot;</span><span class="hl-1"> to be </span><span class="hl-2">&quot;Morpheus&quot;</span><br/>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="2-advanced-elements-iframes-uploads" class="tsd-anchor-link">2. Advanced Elements (Iframes &amp; Uploads)<a href="#2-advanced-elements-iframes-uploads" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Handling complex HTML elements is built-in.</p>
+<pre><code class="gherkin"><span class="hl-6">Feature</span><span class="hl-1">:</span><span class="hl-2"> File Upload and Iframes</span><br/><br/><span class="hl-1">  </span><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Upload Document inside Iframe</span><br/><span class="hl-1">    </span><span class="hl-6">Given </span><span class="hl-1">I visit </span><span class="hl-2">&quot;[https://example.com/upload](https://example.com/upload)&quot;</span><br/><span class="hl-5">    # Switch context to the iframe</span><br/><span class="hl-1">    </span><span class="hl-6">When </span><span class="hl-1">I upload file </span><span class="hl-2">&quot;data/resume.pdf&quot;</span><span class="hl-1"> to </span><span class="hl-2">&quot;#file-input&quot;</span><span class="hl-1"> inside frame </span><span class="hl-2">&quot;#upload-iframe&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I click </span><span class="hl-2">&quot;#submit-btn&quot;</span><span class="hl-1"> inside frame </span><span class="hl-2">&quot;#upload-iframe&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">Then </span><span class="hl-1">I expect </span><span class="hl-2">&quot;div.success&quot;</span><span class="hl-1"> inside frame </span><span class="hl-2">&quot;#upload-iframe&quot;</span><span class="hl-1"> to be visible</span><br/>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="3-the-login-once-pattern-authentication" class="tsd-anchor-link">3. The &quot;Login Once&quot; Pattern (Authentication)<a href="#3-the-login-once-pattern-authentication" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Speed up your suite by 10x. Login once, save the cookies, and reuse them.</p>
+<p><strong>Step 1: Create a Setup Feature (<code>features/setup.feature</code>)</strong></p>
+<pre><code class="gherkin"><span class="hl-6">Feature</span><span class="hl-1">:</span><span class="hl-2"> Setup</span><br/><br/><span class="hl-1">  </span><span class="hl-7">@setup</span><br/><span class="hl-1">  </span><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Admin Login</span><br/><span class="hl-1">    </span><span class="hl-6">Given </span><span class="hl-1">I visit </span><span class="hl-2">&quot;/login&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">When </span><span class="hl-1">I fill </span><span class="hl-2">&quot;#user&quot;</span><span class="hl-1"> with </span><span class="hl-2">&quot;admin&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I fill </span><span class="hl-2">&quot;#pass&quot;</span><span class="hl-1"> with </span><span class="hl-2">&quot;1234&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I click </span><span class="hl-2">&quot;#login-btn&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I expect </span><span class="hl-2">&quot;#dashboard&quot;</span><span class="hl-1"> to be visible</span><br/><span class="hl-5">    # Saves session to ./auth/admin.json</span><br/><span class="hl-1">    </span><span class="hl-6">And </span><span class="hl-1">I save the browser state to </span><span class="hl-2">&quot;admin.json&quot;</span><br/>
+</code><button type="button">Copy</button></pre>
+
+<p><strong>Step 2: Use in Daily Tests (<code>features/admin.feature</code>)</strong></p>
+<pre><code class="gherkin"><span class="hl-6">Feature</span><span class="hl-1">:</span><span class="hl-2"> Admin Panel</span><br/><br/><span class="hl-1">  </span><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Check Reports</span><br/><span class="hl-5">    # Loads cookies instantly - No login UI needed!</span><br/><span class="hl-1">    </span><span class="hl-6">Given </span><span class="hl-1">I load the browser state from </span><span class="hl-2">&quot;admin.json&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">When </span><span class="hl-1">I visit </span><span class="hl-2">&quot;/admin/reports&quot;</span><br/><span class="hl-1">    </span><span class="hl-6">Then </span><span class="hl-1">I expect </span><span class="hl-2">&quot;h1&quot;</span><span class="hl-1"> to have text </span><span class="hl-2">&quot;Weekly Reports&quot;</span><br/>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="4-data-tables-forms" class="tsd-anchor-link">4. Data Tables (Forms)<a href="#4-data-tables-forms" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Fill out entire forms in a single step using a Data Table. You can type, click, check, or assert visibility in one go.</p>
+<pre><code class="gherkin"><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Registration</span><br/><span class="hl-1">  </span><span class="hl-6">When </span><span class="hl-1">I fill the following </span><span class="hl-2">&quot;Registration&quot;</span><span class="hl-1"> form data:</span><br/><span class="hl-3">    | #first-name | John           |</span><br/><span class="hl-3">    | #last-name  | Doe            |</span><br/><span class="hl-3">    | #email      | john@test.com  |</span><br/><span class="hl-3">    | #newsletter | check          |</span><br/><span class="hl-3">    | #submit-btn | click          |</span><br/><span class="hl-3">    | .success    | assert:visible |</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="5-api-testing-tables-files" class="tsd-anchor-link">5. API Testing (Tables &amp; Files)<a href="#5-api-testing-tables-files" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Validate your backend directly. You can send payloads via Tables or JSON Files.</p>
+<h4 id="option-a-data-table-payload" class="tsd-anchor-link">Option A: Data Table Payload<a href="#option-a-data-table-payload" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="gherkin"><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Create User (Table)</span><br/><span class="hl-1">  </span><span class="hl-6">When </span><span class="hl-1">I make a POST request to </span><span class="hl-2">&quot;[https://reqres.in/api/users](https://reqres.in/api/users)&quot;</span><span class="hl-1"> with data:</span><br/><span class="hl-3">    | name | Neo        |</span><br/><span class="hl-3">    | job  | The Chosen |</span><br/><span class="hl-1">  </span><span class="hl-6">Then </span><span class="hl-1">I expect the response status to be 201</span><br/><span class="hl-1">  </span><span class="hl-6">And </span><span class="hl-1">I expect the response property </span><span class="hl-2">&quot;name&quot;</span><span class="hl-1"> to be </span><span class="hl-2">&quot;Neo&quot;</span>
+</code><button type="button">Copy</button></pre>
+
+<h4 id="option-b-file-payload" class="tsd-anchor-link">Option B: File Payload<a href="#option-b-file-payload" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="gherkin"><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Create User (File)</span><br/><span class="hl-5">  # Reads from &#39;data/user.json&#39; in your project root</span><br/><span class="hl-1">  </span><span class="hl-6">When </span><span class="hl-1">I make a POST request to </span><span class="hl-2">&quot;/api/users&quot;</span><span class="hl-1"> with payload from </span><span class="hl-2">&quot;data/user.json&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">Then </span><span class="hl-1">I expect the response status to be 201</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="6-network-mocking" class="tsd-anchor-link">6. Network Mocking<a href="#6-network-mocking" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Simulate backend responses to test UI behavior without relying on real APIs.</p>
+<pre><code class="gherkin"><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Mocking User Profile</span><br/><span class="hl-5">  # Intercept calls to /api/user/1 and return fake data</span><br/><span class="hl-1">  </span><span class="hl-6">Given </span><span class="hl-1">I mock the API endpoint </span><span class="hl-2">&quot;*/**/api/user/1&quot;</span><span class="hl-1"> with body </span><span class="hl-2">&#39;{&quot;name&quot;: &quot;Mocked User&quot;}&#39;</span><br/><br/><span class="hl-5">  # When the UI calls the API, it gets our fake data</span><br/><span class="hl-1">  </span><span class="hl-6">When </span><span class="hl-1">I visit </span><span class="hl-2">&quot;/profile&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">Then </span><span class="hl-1">I expect </span><span class="hl-2">&quot;#username-display&quot;</span><span class="hl-1"> to have text </span><span class="hl-2">&quot;Mocked User&quot;</span><br/>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="7-database-testing-adapter-pattern" class="tsd-anchor-link">7. Database Testing (Adapter Pattern)<a href="#7-database-testing-adapter-pattern" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>You can validate database states by injecting your own DB driver into the runner.</p>
+<p><strong>1. In your <code>bdd.spec.ts</code>:</strong></p>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">runTests</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps&quot;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> </span><span class="hl-4">pg</span><span class="hl-1"> </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;pg&quot;</span><span class="hl-1">; </span><span class="hl-5">// Your driver (pg, mysql, mongo, etc)</span><br/><br/><span class="hl-5">// wrapper function</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-0">queryDb</span><span class="hl-1"> = </span><span class="hl-6">async</span><span class="hl-1"> (</span><span class="hl-4">query</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">) </span><span class="hl-6">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-8">client</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-4">pg</span><span class="hl-1">.</span><span class="hl-0">Client</span><span class="hl-1">(</span><span class="hl-4">process</span><span class="hl-1">.</span><span class="hl-4">env</span><span class="hl-1">.</span><span class="hl-8">DB_URL</span><span class="hl-1">);</span><br/><span class="hl-1">  </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-4">client</span><span class="hl-1">.</span><span class="hl-0">connect</span><span class="hl-1">();</span><br/><span class="hl-1">  </span><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-8">res</span><span class="hl-1"> = </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-4">client</span><span class="hl-1">.</span><span class="hl-0">query</span><span class="hl-1">(</span><span class="hl-4">query</span><span class="hl-1">);</span><br/><span class="hl-1">  </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-4">client</span><span class="hl-1">.</span><span class="hl-0">end</span><span class="hl-1">();</span><br/><span class="hl-1">  </span><span class="hl-3">return</span><span class="hl-1"> </span><span class="hl-4">res</span><span class="hl-1">.</span><span class="hl-4">rows</span><span class="hl-1">; </span><span class="hl-5">// Must return an array of objects</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-0">runTests</span><span class="hl-1">(</span><span class="hl-2">&quot;features/*.feature&quot;</span><span class="hl-1">, { </span><span class="hl-4">dbQuery:</span><span class="hl-1"> </span><span class="hl-4">queryDb</span><span class="hl-1"> });</span>
+</code><button type="button">Copy</button></pre>
+
+<p><strong>2. In your <code>Feature file</code>:</strong></p>
+<pre><code class="gherkin"><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Create User</span><br/><span class="hl-1">  </span><span class="hl-6">When </span><span class="hl-1">I run the database query </span><span class="hl-2">&quot;INSERT INTO users (name) VALUES (&#39;Bob&#39;)&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">Then </span><span class="hl-1">I expect the database to return 1 record</span><br/><span class="hl-1">  </span><span class="hl-6">And </span><span class="hl-1">I expect the first database record to contain:</span><br/><span class="hl-3">    | name | Bob |</span>
 </code><button type="button">Copy</button></pre>
 
 <hr>
-<p>Here’s a full <code>cucumber.js</code> config file that includes <strong>all the configurable options</strong> integrated so far. This supports:</p>
-<ul>
-<li>✅ CLI/env override for artifact directories</li>
-<li>✅ Visual testing toggle</li>
-<li>✅ Screenshot and video toggle</li>
-<li>✅ Device emulation via <code>MOBILE_DEVICE</code> env or world param</li>
-<li>✅ Multiple profiles (<code>default</code>, <code>mobile</code>, <code>visual</code>, <code>ci</code>)</li>
-<li>✅ Parallel test execution and ts-node for TypeScript support</li>
-</ul>
-<hr>
-<h3 id="✅-cucumberjs" class="tsd-anchor-link">✅ <code>cucumber.js</code><a href="#✅-cucumberjs" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="js"><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-6">path</span><span class="hl-1"> </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;path&quot;</span><span class="hl-1">;</span><br/><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-6">dotenv</span><span class="hl-1"> </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;dotenv&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-6">dotenv</span><span class="hl-1">.</span><span class="hl-0">config</span><span class="hl-1">();</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-1"> = </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">TEST_ARTIFACT_DIR</span><span class="hl-1"> || </span><span class="hl-2">&quot;test-artifacts&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">defaultWorldParams</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-6">artifactDir:</span><span class="hl-1"> </span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">payloadDir:</span><span class="hl-1"> </span><span class="hl-2">&quot;payloads&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">enableTrace:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_TRACE</span><span class="hl-1"> || </span><span class="hl-2">&quot;fail&quot;</span><span class="hl-1">, </span><span class="hl-4">// &quot;false&quot; | &quot;fail&quot; | &quot;all&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">enableScreenshots:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_SCREENSHOTS</span><span class="hl-1"> || </span><span class="hl-2">&quot;fail&quot;</span><span class="hl-1">, </span><span class="hl-4">// &quot;false&quot; | &quot;fail&quot; | &quot;all&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">enableVideos:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_VIDEOS</span><span class="hl-1"> || </span><span class="hl-2">&quot;all&quot;</span><span class="hl-1">, </span><span class="hl-4">// &quot;false&quot; | &quot;fail&quot; | &quot;all&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">enableVisualTest:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">ENABLE_VISUAL_TEST</span><span class="hl-1"> === </span><span class="hl-2">&quot;true&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">device:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">MOBILE_DEVICE</span><span class="hl-1"> || </span><span class="hl-3">undefined</span><span class="hl-1">, </span><span class="hl-4">// e.g., &quot;Pixel 5&quot;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-5">default</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">default:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">, </span><span class="hl-2">`html:</span><span class="hl-3">${</span><span class="hl-6">path</span><span class="hl-9">.</span><span class="hl-0">join</span><span class="hl-9">(</span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-9">, </span><span class="hl-2">&quot;report.html&quot;</span><span class="hl-9">)</span><span class="hl-3">}</span><span class="hl-2">`</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">parallel:</span><span class="hl-1"> </span><span class="hl-10">2</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> </span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">  },</span><br/><br/><span class="hl-1">  </span><span class="hl-6">mobile:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">parallel:</span><span class="hl-1"> </span><span class="hl-10">1</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">tags:</span><span class="hl-1"> </span><span class="hl-2">&quot;@mobile&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> {</span><br/><span class="hl-1">      ...</span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">device:</span><span class="hl-1"> </span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">env</span><span class="hl-1">.</span><span class="hl-8">MOBILE_DEVICE</span><span class="hl-1"> || </span><span class="hl-2">&quot;iPhone 13 Pro&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">  },</span><br/><br/><span class="hl-1">  </span><span class="hl-6">visual:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">tags:</span><span class="hl-1"> </span><span class="hl-2">&quot;@visual&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> {</span><br/><span class="hl-1">      ...</span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableVisualTest:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">  },</span><br/><br/><span class="hl-1">  </span><span class="hl-6">ci:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">require:</span><span class="hl-1"> [</span><span class="hl-2">&quot;ts-node/register&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/steps/**/*.ts&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;src/test/support/**/*.ts&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">format:</span><span class="hl-1"> [</span><span class="hl-2">&quot;progress&quot;</span><span class="hl-1">, </span><span class="hl-2">`json:</span><span class="hl-3">${</span><span class="hl-6">path</span><span class="hl-9">.</span><span class="hl-0">join</span><span class="hl-9">(</span><span class="hl-8">ARTIFACT_DIR</span><span class="hl-9">, </span><span class="hl-2">&quot;report.json&quot;</span><span class="hl-9">)</span><span class="hl-3">}</span><span class="hl-2">`</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">publishQuiet:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">paths:</span><span class="hl-1"> [</span><span class="hl-2">&quot;src/test/features/**/*.feature&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">parallel:</span><span class="hl-1"> </span><span class="hl-10">4</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">worldParameters:</span><span class="hl-1"> {</span><br/><span class="hl-1">      ...</span><span class="hl-6">defaultWorldParams</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableScreenshots:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableVideos:</span><span class="hl-1"> </span><span class="hl-3">true</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">enableVisualTest:</span><span class="hl-1"> </span><span class="hl-3">false</span><span class="hl-1">,</span><br/><span class="hl-1">    },</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">};</span>
-</code><button type="button">Copy</button></pre>
-
-<hr>
-<h3 id="✅-usage-examples" class="tsd-anchor-link">✅ Usage Examples<a href="#✅-usage-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><pre><code class="bash"><span class="hl-4"># Run default suite</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><br/><br/><span class="hl-4"># Run mobile tests with device from env</span><br/><span class="hl-6">MOBILE_DEVICE</span><span class="hl-1">=</span><span class="hl-2">&quot;Pixel 5&quot;</span><span class="hl-1"> </span><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><span class="hl-1"> </span><span class="hl-3">--profile</span><span class="hl-1"> </span><span class="hl-2">mobile</span><br/><br/><span class="hl-4"># Run visual regression tests</span><br/><span class="hl-6">ENABLE_VISUAL_TEST</span><span class="hl-1">=</span><span class="hl-2">true</span><span class="hl-1"> </span><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><span class="hl-1"> </span><span class="hl-3">--profile</span><span class="hl-1"> </span><span class="hl-2">visual</span><br/><br/><span class="hl-4"># Run in CI profile with JSON output</span><br/><span class="hl-0">npx</span><span class="hl-1"> </span><span class="hl-2">cucumber-js</span><span class="hl-1"> </span><span class="hl-3">--config</span><span class="hl-1"> </span><span class="hl-2">cucumber.js</span><span class="hl-1"> </span><span class="hl-3">--profile</span><span class="hl-1"> </span><span class="hl-2">ci</span>
-</code><button type="button">Copy</button></pre>
-
-<hr>
-<h3 id="✅-summary-of-supported-options" class="tsd-anchor-link">✅ Summary of Supported Options<a href="#✅-summary-of-supported-options" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<h2 id="📖-step-glossary-cheat-sheet" class="tsd-anchor-link">📖 Step Glossary (Cheat Sheet)<a href="#📖-step-glossary-cheat-sheet" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><h3 id="🖱️-actions" class="tsd-anchor-link">🖱️ Actions<a href="#🖱️-actions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
 <thead>
 <tr>
-<th>Setting</th>
-<th>CLI/Env Variable</th>
-<th><code>worldParameters</code> Key</th>
-<th>Purpose</th>
+<th>Step</th>
+<th>Usage Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Screenshot toggle</td>
-<td><code>ENABLE_SCREENSHOTS</code></td>
-<td><code>enableScreenshots</code></td>
-<td>Capture screenshots on failure</td>
+<td><strong>Visit</strong></td>
+<td><code>I visit &quot;https://google.com&quot;</code></td>
 </tr>
 <tr>
-<td>Video toggle</td>
-<td><code>ENABLE_VIDEOS</code></td>
-<td><code>enableVideos</code></td>
-<td>Enable/disable video recording</td>
+<td><strong>Click</strong></td>
+<td><code>I click &quot;#submit-btn&quot;</code></td>
 </tr>
 <tr>
-<td>Visual testing</td>
-<td><code>ENABLE_VISUAL_TEST</code></td>
-<td><code>enableVisualTest</code></td>
-<td>Capture and compare visual snapshots</td>
+<td><strong>Force Click</strong></td>
+<td><code>I force click &quot;#hidden-btn&quot;</code></td>
 </tr>
 <tr>
-<td>Artifact directory</td>
-<td><code>TEST_ARTIFACT_DIR</code></td>
-<td><code>artifactDir</code></td>
-<td>Where to save screenshots, videos, etc.</td>
+<td><strong>Double Click</strong></td>
+<td><code>I double click &quot;.icon&quot;</code></td>
 </tr>
 <tr>
-<td>Mobile device emu</td>
-<td><code>MOBILE_DEVICE</code></td>
-<td><code>device</code></td>
-<td>Device name for Playwright mobile emulation</td>
+<td><strong>Fill Input</strong></td>
+<td><code>I fill &quot;#email&quot; with &quot;user@test.com&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Press Key</strong></td>
+<td><code>I press &quot;Enter&quot;</code> (or &quot;Tab&quot;, &quot;Escape&quot;)</td>
+</tr>
+<tr>
+<td><strong>Wait</strong></td>
+<td><code>I wait for 2000 milliseconds</code></td>
+</tr>
+<tr>
+<td><strong>Reload</strong></td>
+<td><code>I reload the page</code></td>
+</tr>
+<tr>
+<td><strong>Go Back</strong></td>
+<td><code>I go back</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="🧾-license" class="tsd-anchor-link">🧾 License<a href="#🧾-license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p><a href="media/LICENSE">MIT</a></p>
+<h3 id="✅-assertions" class="tsd-anchor-link">✅ Assertions<a href="#✅-assertions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Usage Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Visibility</strong></td>
+<td><code>I expect &quot;#modal&quot; to be visible</code></td>
+</tr>
+<tr>
+<td><strong>Hidden</strong></td>
+<td><code>I expect &quot;#loader&quot; to be hidden</code></td>
+</tr>
+<tr>
+<td><strong>Exact Text</strong></td>
+<td><code>I expect &quot;#header&quot; to have text &quot;Welcome&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Partial Text</strong></td>
+<td><code>I expect &quot;.error&quot; to contain text &quot;Failed&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Input Value</strong></td>
+<td><code>I expect &quot;#username&quot; to have value &quot;admin&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Exact URL</strong></td>
+<td><code>I expect the url to be &quot;https://site.com/home&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Partial URL</strong></td>
+<td><code>I expect the url to contain &quot;/dashboard&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td><code>I expect the title to contain &quot;Home Page&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Attribute</strong></td>
+<td><code>I expect &quot;img&quot; to have attribute &quot;src&quot; with value &quot;logo.png&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Screenshot</strong></td>
+<td><code>I expect the page screenshot to match &quot;home.png&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="🧩-forms-elements" class="tsd-anchor-link">🧩 Forms &amp; Elements<a href="#🧩-forms-elements" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Usage Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Select (Dropdown)</strong></td>
+<td><code>I select option &quot;Canada&quot; from &quot;#country&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Check Box</strong></td>
+<td><code>I check &quot;#terms-checkbox&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Uncheck</strong></td>
+<td><code>I uncheck &quot;#newsletter&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Upload File</strong></td>
+<td><code>I upload file &quot;data.csv&quot; to &quot;#upload&quot;</code></td>
+</tr>
+<tr>
+<td><strong>Handle Alert</strong></td>
+<td><code>I accept the next dialog</code></td>
+</tr>
+<tr>
+<td><strong>Frame Click</strong></td>
+<td><code>I click &quot;#btn&quot; inside frame &quot;#payment-frame&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="🌐-api" class="tsd-anchor-link">🌐 API<a href="#🌐-api" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Usage Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GET</strong></td>
+<td><code>I make a GET request to &quot;/api/users&quot;</code></td>
+</tr>
+<tr>
+<td><strong>DELETE</strong></td>
+<td><code>I make a DELETE request to &quot;/api/users/1&quot;</code></td>
+</tr>
+<tr>
+<td><strong>POST</strong></td>
+<td><code>I make a POST request to &quot;/api/login&quot; with body '{&quot;u&quot;:&quot;1&quot;}'</code></td>
+</tr>
+<tr>
+<td><strong>Status Check</strong></td>
+<td><code>I expect the response status to be 200</code></td>
+</tr>
+<tr>
+<td><strong>JSON Check</strong></td>
+<td><code>I expect the response property &quot;data.id&quot; to be &quot;99&quot;</code></td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2 id="🙋♂️-contributing" class="tsd-anchor-link">🙋‍♂️ Contributing<a href="#🙋♂️-contributing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Contributions, improvements, and suggestions are welcome! Feel free to open an issue or pull request.</p>
+<h2 id="🛠️-extending-custom-steps" class="tsd-anchor-link">🛠️ Extending (Custom Steps)<a href="#🛠️-extending-custom-steps" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Need a step that isn't included? You can easily register your own in your spec file.</p>
+<pre><code class="typescript"><span class="hl-5">// tests/bdd.spec.ts</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">runTests</span><span class="hl-1">, </span><span class="hl-4">Step</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;playwright-cucumber-ts-steps&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// 1. Define custom step</span><br/><span class="hl-0">Step</span><span class="hl-1">(</span><span class="hl-2">&quot;I scroll to the bottom of the page&quot;</span><span class="hl-1">, </span><span class="hl-6">async</span><span class="hl-1"> (</span><span class="hl-4">page</span><span class="hl-1">) </span><span class="hl-6">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-4">page</span><span class="hl-1">.</span><span class="hl-0">evaluate</span><span class="hl-1">(() </span><span class="hl-6">=&gt;</span><span class="hl-1"> </span><span class="hl-4">window</span><span class="hl-1">.</span><span class="hl-0">scrollTo</span><span class="hl-1">(</span><span class="hl-9">0</span><span class="hl-1">, </span><span class="hl-4">document</span><span class="hl-1">.</span><span class="hl-4">body</span><span class="hl-1">.</span><span class="hl-4">scrollHeight</span><span class="hl-1">));</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-5">// 2. Run tests</span><br/><span class="hl-0">runTests</span><span class="hl-1">(</span><span class="hl-2">&quot;features/*.feature&quot;</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Then use it in your feature:</p>
+<pre><code class="gherkin"><span class="hl-6">Scenario</span><span class="hl-1">:</span><span class="hl-2"> Scroll Test</span><br/><span class="hl-1">  </span><span class="hl-6">Given </span><span class="hl-1">I visit </span><span class="hl-2">&quot;[https://infinite-scroll.com](https://infinite-scroll.com)&quot;</span><br/><span class="hl-1">  </span><span class="hl-6">When </span><span class="hl-1">I scroll to the bottom of the page</span><br/>
+</code><button type="button">Copy</button></pre>
+
 <hr>
-<h2 id="💬-questions" class="tsd-anchor-link">💬 Questions?<a href="#💬-questions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>Open an issue on <a href="https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues">GitHub Issues</a> or reach out via discussions.</p>
-</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#🎭-playwright-cucumber-ts-steps"><span>🎭 playwright-<wbr/>cucumber-<wbr/>ts-<wbr/>steps</span></a><ul><li><a href="#✨-features"><span>✨ <wbr/>Features</span></a></li><li><a href="#📦-installation"><span>📦 <wbr/>Installation</span></a></li><li><a href="#🧠-prerequisites"><span>🧠 <wbr/>Prerequisites</span></a></li><li><a href="#📘-step-definition-documentation"><span>📘 <wbr/>Step <wbr/>Definition <wbr/>Documentation</span></a></li><li><a href="#🛠️-usage"><span>🛠️ <wbr/>Usage</span></a></li><li><a href="#🧪-step-categories"><span>🧪 <wbr/>Step <wbr/>Categories</span></a></li><li><a href="#🧰-customization"><span>🧰 <wbr/>Customization</span></a></li><li><a href="#🔍-tags--aliases"><span>🔍 <wbr/>Tags &amp; <wbr/>Aliases</span></a></li><li><a href="#📸-advanced-usage"><span>📸 <wbr/>Advanced <wbr/>Usage</span></a></li><li><ul><li><a href="#✅-additional-supported-step-features"><span>✅ <wbr/>Additional <wbr/>Supported <wbr/>Step <wbr/>Features</span></a></li><li><a href="#✅-extended-usage-examples"><span>✅ <wbr/>Extended <wbr/>Usage <wbr/>Examples</span></a></li><li><a href="#✅-folder-structure-suggestion"><span>✅ <wbr/>Folder <wbr/>Structure <wbr/>Suggestion</span></a></li><li><a href="#✅-cucumberjs"><span>✅ cucumber.js</span></a></li><li><a href="#✅-usage-examples"><span>✅ <wbr/>Usage <wbr/>Examples</span></a></li><li><a href="#✅-summary-of-supported-options"><span>✅ <wbr/>Summary of <wbr/>Supported <wbr/>Options</span></a></li></ul></li><li><a href="#🧾-license"><span>🧾 <wbr/>License</span></a></li><li><a href="#🙋♂️-contributing"><span>🙋‍♂️ <wbr/>Contributing</span></a></li><li><a href="#💬-questions"><span>💬 <wbr/>Questions?</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">playwright-cucumber-ts-steps</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
+<h2 id="📄-license" class="tsd-anchor-link">📄 License<a href="#📄-license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>MIT © 2024</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#🎭-playwright-cucumber-ts-steps"><span>🎭 <wbr/>Playwright <wbr/>Cucumber <wbr/>TS <wbr/>Steps</span></a><ul><li><a href="#🚀-features"><span>🚀 <wbr/>Features</span></a></li><li><a href="#📦-installation"><span>📦 <wbr/>Installation</span></a></li><li><a href="#⚡-quick-start-guide"><span>⚡ <wbr/>Quick <wbr/>Start <wbr/>Guide</span></a></li><li><ul><li><a href="#1-configure-playwright"><span>1. <wbr/>Configure <wbr/>Playwright</span></a></li><li><a href="#2-create-the-runner"><span>2. <wbr/>Create the <wbr/>Runner</span></a></li><li><a href="#3-write-your-feature"><span>3. <wbr/>Write <wbr/>Your <wbr/>Feature</span></a></li><li><a href="#4-run-tests"><span>4. <wbr/>Run <wbr/>Tests</span></a></li></ul></li><li><a href="#🏷️-tag-filtering-new"><span>🏷️ <wbr/>Tag <wbr/>Filtering (<wbr/>New!)</span></a></li><li><a href="#💡-various-usage-examples"><span>💡 <wbr/>Various <wbr/>Usage <wbr/>Examples</span></a></li><li><ul><li><a href="#1-api-testing-backend-validation"><span>1. <wbr/>API <wbr/>Testing (<wbr/>Backend <wbr/>Validation)</span></a></li><li><a href="#2-advanced-elements-iframes-uploads"><span>2. <wbr/>Advanced <wbr/>Elements (<wbr/>Iframes &amp; <wbr/>Uploads)</span></a></li><li><a href="#3-the-login-once-pattern-authentication"><span>3. <wbr/>The &quot;<wbr/>Login <wbr/>Once&quot; <wbr/>Pattern (<wbr/>Authentication)</span></a></li><li><a href="#4-data-tables-forms"><span>4. <wbr/>Data <wbr/>Tables (<wbr/>Forms)</span></a></li><li><a href="#5-api-testing-tables-files"><span>5. <wbr/>API <wbr/>Testing (<wbr/>Tables &amp; <wbr/>Files)</span></a></li><li><ul><li><a href="#option-a-data-table-payload"><span>Option <wbr/>A: <wbr/>Data <wbr/>Table <wbr/>Payload</span></a></li><li><a href="#option-b-file-payload"><span>Option <wbr/>B: <wbr/>File <wbr/>Payload</span></a></li></ul></li><li><a href="#6-network-mocking"><span>6. <wbr/>Network <wbr/>Mocking</span></a></li><li><a href="#7-database-testing-adapter-pattern"><span>7. <wbr/>Database <wbr/>Testing (<wbr/>Adapter <wbr/>Pattern)</span></a></li></ul></li><li><a href="#📖-step-glossary-cheat-sheet"><span>📖 <wbr/>Step <wbr/>Glossary (<wbr/>Cheat <wbr/>Sheet)</span></a></li><li><ul><li><a href="#🖱️-actions"><span>🖱️ <wbr/>Actions</span></a></li><li><a href="#✅-assertions"><span>✅ <wbr/>Assertions</span></a></li><li><a href="#🧩-forms-elements"><span>🧩 <wbr/>Forms &amp; <wbr/>Elements</span></a></li><li><a href="#🌐-api"><span>🌐 <wbr/>API</span></a></li></ul></li><li><a href="#🛠️-extending-custom-steps"><span>🛠️ <wbr/>Extending (<wbr/>Custom <wbr/>Steps)</span></a></li><li><a href="#📄-license"><span>📄 <wbr/>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">Playwright Cucumber TS Steps</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer></footer><div class="overlay"></div></body></html>
