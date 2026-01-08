@@ -1,4 +1,4 @@
-# 🎭 playwright-cucumber-ts-steps
+# 🎭 Playwright Cucumber TS Steps
 
 [![NPM](https://nodei.co/npm/playwright-cucumber-ts-steps.png?downloads=true&downloadRank=true&stars=true&height=3)](https://nodei.co/npm/playwright-cucumber-ts-steps/)
 
@@ -6,338 +6,378 @@
  <img src="https://github.com/qaPaschalE/k6-cucumber-steps/blob/main/assets/paschal%20logo%20(2).png?raw=true" alt="paschal Logo" style="margin-top:25px;" align="center"/>
 </td></tr></table>
 
-[![npm](https://img.shields.io/npm/v/playwright-cucumber-ts-steps?logo=npm)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
-[![License](https://img.shields.io/github/license/qaPaschalE/playwright-cucumber-ts-steps?logo=github)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/blob/main/LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E=18-green?logo=node.js)](https://nodejs.org/)
-[![Build Status](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/actions)
-[![TypeScript](https://img.shields.io/badge/types-TypeScript-blue?logo=typescript)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
-[![Issues](https://img.shields.io/github/issues/qaPaschalE/playwright-cucumber-ts-steps?logo=github)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues)
-[![Stars](https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps?logo=github)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers)
+[![npm version](https://img.shields.io/npm/v/playwright-cucumber-ts-steps?style=flat-square&color=blue)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
+[![Downloads](https://img.shields.io/npm/dm/playwright-cucumber-ts-steps?style=flat-square)](https://www.npmjs.com/package/playwright-cucumber-ts-steps)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Playwright](https://img.shields.io/badge/tested%20with-Playwright-blueviolet?style=flat-square&logo=playwright)](https://playwright.dev)
+[![TypeScript](https://img.shields.io/badge/written%20in-TypeScript-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![GitHub stars](https://img.shields.io/github/stars/qaPaschalE/playwright-cucumber-ts-steps)](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/stargazers)
 
-> A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.
+**The "Low-Code" BDD Framework for Playwright.**
 
-> **Note:** This package is designed for advanced Cucumber+Playwright+TypeScript setups. For basic Playwright usage, see the [official Playwright docs](https://playwright.dev/).
+Write powerful end-to-end tests in plain English using Gherkin syntax, without managing complex glue code. `playwright-cucumber-ts-steps` provides a pre-built library of robust steps for UI, API, and Authentication testing, running natively inside Playwright.
 
-## ✨ Features
+---
 
-- 🧩 Plug-and-play Cucumber step definitions
-- 🎯 Support for **UI**, **API**, **mobile**, **iframe**, **hybrid login**, and **visual testing**
-- 🧠 Smart **session management** via storageState, `localStorage`, `sessionStorage`, and alias reuse
-- 🗂️ **Alias**, **Faker**, `.env`, and dynamic JSON fixture support
-- 📸 **Screenshot** on failure, 🎥 **video recording**, and 🖼️ **visual diff** with baseline comparison
-- 📤 Supports **file upload**, **drag-and-drop**, and **multi-user session flows**
-- 🌐 Fully supports **API requests with inline assertions**, payload from custom folders, and session injection
-- ✅ Compatible with both `Page` and `FrameLocator` contexts (iframe-aware)
+## 🚀 Features
+
+- **Zero Boilerplate:** Install and start writing `.feature` files immediately.
+- **Hybrid Testing:** Mix **UI**, **API**, and **Database** steps in a single scenario.
+- **Smart Auth:** Login once, save the session, and reuse it across thousands of tests.
+- **Native Performance:** Runs purely on Playwright (no heavy Cucumber-JS wrapper), giving you Parallelism, Tracing, and Retries out of the box.
+- **Tag Filtering:** Run specific tests like `@smoke` or `@regression` easily.
+- **Auto-Reporting:** Built-in helper for HTML and Slack reports with **screenshots on failure**.
+
+---
 
 ## 📦 Installation
 
 ```bash
-npm install playwright-cucumber-ts-steps
+npm install playwright-cucumber-ts-steps @playwright/test
 ```
 
-or
-
 ```bash
-yarn add playwright-cucumber-ts-steps
-```
-
----
-
-## 🧠 Prerequisites
-
-Ensure your project is already set up with:
-
-- [`@playwright/test`](https://playwright.dev/)
-- [`@cucumber/cucumber`](https://github.com/cucumber/cucumber-js)
-- TypeScript
-- Cucumber IDE plugin (Optional), but Highly recommended
-
-If not, run:
-
-```bash
-npm install --save-dev @playwright/test @cucumber/cucumber typescript ts-node
 npx playwright install
 ```
 
-## 📘 Step Definition Documentation
-
-👉 [View Steps Documentation](https://qapaschale.github.io/playwright-cucumber-ts-steps/) and [examples](https://github.com/qaPaschale/playwright-cucumber-ts-steps/tree/master/playwright/e2e).
-
 ---
 
-## 🛠️ Usage
+## ⚡ Quick Start Guide
 
-1. **Load step definitions** from the package:
+### 1. Configure Playwright
 
-   ```ts
-   // e2e/steps/index.ts
-   import "playwright-cucumber-ts-steps/register";
-   ```
+Update `playwright.config.ts` to use the built-in reporting helper.
 
-2. **Use step definitions in your feature files**:
+```typescript
+import { defineConfig } from "@playwright/test";
+import { getReporters } from "playwright-cucumber-ts-steps";
 
-   ```gherkin
-   Feature: Login
-
-     Scenario: User logs in
-       Given I visit "/login"
-       When I find input by name "Email"
-       And I type "user@example.com"
-       And I click button "Login"
-       Then I see visible text "Welcome"
-       Then I do not see URL contains "/login"
-
-   ```
-
----
-
-## 🧪 Step Categories
-
-- ✅ **Assertions**: `I see text`, `I do not see text`, `I see button`, `I see value`, etc.
-- 🎬 **Actions**: `I click`, `I type`, `I wait`, `I switch to iframe`, etc.
-- 📄 **Forms**: `I fill the following`, aliasing, dynamic faker values
-- 🌐 **API**: Request mocking, assertions, response validation
-- 📱 **Mobile support**: Enable with `@mobile` tag (iPhone 13 emulation)
-- 👁️ **Visual testing**: Enable with `@visual` tag (pixelmatch diff)
-
----
-
-## 🧰 Customization
-
-You can extend the base `CustomWorld` and define your own steps:
-
-```ts
-// custom-world.ts
-import { CustomWorld as BaseWorld } from "playwright-cucumber-ts-steps";
-
-export class CustomWorld extends BaseWorld {
-  // Add your custom context or helpers here
-}
+export default defineConfig({
+  testDir: "./tests",
+  // Sets up HTML report + Console list automatically
+  reporter: getReporters({ on: ["html"] }),
+  use: {
+    // We handle screenshots manually in the runner,
+    // but this is good as a backup
+    screenshot: "only-on-failure",
+  },
+});
 ```
 
----
+### 2. Create the Runner
 
-## 🔍 Tags & Aliases
+Create a file at `tests/bdd.spec.ts`. This is the entry point.
 
-- Use aliases with `@alias` syntax:
+```typescript
+import { runTests } from "playwright-cucumber-ts-steps";
 
-  ```gherkin
-  Given I get element by selector "[type='text_selector']"
-  And I store element text as "welcomeText"
-  Then I see "@welcomeText" in the element
-  ```
+// Runs all feature files in the 'features' folder
+runTests("features/*.feature");
+```
 
-- Use faker:
+### 3. Write Your Feature
 
-  ```gherkin
-  // Here below "Email" represents a faker variable "Email: () => faker.internet.email()", Continue button containing text with action click, best for Forms
-
-   When I fill the following "example form page" form data:
-      | Target         | Value            |
-      | [name='email'] | Email            |
-      | Continue       | Click            |
-  ```
-
----
-
-## 📸 Advanced Usage
-
-These features are **optional** and can be implemented in your own `cucumber.js`:
-
-- 📷 **Visual regression testing** with pixelmatch
-- 🎥 **Video recording per scenario**
-- 🔐 **Session reuse** using `storageState`
-
----
-
----
-
-### ✅ Additional Supported Step Features
-
-| Feature Type     | Description                                                                           |
-| ---------------- | ------------------------------------------------------------------------------------- |
-| `fill form data` | Use `When I fill the following "Login" form data:` to perform actions like:           |
-|                  | - `fill`, `click`, `check`, `select`, `upload:<file>`                                 |
-|                  | - `drag:<targetSelector>` for drag-and-drop                                           |
-|                  | - `assert:visible`, `assert:text:<value>`                                             |
-|                  | - `request:<METHOD>:<URL>:<payload>.json`                                             |
-|                  | - `set:localStorage:<key>`, `set:sessionStorage:<key>`                                |
-|                  | - `wait:<ms>`, `reload`, and use alias `@aliasName`                                   |
-| Session Handling | Steps like `I login with a session data "admin.json"`, `I save session as "customer"` |
-| Session Restore  | `I restore session cookies "customer" [with reload] [using localStorage]`             |
-| API Assertions   | Validate JSON response with `assert:json:key=expectedValue`                           |
-
----
-
-### ✅ Extended Usage Examples
+Create `features/login.feature`:
 
 ```gherkin
-Scenario: Login and save session
-  When I fill the following "Login" form data:
-    | input[name='email']        | test@example.com            |
-    | input[name='password']     | @userPassword               |
-    | input[type='checkbox']     | check                       |
-    | button:has-text("Sign In") | click                       |
-    | .welcome                   | assert:visible              |
-    | .role                      | assert:text:Admin           |
-  And I save session as "admin"
+Feature: User Authentication
 
-Scenario: Restore user session
-  Given I restore session cookies "admin" with reload using localStorage
-  When I visit "/dashboard"
-  Then I see text "Welcome back"
+  @smoke
+  Scenario: Successful Login
+    Given I visit "[https://the-internet.herokuapp.com/login](https://the-internet.herokuapp.com/login)"
+    When I fill "#username" with "tomsmith"
+    And I fill "#password" with "SuperSecretPassword!"
+    And I click "button[type='submit']"
+    Then I expect "#flash" to contain text "You logged into a secure area!"
 
-Scenario: API login + inject session
-  When I fill the following "Login" form data:
-    | request:POST:/api/login:adminPayload.json | saveAs:loginData     |
-    | set:localStorage:token                    | @loginData.token     |
-    | save session as                           | adminViaAPI          |
 ```
 
----
-
-### ✅ Folder Structure Suggestion
-
-```text
-e2e/
-├── features/                        # .feature files
-├── step_definitions/
-│   └── index.ts                    # import from this package
-├── support/
-│   ├── world.ts                    # CustomWorld extends with iframe support
-│   ├── hooks.ts                    # artifact & session manager
-│   └── helpers/
-│       └── resolveUtils.ts        # alias/env/json resolver
-├── test-data/                      # JSON fixtures
-├── payload/                        # API request payloads
-```
-
----
-
-Here’s a full `cucumber.js` config file that includes **all the configurable options** integrated so far. This supports:
-
-- ✅ CLI/env override for artifact directories
-- ✅ Visual testing toggle
-- ✅ Screenshot and video toggle
-- ✅ Device emulation via `MOBILE_DEVICE` env or world param
-- ✅ Multiple profiles (`default`, `mobile`, `visual`, `ci`)
-- ✅ Parallel test execution and ts-node for TypeScript support
-
----
-
-### ✅ `cucumber.js`
-
-```js
-import path from "path";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const ARTIFACT_DIR = process.env.TEST_ARTIFACT_DIR || "test-artifacts";
-
-const defaultWorldParams = {
-  artifactDir: ARTIFACT_DIR,
-  payloadDir: "payloads",
-  enableTrace: process.env.ENABLE_TRACE || "fail", // "false" | "fail" | "all"
-  enableScreenshots: process.env.ENABLE_SCREENSHOTS || "fail", // "false" | "fail" | "all"
-  enableVideos: process.env.ENABLE_VIDEOS || "all", // "false" | "fail" | "all"
-  enableVisualTest: process.env.ENABLE_VISUAL_TEST === "true",
-  device: process.env.MOBILE_DEVICE || undefined, // e.g., "Pixel 5"
-};
-
-export default {
-  default: {
-    require: ["ts-node/register", "src/test/steps/**/*.ts", "src/test/support/**/*.ts"],
-    format: ["progress", `html:${path.join(ARTIFACT_DIR, "report.html")}`],
-    publishQuiet: true,
-    paths: ["src/test/features/**/*.feature"],
-    parallel: 2,
-    worldParameters: defaultWorldParams,
-  },
-
-  mobile: {
-    require: ["ts-node/register", "src/test/steps/**/*.ts", "src/test/support/**/*.ts"],
-    format: ["progress"],
-    publishQuiet: true,
-    paths: ["src/test/features/**/*.feature"],
-    parallel: 1,
-    tags: "@mobile",
-    worldParameters: {
-      ...defaultWorldParams,
-      device: process.env.MOBILE_DEVICE || "iPhone 13 Pro",
-    },
-  },
-
-  visual: {
-    require: ["ts-node/register", "src/test/steps/**/*.ts", "src/test/support/**/*.ts"],
-    format: ["progress"],
-    publishQuiet: true,
-    paths: ["src/test/features/**/*.feature"],
-    tags: "@visual",
-    worldParameters: {
-      ...defaultWorldParams,
-      enableVisualTest: true,
-    },
-  },
-
-  ci: {
-    require: ["ts-node/register", "src/test/steps/**/*.ts", "src/test/support/**/*.ts"],
-    format: ["progress", `json:${path.join(ARTIFACT_DIR, "report.json")}`],
-    publishQuiet: true,
-    paths: ["src/test/features/**/*.feature"],
-    parallel: 4,
-    worldParameters: {
-      ...defaultWorldParams,
-      enableScreenshots: true,
-      enableVideos: true,
-      enableVisualTest: false,
-    },
-  },
-};
-```
-
----
-
-### ✅ Usage Examples
+### 4. Run Tests
 
 ```bash
-# Run default suite
-npx cucumber-js --config cucumber.js
-
-# Run mobile tests with device from env
-MOBILE_DEVICE="Pixel 5" npx cucumber-js --config cucumber.js --profile mobile
-
-# Run visual regression tests
-ENABLE_VISUAL_TEST=true npx cucumber-js --config cucumber.js --profile visual
-
-# Run in CI profile with JSON output
-npx cucumber-js --config cucumber.js --profile ci
+npx playwright test
 ```
 
 ---
 
-### ✅ Summary of Supported Options
+## 🏷️ Tag Filtering (New!)
 
-| Setting            | CLI/Env Variable     | `worldParameters` Key | Purpose                                     |
-| ------------------ | -------------------- | --------------------- | ------------------------------------------- |
-| Screenshot toggle  | `ENABLE_SCREENSHOTS` | `enableScreenshots`   | Capture screenshots on failure              |
-| Video toggle       | `ENABLE_VIDEOS`      | `enableVideos`        | Enable/disable video recording              |
-| Visual testing     | `ENABLE_VISUAL_TEST` | `enableVisualTest`    | Capture and compare visual snapshots        |
-| Artifact directory | `TEST_ARTIFACT_DIR`  | `artifactDir`         | Where to save screenshots, videos, etc.     |
-| Mobile device emu  | `MOBILE_DEVICE`      | `device`              | Device name for Playwright mobile emulation |
+We support a **Friendly Syntax** for filtering tests via the `TAGS` environment variable.
 
-## 🧾 License
+| Logic   | Symbol | Example          | Description                                      |
+| ------- | ------ | ---------------- | ------------------------------------------------ |
+| **AND** | `,`    | `@login,@signup` | Run tests that have `@login` **AND** `@signup`.  |
+|         |
+| **MIX** | `,`    | `@a,@b, @c`      | Run tests with (`@a` AND `@b`) **OR** just `@c`. |
 
-[MIT](LICENSE)
+**Usage:**
+
+```bash
+# Run only smoke tests
+TAGS='@smoke' npx playwright test
+OR
+npx playwright test -g "@smoke"
+
+# Run smoke tests that are also critical
+TAGS='@smoke,@critical' npx playwright test
+OR
+npx playwright test -g "@smoke|@critical"
+
+```
+
+_(On Windows PowerShell, use `$env:TAGS="@smoke"; npx playwright test`)_
+
+**In your Test Runner (`tests/bdd.spec.ts`):**
+
+```typescript
+import { runTests } from "playwright-cucumber-ts-steps";
+
+// OPTION 1: Run Everything
+// runTests('features/*.feature');
+
+// OPTION 2: Run only Smoke tests
+runTests("features/*.feature", { tags: "@smoke" });
+```
 
 ---
 
-## 🙋‍♂️ Contributing
+## 💡 Various Usage Examples
 
-Contributions, improvements, and suggestions are welcome! Feel free to open an issue or pull request.
+### 1. API Testing (Backend Validation)
+
+You can validate your backend directly without opening a browser, or mix it with UI tests.
+
+```gherkin
+Feature: User API
+
+  @api
+  Scenario: Create and Verify User
+    When I make a POST request to "[https://reqres.in/api/users](https://reqres.in/api/users)" with body '{"name": "Morpheus", "job": "Leader"}'
+    Then I expect the response status to be 201
+    And I expect the response property "name" to be "Morpheus"
+
+```
+
+### 2. Advanced Elements (Iframes & Uploads)
+
+Handling complex HTML elements is built-in.
+
+```gherkin
+Feature: File Upload and Iframes
+
+  Scenario: Upload Document inside Iframe
+    Given I visit "[https://example.com/upload](https://example.com/upload)"
+    # Switch context to the iframe
+    When I upload file "data/resume.pdf" to "#file-input" inside frame "#upload-iframe"
+    And I click "#submit-btn" inside frame "#upload-iframe"
+    Then I expect "div.success" inside frame "#upload-iframe" to be visible
+
+```
+
+### 3. The "Login Once" Pattern (Authentication)
+
+Speed up your suite by 10x. Login once, save the cookies, and reuse them.
+
+**Step 1: Create a Setup Feature (`features/setup.feature`)**
+
+```gherkin
+Feature: Setup
+
+  @setup
+  Scenario: Admin Login
+    Given I visit "/login"
+    When I fill "#user" with "admin"
+    And I fill "#pass" with "1234"
+    And I click "#login-btn"
+    And I expect "#dashboard" to be visible
+    # Saves session to ./auth/admin.json
+    And I save the browser state to "admin.json"
+
+```
+
+**Step 2: Use in Daily Tests (`features/admin.feature`)**
+
+```gherkin
+Feature: Admin Panel
+
+  Scenario: Check Reports
+    # Loads cookies instantly - No login UI needed!
+    Given I load the browser state from "admin.json"
+    When I visit "/admin/reports"
+    Then I expect "h1" to have text "Weekly Reports"
+
+```
+
+### 4. Data Tables (Forms)
+
+Fill out entire forms in a single step using a Data Table. You can type, click, check, or assert visibility in one go.
+
+```gherkin
+Scenario: Registration
+  When I fill the following "Registration" form data:
+    | #first-name | John           |
+    | #last-name  | Doe            |
+    | #email      | john@test.com  |
+    | #newsletter | check          |
+    | #submit-btn | click          |
+    | .success    | assert:visible |
+```
+
+### 5. API Testing (Tables & Files)
+
+Validate your backend directly. You can send payloads via Tables or JSON Files.
+
+#### Option A: Data Table Payload
+
+```gherkin
+Scenario: Create User (Table)
+  When I make a POST request to "[https://reqres.in/api/users](https://reqres.in/api/users)" with data:
+    | name | Neo        |
+    | job  | The Chosen |
+  Then I expect the response status to be 201
+  And I expect the response property "name" to be "Neo"
+```
+
+#### Option B: File Payload
+
+```gherkin
+Scenario: Create User (File)
+  # Reads from 'data/user.json' in your project root
+  When I make a POST request to "/api/users" with payload from "data/user.json"
+  Then I expect the response status to be 201
+```
+
+### 6. Network Mocking
+
+Simulate backend responses to test UI behavior without relying on real APIs.
+
+```gherkin
+Scenario: Mocking User Profile
+  # Intercept calls to /api/user/1 and return fake data
+  Given I mock the API endpoint "*/**/api/user/1" with body '{"name": "Mocked User"}'
+
+  # When the UI calls the API, it gets our fake data
+  When I visit "/profile"
+  Then I expect "#username-display" to have text "Mocked User"
+
+```
+
+### 7. Database Testing (Adapter Pattern)
+
+You can validate database states by injecting your own DB driver into the runner.
+
+**1. In your `bdd.spec.ts`:**
+
+```typescript
+import { runTests } from "playwright-cucumber-ts-steps";
+import pg from "pg"; // Your driver (pg, mysql, mongo, etc)
+
+// wrapper function
+const queryDb = async (query: string) => {
+  const client = new pg.Client(process.env.DB_URL);
+  await client.connect();
+  const res = await client.query(query);
+  await client.end();
+  return res.rows; // Must return an array of objects
+};
+
+runTests("features/*.feature", { dbQuery: queryDb });
+```
+
+**2. In your `Feature file`:**
+
+```gherkin
+Scenario: Create User
+  When I run the database query "INSERT INTO users (name) VALUES ('Bob')"
+  Then I expect the database to return 1 record
+  And I expect the first database record to contain:
+    | name | Bob |
+```
 
 ---
 
-## 💬 Questions?
+## 📖 Step Glossary (Cheat Sheet)
 
-Open an issue on [GitHub Issues](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/issues) or reach out via discussions.
+### 🖱️ Actions
+
+| Step             | Usage Example                          |
+| ---------------- | -------------------------------------- |
+| **Visit**        | `I visit "https://google.com"`         |
+| **Click**        | `I click "#submit-btn"`                |
+| **Force Click**  | `I force click "#hidden-btn"`          |
+| **Double Click** | `I double click ".icon"`               |
+| **Fill Input**   | `I fill "#email" with "user@test.com"` |
+| **Press Key**    | `I press "Enter"` (or "Tab", "Escape") |
+| **Wait**         | `I wait for 2000 milliseconds`         |
+| **Reload**       | `I reload the page`                    |
+| **Go Back**      | `I go back`                            |
+
+### ✅ Assertions
+
+| Step             | Usage Example                                                  |
+| ---------------- | -------------------------------------------------------------- |
+| **Visibility**   | `I expect "#modal" to be visible`                              |
+| **Hidden**       | `I expect "#loader" to be hidden`                              |
+| **Exact Text**   | `I expect "#header" to have text "Welcome"`                    |
+| **Partial Text** | `I expect ".error" to contain text "Failed"`                   |
+| **Input Value**  | `I expect "#username" to have value "admin"`                   |
+| **Exact URL**    | `I expect the url to be "https://site.com/home"`               |
+| **Partial URL**  | `I expect the url to contain "/dashboard"`                     |
+| **Title**        | `I expect the title to contain "Home Page"`                    |
+| **Attribute**    | `I expect "img" to have attribute "src" with value "logo.png"` |
+| **Screenshot**   | `I expect the page screenshot to match "home.png"`             |
+
+### 🧩 Forms & Elements
+
+| Step                  | Usage Example                                  |
+| --------------------- | ---------------------------------------------- |
+| **Select (Dropdown)** | `I select option "Canada" from "#country"`     |
+| **Check Box**         | `I check "#terms-checkbox"`                    |
+| **Uncheck**           | `I uncheck "#newsletter"`                      |
+| **Upload File**       | `I upload file "data.csv" to "#upload"`        |
+| **Handle Alert**      | `I accept the next dialog`                     |
+| **Frame Click**       | `I click "#btn" inside frame "#payment-frame"` |
+
+### 🌐 API
+
+| Step             | Usage Example                                                 |
+| ---------------- | ------------------------------------------------------------- |
+| **GET**          | `I make a GET request to "/api/users"`                        |
+| **DELETE**       | `I make a DELETE request to "/api/users/1"`                   |
+| **POST**         | `I make a POST request to "/api/login" with body '{"u":"1"}'` |
+| **Status Check** | `I expect the response status to be 200`                      |
+| **JSON Check**   | `I expect the response property "data.id" to be "99"`         |
+
+---
+
+## 🛠️ Extending (Custom Steps)
+
+Need a step that isn't included? You can easily register your own in your spec file.
+
+```typescript
+// tests/bdd.spec.ts
+import { runTests, Step } from "playwright-cucumber-ts-steps";
+
+// 1. Define custom step
+Step("I scroll to the bottom of the page", async (page) => {
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+});
+
+// 2. Run tests
+runTests("features/*.feature");
+```
+
+Then use it in your feature:
+
+```gherkin
+Scenario: Scroll Test
+  Given I visit "[https://infinite-scroll.com](https://infinite-scroll.com)"
+  When I scroll to the bottom of the page
+
+```
+
+---
+
+## 📄 License
+
+MIT © 2024

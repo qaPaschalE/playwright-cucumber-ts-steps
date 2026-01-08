@@ -1,34 +1,26 @@
 {
-    "cucumber.features": [
-    "playwright/e2e/features/*.feature",
-    "playwright/e2e/features/*.feature",
-    "apps/qa/playwright/e2e/features/*.feature",
-    "apps/qa/playwright/e2e/features/*.feature",
-    "e2e/features/*feature",
-    // "features/*.feature",
-    // "test/**/*.feature",
-    // "**/**/*.feature",
-    // "test/unit/**/*.feature",
-    // "test/e2e/**/*.feature",
-    "src/test/features/*.feature"
-  ],
+    "cucumberautocomplete.steps": [
+        "**/*.js",
+        "**/*.ts",
+        "dist/*.js"
 
-  "cucumber.glue": [
-  
-    "playwright/e2e/step_definitions/*.ts",
-    "node_modules/playwright-cucumber-ts-steps/dist/**/*.js",
-    "apps/qa/playwright/e2e/step_definitions/*.ts",
-    "node_modules/playwright-cucumber-ts-steps/src/**/*.ts",
-    "apps/qa/node_modules/playwright-cucumber-ts-steps/src/**/*.ts",
-    "apps/qa/playwright/e2e/step_definitions/index.ts",
-    "src/**/*.ts",
-    "test/**/*.ts",
-    // "test/unit/**/*.ts",
-    // "test/e2e/**/*.ts",
-    "src/test/steps/**/*.ts",
-    "src/test/steps/index.ts",
-    "e2e/steps/*.py",
-    "steps/*.py",
-    "apps/qa/playwright/e2e/step_definitions/**/*.ts"
-  ],
+    ],
+    "cucumberautocomplete.syncfeatures": "examples/*.feature",
+    // "cucumberautocomplete.strictGherkinCompletion": false,
+    "cucumberautocomplete.strictGherkinValidation": false,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.stepsInvariants": true,
+    
+   
+    "cucumberautocomplete.skipDocStringsFormat": true,
+    
+    "cucumberautocomplete.onTypeFormat": true,
+    "editor.quickSuggestions": {
+        "comments": false,
+        "strings": true,
+        "other": true
+    },
+    // "cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
+    // "cucumberautocomplete.stepRegExSymbol": "'",
+    // "cucumberautocomplete.pureTextSteps": true
 }

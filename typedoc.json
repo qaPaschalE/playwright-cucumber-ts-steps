@@ -1,8 +1,26 @@
 {
   "cacheBust": true,
-  "entryPoints": ["src/actions", "src/assertions"],
+  // "entryPoints": ["src/actions", "src/assertions"],
   "out": "temp-docs/docs",
 
+  "entryPoints": [
+    "src/index.ts",
+    "src/backend/*.ts",
+    "src/backend/actions",
+    "src/backend/assertions",
+    "src/backend/db",
+    "src/backend/utils",
+    "src/backend/auth",
+    "src/backend/elements"
+  ],
+  // "out": "docs",
+  "entryPointStrategy": "expand",
+  "name": "Playwright Cucumber TS Steps",
+  "readme": "README.md",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "theme": "default",
+  "hideGenerator": true,
   "highlightLanguages": [
     "css",
     "gherkin",

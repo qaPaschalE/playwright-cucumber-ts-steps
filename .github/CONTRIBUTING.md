@@ -69,12 +69,6 @@ To open the Playwright UI for test debugging:
 npm run playwright:ui
 ```
 
-You can also run feature files using Cucumber:
-
-```bash
-npx cucumber-js --config cucumber.js
-```
-
 ---
 
 ## 🔍 Lint

@@ -1,40 +1,24 @@
 {
   "name": "playwright-cucumber-ts-steps",
-  "version": "1.0.1",
   "description": "A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.",
-  "type": "commonjs",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
-  "exports": {
-    ".": {
-      "import": "./lib/index.js"
-    },
-    "./register": {
-      "import": "./lib/register.js"
-    }
-  },
-  "sideEffects": false,
-  "typesVersions": {
-    "*": {
-      "*": [
-        "lib/*"
-      ]
-    }
-  },
+  "version": "1.1.8",
+  "private": false,
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "docs": "typedoc",
     "docs:deploy": "gh-pages -d temp-docs",
+    "prepublishOnly": "npm run build",
     "prepare": "husky",
-    "lint": "eslint . --ext .ts",
+    "playwright:ui": "npx playwright test --headed",
+    "lint": "eslint .",
     "lint:fix": "eslint . --ext .ts --fix",
     "lint:tsc": "tsc --noEmit",
     "format": "prettier --write .",
     "clean": "rm -rf playwright/report",
-    "test": "npm run clean && cucumber-js --config playwright/config/cucumber.js",
+    "test": "npx playwright test demoTest.spec.ts",
     "commitlint": "commitlint --edit"
   },
   "lint-staged": {
@@ -77,27 +61,20 @@
   },
   "homepage": "https://github.com/qaPaschalE/playwright-cucumber-ts-steps#readme",
   "peerDependencies": {
-    "@cucumber/cucumber": "*",
     "@playwright/test": "*"
   },
   "files": [
-    "lib/",
-    "src/"
+    "dist/"
   ],
-  "dependencies": {
-    "@cucumber/tag-expressions": "^6.2.0",
-    "@faker-js/faker": "^9.8.0",
-    "dayjs": "^1.11.13",
-    "dotenv-cli": "^8.0.0",
-    "glob": "^11.0.3",
-    "parse": "^6.1.1",
-    "pixelmatch": "^7.1.0",
-    "pngjs": "^7.0.0"
-  },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@playwright/test": "^1.41.0",
+    "@types/glob": "^8.1.0",
+    "@types/node": "^20.11.0",
     "@types/pngjs": "^6.0.5",
+    "@typescript-eslint/eslint-plugin": "^8.52.0",
+    "@typescript-eslint/parser": "^8.52.0",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.32.0",
@@ -106,8 +83,14 @@
     "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
-    "typedoc": "^0.28.5",
-    "typescript": "^5.8.3",
+    "typedoc": "^0.28.15",
+    "typescript": "^5.3.3",
     "typescript-eslint": "^8.34.1"
+  },
+  "dependencies": {
+    "@cucumber/cucumber-expressions": "^17.1.0",
+    "@cucumber/gherkin": "^27.0.0",
+    "@cucumber/messages": "^22.0.0",
+    "glob": "^10.3.10"
   }
 }

@@ -1,29 +1,51 @@
-// eslint.config.js
-const tseslint = require("typescript-eslint");
-const eslintPluginImport = require("eslint-plugin-import");
+import tsParser from "@typescript-eslint/parser";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
 
-module.exports = [
+export default [
+  // 1. Global Ignores (This replaces .eslintignore)
   {
-    files: ["**/*.ts"],
+    ignores: [
+      "dist/**", 
+      "node_modules/**", 
+      "docs/**", 
+      "temp-docs/**"
+    ],
+  },
+  // 2. TypeScript Config
+  {
+    files: ["src/**/*.ts"],
     languageOptions: {
-      parser: tseslint.parser,
+      parser: tsParser,
       parserOptions: {
         project: "./tsconfig.json",
-        sourceType: "module",
+        // This helps resolve paths relative to the config file
+        tsconfigRootDir: process.cwd(), 
       },
     },
     plugins: {
-      "@typescript-eslint": tseslint.plugin,
-      import: eslintPluginImport,
+      "@typescript-eslint": tsPlugin,
     },
     rules: {
-      ...tseslint.configs.recommendedTypeChecked[0].rules,
-      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      ...tsPlugin.configs.recommended.rules,
       "@typescript-eslint/no-explicit-any": "off",
-      "import/order": ["warn", { alphabetize: { order: "asc" } }],
+      "@typescript-eslint/no-unused-vars": ["warn", { 
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "vars": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }],
     },
   },
+  // 3. Config for tests and examples (Prevents "project" errors)
   {
-    ignores: ["lib/**", "node_modules/**", "playwright/**"],
-  },
+    files: ["*.spec.ts", "examples/**/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+    },
+    rules: {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  }
 ];

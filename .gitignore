@@ -139,10 +139,14 @@ screenshots/
 videos
 snapshots/
 report
-examples/
 tests/
 coverage/
 scripts/
 traces/
 lib/
 playwright-report
+node_modules
+dist
+docs
+playwright-report
+test-results
