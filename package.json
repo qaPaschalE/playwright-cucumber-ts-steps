@@ -1,7 +1,7 @@
 {
   "name": "playwright-cucumber-ts-steps",
   "description": "A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,6 +11,7 @@
     "docs:deploy": "gh-pages -d temp-docs",
     "prepublishOnly": "npm run build",
     "prepare": "husky",
+    "metadata": "ts-node ./scripts/generate-metadata.ts",
     "playwright:ui": "npx playwright test --headed",
     "lint": "eslint .",
     "lint:fix": "eslint . --ext .ts --fix",
@@ -19,6 +20,10 @@
     "clean": "rm -rf playwright/report",
     "test": "npx playwright test demoTest.spec.ts",
     "commitlint": "commitlint --edit"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./metadata": "./dist/metadata.json"
   },
   "lint-staged": {
     "*.{js,ts,tsx,json,md}": [

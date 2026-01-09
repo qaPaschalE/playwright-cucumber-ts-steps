@@ -1,5 +1,6 @@
 echo "🔍 Running pre-push checks..."
 npm run lint
+npm run metadata
 npm run lint:tsc
 npm run test
 if [ $? -ne 0 ]; then
