@@ -2,9 +2,17 @@ import * as fs from "fs";
 import * as path from "path";
 import { Step } from "../../core/registry";
 
-// 1. SAVE STATE (Use this after a successful login)
-// Example: And I save the browser state to "admin.json"
-Step("I save the browser state to {string}", async (page, filename) => {
+// ==================================================
+// CORE FUNCTIONS
+// ==================================================
+
+/**
+ * Saves the current browser context's storage state (cookies, localStorage, etc.) to a file.
+ * Use this after a successful login to persist the authenticated session.
+ * @example
+ * And I save the browser state to "admin.json"
+ */
+export async function saveBrowserState(page: any, filename: string): Promise<void> {
   // Ensure the directory exists
   const authDir = path.resolve(process.cwd(), "auth");
   if (!fs.existsSync(authDir)) {
@@ -14,11 +22,15 @@ Step("I save the browser state to {string}", async (page, filename) => {
   const filePath = path.resolve(authDir, filename);
   await page.context().storageState({ path: filePath });
   console.log(`✅ State saved to: ${filePath}`);
-});
+}
 
-// 2. LOAD STATE (Use this at the start of other scenarios)
-// Example: Given I load the browser state from "admin.json"
-Step("I load the browser state from {string}", async (page, filename) => {
+/**
+ * Loads a previously saved browser context state (cookies, localStorage, etc.) from a file.
+ * Use this at the start of other scenarios to restore an authenticated session.
+ * @example
+ * Given I load the browser state from "admin.json"
+ */
+export async function loadBrowserState(page: any, filename: string): Promise<void> {
   const filePath = path.resolve(process.cwd(), "auth", filename);
 
   if (!fs.existsSync(filePath)) {
@@ -43,4 +55,11 @@ Step("I load the browser state from {string}", async (page, filename) => {
   }
 
   console.log(`✅ Loaded session for: ${filename}`);
-});
+}
+
+// ==================================================
+// GLUE STEPS
+// ==================================================
+
+Step("I save the browser state to {string}", saveBrowserState);
+Step("I load the browser state from {string}", loadBrowserState);

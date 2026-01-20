@@ -2,7 +2,6 @@ import "./navigation";
 import "./interactions";
 import "./formTable";
 import "./click";
-import "./find";
 import "./inputs";
 import "./form";
 import "./mouse";

@@ -1,6 +1,6 @@
+@smoke
 Feature: Search Engine Test
 
-  @smoke
   Scenario: Visit Google and Validate
     Given I visit "https://www.google.com"
     Then I expect the title to contain "Google"

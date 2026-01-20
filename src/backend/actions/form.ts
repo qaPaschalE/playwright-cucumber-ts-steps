@@ -4,6 +4,10 @@ import { expect } from "@playwright/test";
 import { Step } from "../../core/registry";
 import { setVariable, getVariable } from "../utils/state";
 
+// ==================================================
+// TYPE DEFINITIONS
+// ==================================================
+
 /**
  * Defines the structure of a row in the Form Data Table.
  */
@@ -18,13 +22,14 @@ type ActionRow = {
   SaveAs?: string;
 };
 
+// ==================================================
+// HELPER FUNCTIONS (Internal)
+// ==================================================
+
 /**
  * Helper to convert raw runner table into Objects (ActionRow[]).
  * Handles whitespace in headers (e.g., "| Target |" -> "Target").
  * Supports both Cucumber DataTables (hashes) and Raw Arrays (Custom Runner).
- *
- * @param table - The raw table object from the test runner.
- * @returns An array of ActionRow objects.
  */
 function parseDataTable(table: any): ActionRow[] {
   // Debug Log: See exactly what the runner is passing
@@ -57,10 +62,6 @@ function parseDataTable(table: any): ActionRow[] {
 /**
  * Helper to resolve values, handling variable aliases.
  * If a value starts with "@", it retrieves it from the global state.
- *
- * @param page - The Playwright Page object (for context).
- * @param rawValue - The value string from the Gherkin table.
- * @returns The resolved string value.
  */
 function resolveValue(page: any, rawValue: string): string {
   if (!rawValue) return "";
@@ -80,32 +81,13 @@ function resolveValue(page: any, rawValue: string): string {
   return trimmed;
 }
 
+// ==================================================
+// CORE FUNCTIONS
+// ==================================================
+
 /**
- * A "Swiss Army Knife" step for filling forms, performing assertions, and executing mixed workflows.
- * It iterates through a Data Table and performs actions based on the `Target` and `Value` columns.
- *
- * ```gherkin
- * When I fill the following {string} form data
- * ```
- *
- * @remarks
- * **Columns:**
- * - `Target`: The CSS selector, or a special keyword (request:, set:localStorage:, wait).
- * - `Value`: The value to input, the action (click, check), or assertion pattern.
- *
- * **Supported UI Actions:**
- * - **Fill:** Default behavior. Types `Value` into `Target`.
- * - **Click:** Set `Value` to "click".
- * - **Check:** Set `Value` to "check".
- * - **Select:** Set `Value` to "select" (selects first option).
- * - **Assert Visible:** Set `Value` to "assert:visible".
- * - **Assert Text:** Set `Value` to "assert:text:Expected Text".
- *
- * **Supported Special Actions:**
- * - **API Request:** Target = `request:METHOD:URL`, Value = `payload_filename.json`.
- * - **Local Storage:** Target = `set:localStorage:key`, Value = `value`.
- * - **Wait:** Target = `wait`, Value = `wait:1000` (ms).
- *
+ * A "Swiss Army Knife" function for filling forms, performing assertions, and executing mixed workflows.
+ * Iterates through a Data Table and performs actions based on the Target and Value columns.
  * @example
  * When I fill the following "Login Flow" form data:
  * | Target                  | Value                |
@@ -115,133 +97,151 @@ function resolveValue(page: any, rawValue: string): string {
  * | wait                    | wait:500             |
  * | .error-msg              | assert:visible       |
  * | request:GET:/api/status | body: {}             |
+ * @remarks
+ * **Columns:**
+ * - Target: The CSS selector, or a special keyword (request:, set:localStorage:, wait).
+ * - Value: The value to input, the action (click, check), or assertion pattern.
+ * **Supported UI Actions:**
+ * - Fill: Default behavior. Types Value into Target.
+ * - Click: Set Value to "click".
+ * - Check: Set Value to "check".
+ * - Select: Set Value to "select".
+ * - Assert Visible: Set Value to "assert:visible".
+ * - Assert Text: Set Value to "assert:text:Expected Text".
+ * **Supported Special Actions:**
+ * - API Request: Target = "request:METHOD:URL", Value = "payload_filename.json".
+ * - Local Storage: Target = "set:localStorage:key", Value = "value".
+ * - Wait: Target = "wait", Value = "wait:1000" (ms).
  */
-export const FillFormData = Step(
-  "I fill the following {string} form data",
-  async (page, formName, table) => {
-    console.log(`📝 Processing Form: "${formName}"`);
+export async function fillFormData(page: any, formName: string, table: any): Promise<void> {
+  console.log(`📝 Processing Form: "${formName}"`);
 
-    // Parse the table
-    const rows: ActionRow[] = parseDataTable(table);
+  // Parse the table
+  const rows: ActionRow[] = parseDataTable(table);
 
-    if (rows.length === 0) {
-      console.warn("⚠️ Form data table appears empty or invalid.");
-      return;
-    }
-
-    for (const row of rows) {
-      // Guard clause: If Target is missing/undefined, skip or throw useful error
-      if (!row.Target) {
-        console.error("❌ Invalid Row Detected (Missing Target):", JSON.stringify(row));
-        continue;
-      }
-
-      const target = row.Target; // Already trimmed in parser
-      const rawValue = row.Value || "";
-      const resolvedValue = resolveValue(page, rawValue);
-
-      // ============================================
-      // 1. SPECIAL ACTIONS
-      // ============================================
-
-      // ✅ API Requests
-      if (target.startsWith("request:")) {
-        const parts = target.replace("request:", "").split(":");
-        const method = parts[0].toUpperCase();
-        const url = parts.slice(1).join(":");
-
-        const payloadFile = rawValue;
-        const payloadDir = row.PayloadDir || "payload";
-        const filePath = path.resolve(process.cwd(), payloadDir, payloadFile);
-
-        if (!fs.existsSync(filePath)) {
-          throw new Error(`❌ Payload file not found: ${filePath}`);
-        }
-
-        const payload = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-        console.log(`📞 API ${method} -> ${url}`);
-
-        const response = await page.request.fetch(url, {
-          method: method,
-          data: payload,
-        });
-
-        const responseBody = await response.json();
-        setVariable(page, "lastApiResponse", responseBody);
-        setVariable(page, "lastStatusCode", response.status());
-        console.log(`✅ Status: ${response.status()}`);
-
-        if (row.SaveAs) {
-          setVariable(page, row.SaveAs, responseBody);
-        }
-        continue;
-      }
-
-      // ✅ Local Storage
-      if (target.startsWith("set:localStorage:")) {
-        const key = target.split(":")[2];
-        await page.evaluate(({ k, v }) => localStorage.setItem(k, v), {
-          k: key,
-          v: resolvedValue,
-        });
-        console.log(`📦 localStorage: Set "${key}"`);
-        continue;
-      }
-
-      // ✅ Explicit Waits
-      if (target === "wait") {
-        const time = parseInt(rawValue.replace("wait:", ""), 10);
-        if (!isNaN(time)) {
-          console.log(`⏳ Waiting ${time}ms`);
-          await page.waitForTimeout(time);
-        }
-        continue;
-      }
-
-      // ============================================
-      // 2. UI ELEMENT ACTIONS
-      // ============================================
-
-      const locator = page.locator(target);
-
-      // ✅ Assertions
-      if (rawValue.startsWith("assert:")) {
-        const parts = rawValue.split(":");
-        const type = parts[1];
-        const expected = parts.slice(2).join(":");
-
-        if (type === "visible") {
-          await expect(locator).toBeVisible();
-          console.log(`🔎 Asserted visible: ${target}`);
-        } else if (type === "text") {
-          await expect(locator).toHaveText(expected || "");
-          console.log(`🔎 Asserted text: ${target}`);
-        }
-        continue;
-      }
-
-      // ✅ Interactions
-      if (rawValue === "click") {
-        await locator.click();
-        console.log(`👆 Clicked: ${target}`);
-        continue;
-      }
-
-      if (rawValue === "check") {
-        await locator.check();
-        console.log(`☑️ Checked: ${target}`);
-        continue;
-      }
-
-      if (rawValue === "select") {
-        await locator.selectOption({ index: 0 });
-        console.log(`🔽 Selected index 0: ${target}`);
-        continue;
-      }
-
-      // ✅ Default: Fill
-      await locator.fill(resolvedValue);
-      console.log(`✍️ Filled ${target} with "${resolvedValue}"`);
-    }
+  if (rows.length === 0) {
+    console.warn("⚠️ Form data table appears empty or invalid.");
+    return;
   }
-);
+
+  for (const row of rows) {
+    // Guard clause: If Target is missing/undefined, skip or throw useful error
+    if (!row.Target) {
+      console.error("❌ Invalid Row Detected (Missing Target):", JSON.stringify(row));
+      continue;
+    }
+
+    const target = row.Target; // Already trimmed in parser
+    const rawValue = row.Value || "";
+    const resolvedValue = resolveValue(page, rawValue);
+
+    // ============================================
+    // 1. SPECIAL ACTIONS
+    // ============================================
+
+    // ✅ API Requests
+    if (target.startsWith("request:")) {
+      const parts = target.replace("request:", "").split(":");
+      const method = parts[0].toUpperCase();
+      const url = parts.slice(1).join(":");
+
+      const payloadFile = rawValue;
+      const payloadDir = row.PayloadDir || "payload";
+      const filePath = path.resolve(process.cwd(), payloadDir, payloadFile);
+
+      if (!fs.existsSync(filePath)) {
+        throw new Error(`❌ Payload file not found: ${filePath}`);
+      }
+
+      const payload = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+      console.log(`📞 API ${method} -> ${url}`);
+
+      const response = await page.request.fetch(url, {
+        method: method,
+        data: payload,
+      });
+
+      const responseBody = await response.json();
+      setVariable(page, "lastApiResponse", responseBody);
+      setVariable(page, "lastStatusCode", response.status());
+      console.log(`✅ Status: ${response.status()}`);
+
+      if (row.SaveAs) {
+        setVariable(page, row.SaveAs, responseBody);
+      }
+      continue;
+    }
+
+    // ✅ Local Storage
+    if (target.startsWith("set:localStorage:")) {
+      const key = target.split(":")[2];
+      await page.evaluate(({ k, v }: { k: string; v: string }) => localStorage.setItem(k, v), {
+        k: key,
+        v: resolvedValue,
+      });
+      console.log(`📦 localStorage: Set "${key}"`);
+      continue;
+    }
+
+    // ✅ Explicit Waits
+    if (target === "wait") {
+      const time = parseInt(rawValue.replace("wait:", ""), 10);
+      if (!isNaN(time)) {
+        console.log(`⏳ Waiting ${time}ms`);
+        await page.waitForTimeout(time);
+      }
+      continue;
+    }
+
+    // ============================================
+    // 2. UI ELEMENT ACTIONS
+    // ============================================
+
+    const locator = page.locator(target);
+
+    // ✅ Assertions
+    if (rawValue.startsWith("assert:")) {
+      const parts = rawValue.split(":");
+      const type = parts[1];
+      const expected = parts.slice(2).join(":");
+
+      if (type === "visible") {
+        await expect(locator).toBeVisible();
+        console.log(`🔎 Asserted visible: ${target}`);
+      } else if (type === "text") {
+        await expect(locator).toHaveText(expected || "");
+        console.log(`🔎 Asserted text: ${target}`);
+      }
+      continue;
+    }
+
+    // ✅ Interactions
+    if (rawValue === "click") {
+      await locator.click();
+      console.log(`👆 Clicked: ${target}`);
+      continue;
+    }
+
+    if (rawValue === "check") {
+      await locator.check();
+      console.log(`☑️ Checked: ${target}`);
+      continue;
+    }
+
+    if (rawValue === "select") {
+      await locator.selectOption({ index: 0 });
+      console.log(`🔽 Selected index 0: ${target}`);
+      continue;
+    }
+
+    // ✅ Default: Fill
+    await locator.fill(resolvedValue);
+    console.log(`✍️ Filled ${target} with "${resolvedValue}"`);
+  }
+}
+
+// ==================================================
+// GLUE STEPS
+// ==================================================
+
+Step("I fill the following {string} form data", fillFormData);

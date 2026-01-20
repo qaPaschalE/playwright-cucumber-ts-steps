@@ -7,7 +7,6 @@ examples/
 e2e/
 tests/
 coverage/
-scripts/
 traces/
 playwright
 .release-please-manifest.json

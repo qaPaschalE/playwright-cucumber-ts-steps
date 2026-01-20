@@ -1,73 +1,71 @@
 import { Step } from "../../core/registry";
 
-// =============================
-// NAVIGATION STEPS
-// =============================
+// ==================================================
+// CORE FUNCTIONS
+// ==================================================
 
 /**
  * Navigates the browser to a specific absolute URL.
- *
- * ```gherkin
- * Given I visit "[https://www.google.com](https://www.google.com)"
- * ```
- *
+ * @example
+ * Given I visit "https://www.google.com"
  * @param url - The full URL string (must include http/https).
  */
-export const VisitUrl = Step("I visit {string}", async (page, url) => {
+export async function visitUrl(page: any, url: string): Promise<void> {
   await page.goto(url);
   console.log(`🌍 Visiting: ${url}`);
-});
+}
 
 /**
  * Reloads the current page (simulates hitting the Refresh button).
- *
- * ```gherkin
+ * @example
  * When I reload the page
- * ```
  */
-export const ReloadPage = Step("I reload the page", async (page) => {
+export async function reloadPage(page: any): Promise<void> {
   await page.reload();
   console.log("🔄 Page reloaded");
-});
+}
 
 /**
  * Navigates back one step in the browser history.
  * Simulates clicking the browser's "Back" button.
- *
- * ```gherkin
+ * @example
  * When I go back
- * ```
  */
-export const GoBack = Step("I go back", async (page) => {
+export async function goBack(page: any): Promise<void> {
   await page.goBack();
   console.log("⬅️ Went back");
-});
+}
 
 /**
  * Navigates forward one step in the browser history.
  * Simulates clicking the browser's "Forward" button.
- *
- * ```gherkin
+ * @example
  * When I go forward
- * ```
  */
-export const GoForward = Step("I go forward", async (page) => {
+export async function goForward(page: any): Promise<void> {
   await page.goForward();
   console.log("➡️ Went forward");
-});
+}
 
 /**
  * Navigates to a specific path.
  * If a `baseURL` is configured in your Playwright config, this is relative to it.
  * Otherwise, it treats the string as a direct URL.
- *
- * ```gherkin
+ * @example
  * When I navigate to "/dashboard/login"
- * ```
- *
  * @param path - The relative path or URL to navigate to.
  */
-export const NavigateToPath = Step("I navigate to {string}", async (page, path) => {
+export async function navigateToPath(page: any, path: string): Promise<void> {
   await page.goto(path);
   console.log(`🌍 Navigated to path: ${path}`);
-});
+}
+
+// ==================================================
+// GLUE STEPS
+// ==================================================
+
+Step("I visit {string}", visitUrl);
+Step("I reload the page", reloadPage);
+Step("I go back", goBack);
+Step("I go forward", goForward);
+Step("I navigate to {string}", navigateToPath);

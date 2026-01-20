@@ -1,25 +1,23 @@
 import { Step } from "../../core/registry";
-import { getActiveElement, getVariable, parseClickOptions } from "../utils/state";
+import { getActiveElement, getVariable, parseClickOptions, setActiveElement } from "../utils/state";
 
-// =============================
-// 1. TYPING & FILLING
-// =============================
+// ==================================================
+// CORE FUNCTIONS
+// ==================================================
 
 /**
  * Fills the currently stored (active) input element with specific text.
  * Supports variable aliases using the "@" prefix.
- *
- * ```gherkin
+ * @example
  * When I type "hello world"
  * When I type "@storedPassword"
- * ```
- *
+ * @param page - Playwright page object
  * @param textOrAlias - The text to type OR a variable key prefixed with "@".
  * @param table - Optional data table for options (e.g., force: true).
  */
-export const TypeText = Step("I type {string}", async (page, textOrAlias, table) => {
+export async function typeText(page: any, textOrAlias: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
-  const options = parseClickOptions(table); // Reusing generic options parser
+  const options = parseClickOptions(table);
 
   let text = textOrAlias;
 
@@ -33,19 +31,15 @@ export const TypeText = Step("I type {string}", async (page, textOrAlias, table)
 
   await element.fill(text, options);
   console.log(`⌨️ Filled element with: "${text}"`);
-});
+}
 
 /**
  * Fills the active input with a value explicitly retrieved from the variable store.
- * Unlike `I type`, this does not require the "@" prefix in the step text.
- *
- * ```gherkin
+ * @example
  * When I type stored "userEmail"
- * ```
- *
  * @param alias - The key of the stored variable.
  */
-export const TypeStoredText = Step("I type stored {string}", async (page, alias, table) => {
+export async function typeStoredText(page: any, alias: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
   const options = parseClickOptions(table);
 
@@ -54,176 +48,141 @@ export const TypeStoredText = Step("I type stored {string}", async (page, alias,
 
   await element.fill(val, options);
   console.log(`⌨️ Typed stored value from "${alias}"`);
-});
+}
 
 /**
  * Types text character-by-character with a 100ms delay.
- * Useful for testing auto-complete fields or search bars that listen for keystrokes.
- *
- * ```gherkin
+ * @example
  * When I slowly type "Playwright"
- * ```
- *
  * @param text - The text to type sequentially.
  */
-export const TypeSlowly = Step("I slowly type {string}", async (page, text) => {
+export async function typeSlowly(page: any, text: string): Promise<void> {
   const element = getActiveElement(page);
   await element.pressSequentially(text, { delay: 100 });
   console.log(`⌨️ Slowly typed: "${text}"`);
-});
+}
 
 /**
  * Sets the value of an input directly (alias for filling).
- *
- * ```gherkin
+ * @example
  * When I set value "12345"
- * ```
- *
  * @param value - The value to set.
  */
-export const SetInputValue = Step("I set value {string}", async (page, value, table) => {
+export async function setInputValue(page: any, value: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
   const options = parseClickOptions(table);
   await element.fill(value, options);
   console.log(`📝 Set value to: "${value}"`);
-});
+}
 
 /**
  * Clears the text content of the active input field.
- *
- * ```gherkin
+ * @example
  * When I clear
- * ```
  */
-export const ClearInput = Step("I clear", async (page) => {
+export async function clearInput(page: any): Promise<void> {
   const element = getActiveElement(page);
   await element.fill("");
   console.log("🧹 Cleared input");
-});
+}
 
 /**
  * Simulates pressing a specific keyboard key on the active element.
- * Useful for "Enter" to submit, or "ArrowDown" for dropdowns.
- *
- * ```gherkin
+ * @example
  * When I press "Enter"
  * When I press "Tab"
- * ```
- *
  * @param key - The key name (e.g., "Enter", "Escape", "ArrowDown").
  */
-export const PressKeyOnInput = Step("I press {string}", async (page, key) => {
+export async function pressKeyOnInput(page: any, key: string): Promise<void> {
   const element = getActiveElement(page);
   await element.press(key);
   console.log(`🎹 Pressed key: "${key}"`);
-});
-
-// =============================
-// 2. CHECKBOXES & RADIOS
-// =============================
+}
 
 /**
  * Checks the currently active checkbox or radio button.
- *
- * ```gherkin
+ * @example
  * When I check
- * ```
  */
-export const CheckElement = Step("I check", async (page, table) => {
+export async function checkElement(page: any, table?: any): Promise<void> {
   const element = getActiveElement(page);
   const options = parseClickOptions(table);
   await element.check(options);
   console.log("✅ Checked element");
-});
+}
 
 /**
  * Unchecks the currently active checkbox.
- *
- * ```gherkin
+ * @example
  * When I uncheck
- * ```
  */
-export const UncheckElement = Step("I uncheck", async (page, table) => {
+export async function uncheckElement(page: any, table?: any): Promise<void> {
   const element = getActiveElement(page);
   const options = parseClickOptions(table);
   await element.uncheck(options);
   console.log("⬜ Unchecked element");
-});
+}
 
 /**
- * Legacy alias for `I check`.
- *
- * ```gherkin
- * When I check input
- * ```
+ * Checks/Unchecks the Nth checkbox or radio button matching a selector.
+ * @example
+ * When I check 1st selector "input[type='checkbox']"
+ * When I uncheck 2nd selector ".terms-check"
  */
-export const CheckInputAlias = Step("I check input", async (page, table) => {
-  const element = getActiveElement(page);
+export async function checkNthElementBySelector(
+  page: any,
+  action: string,
+  indexStr: string,
+  selector: string,
+  table?: any
+): Promise<void> {
+  const index = parseInt(indexStr, 10);
   const options = parseClickOptions(table);
-  await element.check(options);
-  console.log("✅ Checked input");
-});
+  const locator = page.locator(selector).nth(index - 1);
 
-/**
- * Legacy alias for `I uncheck`.
- *
- * ```gherkin
- * When I uncheck input
- * ```
- */
-export const UncheckInputAlias = Step("I uncheck input", async (page, table) => {
-  const element = getActiveElement(page);
-  const options = parseClickOptions(table);
-  await element.uncheck(options);
-  console.log("⬜ Unchecked input");
-});
+  await locator.waitFor({ state: "visible", timeout: options.timeout || 5000 });
 
-// =============================
-// 3. DROPDOWNS & SELECTS
-// =============================
+  if (action === "check") {
+    await locator.check(options);
+  } else {
+    await locator.uncheck(options);
+  }
+
+  setActiveElement(page, locator);
+  console.log(
+    `✅ ${action === "check" ? "Checked" : "Unchecked"} ${indexStr} selector "${selector}"`
+  );
+}
 
 /**
  * Selects an option in a `<select>` dropdown by its visible label.
- *
- * ```gherkin
+ * @example
  * When I select option "California"
- * ```
- *
  * @param option - The visible text label of the option to select.
  */
-export const SelectOption = Step("I select option {string}", async (page, option, table) => {
+export async function selectOption(page: any, option: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
   const options = parseClickOptions(table);
 
-  // Playwright selects by value or label automatically
   await element.selectOption({ label: option }, options);
   console.log(`🔽 Selected option: "${option}"`);
-});
-
-// =============================
-// 4. FORMS & FILES
-// =============================
+}
 
 /**
  * Submits the form related to the active element.
- *
- * **Logic:**
+ * Logic:
  * 1. Tries to find the parent `<form>` of the currently stored element.
- * 2. If no parent form is found (or no element is active), it finds the *first* form on the page.
- *
- * ```gherkin
+ * 2. If no parent form is found, finds the first form on the page.
+ * @example
  * When I submit
- * ```
  */
-export const SubmitForm = Step("I submit", async (page) => {
+export async function submitForm(page: any): Promise<void> {
   let formLocator;
 
   try {
     const element = getActiveElement(page);
-    // Try to find the parent form of the stored element
     formLocator = element.locator("xpath=ancestor-or-self::form");
   } catch (_e) {
-    // If no element stored, find first form on page
     formLocator = page.locator("form").first();
   }
 
@@ -232,37 +191,50 @@ export const SubmitForm = Step("I submit", async (page) => {
     throw new Error("❌ No form found to submit.");
   }
 
-  // Native HTML submit (bypasses some validation, extremely reliable)
   await formLocator.evaluate((f: any) => f.submit());
   console.log("📨 Submitted form");
-});
+}
 
 /**
  * Uploads a file to the active file input element.
- *
- * ```gherkin
+ * @example
  * When I select file "data/invoice.pdf"
- * ```
- *
  * @param filePath - The path to the file (relative to the project root).
  */
-export const SelectFile = Step("I select file {string}", async (page, filePath) => {
+export async function selectFile(page: any, filePath: string): Promise<void> {
   const element = getActiveElement(page);
   await element.setInputFiles(filePath);
   console.log(`📂 Selected file: "${filePath}"`);
-});
+}
 
 /**
- * Alias for `I select file`.
- *
- * ```gherkin
+ * Uploads a file to the active file input element (alias for selectFile).
+ * @example
  * When I upload file "images/logo.png"
- * ```
- *
  * @param filePath - The path to the file.
  */
-export const UploadFileAlias = Step("I upload file {string}", async (page, filePath) => {
+export async function uploadFile(page: any, filePath: string): Promise<void> {
   const element = getActiveElement(page);
   await element.setInputFiles(filePath);
   console.log(`📂 Uploaded file: "${filePath}"`);
-});
+}
+
+// ==================================================
+// GLUE STEPS
+// ==================================================
+
+Step("I type {string}", typeText);
+Step("I type stored {string}", typeStoredText);
+Step("I slowly type {string}", typeSlowly);
+Step("I set value {string}", setInputValue);
+Step("I clear", clearInput);
+Step("I press {string}", pressKeyOnInput);
+Step("I check", checkElement);
+Step("I uncheck", uncheckElement);
+Step("I check input", checkElement);
+Step("I uncheck input", uncheckElement);
+Step(/^I (check|uncheck) (\d+)(?:st|nd|rd|th) selector "([^"]+)"$/, checkNthElementBySelector);
+Step("I select option {string}", selectOption);
+Step("I submit", submitForm);
+Step("I select file {string}", selectFile);
+Step("I upload file {string}", uploadFile);
