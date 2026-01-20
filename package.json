@@ -1,7 +1,7 @@
 {
   "name": "playwright-cucumber-ts-steps",
   "description": "A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.",
-  "version": "1.1.13",
+  "version": "1.2.0",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
