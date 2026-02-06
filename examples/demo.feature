@@ -1,10 +1,10 @@
-@smoke
+@smoke 
 Feature: Search Engine Test
 
-  Scenario: Visit Google and Validate
-    Given I visit "https://www.google.com"
-    Then I expect the title to contain "Google"
-    And I expect "[aria-label='Google']" to be visible
+  Scenario: Visit Herokuapp and Validate
+    Given I visit "https://the-internet.herokuapp.com/"
+    Then I expect the title to contain "The Internet"
+    And I expect "a[href='/abtest']" to be visible
 
   Scenario: Advanced Elements -- Dropdown Test
     Given I visit "https://the-internet.herokuapp.com/dropdown"

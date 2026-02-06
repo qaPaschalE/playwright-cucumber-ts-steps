@@ -1,3 +1,4 @@
+// src/core/runner.ts
 import * as fs from "fs";
 import { test } from "@playwright/test";
 import { globSync } from "glob";
@@ -9,10 +10,11 @@ import "../backend/assertions/index";
 import "../backend/elements/index";
 import "../backend/api/index";
 import "../backend/auth/index";
-import { dbState } from "../backend/db/state";
+import "../backend/utils/state";
 import "../backend/db/index";
 
-interface RunnerOptions {
+// ✅ Move interfaces to the correct position
+export interface RunnerOptions {
   tags?: string;
   dbQuery?: (query: string) => Promise<any>;
 }
@@ -23,10 +25,22 @@ interface ParsedStep {
   dataTable?: string[][];
   docString?: string;
 }
-
 export function runTests(featureGlob: string, options?: RunnerOptions) {
-  if (options?.dbQuery) {
-    dbState.setAdapter(options.dbQuery);
+
+
+  // Also show ALL steps if there are few
+  if (stepRegistry.length <= 10) {
+    stepRegistry.forEach((step, index) => {
+      let patternStr: string;
+      if (step.expression instanceof RegExp) {
+        patternStr = `REGEX: ${step.expression.source}`;
+      } else if (typeof step.pattern === 'string') {
+        patternStr = `CUCUMBER: ${step.pattern}`;
+      } else {
+        patternStr = `UNKNOWN: ${step.pattern}`;
+      }
+      console.log(`  ${index + 1}. ${patternStr}`);
+    });
   }
 
   const files = globSync(featureGlob);
@@ -220,7 +234,23 @@ export function runTests(featureGlob: string, options?: RunnerOptions) {
  */
 function findMatchingStep(text: string) {
   for (const step of stepRegistry) {
-    // 1. RegExp Match
+    // 1. Cucumber Expression Match (NEW - Proper way)
+    if (step.expression && typeof (step.expression as any).match === "function") {
+      try {
+        const match = (step.expression as any).match(text);
+        if (match) {
+          return {
+            fn: step.fn,
+            args: match.map((arg: any) => arg.getValue(null)),
+          };
+        }
+      } catch (e) {
+        // Continue to next step if Cucumber Expression fails
+        continue;
+      }
+    }
+
+    // 2. RegExp Match
     if (step.expression instanceof RegExp) {
       const match = step.expression.exec(text);
       if (match) {
@@ -228,16 +258,7 @@ function findMatchingStep(text: string) {
         return { fn: step.fn, args: match.slice(1) };
       }
     }
-    // 2. Cucumber Expression Match (if strictly typed)
-    else if (typeof (step.expression as any).match === "function") {
-      const match = (step.expression as any).match(text);
-      if (match) {
-        return {
-          fn: step.fn,
-          args: match.map((arg: any) => arg.getValue(null)),
-        };
-      }
-    }
+
     // 3. String Match (Legacy/Simple)
     else if (typeof step.expression === "string") {
       if (step.expression === text) {

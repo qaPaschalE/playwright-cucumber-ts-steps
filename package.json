@@ -1,7 +1,7 @@
 {
   "name": "playwright-cucumber-ts-steps",
   "description": "A collection of reusable Playwright step definitions for Cucumber in TypeScript, designed to streamline end-to-end testing across web, API, and mobile applications.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -75,7 +75,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@playwright/test": "^1.41.0",
+    "@playwright/test": "^1.58.1",
     "@types/glob": "^8.1.0",
     "@types/node": "^20.11.0",
     "@types/pngjs": "^6.0.5",

@@ -1,18 +1,20 @@
+//src/backend/actions/mouse.ts
 import { Step } from "../../core/registry";
 import { setActiveElement, parseClickOptions } from "../utils/state";
-
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
 // ==================================================
 // CORE FUNCTIONS
 // ==================================================
 
 /**
  * Scrolls a specific element into the visible viewport.
- * Useful when an element is off-screen and needs to be visible before interaction.
- * @example
- * When I scroll ".footer-section" into view
- * @param selector - The CSS selector of the element.
+ * Supports fixtures for reusable selectors.
+ * @example When I scroll "footer.footerSection" into view
  */
-export async function scrollIntoView(page: any, selector: string): Promise<void> {
+export async function scrollIntoView(page: any, selectorKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
   const locator = page.locator(selector);
   await locator.scrollIntoViewIfNeeded();
   console.log(`🖱️ Scrolled element "${selector}" into view.`);
@@ -20,18 +22,18 @@ export async function scrollIntoView(page: any, selector: string): Promise<void>
 
 /**
  * Scrolls the internal content of a specific element (overflow container) to X, Y coordinates.
- * @example
- * When I scroll "#chat-box" to position x:0 y:500
- * @param selector - The CSS selector of the scrollable container.
- * @param x - The horizontal scroll position (pixels).
- * @param y - The vertical scroll position (pixels).
+ * Supports fixtures for reusable selectors.
+ * @example When I scroll "chat.chatBox" to position x:0 y:500
  */
 export async function scrollElementToPosition(
   page: any,
-  selector: string,
+  selectorKey: string,
   x: number,
   y: number
 ): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
   const locator = page.locator(selector);
   await locator.evaluate(
     (el: Element, coords: { x: number; y: number }) => {
@@ -44,10 +46,7 @@ export async function scrollElementToPosition(
 
 /**
  * Scrolls the entire main browser window to specific X, Y coordinates immediately.
- * @example
- * When I scroll to coordinates x:0 y:0
- * @param x - The absolute horizontal position.
- * @param y - The absolute vertical position.
+ * @example When I scroll to coordinates x:0 y:0
  */
 export async function scrollWindowToCoordinates(page: any, x: number, y: number): Promise<void> {
   await page.evaluate(
@@ -61,10 +60,7 @@ export async function scrollWindowToCoordinates(page: any, x: number, y: number)
 
 /**
  * Scrolls the entire main browser window smoothly to specific coordinates.
- * @example
- * When I scroll mouse window to position top:0 left:0
- * @param top - The vertical position (Y).
- * @param left - The horizontal position (X).
+ * @example When I scroll mouse window to position top:0 left:0
  */
 export async function scrollWindowSmoothly(page: any, top: number, left: number): Promise<void> {
   await page.evaluate(
@@ -83,9 +79,7 @@ export async function scrollWindowSmoothly(page: any, top: number, left: number)
 /**
  * Scrolls the window to a general direction edge (top, bottom, left, right).
  * Includes a short wait for smooth scrolling animation to complete.
- * @example
- * When I scroll to "bottom"
- * @param direction - One of: "top", "bottom", "left", "right".
+ * @example When I scroll to "bottom"
  */
 export async function scrollToDirection(page: any, direction: string): Promise<void> {
   const validDirections = ["top", "bottom", "left", "right"];
@@ -93,7 +87,7 @@ export async function scrollToDirection(page: any, direction: string): Promise<v
 
   if (!validDirections.includes(dir)) {
     throw new Error(
-      `Invalid scroll direction "${direction}". Must be one of: ${validDirections.join(", ")}.`
+      `❌ Invalid scroll direction "${direction}". Must be one of: ${validDirections.join(", ")}.`
     );
   }
 
@@ -124,11 +118,13 @@ export async function scrollToDirection(page: any, direction: string): Promise<v
 /**
  * Simulates a mouse hover over an element.
  * Sets the hovered element as the "Active Element" for subsequent steps.
- * @example
- * When I hover over the element ".dropdown-toggle"
- * @param selector - The CSS selector to hover over.
+ * Supports fixtures for reusable selectors.
+ * @example When I hover over the element "dropdown.toggleButton"
  */
-export async function hoverElement(page: any, selector: string): Promise<void> {
+export async function hoverElement(page: any, selectorKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
   const element = page.locator(selector);
   await element.hover();
   setActiveElement(page, element);
@@ -138,10 +134,7 @@ export async function hoverElement(page: any, selector: string): Promise<void> {
 /**
  * Moves the mouse cursor to specific absolute screen coordinates.
  * Useful for canvas interactions or testing mouse tracking.
- * @example
- * When I move mouse to coordinates 100, 200
- * @param x - The X-coordinate.
- * @param y - The Y-coordinate.
+ * @example When I move mouse to coordinates 100, 200
  */
 export async function moveMouseToCoordinates(page: any, x: number, y: number): Promise<void> {
   await page.mouse.move(x, y);
@@ -150,10 +143,7 @@ export async function moveMouseToCoordinates(page: any, x: number, y: number): P
 
 /**
  * Hovers over the Nth element containing the specified text.
- * @example
- * When I hover on 1st element "Profile"
- * When I hover on 3rd element "Settings"
- * | timeout | 2000 |
+ * @example When I hover on 1st element "Profile"
  */
 export async function hoverNthElementByText(
   page: any,
@@ -174,19 +164,22 @@ export async function hoverNthElementByText(
 
 /**
  * Hovers over the Nth element matching a CSS or XPath selector.
- * @example
- * When I hover on 1st selector ".user-avatar"
+ * Supports fixtures for reusable selectors.
+ * @example When I hover on 1st selector "user.avatar"
  */
 export async function hoverNthElementBySelector(
   page: any,
   indexStr: string,
-  selector: string,
+  selectorKey: string,
   table?: any
 ): Promise<void> {
   const index = parseInt(indexStr, 10);
   const options = parseClickOptions(table);
-  const locator = page.locator(selector).nth(index - 1);
 
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
+  const locator = page.locator(selector).nth(index - 1);
   await locator.waitFor({ state: "visible", timeout: options.timeout || 5000 });
   await locator.hover(options);
 
@@ -198,12 +191,12 @@ export async function hoverNthElementBySelector(
 // GLUE STEPS
 // ==================================================
 
-Step("I scroll {string} into view", scrollIntoView);
-Step("I scroll {string} to position x:{int} y:{int}", scrollElementToPosition);
-Step("I scroll to coordinates x:{int} y:{int}", scrollWindowToCoordinates);
-Step("I scroll mouse window to position top:{int} left:{int}", scrollWindowSmoothly);
-Step("I scroll to {string}", scrollToDirection);
-Step("I hover over the element {string}", hoverElement);
-Step("I move mouse to coordinates {int}, {int}", moveMouseToCoordinates);
-Step(/^I hover on (\d+)(?:st|nd|rd|th) element "([^"]+)"$/, hoverNthElementByText);
-Step(/^I hover on (\d+)(?:st|nd|rd|th) selector "([^"]+)"$/, hoverNthElementBySelector);
+Step("I scroll {string} into view", scrollIntoView, "When");
+Step("I scroll {string} to position x:{int} y:{int}", scrollElementToPosition, "When");
+Step("I scroll to coordinates x:{int} y:{int}", scrollWindowToCoordinates, "When");
+Step("I scroll mouse window to position top:{int} left:{int}", scrollWindowSmoothly, "When");
+Step("I scroll to {string}", scrollToDirection, "When");
+Step("I hover over the element {string}", hoverElement, "When");
+Step("I move mouse to coordinates {int}, {int}", moveMouseToCoordinates, "When");
+Step("I hover on {int}(?:st|nd|rd|th) element {string}", hoverNthElementByText, "When");
+Step("I hover on {int}(?:st|nd|rd|th) selector {string}", hoverNthElementBySelector, "When");

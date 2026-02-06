@@ -1,5 +1,5 @@
 // src/backend/utils/state.ts
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, APIResponse } from "@playwright/test";
 
 // 1. STATE MANAGEMENT
 // We attach data to the Playwright Page object so it persists between steps.
@@ -94,3 +94,76 @@ export function parseClickOptions(table: any): {
 
   return options;
 }
+/**
+ * Resolves a raw value, handling variable aliases.
+ * If a value starts with "@", it retrieves it from the global state.
+ * @param page - The Playwright Page object.
+ * @param rawValue - The raw value to resolve.
+ * @returns The resolved value.
+ */
+export function resolveValue(page: any, rawValue: string): string {
+  if (!rawValue) return "";
+  const trimmed = rawValue.trim();
+
+  // Handle Alias (e.g., @adminPassword)
+  if (trimmed.startsWith("@")) {
+    const alias = trimmed.slice(1);
+    const stored = getVariable(page, alias);
+    if (stored === undefined) {
+      console.warn(`⚠️ Warning: Alias @${alias} not found. Using literal value.`);
+      return trimmed;
+    }
+    return typeof stored === "object" ? JSON.stringify(stored) : String(stored);
+  }
+
+  return trimmed;
+}
+
+
+// API RESPONSE STORAGE
+// We use this to store the last API response for assertions in "Then" steps.
+// A simple storage to hold the response between the "When" and "Then" steps
+let lastResponse: APIResponse | null = null;
+
+export const apiState = {
+  setResponse: (response: APIResponse) => {
+    lastResponse = response;
+  },
+  getResponse: () => {
+    if (!lastResponse)
+      throw new Error(
+        "No API response found. Did you run a 'When I make a request' step first?"
+      );
+    return lastResponse;
+  },
+};
+
+
+// DATABASE QUERY STATE
+// We use this to store a user-provided DB query function and the last result.
+// Holds the user's custom DB function
+let dbAdapter: ((query: string) => Promise<any>) | null = null;
+let lastResult: any = null;
+
+export const dbState = {
+  // Runner calls this to register the user's function
+  setAdapter: (fn: (query: string) => Promise<any>) => {
+    dbAdapter = fn;
+  },
+
+  // Step calls this to run a query
+  executeQuery: async (query: string) => {
+    if (!dbAdapter) {
+      throw new Error(
+        "❌ No Database Adapter found. Pass a 'dbQuery' function to runTests()."
+      );
+    }
+    const result = await dbAdapter(query);
+    lastResult = result;
+    console.log(`🗄️ DB Result:`, JSON.stringify(lastResult));
+    return result;
+  },
+
+  // Assertions use this to check results
+  getLastResult: () => lastResult,
+};

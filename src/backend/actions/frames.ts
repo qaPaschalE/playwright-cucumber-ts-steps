@@ -1,5 +1,9 @@
+//src/backend/actions/frames.ts
 import { Step } from "../../core/registry";
-import { setActiveElement } from "../utils/state";
+import {
+  setActiveElement,
+} from "../utils/state";
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
 
 // ==================================================
 // CORE FUNCTIONS
@@ -8,15 +12,19 @@ import { setActiveElement } from "../utils/state";
 /**
  * Attempts to switch the logical context to a specific iframe.
  * Verifies the frame exists and logs a warning about frame scope limitations.
- * @example
- * When I switch to frame "#payment-iframe"
- * @param selector - The CSS selector of the iframe element.
+ * @example When I switch to frame "payment-iframe"
+ * @param selectorKey - The key of the iframe selector in the fixtures or a raw CSS selector.
  */
-export async function switchToFrame(page: any, selector: string): Promise<void> {
-  const frameElement = page.locator(selector);
-  const frame = frameElement.contentFrame();
+export async function switchToFrame(page: any, selectorKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
 
-  if (!frame) throw new Error(`❌ Iframe "${selector}" not found or has no content.`);
+  const frameElement = page.locator(selector);
+  const frame = await frameElement.contentFrame();
+
+  if (!frame) {
+    throw new Error(`❌ Iframe "${selector}" not found or has no content.`);
+  }
 
   console.log(
     `⚠️ Switching Frames requires a Scope manager. For now, use 'I find element ... in frame ...'`
@@ -26,16 +34,21 @@ export async function switchToFrame(page: any, selector: string): Promise<void> 
 /**
  * Finds an element inside a specific iframe and sets it as the active element.
  * This is the robust way to interact with iframe content (e.g., Stripe forms, embedded videos).
- * @example
- * When I find element "#card-number" in frame "#stripe-element"
- * @param elementSelector - The selector of the element INSIDE the iframe.
- * @param frameSelector - The selector of the iframe element itself.
+ * @example When I find element "card-number" in frame "stripe-element"
+ * @param elementSelectorKey - The key of the element selector in the fixtures or a raw CSS selector.
+ * @param frameSelectorKey - The key of the iframe selector in the fixtures or a raw CSS selector.
  */
 export async function findElementInFrame(
   page: any,
-  elementSelector: string,
-  frameSelector: string
+  elementSelectorKey: string,
+  frameSelectorKey: string
 ): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+
+  // Resolve selectors from fixtures or use raw values
+  const frameSelector = getFixtureValue(selectors, frameSelectorKey);
+  const elementSelector = getFixtureValue(selectors, elementSelectorKey);
+
   const frame = page.frameLocator(frameSelector);
   const element = frame.locator(elementSelector).first();
 
@@ -47,14 +60,16 @@ export async function findElementInFrame(
 /**
  * Waits for a new browser tab (popup) to open.
  * Useful for validating `target="_blank"` links.
- * @example
- * When I click on link "Open Dashboard"
- * And I switch to new tab
+ * @example When I click on link "Open Dashboard" And I switch to new tab
  */
 export async function switchToNewTab(page: any): Promise<void> {
   console.log("⚠️ Multi-tab support requires Runner updates. Verifying popup event only.");
 
-  const popup = await page.waitForEvent("popup");
+  const [popup] = await Promise.all([
+    page.waitForEvent("popup"),
+    page.click("a[target='_blank']"), // Simulate clicking a link that opens a new tab
+  ]);
+
   await popup.waitForLoadState();
   console.log(`📑 New tab opened: ${await popup.title()}`);
 }
@@ -63,6 +78,6 @@ export async function switchToNewTab(page: any): Promise<void> {
 // GLUE STEPS
 // ==================================================
 
-Step("I switch to frame {string}", switchToFrame);
-Step("I find element {string} in frame {string}", findElementInFrame);
-Step("I switch to new tab", switchToNewTab);
+Step("I switch to frame {string}", switchToFrame, "When");
+Step("I find element {string} in frame {string}", findElementInFrame, "When");
+Step("I switch to new tab", switchToNewTab, "When");

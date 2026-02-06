@@ -141,7 +141,6 @@ snapshots/
 report
 tests/
 coverage/
-scripts/
 traces/
 lib/
 playwright-report
@@ -150,3 +149,9 @@ dist
 docs
 playwright-report
 test-results
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

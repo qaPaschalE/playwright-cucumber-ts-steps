@@ -1,4 +1,6 @@
+//src/backend/actions/click.ts
 import { Step } from "../../core/registry";
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
 import {
   setActiveElement,
   getActiveElement,
@@ -13,8 +15,7 @@ import {
 
 /**
  * Clicks on the currently stored (active) element.
- * @example
- * When I click
+ * @example When I click
  */
 export async function clickStoredElement(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -25,16 +26,21 @@ export async function clickStoredElement(page: any, table?: any): Promise<void> 
 
 /**
  * Clicks on an element matching the given CSS/XPath selector.
- * @example
- * When I click on element ".my-element"
- * @param selector - The CSS or XPath selector of the element.
+ * Supports fixtures for reusable selectors.
+ * @example When I click on element ".my-element"
+ *          When I click on element "login.submitButton"
  */
 export async function clickElementBySelector(
   page: any,
-  selector: string,
+  selectorKey: string,
   table?: any
 ): Promise<void> {
   const options = parseClickOptions(table);
+
+  // Resolve selector from fixtures or use raw value
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
   const element = page.locator(selector);
   await element.click(options);
   setActiveElement(page, element);
@@ -43,9 +49,7 @@ export async function clickElementBySelector(
 
 /**
  * Clicks on a button role element with the specified label.
- * @example
- * When I click on button "Submit"
- * @param label - The visible text or accessible name of the button.
+ * @example When I click on button "Submit"
  */
 export async function clickButtonByLabel(page: any, label: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -57,9 +61,7 @@ export async function clickButtonByLabel(page: any, label: string, table?: any):
 
 /**
  * Clicks on a link role element with the specified text.
- * @example
- * When I click on link "Home"
- * @param text - The visible text of the link.
+ * @example When I click on link "Home"
  */
 export async function clickLinkByText(page: any, text: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -71,9 +73,7 @@ export async function clickLinkByText(page: any, text: string, table?: any): Pro
 
 /**
  * Clicks on a form label element.
- * @example
- * When I click on label "Email"
- * @param labelText - The text content of the label element.
+ * @example When I click on label "Email"
  */
 export async function clickLabelByText(page: any, labelText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -85,9 +85,7 @@ export async function clickLabelByText(page: any, labelText: string, table?: any
 
 /**
  * Clicks on the first visible element containing the specified text (partial match).
- * @example
- * When I click on text "Login"
- * @param rawText - The text to look for. Use "@alias" to reference a stored variable.
+ * @example When I click on text "Login"
  */
 export async function clickByText(page: any, rawText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -113,9 +111,7 @@ export async function clickByText(page: any, rawText: string, table?: any): Prom
 
 /**
  * Clicks on an element containing the EXACT specified text.
- * @example
- * When I click on exact text "Submit"
- * @param exactText - The exact text content to match.
+ * @example When I click on exact text "Submit"
  */
 export async function clickByExactText(page: any, exactText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -129,8 +125,7 @@ export async function clickByExactText(page: any, exactText: string, table?: any
 
 /**
  * Clicks on a selector provided via Regex match.
- * @example
- * When I click on selector "#btn-id"
+ * @example When I click on selector "#btn-id"
  */
 export async function clickByRegexSelector(page: any, selector: string): Promise<void> {
   const locator = page.locator(selector);
@@ -141,8 +136,7 @@ export async function clickByRegexSelector(page: any, selector: string): Promise
 
 /**
  * Iterates through ALL currently stored active elements and clicks them one by one.
- * @example
- * When I click all
+ * @example When I click all
  */
 export async function clickAllStoredElements(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -162,8 +156,7 @@ export async function clickAllStoredElements(page: any, table?: any): Promise<vo
 
 /**
  * Double-clicks on the currently stored (active) element.
- * @example
- * When I double click
+ * @example When I double click
  */
 export async function doubleClickStoredElement(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -174,8 +167,7 @@ export async function doubleClickStoredElement(page: any, table?: any): Promise<
 
 /**
  * Double-clicks on the first element containing the specified text.
- * @example
- * When I double click on text "Button"
+ * @example When I double click on text "Button"
  */
 export async function doubleClickByText(page: any, text: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -186,8 +178,7 @@ export async function doubleClickByText(page: any, text: string, table?: any): P
 
 /**
  * Double-clicks at specific X, Y coordinates on the page.
- * @example
- * When I double click position 100 200
+ * @example When I double click position 100 200
  */
 export async function doubleClickPosition(
   page: any,
@@ -202,8 +193,7 @@ export async function doubleClickPosition(
 
 /**
  * Right-clicks (Context Click) on the currently stored element.
- * @example
- * When I right click
+ * @example When I right click
  */
 export async function rightClickStoredElement(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -214,8 +204,7 @@ export async function rightClickStoredElement(page: any, table?: any): Promise<v
 
 /**
  * Right-clicks on the first element containing the specified text.
- * @example
- * When I right click on text "Menu"
+ * @example When I right click on text "Menu"
  */
 export async function rightClickByText(page: any, text: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -226,8 +215,7 @@ export async function rightClickByText(page: any, text: string, table?: any): Pr
 
 /**
  * Right-clicks at specific X, Y coordinates on the page.
- * @example
- * When I right click position 100 200
+ * @example When I right click position 100 200
  */
 export async function rightClickPosition(
   page: any,
@@ -243,9 +231,8 @@ export async function rightClickPosition(
 /**
  * Clicks on the Nth element containing the specified text.
  * Handles 1st, 2nd, 3rd, 4th, etc.
- * @example
- * When I click on 1st element "Login"
- * When I click on 2nd element "Submit"
+ * @example When I click on 1st element "Login"
+ *          When I click on 2nd element "Submit"
  */
 export async function clickNthElementByText(
   page: any,
@@ -268,17 +255,20 @@ export async function clickNthElementByText(
 
 /**
  * Clicks on the Nth element matching a CSS or XPath selector.
- * @example
- * When I click on 1st selector ".btn"
+ * @example When I click on 1st selector ".btn"
  */
 export async function clickNthElementBySelector(
   page: any,
   indexStr: string,
-  selector: string,
+  selectorKey: string,
   table?: any
 ): Promise<void> {
   const index = parseInt(indexStr, 10);
   const options = parseClickOptions(table);
+
+  // Resolve selector from fixtures or use raw value
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
 
   const locator = page.locator(selector).nth(index - 1);
 
@@ -293,20 +283,20 @@ export async function clickNthElementBySelector(
 // GLUE STEPS
 // ==================================================
 
-Step("I click", clickStoredElement);
-Step("I click on element {string}", clickElementBySelector);
-Step("I click on button {string}", clickButtonByLabel);
-Step("I click on link {string}", clickLinkByText);
-Step("I click on label {string}", clickLabelByText);
-Step("I click on text {string}", clickByText);
-Step("I click on exact text {string}", clickByExactText);
-Step(/^I click on selector "([^"]+)"$/, clickByRegexSelector);
-Step("I click all", clickAllStoredElements);
-Step("I double click", doubleClickStoredElement);
-Step("I double click on text {string}", doubleClickByText);
-Step("I double click position {int} {int}", doubleClickPosition);
-Step("I right click", rightClickStoredElement);
-Step("I right click on text {string}", rightClickByText);
-Step("I right click position {int} {int}", rightClickPosition);
-Step(/^I click on (\d+)(?:st|nd|rd|th) element "([^"]+)"$/, clickNthElementByText);
-Step(/^I click on (\d+)(?:st|nd|rd|th) selector "([^"]+)"$/, clickNthElementBySelector);
+Step("I click", clickStoredElement, "When");
+Step("I click on element {string}", clickElementBySelector, "When");
+Step("I click on button {string}", clickButtonByLabel, "When");
+Step("I click on link {string}", clickLinkByText, "When");
+Step("I click on label {string}", clickLabelByText, "When");
+Step("I click on text {string}", clickByText, "When");
+Step("I click on exact text {string}", clickByExactText, "When");
+Step("I click on selector {string}", clickByRegexSelector, "When");
+Step("I click all", clickAllStoredElements, "When");
+Step("I double click", doubleClickStoredElement, "When");
+Step("I double click on text {string}", doubleClickByText, "When");
+Step("I double click position {int} {int}", doubleClickPosition, "When");
+Step("I right click", rightClickStoredElement, "When");
+Step("I right click on text {string}", rightClickByText, "When");
+Step("I right click position {int} {int}", rightClickPosition, "When");
+Step("I click on {int}(?:st|nd|rd|th) element {string}", clickNthElementByText, "When");
+Step("I click on {int}(?:st|nd|rd|th) selector {string}", clickNthElementBySelector, "When");

@@ -1,28 +1,28 @@
+//src/backend/db/steps.ts
 import { expect } from "@playwright/test";
 import { Step } from "../../core/registry";
-import { dbState } from "./state";
-
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
+import { dbState } from "../utils/state";
 // ==================================================
 // CORE FUNCTIONS
 // ==================================================
 
 /**
  * Executes a raw SQL query against the configured database.
- * The results are stored in the internal `dbState` for subsequent assertions.
- * @example
- * When I run the database query "SELECT * FROM users WHERE email = 'test@example.com'"
- * @param query - The SQL query string to execute.
+ * Supports fixtures for reusable queries.
+ * @example When I run the database query "selectUsersByEmail"
  */
-export async function runDbQuery(page: any, query: string): Promise<void> {
+export async function runDbQuery(_page: any, queryKey: string): Promise<void> {
+  const queries = loadFixture("queries.json");
+  const query = getFixtureValue(queries, queryKey);
+
   await dbState.executeQuery(query);
   console.log(`🗄️ Executed DB Query: ${query}`);
 }
 
 /**
  * Asserts that the last executed database query returned a specific number of records.
- * @example
- * Then I expect the database to return 1 record
- * @param count - The expected number of rows in the result set.
+ * @example Then I expect the database to return 1 record
  */
 export async function expectDbRecordCount(page: any, count: number): Promise<void> {
   const result = dbState.getLastResult();
@@ -36,8 +36,7 @@ export async function expectDbRecordCount(page: any, count: number): Promise<voi
 
 /**
  * Asserts that the database query returned no records (empty result set).
- * @example
- * Then I expect the database to return no records
+ * @example Then I expect the database to return no records
  */
 export async function expectDbNoRecords(page: any): Promise<void> {
   const result = dbState.getLastResult();
@@ -51,12 +50,11 @@ export async function expectDbNoRecords(page: any): Promise<void> {
 /**
  * Asserts that the first record of the last database result set contains specific column values.
  * Performs a loose equality check (converts values to strings) to handle type mismatches.
- * @example
- * Then I expect the first database record to contain
+ * Supports fixtures for reusable table data.
+ * @example Then I expect the first database record to contain
  * | username | admin             |
  * | is_active| 1                 |
  * | role     | superuser         |
- * @param tableData - A Gherkin Data Table containing column names (keys) and expected values.
  */
 export async function expectFirstDbRecordToContain(
   page: any,
@@ -90,12 +88,10 @@ export async function expectFirstDbRecordToContain(
 
 /**
  * Asserts that a specific row (by index) contains expected column values.
- * @example
- * Then I expect database row 2 to contain
+ * Supports fixtures for reusable table data.
+ * @example Then I expect database row 2 to contain
  * | username | bob              |
  * | status   | active           |
- * @param index - The row index (1-based: 1 = first row, 2 = second row, etc.)
- * @param tableData - A Gherkin Data Table with column names and expected values.
  */
 export async function expectDbRowToContain(
   page: any,
@@ -138,10 +134,9 @@ export async function expectDbRowToContain(
 /**
  * Asserts that all records in the result set contain specific column values.
  * Useful for verifying uniform data across multiple rows.
- * @example
- * Then I expect all database records to contain
+ * Supports fixtures for reusable table data.
+ * @example Then I expect all database records to contain
  * | status | active |
- * @param tableData - A Gherkin Data Table with column names and expected values.
  */
 export async function expectAllDbRecordsToContain(page: any, tableData: string[][]): Promise<void> {
   const result = dbState.getLastResult();
@@ -179,11 +174,13 @@ export async function expectAllDbRecordsToContain(page: any, tableData: string[]
 
 /**
  * Asserts that a specific column exists in the database result set.
- * @example
- * Then I expect database column "email" to exist
- * @param columnName - The name of the column to verify.
+ * Supports fixtures for reusable column names.
+ * @example Then I expect database column "email" to exist
  */
-export async function expectDbColumnExists(page: any, columnName: string): Promise<void> {
+export async function expectDbColumnExists(page: any, columnNameKey: string): Promise<void> {
+  const columns = loadFixture("columns.json");
+  const columnName = getFixtureValue(columns, columnNameKey);
+
   const result = dbState.getLastResult();
 
   if (!Array.isArray(result) || result.length === 0) {
@@ -203,16 +200,20 @@ export async function expectDbColumnExists(page: any, columnName: string): Promi
 /**
  * Asserts that a specific column in any row contains the expected value.
  * Searches through all rows to find a match.
- * @example
- * Then I expect database column "email" to contain "test@example.com"
- * @param columnName - The name of the column to check.
- * @param expectedValue - The expected value to find.
+ * Supports fixtures for reusable column names and values.
+ * @example Then I expect database column "email" to contain "test@example.com"
  */
 export async function expectDbColumnContains(
   page: any,
-  columnName: string,
-  expectedValue: string
+  columnNameKey: string,
+  expectedValueKey: string
 ): Promise<void> {
+  const columns = loadFixture("columns.json");
+  const values = loadFixture("values.json");
+
+  const columnName = getFixtureValue(columns, columnNameKey);
+  const expectedValue = getFixtureValue(values, expectedValueKey);
+
   const result = dbState.getLastResult();
 
   if (!Array.isArray(result)) {
@@ -242,16 +243,20 @@ export async function expectDbColumnContains(
 
 /**
  * Asserts the data type of a column's value in the first record.
- * @example
- * Then I expect database column "age" to be of type "number"
- * @param columnName - The name of the column to check.
- * @param dataType - Expected type: "string", "number", "boolean", "null", "object".
+ * Supports fixtures for reusable column names and types.
+ * @example Then I expect database column "age" to be of type "number"
  */
 export async function expectDbColumnType(
   page: any,
-  columnName: string,
-  dataType: string
+  columnNameKey: string,
+  dataTypeKey: string
 ): Promise<void> {
+  const columns = loadFixture("columns.json");
+  const types = loadFixture("types.json");
+
+  const columnName = getFixtureValue(columns, columnNameKey);
+  const dataType = getFixtureValue(types, dataTypeKey);
+
   const result = dbState.getLastResult();
 
   if (!Array.isArray(result) || result.length === 0) {
@@ -276,12 +281,12 @@ export async function expectDbColumnType(
 // GLUE STEPS
 // ==================================================
 
-Step("I run the database query {string}", runDbQuery);
-Step("I expect the database to return {int} record(s)", expectDbRecordCount);
-Step("I expect the database to return no records", expectDbNoRecords);
-Step("I expect the first database record to contain", expectFirstDbRecordToContain);
-Step("I expect database row {int} to contain", expectDbRowToContain);
-Step("I expect all database records to contain", expectAllDbRecordsToContain);
-Step("I expect database column {string} to exist", expectDbColumnExists);
-Step("I expect database column {string} to contain {string}", expectDbColumnContains);
-Step("I expect database column {string} to be of type {string}", expectDbColumnType);
+Step("I run the database query {string}", runDbQuery, "When");
+Step("I expect the database to return {int} record(s)", expectDbRecordCount, "Then");
+Step("I expect the database to return no records", expectDbNoRecords, "Then");
+Step("I expect the first database record to contain", expectFirstDbRecordToContain, "Then");
+Step("I expect database row {int} to contain", expectDbRowToContain, "Then");
+Step("I expect all database records to contain", expectAllDbRecordsToContain, "Then");
+Step("I expect database column {string} to exist", expectDbColumnExists, "Then");
+Step("I expect database column {string} to contain {string}", expectDbColumnContains, "Then");
+Step("I expect database column {string} to be of type {string}", expectDbColumnType, "Then");

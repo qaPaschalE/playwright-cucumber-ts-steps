@@ -1,12 +1,14 @@
 // src/reporting/index.ts
 
-interface ReportOptions {
+// ✅ Export the interface so it can be accessed from outside
+export interface ReportOptions {
   on: ("html" | "slack" | "teams" | "json")[]; // User selects what they want
   slackWebhookUrl?: string; // Optional: Only if Slack is chosen
 }
+
 /**
  * Helper to generate Playwright Reporter configuration.
- * * @param options - Select which reporters to enable ('html', 'slack', etc.)
+ * @param options - Select which reporters to enable ('html', 'slack', etc.)
  * @returns An array suitable for the 'reporter' field in playwright.config.ts
  */
 export function getReporters(options: ReportOptions) {

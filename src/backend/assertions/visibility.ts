@@ -1,17 +1,15 @@
+//src/backend/assertions/visibility.ts
 import { expect } from "@playwright/test";
 import { Step } from "../../core/registry";
-import { getActiveElement, getVariable } from "../utils/state";
-
+import { loadFixture, getFixtureValue, } from "../utils/fixtures";
+import { getActiveElement, getVariable, } from "../utils/state";
 // ==================================================
 // CORE FUNCTIONS
 // ==================================================
 
-// --- Visibility & State Checks ---
-
 /**
  * Asserts that the currently stored (active) element is visible in the viewport.
- * @example
- * Then I expect element to be visible
+ * @example Then I expect element to be visible
  */
 export async function expectActiveVisible(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -21,11 +19,13 @@ export async function expectActiveVisible(page: any): Promise<void> {
 
 /**
  * Asserts that an element with a given selector or description is visible in the viewport.
- * @example
- * Then I expect "Submit Button" to be visible
- * Then I expect ".login-form" to be visible
+ * Supports fixtures for reusable selectors.
+ * @example Then I expect "login.submitButton" to be visible
  */
-export async function expectStringVisible(page: any, selector: string): Promise<void> {
+export async function expectStringVisible(page: any, selectorKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
   const element = page.locator(selector);
   await expect(element).toBeVisible();
   console.log(`✅ "${selector}" is visible`);
@@ -33,8 +33,7 @@ export async function expectStringVisible(page: any, selector: string): Promise<
 
 /**
  * Asserts that the currently stored (active) element is hidden or detached from the DOM.
- * @example
- * Then I expect element to be hidden
+ * @example Then I expect element to be hidden
  */
 export async function expectActiveHidden(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -44,8 +43,7 @@ export async function expectActiveHidden(page: any): Promise<void> {
 
 /**
  * Asserts that the currently stored (active) element is enabled (not disabled).
- * @example
- * Then I expect element to be enabled
+ * @example Then I expect element to be enabled
  */
 export async function expectActiveEnabled(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -55,8 +53,7 @@ export async function expectActiveEnabled(page: any): Promise<void> {
 
 /**
  * Asserts that the currently stored (active) element is disabled.
- * @example
- * Then I expect element to be disabled
+ * @example Then I expect element to be disabled
  */
 export async function expectActiveDisabled(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -64,14 +61,15 @@ export async function expectActiveDisabled(page: any): Promise<void> {
   console.log("✅ Element is disabled");
 }
 
-// --- Text & Value Checks ---
-
 /**
  * Asserts that the currently stored (active) element has the exact text specified.
- * @example
- * Then I expect element to have text "Submit Order"
+ * Supports fixtures for reusable texts.
+ * @example Then I expect element to have text "login.submitButtonText"
  */
-export async function expectActiveText(page: any, text: string): Promise<void> {
+export async function expectActiveText(page: any, textKey: string): Promise<void> {
+  const texts = loadFixture("texts.json");
+  const text = getFixtureValue(texts, textKey);
+
   const element = getActiveElement(page);
   await expect(element).toHaveText(text);
   console.log(`✅ Element has text "${text}"`);
@@ -79,10 +77,13 @@ export async function expectActiveText(page: any, text: string): Promise<void> {
 
 /**
  * Asserts that the currently stored (active) element contains the specified partial text.
- * @example
- * Then I expect element to contain text "Order #"
+ * Supports fixtures for reusable texts.
+ * @example Then I expect element to contain text "login.partialText"
  */
-export async function expectActiveContainText(page: any, text: string): Promise<void> {
+export async function expectActiveContainText(page: any, textKey: string): Promise<void> {
+  const texts = loadFixture("texts.json");
+  const text = getFixtureValue(texts, textKey);
+
   const element = getActiveElement(page);
   await expect(element).toContainText(text);
   console.log(`✅ Element contains text "${text}"`);
@@ -91,31 +92,35 @@ export async function expectActiveContainText(page: any, text: string): Promise<
 /**
  * Asserts that the currently stored (active) element (input/select) has a specific value.
  * Supports aliases (e.g., `@orderId`) to compare against stored variables.
- * @example
- * Then I expect element to have value "12345"
- * Then I expect element to have value "@savedUserEmail"
+ * Supports fixtures for reusable values.
+ * @example Then I expect element to have value "@savedUserEmail"
  */
-export async function expectActiveValue(page: any, value: string): Promise<void> {
-  let resolvedValue = value;
-  if (value.startsWith("@")) {
-    const alias = value.slice(1);
+export async function expectActiveValue(page: any, valueKey: string): Promise<void> {
+  let resolvedValue = valueKey;
+  if (valueKey.startsWith("@")) {
+    const alias = valueKey.slice(1);
     const stored = getVariable(page, alias);
     if (!stored) throw new Error(`Alias @${alias} not found`);
     resolvedValue = stored;
+  } else {
+    const values = loadFixture("values.json");
+    resolvedValue = getFixtureValue(values, valueKey);
   }
+
   const element = getActiveElement(page);
   await expect(element).toHaveValue(resolvedValue);
   console.log(`✅ Element has value "${resolvedValue}"`);
 }
 
-// --- Attribute Checks ---
-
 /**
  * Asserts that the currently stored (active) element possesses a specific attribute.
- * @example
- * Then I expect element to have attribute "required"
+ * Supports fixtures for reusable attributes.
+ * @example Then I expect element to have attribute "attributes.required"
  */
-export async function expectActiveAttribute(page: any, attr: string): Promise<void> {
+export async function expectActiveAttribute(page: any, attrKey: string): Promise<void> {
+  const attributes = loadFixture("attributes.json");
+  const attr = getFixtureValue(attributes, attrKey);
+
   const element = getActiveElement(page);
   await expect(element).toHaveAttribute(attr);
   console.log(`✅ Element has attribute "${attr}"`);
@@ -123,25 +128,28 @@ export async function expectActiveAttribute(page: any, attr: string): Promise<vo
 
 /**
  * Asserts that the currently stored (active) element has an attribute with a specific value.
- * @example
- * Then I expect element to have attribute "type" with value "password"
+ * Supports fixtures for reusable attributes and values.
+ * @example Then I expect element to have attribute "attributes.type" with value "input.passwordType"
  */
 export async function expectActiveAttributeValue(
   page: any,
-  attr: string,
-  value: string
+  attrKey: string,
+  valueKey: string
 ): Promise<void> {
+  const attributes = loadFixture("attributes.json");
+  const values = loadFixture("values.json");
+
+  const attr = getFixtureValue(attributes, attrKey);
+  const value = getFixtureValue(values, valueKey);
+
   const element = getActiveElement(page);
   await expect(element).toHaveAttribute(attr, value);
   console.log(`✅ Element has attribute "${attr}" = "${value}"`);
 }
 
-// --- Visual Regression ---
-
 /**
  * Performs a visual comparison of the entire page against a baseline screenshot.
- * @example
- * Then I expect the page screenshot to match "landing-page.png"
+ * @example Then I expect the page screenshot to match "landing-page.png"
  */
 export async function expectPageScreenshotMatch(page: any, filename: string): Promise<void> {
   await expect(page).toHaveScreenshot(filename);
@@ -150,8 +158,7 @@ export async function expectPageScreenshotMatch(page: any, filename: string): Pr
 
 /**
  * Performs a visual comparison of the active element against a baseline screenshot.
- * @example
- * Then I expect the element screenshot to match "login-button.png"
+ * @example Then I expect the element screenshot to match "login-button.png"
  */
 export async function expectElementScreenshotMatch(page: any, filename: string): Promise<void> {
   const element = getActiveElement(page);
@@ -163,15 +170,15 @@ export async function expectElementScreenshotMatch(page: any, filename: string):
 // GLUE STEPS
 // ==================================================
 
-Step("I expect element to be visible", expectActiveVisible);
-Step("I expect {string} to be visible", expectStringVisible);
-Step("I expect element to be hidden", expectActiveHidden);
-Step("I expect element to be enabled", expectActiveEnabled);
-Step("I expect element to be disabled", expectActiveDisabled);
-Step("I expect element to have text {string}", expectActiveText);
-Step("I expect element to contain text {string}", expectActiveContainText);
-Step("I expect element to have value {string}", expectActiveValue);
-Step("I expect element to have attribute {string}", expectActiveAttribute);
-Step("I expect element to have attribute {string} with value {string}", expectActiveAttributeValue);
-Step("I expect the page screenshot to match {string}", expectPageScreenshotMatch);
-Step("I expect the element screenshot to match {string}", expectElementScreenshotMatch);
+Step("I expect element to be visible", expectActiveVisible, "Then");
+Step("I expect {string} to be visible", expectStringVisible, "Then");
+Step("I expect element to be hidden", expectActiveHidden, "Then");
+Step("I expect element to be enabled", expectActiveEnabled, "Then");
+Step("I expect element to be disabled", expectActiveDisabled, "Then");
+Step("I expect element to have text {string}", expectActiveText, "Then");
+Step("I expect element to contain text {string}", expectActiveContainText, "Then");
+Step("I expect element to have value {string}", expectActiveValue, "Then");
+Step("I expect element to have attribute {string}", expectActiveAttribute, "Then");
+Step("I expect element to have attribute {string} with value {string}", expectActiveAttributeValue, "Then");
+Step("I expect the page screenshot to match {string}", expectPageScreenshotMatch, "Then");
+Step("I expect the element screenshot to match {string}", expectElementScreenshotMatch, "Then");

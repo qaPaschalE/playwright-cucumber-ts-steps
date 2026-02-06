@@ -1,19 +1,22 @@
+//src/backend/api/requests.ts
 import * as fs from "fs";
 import * as path from "path";
 import { Step } from "../../core/registry";
-import { apiState } from "./state";
-
+import { apiState } from "../utils/state";
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
 // ==================================================
 // CORE FUNCTIONS
 // ==================================================
 
 /**
  * Performs a standard HTTP GET request and stores the response in the global API state.
- * @example
- * When I make a GET request to "https://api.example.com/users"
- * @param url - The full URL or endpoint path.
+ * Supports fixtures for reusable API endpoints.
+ * @example When I make a GET request to "users.list"
  */
-export async function makeGetRequest(page: any, url: string): Promise<void> {
+export async function makeGetRequest(page: any, urlKey: string): Promise<void> {
+  const endpoints = loadFixture("endpoints.json");
+  const url = getFixtureValue(endpoints, urlKey);
+
   const response = await page.request.get(url);
   apiState.setResponse(response);
   console.log(`GET ${url} - Status: ${response.status()}`);
@@ -21,11 +24,13 @@ export async function makeGetRequest(page: any, url: string): Promise<void> {
 
 /**
  * Performs a standard HTTP DELETE request and stores the response in the global API state.
- * @example
- * When I make a DELETE request to "/api/users/1"
- * @param url - The endpoint path to delete.
+ * Supports fixtures for reusable API endpoints.
+ * @example When I make a DELETE request to "users.delete"
  */
-export async function makeDeleteRequest(page: any, url: string): Promise<void> {
+export async function makeDeleteRequest(page: any, urlKey: string): Promise<void> {
+  const endpoints = loadFixture("endpoints.json");
+  const url = getFixtureValue(endpoints, urlKey);
+
   const response = await page.request.delete(url);
   apiState.setResponse(response);
   console.log(`DELETE ${url} - Status: ${response.status()}`);
@@ -33,19 +38,19 @@ export async function makeDeleteRequest(page: any, url: string): Promise<void> {
 
 /**
  * Performs an HTTP POST request using a Gherkin Data Table as the JSON payload.
- * @example
- * When I make a POST request to "/api/users" with data
+ * @example When I make a POST request to "users.create" with data
  * | name | John |
  * | job  | Dev  |
- * @param url - The target endpoint.
- * @param tableData - The Gherkin Data Table (automatically converted to a JSON object).
  */
 export async function makePostRequestWithTable(
   page: any,
-  url: string,
+  urlKey: string,
   tableData: string[][]
 ): Promise<void> {
   if (!tableData) throw new Error("This step requires a Data Table.");
+
+  const endpoints = loadFixture("endpoints.json");
+  const url = getFixtureValue(endpoints, urlKey);
 
   const payload = tableData.reduce((acc: any, row: string[]) => {
     acc[row[0]] = row[1];
@@ -63,16 +68,20 @@ export async function makePostRequestWithTable(
 
 /**
  * Performs an HTTP POST request using the contents of a local JSON file as the payload.
- * @example
- * When I make a POST request to "/api/users" with payload from "data/user.json"
- * @param url - The target endpoint.
- * @param filePath - Path to the JSON file relative to the project root.
+ * Supports fixtures for reusable API endpoints and payloads.
+ * @example When I make a POST request to "users.create" with payload from "user.newUser"
  */
 export async function makePostRequestWithFile(
   page: any,
-  url: string,
-  filePath: string
+  urlKey: string,
+  filePathKey: string
 ): Promise<void> {
+  const endpoints = loadFixture("endpoints.json");
+  const files = loadFixture("files.json");
+
+  const url = getFixtureValue(endpoints, urlKey);
+  const filePath = getFixtureValue(files, filePathKey);
+
   const fullPath = path.resolve(process.cwd(), filePath);
 
   if (!fs.existsSync(fullPath)) {
@@ -95,7 +104,7 @@ export async function makePostRequestWithFile(
 // GLUE STEPS
 // ==================================================
 
-Step("I make a GET request to {string}", makeGetRequest);
-Step("I make a DELETE request to {string}", makeDeleteRequest);
-Step("I make a POST request to {string} with data", makePostRequestWithTable);
-Step("I make a POST request to {string} with payload from {string}", makePostRequestWithFile);
+Step("I make a GET request to {string}", makeGetRequest, "When");
+Step("I make a DELETE request to {string}", makeDeleteRequest, "When");
+Step("I make a POST request to {string} with data", makePostRequestWithTable, "When");
+Step("I make a POST request to {string} with payload from {string}", makePostRequestWithFile, "When");

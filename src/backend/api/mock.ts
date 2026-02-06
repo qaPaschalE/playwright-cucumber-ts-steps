@@ -1,6 +1,10 @@
 import * as fs from "fs";
 import * as path from "path";
 import { Step } from "../../core/registry";
+import {
+  loadFixture,
+  getFixtureValue,
+} from "./../utils/fixtures";
 
 // ==================================================
 // CORE FUNCTIONS
@@ -8,16 +12,17 @@ import { Step } from "../../core/registry";
 
 /**
  * Mocks a specific API endpoint with a hardcoded inline JSON response body.
- * @example
- * Given I mock the API endpoint "/api/users" with body '{"id": 1, "name": "Fake"}'
- * @param urlPattern - The URL or glob pattern to intercept.
- * @param jsonBody - The raw JSON string to return as the response.
+ * Supports fixtures for reusable API endpoints.
+ * @example Given I mock the API endpoint "/api/users" with body '{"id": 1, "name": "Fake"}'
  */
 export async function mockApiWithInlineJson(
   page: any,
-  urlPattern: string,
+  urlPatternKey: string,
   jsonBody: string
 ): Promise<void> {
+  const endpoints = loadFixture("endpoints.json");
+  const urlPattern = getFixtureValue(endpoints, urlPatternKey);
+
   await page.route(urlPattern, async (route: any) => {
     const json = JSON.parse(jsonBody);
     await route.fulfill({
@@ -31,16 +36,20 @@ export async function mockApiWithInlineJson(
 
 /**
  * Mocks an API endpoint using the contents of a local JSON file.
- * @example
- * Given I mock the API endpoint "/api/users" with response from "mocks/users.json"
- * @param urlPattern - The URL pattern to intercept.
- * @param filePath - Path to the JSON file relative to the project root.
+ * Supports fixtures for reusable API endpoints and mock files.
+ * @example Given I mock the API endpoint "/api/users" with response from "mocks/users.json"
  */
 export async function mockApiWithFile(
   page: any,
-  urlPattern: string,
-  filePath: string
+  urlPatternKey: string,
+  filePathKey: string
 ): Promise<void> {
+  const endpoints = loadFixture("endpoints.json");
+  const files = loadFixture("files.json");
+
+  const urlPattern = getFixtureValue(endpoints, urlPatternKey);
+  const filePath = getFixtureValue(files, filePathKey);
+
   const fullPath = path.resolve(process.cwd(), filePath);
 
   if (!fs.existsSync(fullPath)) {
@@ -62,16 +71,17 @@ export async function mockApiWithFile(
 /**
  * Mocks an API endpoint to return a specific HTTP status code only.
  * Useful for simulating server errors like 500 or 404.
- * @example
- * Given I mock the API endpoint "/api/broken" with status 500
- * @param urlPattern - The URL pattern to intercept.
- * @param statusCode - The HTTP status code to return.
+ * Supports fixtures for reusable API endpoints.
+ * @example Given I mock the API endpoint "/api/broken" with status 500
  */
 export async function mockApiStatus(
   page: any,
-  urlPattern: string,
+  urlPatternKey: string,
   statusCode: number
 ): Promise<void> {
+  const endpoints = loadFixture("endpoints.json");
+  const urlPattern = getFixtureValue(endpoints, urlPatternKey);
+
   await page.route(urlPattern, async (route: any) => {
     await route.fulfill({ status: statusCode });
   });
@@ -82,6 +92,6 @@ export async function mockApiStatus(
 // GLUE STEPS
 // ==================================================
 
-Step("I mock the API endpoint {string} with body {string}", mockApiWithInlineJson);
-Step("I mock the API endpoint {string} with response from {string}", mockApiWithFile);
-Step("I mock the API endpoint {string} with status {int}", mockApiStatus);
+Step("I mock the API endpoint {string} with body {string}", mockApiWithInlineJson, "Given");
+Step("I mock the API endpoint {string} with response from {string}", mockApiWithFile, "Given");
+Step("I mock the API endpoint {string} with status {int}", mockApiStatus, "Given");

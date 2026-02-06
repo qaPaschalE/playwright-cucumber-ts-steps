@@ -1,5 +1,7 @@
+//src/backend/elements/frames.ts
 import { expect } from "@playwright/test";
 import { Step } from "../../core/registry";
+import { loadFixture, getFixtureValue, } from "../utils/fixtures";
 
 // ==================================================
 // CORE FUNCTIONS
@@ -7,16 +9,19 @@ import { Step } from "../../core/registry";
 
 /**
  * Clicks an element located inside a specific `<iframe>`.
- * @example
- * When I click "button#submit" inside frame "#payment-iframe"
- * @param elementSelector - The CSS/Playwright selector for the element to click.
- * @param frameSelector - The selector for the iframe element itself.
+ * Supports fixtures for reusable selectors.
+ * @example When I click "selectors.paymentSubmitButton" inside frame "selectors.paymentIframe"
  */
 export async function clickInsideFrame(
   page: any,
-  elementSelector: string,
-  frameSelector: string
+  elementSelectorKey: string,
+  frameSelectorKey: string
 ): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+
+  const elementSelector = getFixtureValue(selectors, elementSelectorKey);
+  const frameSelector = getFixtureValue(selectors, frameSelectorKey);
+
   const frame = page.frameLocator(frameSelector);
   await frame.locator(elementSelector).click();
   console.log(`🖼️ Clicked "${elementSelector}" inside frame "${frameSelector}".`);
@@ -24,18 +29,22 @@ export async function clickInsideFrame(
 
 /**
  * Fills an input field located inside a specific `<iframe>`.
- * @example
- * When I fill "input[name='card-number']" inside frame "#checkout-frame" with "42424242"
- * @param elementSelector - The selector for the input field inside the frame.
- * @param frameSelector - The selector for the iframe.
- * @param value - The text to type into the input.
+ * Supports fixtures for reusable selectors and values.
+ * @example When I fill "selectors.cardNumberInput" inside frame "selectors.checkoutFrame" with "values.cardNumber"
  */
 export async function fillInsideFrame(
   page: any,
-  elementSelector: string,
-  frameSelector: string,
-  value: string
+  elementSelectorKey: string,
+  frameSelectorKey: string,
+  valueKey: string
 ): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const values = loadFixture("values.json");
+
+  const elementSelector = getFixtureValue(selectors, elementSelectorKey);
+  const frameSelector = getFixtureValue(selectors, frameSelectorKey);
+  const value = getFixtureValue(values, valueKey);
+
   const frame = page.frameLocator(frameSelector);
   await frame.locator(elementSelector).fill(value);
   console.log(`🖼️ Filled "${elementSelector}" inside frame "${frameSelector}" with value.`);
@@ -43,19 +52,23 @@ export async function fillInsideFrame(
 
 /**
  * Asserts that an element inside a specific `<iframe>` contains the expected text.
+ * Supports fixtures for reusable selectors and text.
  * Uses Playwright's web-first assertions for automatic retries.
- * @example
- * Then I expect ".success-msg" inside frame "#upload-frame" to have text "Upload Complete"
- * @param elementSelector - The selector for the element inside the frame.
- * @param frameSelector - The selector for the iframe.
- * @param text - The text expected to be found.
+ * @example Then I expect "selectors.successMessage" inside frame "selectors.uploadFrame" to have text "texts.uploadComplete"
  */
 export async function expectTextInsideFrame(
   page: any,
-  elementSelector: string,
-  frameSelector: string,
-  text: string
+  elementSelectorKey: string,
+  frameSelectorKey: string,
+  textKey: string
 ): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const texts = loadFixture("texts.json");
+
+  const elementSelector = getFixtureValue(selectors, elementSelectorKey);
+  const frameSelector = getFixtureValue(selectors, frameSelectorKey);
+  const text = getFixtureValue(texts, textKey);
+
   const frame = page.frameLocator(frameSelector);
   const locator = frame.locator(elementSelector);
   await expect(locator).toContainText(text);
@@ -66,6 +79,6 @@ export async function expectTextInsideFrame(
 // GLUE STEPS
 // ==================================================
 
-Step("I click {string} inside frame {string}", clickInsideFrame);
-Step("I fill {string} inside frame {string} with {string}", fillInsideFrame);
-Step("I expect {string} inside frame {string} to have text {string}", expectTextInsideFrame);
+Step("I click {string} inside frame {string}", clickInsideFrame, "When");
+Step("I fill {string} inside frame {string} with {string}", fillInsideFrame, "When");
+Step("I expect {string} inside frame {string} to have text {string}", expectTextInsideFrame, "Then");

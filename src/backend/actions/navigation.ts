@@ -1,3 +1,4 @@
+//src/backend/actions/navigation.ts
 import { Step } from "../../core/registry";
 
 // ==================================================
@@ -64,8 +65,8 @@ export async function navigateToPath(page: any, path: string): Promise<void> {
 // GLUE STEPS
 // ==================================================
 
-Step("I visit {string}", visitUrl);
-Step("I reload the page", reloadPage);
-Step("I go back", goBack);
-Step("I go forward", goForward);
-Step("I navigate to {string}", navigateToPath);
+Step("I visit {string}", visitUrl, "Given");
+Step("I reload the page", reloadPage, "When");
+Step("I go back", goBack, "When");
+Step("I go forward", goForward, "When");
+Step("I navigate to {string}", navigateToPath, "When");

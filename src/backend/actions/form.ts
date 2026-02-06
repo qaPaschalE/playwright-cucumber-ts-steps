@@ -1,9 +1,14 @@
+//src/backend/actions/form.ts
 import * as fs from "fs";
 import * as path from "path";
 import { expect } from "@playwright/test";
 import { Step } from "../../core/registry";
-import { setVariable, getVariable } from "../utils/state";
+import {
+  setVariable,
+  getVariable,
 
+} from "../utils/state";
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
 // ==================================================
 // TYPE DEFINITIONS
 // ==================================================
@@ -67,7 +72,7 @@ function resolveValue(page: any, rawValue: string): string {
   if (!rawValue) return "";
   const trimmed = rawValue.trim();
 
-  // Handle Alias (e.g. @adminPassword)
+  // Handle Alias (e.g., @adminPassword)
   if (trimmed.startsWith("@")) {
     const alias = trimmed.slice(1);
     const stored = getVariable(page, alias);
@@ -90,28 +95,17 @@ function resolveValue(page: any, rawValue: string): string {
  * Iterates through a Data Table and performs actions based on the Target and Value columns.
  * @example
  * When I fill the following "Login Flow" form data:
+ * ```gherkin
  * | Target                  | Value                |
- * | #username               | myuser               |
- * | #password               | @secretPassword      |
- * | #login-btn              | click                |
+ * | login.usernameField     | myuser               |
+ * | login.passwordField     | \{@link @secretPassword\      |
+ * | login.submitButton      | click                |
  * | wait                    | wait:500             |
  * | .error-msg              | assert:visible       |
  * | request:GET:/api/status | body: {}             |
- * @remarks
- * **Columns:**
- * - Target: The CSS selector, or a special keyword (request:, set:localStorage:, wait).
- * - Value: The value to input, the action (click, check), or assertion pattern.
- * **Supported UI Actions:**
- * - Fill: Default behavior. Types Value into Target.
- * - Click: Set Value to "click".
- * - Check: Set Value to "check".
- * - Select: Set Value to "select".
- * - Assert Visible: Set Value to "assert:visible".
- * - Assert Text: Set Value to "assert:text:Expected Text".
- * **Supported Special Actions:**
- * - API Request: Target = "request:METHOD:URL", Value = "payload_filename.json".
- * - Local Storage: Target = "set:localStorage:key", Value = "value".
- * - Wait: Target = "wait", Value = "wait:1000" (ms).
+ * ```
+ * @param formName - A descriptive name for the form being filled (used for logging only).
+ * @param table - The Data Table provided in the step definition.
  */
 export async function fillFormData(page: any, formName: string, table: any): Promise<void> {
   console.log(`📝 Processing Form: "${formName}"`);
@@ -131,9 +125,15 @@ export async function fillFormData(page: any, formName: string, table: any): Pro
       continue;
     }
 
-    const target = row.Target; // Already trimmed in parser
+    let target = row.Target; // Already trimmed in parser
     const rawValue = row.Value || "";
     const resolvedValue = resolveValue(page, rawValue);
+
+    // Resolve target from fixtures if applicable
+    const selectors = loadFixture("selectors.json");
+    if (!(target.startsWith("request:") || target.startsWith("set:localStorage:") || target === "wait")) {
+      target = getFixtureValue(selectors, target);
+    }
 
     // ============================================
     // 1. SPECIAL ACTIONS
@@ -216,19 +216,19 @@ export async function fillFormData(page: any, formName: string, table: any): Pro
     }
 
     // ✅ Interactions
-    if (rawValue === "click") {
+    if (resolvedValue === "click") {
       await locator.click();
       console.log(`👆 Clicked: ${target}`);
       continue;
     }
 
-    if (rawValue === "check") {
+    if (resolvedValue === "check") {
       await locator.check();
       console.log(`☑️ Checked: ${target}`);
       continue;
     }
 
-    if (rawValue === "select") {
+    if (resolvedValue === "select") {
       await locator.selectOption({ index: 0 });
       console.log(`🔽 Selected index 0: ${target}`);
       continue;
@@ -244,4 +244,4 @@ export async function fillFormData(page: any, formName: string, table: any): Pro
 // GLUE STEPS
 // ==================================================
 
-Step("I fill the following {string} form data", fillFormData);
+Step("I fill the following {string} form data", fillFormData, "When");

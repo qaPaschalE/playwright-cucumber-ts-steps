@@ -1,5 +1,8 @@
+//src/backend/api/network.ts
 import { Step } from "../../core/registry";
-import { setVariable } from "../utils/state";
+import {
+  setVariable,
+} from "../utils/state";
 
 // ==================================================
 // HELPER FUNCTIONS (Internal)
@@ -38,8 +41,7 @@ function safeJsonParse(input: any, context: string): any {
 /**
  * Intercepts a network URL and returns a stubbed JSON response.
  * Supports Gherkin DocStrings for the body content.
- * @example
- * When I intercept URL "/api/user" and stub body:
+ * @example When I intercept URL "/api/user" and stub body:
  * """
  * { "id": 101, "status": "active" }
  * """
@@ -60,8 +62,7 @@ export async function interceptStubJson(page: any, url: string, body: any): Prom
 
 /**
  * Intercepts a URL and stubs it with a raw string (non-JSON).
- * @example
- * When I intercept URL "/health" and stub body "OK"
+ * @example When I intercept URL "/health" and stub body "OK"
  */
 export async function interceptStubRaw(page: any, url: string, body: string): Promise<void> {
   await page.route(url, (route: any) => {
@@ -77,8 +78,7 @@ export async function interceptStubRaw(page: any, url: string, body: string): Pr
 /**
  * Intercepts a URL but allows it to continue (Network Spying).
  * Useful for monitoring traffic without changing the response.
- * @example
- * When I intercept URL "/api/*"
+ * @example When I intercept URL "/api/*"
  */
 export async function interceptSpy(page: any, url: string): Promise<void> {
   await page.route(url, async (route: any) => {
@@ -90,8 +90,7 @@ export async function interceptSpy(page: any, url: string): Promise<void> {
 /**
  * Makes a GET request and stores the response in the test state.
  * Stores values in `lastResponse` and `lastStatusCode`.
- * @example
- * When I make request to "https://api.example.com/v1/users"
+ * @example When I make request to "https://api.example.com/v1/users"
  */
 export async function apiGetRequest(page: any, url: string): Promise<void> {
   console.log(`⚡ GET request to: ${url}`);
@@ -102,7 +101,7 @@ export async function apiGetRequest(page: any, url: string): Promise<void> {
   let jsonBody;
   try {
     jsonBody = JSON.parse(body);
-  } catch {}
+  } catch { }
 
   setVariable(page, "lastResponse", { status, body, json: jsonBody });
   setVariable(page, "lastStatusCode", status);
@@ -112,8 +111,7 @@ export async function apiGetRequest(page: any, url: string): Promise<void> {
 
 /**
  * Makes a POST request with a JSON body provided via DocString.
- * @example
- * When I make a POST request to "/api/login" with JSON body:
+ * @example When I make a POST request to "/api/login" with JSON body:
  * """
  * { "username": "admin", "password": "password123" }
  * """
@@ -129,7 +127,7 @@ export async function apiPostRequest(page: any, url: string, docString: any): Pr
   let jsonBody;
   try {
     jsonBody = JSON.parse(body);
-  } catch {}
+  } catch { }
 
   setVariable(page, "lastResponse", { status, body, json: jsonBody });
   setVariable(page, "lastStatusCode", status);
@@ -140,8 +138,7 @@ export async function apiPostRequest(page: any, url: string, docString: any): Pr
 /**
  * Makes a generic HTTP request using the browser's `fetch` API.
  * Supports a data table for headers and an optional body.
- * @example
- * When I make a "PUT" request to "/api/settings"
+ * @example When I make a "PUT" request to "/api/settings"
  * | Authorization | Bearer my-token |
  * | body          | {"theme": "dark"} |
  */
@@ -188,7 +185,7 @@ export async function browserFetchRequest(
   let jsonBody;
   try {
     jsonBody = JSON.parse(res.body);
-  } catch {}
+  } catch { }
 
   setVariable(page, "lastResponse", { ...res, json: jsonBody });
   setVariable(page, "lastStatusCode", res.status);
@@ -200,9 +197,9 @@ export async function browserFetchRequest(
 // GLUE STEPS
 // ==================================================
 
-Step(/^I intercept URL "([^"]+)" and stub body:?$/, interceptStubJson);
-Step("I intercept URL {string} and stub body {string}", interceptStubRaw);
-Step("I intercept URL {string}", interceptSpy);
-Step("I make request to {string}", apiGetRequest);
-Step(/^I make a POST request to "([^"]+)" with JSON body:?$/, apiPostRequest);
-Step('I make a "{word}" request to {string}', browserFetchRequest);
+Step("I intercept URL {string} and stub body:", interceptStubJson, "When"); // Handles DocString
+Step("I intercept URL {string} and stub body {string}", interceptStubRaw, "When");
+Step("I intercept URL {string}", interceptSpy, "When");
+Step("I make request to {string}", apiGetRequest, "When");
+Step("I make a POST request to {string} with JSON body:", apiPostRequest, "When"); // Handles DocString
+Step("I make a {word} request to {string}", browserFetchRequest, "When");

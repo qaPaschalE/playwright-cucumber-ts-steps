@@ -1,6 +1,6 @@
 import { Step } from "../../core/registry";
 import { getActiveElement } from "../utils/state";
-
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
 // ==================================================
 // HELPER FUNCTIONS
 // ==================================================
@@ -32,8 +32,7 @@ async function safeTap(target: any): Promise<string> {
 /**
  * Taps on the currently stored (active) element.
  * Uses a "Hybrid Tap" strategy: tries to tap, falls back to click if touch is unsupported.
- * @example
- * When I tap
+ * @example When I tap
  */
 export async function tapStoredElement(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -43,11 +42,13 @@ export async function tapStoredElement(page: any): Promise<void> {
 
 /**
  * Finds an element by selector and taps it.
- * @example
- * When I tap element "#menu-toggle"
- * @param selector - The CSS selector of the element.
+ * Supports fixtures for reusable selectors.
+ * @example When I tap element "menu.toggleButton"
  */
-export async function tapElementBySelector(page: any, selector: string): Promise<void> {
+export async function tapElementBySelector(page: any, selectorKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
   const element = page.locator(selector);
   const action = await safeTap(element);
   console.log(`👆 ${action === "tapped" ? "Tapped" : "Clicked"} element "${selector}"`);
@@ -55,10 +56,7 @@ export async function tapElementBySelector(page: any, selector: string): Promise
 
 /**
  * Taps at specific X, Y coordinates on the screen.
- * @example
- * When I tap coordinates x:50 y:200
- * @param x - The X-coordinate.
- * @param y - The Y-coordinate.
+ * @example When I tap coordinates x:50 y:200
  */
 export async function tapCoordinates(page: any, x: number, y: number): Promise<void> {
   await page.mouse.click(x, y);
@@ -67,10 +65,7 @@ export async function tapCoordinates(page: any, x: number, y: number): Promise<v
 
 /**
  * Resizes the browser window/viewport to specific dimensions.
- * @example
- * When I resize window to width 375 and height 812
- * @param width - The width in pixels.
- * @param height - The height in pixels.
+ * @example When I resize window to width 375 and height 812
  */
 export async function resizeWindow(page: any, width: number, height: number): Promise<void> {
   await page.setViewportSize({ width, height });
@@ -79,9 +74,7 @@ export async function resizeWindow(page: any, width: number, height: number): Pr
 
 /**
  * Resizes the viewport to match a specific device preset.
- * @example
- * When I simulate device "iPhone 12"
- * @param deviceName - The name of the device. Supported: "iPhone 12", "iPhone SE", "iPad", "Pixel 5", "Samsung Galaxy S8", "Desktop".
+ * @example When I simulate device "iPhone 12"
  */
 export async function simulateDevice(page: any, deviceName: string): Promise<void> {
   const devices: Record<string, { width: number; height: number }> = {
@@ -104,10 +97,7 @@ export async function simulateDevice(page: any, deviceName: string): Promise<voi
 
 /**
  * Sets the geolocation coordinates for the browser context and auto-grants permission.
- * @example
- * When I set geolocation to lat: 37.7749 long: -122.4194
- * @param lat - The latitude (float).
- * @param long - The longitude (float).
+ * @example When I set geolocation to lat: 37.7749 long: -122.4194
  */
 export async function setGeolocation(page: any, lat: number, long: number): Promise<void> {
   await page.context().setGeolocation({ latitude: lat, longitude: long });
@@ -117,9 +107,7 @@ export async function setGeolocation(page: any, lat: number, long: number): Prom
 
 /**
  * Grants a specific browser permission to the current context.
- * @example
- * When I grant permission "notifications"
- * @param permission - The permission name (e.g., "geolocation", "notifications", "camera").
+ * @example When I grant permission "notifications"
  */
 export async function grantPermission(page: any, permission: string): Promise<void> {
   await page.context().grantPermissions([permission]);
@@ -130,10 +118,10 @@ export async function grantPermission(page: any, permission: string): Promise<vo
 // GLUE STEPS
 // ==================================================
 
-Step("I tap", tapStoredElement);
-Step("I tap element {string}", tapElementBySelector);
-Step("I tap coordinates x:{int} y:{int}", tapCoordinates);
-Step("I resize window to width {int} and height {int}", resizeWindow);
-Step("I simulate device {string}", simulateDevice);
-Step("I set geolocation to lat: {float} long: {float}", setGeolocation);
-Step("I grant permission {string}", grantPermission);
+Step("I tap", tapStoredElement, "When");
+Step("I tap element {string}", tapElementBySelector, "When");
+Step("I tap coordinates x:{int} y:{int}", tapCoordinates, "When");
+Step("I resize window to width {int} and height {int}", resizeWindow, "When");
+Step("I simulate device {string}", simulateDevice, "When");
+Step("I set geolocation to lat: {float} long: {float}", setGeolocation, "When");
+Step("I grant permission {string}", grantPermission, "When");

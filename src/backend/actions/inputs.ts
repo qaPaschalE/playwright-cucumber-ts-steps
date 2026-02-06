@@ -1,6 +1,12 @@
+//src/backend/actions/inputs.ts
 import { Step } from "../../core/registry";
-import { getActiveElement, getVariable, parseClickOptions, setActiveElement } from "../utils/state";
-
+import {
+  getActiveElement,
+  getVariable,
+  parseClickOptions,
+  setActiveElement,
+} from "../utils/state";
+import { loadFixture, getFixtureValue } from "../utils/fixtures";
 // ==================================================
 // CORE FUNCTIONS
 // ==================================================
@@ -8,12 +14,8 @@ import { getActiveElement, getVariable, parseClickOptions, setActiveElement } fr
 /**
  * Fills the currently stored (active) input element with specific text.
  * Supports variable aliases using the "@" prefix.
- * @example
- * When I type "hello world"
- * When I type "@storedPassword"
- * @param page - Playwright page object
- * @param textOrAlias - The text to type OR a variable key prefixed with "@".
- * @param table - Optional data table for options (e.g., force: true).
+ * @example When I type "hello world"
+ *          When I type "@storedPassword"
  */
 export async function typeText(page: any, textOrAlias: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -35,9 +37,7 @@ export async function typeText(page: any, textOrAlias: string, table?: any): Pro
 
 /**
  * Fills the active input with a value explicitly retrieved from the variable store.
- * @example
- * When I type stored "userEmail"
- * @param alias - The key of the stored variable.
+ * @example When I type stored "userEmail"
  */
 export async function typeStoredText(page: any, alias: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -52,21 +52,17 @@ export async function typeStoredText(page: any, alias: string, table?: any): Pro
 
 /**
  * Types text character-by-character with a 100ms delay.
- * @example
- * When I slowly type "Playwright"
- * @param text - The text to type sequentially.
+ * @example When I slowly type "Playwright"
  */
 export async function typeSlowly(page: any, text: string): Promise<void> {
   const element = getActiveElement(page);
-  await element.pressSequentially(text, { delay: 100 });
+  await element.type(text, { delay: 100 });
   console.log(`⌨️ Slowly typed: "${text}"`);
 }
 
 /**
  * Sets the value of an input directly (alias for filling).
- * @example
- * When I set value "12345"
- * @param value - The value to set.
+ * @example When I set value "12345"
  */
 export async function setInputValue(page: any, value: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -77,8 +73,7 @@ export async function setInputValue(page: any, value: string, table?: any): Prom
 
 /**
  * Clears the text content of the active input field.
- * @example
- * When I clear
+ * @example When I clear
  */
 export async function clearInput(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -88,10 +83,7 @@ export async function clearInput(page: any): Promise<void> {
 
 /**
  * Simulates pressing a specific keyboard key on the active element.
- * @example
- * When I press "Enter"
- * When I press "Tab"
- * @param key - The key name (e.g., "Enter", "Escape", "ArrowDown").
+ * @example When I press "Enter"
  */
 export async function pressKeyOnInput(page: any, key: string): Promise<void> {
   const element = getActiveElement(page);
@@ -101,8 +93,7 @@ export async function pressKeyOnInput(page: any, key: string): Promise<void> {
 
 /**
  * Checks the currently active checkbox or radio button.
- * @example
- * When I check
+ * @example When I check
  */
 export async function checkElement(page: any, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -113,8 +104,7 @@ export async function checkElement(page: any, table?: any): Promise<void> {
 
 /**
  * Unchecks the currently active checkbox.
- * @example
- * When I uncheck
+ * @example When I uncheck
  */
 export async function uncheckElement(page: any, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -125,21 +115,23 @@ export async function uncheckElement(page: any, table?: any): Promise<void> {
 
 /**
  * Checks/Unchecks the Nth checkbox or radio button matching a selector.
- * @example
- * When I check 1st selector "input[type='checkbox']"
- * When I uncheck 2nd selector ".terms-check"
+ * @example When I check 1st selector "input[type='checkbox']"
  */
 export async function checkNthElementBySelector(
   page: any,
   action: string,
   indexStr: string,
-  selector: string,
+  selectorKey: string,
   table?: any
 ): Promise<void> {
   const index = parseInt(indexStr, 10);
   const options = parseClickOptions(table);
-  const locator = page.locator(selector).nth(index - 1);
 
+  // Resolve selector from fixtures or use raw value
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
+  const locator = page.locator(selector).nth(index - 1);
   await locator.waitFor({ state: "visible", timeout: options.timeout || 5000 });
 
   if (action === "check") {
@@ -156,9 +148,7 @@ export async function checkNthElementBySelector(
 
 /**
  * Selects an option in a `<select>` dropdown by its visible label.
- * @example
- * When I select option "California"
- * @param option - The visible text label of the option to select.
+ * @example When I select option "California"
  */
 export async function selectOption(page: any, option: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -170,11 +160,7 @@ export async function selectOption(page: any, option: string, table?: any): Prom
 
 /**
  * Submits the form related to the active element.
- * Logic:
- * 1. Tries to find the parent `<form>` of the currently stored element.
- * 2. If no parent form is found, finds the first form on the page.
- * @example
- * When I submit
+ * @example When I submit
  */
 export async function submitForm(page: any): Promise<void> {
   let formLocator;
@@ -197,9 +183,7 @@ export async function submitForm(page: any): Promise<void> {
 
 /**
  * Uploads a file to the active file input element.
- * @example
- * When I select file "data/invoice.pdf"
- * @param filePath - The path to the file (relative to the project root).
+ * @example When I select file "data/invoice.pdf"
  */
 export async function selectFile(page: any, filePath: string): Promise<void> {
   const element = getActiveElement(page);
@@ -209,9 +193,7 @@ export async function selectFile(page: any, filePath: string): Promise<void> {
 
 /**
  * Uploads a file to the active file input element (alias for selectFile).
- * @example
- * When I upload file "images/logo.png"
- * @param filePath - The path to the file.
+ * @example When I upload file "images/logo.png"
  */
 export async function uploadFile(page: any, filePath: string): Promise<void> {
   const element = getActiveElement(page);
@@ -223,18 +205,21 @@ export async function uploadFile(page: any, filePath: string): Promise<void> {
 // GLUE STEPS
 // ==================================================
 
-Step("I type {string}", typeText);
-Step("I type stored {string}", typeStoredText);
-Step("I slowly type {string}", typeSlowly);
-Step("I set value {string}", setInputValue);
-Step("I clear", clearInput);
-Step("I press {string}", pressKeyOnInput);
-Step("I check", checkElement);
-Step("I uncheck", uncheckElement);
-Step("I check input", checkElement);
-Step("I uncheck input", uncheckElement);
-Step(/^I (check|uncheck) (\d+)(?:st|nd|rd|th) selector "([^"]+)"$/, checkNthElementBySelector);
-Step("I select option {string}", selectOption);
-Step("I submit", submitForm);
-Step("I select file {string}", selectFile);
-Step("I upload file {string}", uploadFile);
+Step("I type {string}", typeText, "When");
+Step("I fill {string}", typeText, "When");
+Step("I type stored {string}", typeStoredText, "When");
+Step("I fill stored {string}", typeStoredText, "When");
+Step("I slowly type {string}", typeSlowly, "When");
+Step("I slowly fill {string}", typeSlowly, "When");
+Step("I set value {string}", setInputValue, "When");
+Step("I clear", clearInput, "When");
+Step("I press {string}", pressKeyOnInput, "When");
+Step("I check", checkElement, "When");
+Step("I uncheck", uncheckElement, "When");
+Step("I check input", checkElement, "When");
+Step("I uncheck input", uncheckElement, "When");
+Step("I {string} {int}(?:st|nd|rd|th) selector {string}", checkNthElementBySelector, "When");
+Step("I select option {string}", selectOption, "When");
+Step("I submit", submitForm, "When");
+Step("I select file {string}", selectFile, "When");
+Step("I upload file {string}", uploadFile, "When");

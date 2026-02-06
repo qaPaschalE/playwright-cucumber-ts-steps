@@ -19,6 +19,7 @@ export interface StepDefinition {
   expression: CucumberExpression | RegExp;
   fn: StepAction;
   pattern: string | RegExp;
+  type?: string;
 }
 
 // 2. The Global Registry
@@ -30,7 +31,8 @@ const parameterTypeRegistry = new ParameterTypeRegistry();
  * 3. The Function to Register Steps
  * Supports passing a string (converted to CucumberExpression) OR a direct RegExp.
  */
-export function Step(pattern: string | RegExp, fn: StepAction) {
+export function Step(pattern: string | RegExp, fn: StepAction, type?: string) {
+
   let expression: CucumberExpression | RegExp;
 
   if (pattern instanceof RegExp) {
@@ -45,5 +47,6 @@ export function Step(pattern: string | RegExp, fn: StepAction) {
     expression,
     fn,
     pattern,
+    type,
   });
 }
