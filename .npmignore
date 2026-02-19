@@ -86,3 +86,6 @@ package-lock.json
 # Ignore typedoc output if not needed
 typedoc.json
 docs/
+QWEN.md
+CLAUDE.md
+RELEASE_NOTES_*

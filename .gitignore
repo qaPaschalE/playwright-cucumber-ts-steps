@@ -149,7 +149,9 @@ dist
 docs
 playwright-report
 test-results
-
+CLAUDE.md
+QWEN.md
+RELEASE_NOTES_*
 # Playwright
 /playwright-report/
 /blob-report/

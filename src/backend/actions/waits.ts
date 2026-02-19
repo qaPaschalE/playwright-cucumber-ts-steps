@@ -42,6 +42,19 @@ export async function waitForElementVisible(page: any): Promise<void> {
 }
 
 /**
+ * Explicitly waits for a specific element to become visible.
+ * Useful for ensuring animations complete or modals appear before proceeding.
+ * @example When I wait for "#modal" to be visible
+ */
+export async function waitForElementVisibleBySelector(page: any, selectorKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
+  await page.locator(selector).waitFor({ state: "visible" });
+  console.log(`⏳ Element "${selector}" is now visible`);
+}
+
+/**
  * Explicitly waits for the currently stored (active) element to become hidden or detached from the DOM.
  * Useful for verifying that loading spinners have disappeared.
  * @example When I wait for element to be hidden
@@ -72,5 +85,6 @@ export async function waitForUrlContain(page: any, urlPartKey: string): Promise<
 Step("I wait for network idle", waitForNetworkIdle, "When");
 Step("I wait for load state {string}", waitForLoadState, "When");
 Step("I wait for element to be visible", waitForElementVisible, "When");
+Step("I wait for {string} to be visible", waitForElementVisibleBySelector, "When");
 Step("I wait for element to be hidden", waitForElementHidden, "When");
 Step("I wait for URL to contain {string}", waitForUrlContain, "When");

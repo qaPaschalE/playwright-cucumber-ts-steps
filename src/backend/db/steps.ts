@@ -38,7 +38,7 @@ export async function expectDbRecordCount(page: any, count: number): Promise<voi
  * Asserts that the database query returned no records (empty result set).
  * @example Then I expect the database to return no records
  */
-export async function expectDbNoRecords(page: any): Promise<void> {
+export async function expectDbNoRecords(_page: any): Promise<void> {
   const result = dbState.getLastResult();
   if (!Array.isArray(result)) {
     throw new Error(`Expected array result from database but got: ${typeof result}`);

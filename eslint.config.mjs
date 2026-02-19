@@ -11,7 +11,7 @@ export default [
       "temp-docs/**"
     ],
   },
-  // 2. TypeScript Config
+  // 2. TypeScript Config for src
   {
     files: ["src/**/*.ts"],
     languageOptions: {
@@ -19,7 +19,7 @@ export default [
       parserOptions: {
         project: "./tsconfig.json",
         // This helps resolve paths relative to the config file
-        tsconfigRootDir: process.cwd(), 
+        tsconfigRootDir: process.cwd(),
       },
     },
     plugins: {
@@ -28,7 +28,7 @@ export default [
     rules: {
       ...tsPlugin.configs.recommended.rules,
       "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": ["warn", { 
+      "@typescript-eslint/no-unused-vars": ["warn", {
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_",
         "vars": "all",
@@ -37,7 +37,32 @@ export default [
       }],
     },
   },
-  // 3. Config for tests and examples (Prevents "project" errors)
+  // 3. TypeScript Config for scripts (no type-checking)
+  {
+    files: ["scripts/**/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module",
+      },
+    },
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+    },
+    rules: {
+      ...tsPlugin.configs.recommended.rules,
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": ["warn", {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "vars": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }],
+    },
+  },
+  // 4. Config for tests and examples (Prevents "project" errors)
   {
     files: ["*.spec.ts", "examples/**/*.ts"],
     languageOptions: {

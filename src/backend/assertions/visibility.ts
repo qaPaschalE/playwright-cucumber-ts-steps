@@ -166,6 +166,61 @@ export async function expectElementScreenshotMatch(page: any, filename: string):
   console.log(`📸 Element matches screenshot: ${filename}`);
 }
 
+// Additional functions for more specific visibility and existence checks
+/**
+ * Asserts that an element is not visible.
+ * Supports fixtures for reusable selectors.
+ * @example Then I expect "modal.overlay" to be not visible
+ */
+export async function expectElementToNotBeVisible(
+  page: any,
+  selectorKey: string
+): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
+  await expect(page.locator(selector)).not.toBeVisible();
+  console.log(`✅ Element "${selector}" is not visible`);
+}
+
+/**
+ * Asserts that an element exists in the DOM.
+ * Supports fixtures for reusable selectors.
+ * @example Then I expect element "header.logo" exists
+ */
+export async function expectElementExists(
+  page: any,
+  selectorKey: string
+): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
+  const count = await page.locator(selector).count();
+  if (count === 0) {
+    throw new Error(`Element "${selector}" does not exist in the DOM`);
+  }
+  console.log(`✅ Element "${selector}" exists in the DOM`);
+}
+
+/**
+ * Asserts that an element does not exist in the DOM.
+ * Supports fixtures for reusable selectors.
+ * @example Then I expect element "modal.deleted" does not exist
+ */
+export async function expectElementDoesNotExist(
+  page: any,
+  selectorKey: string
+): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
+  const count = await page.locator(selector).count();
+  if (count > 0) {
+    throw new Error(`Element "${selector}" exists in the DOM but was expected not to`);
+  }
+  console.log(`✅ Element "${selector}" does not exist in the DOM`);
+}
+
 // ==================================================
 // GLUE STEPS
 // ==================================================
@@ -182,3 +237,6 @@ Step("I expect element to have attribute {string}", expectActiveAttribute, "Then
 Step("I expect element to have attribute {string} with value {string}", expectActiveAttributeValue, "Then");
 Step("I expect the page screenshot to match {string}", expectPageScreenshotMatch, "Then");
 Step("I expect the element screenshot to match {string}", expectElementScreenshotMatch, "Then");
+Step("I expect {string} to be not visible", expectElementToNotBeVisible, "Then");
+Step("I expect element {string} exists", expectElementExists, "Then");
+Step("I expect element {string} does not exist", expectElementDoesNotExist, "Then");

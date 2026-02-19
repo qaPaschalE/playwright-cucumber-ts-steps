@@ -240,8 +240,27 @@ export async function fillFormData(page: any, formName: string, table: any): Pro
   }
 }
 
+/**
+ * Selects an option from a React select component.
+ * This handles React's custom select implementations that may not use standard <select> elements.
+ * @example When I select react option "Option 3" from "#react-select-id"
+ */
+export async function selectReactOption(page: any, optionText: string, selectorKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const selector = getFixtureValue(selectors, selectorKey);
+
+  // Click the select dropdown to reveal options
+  await page.locator(selector).click();
+  
+  // Wait for options to appear and then click the desired option
+  await page.locator(`text=${optionText}`).click();
+  
+  console.log(`✅ Selected react option "${optionText}" from "${selector}"`);
+}
+
 // ==================================================
 // GLUE STEPS
 // ==================================================
 
 Step("I fill the following {string} form data", fillFormData, "When");
+Step("I select react option {string} from {string}", selectReactOption, "When");

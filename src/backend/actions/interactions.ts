@@ -66,14 +66,39 @@ export async function pressKeyGlobal(page: any, key: string): Promise<void> {
 }
 
 /**
- * Pauses the test execution for a fixed amount of time.
- * Avoid using this unless absolutely necessary; prefer dynamic waits instead.
- * @example When I wait for 5000 milliseconds
- * @param ms - The duration to wait in milliseconds.
+ * Drags one element and drops it onto another.
+ * Supports fixtures for reusable selectors.
+ * @example When I drag "droppable.draggable" to "droppable.dropZone"
+ * @param sourceKey - The selector of the element to drag.
+ * @param targetKey - The selector of the drop target element.
  */
-export async function hardWait(page: any, ms: number): Promise<void> {
-  console.warn(`⚠️ Hard wait detected (${ms}ms). Consider replacing with dynamic waits.`);
-  await page.waitForTimeout(ms);
+export async function dragElementTo(page: any, sourceKey: string, targetKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const source = getFixtureValue(selectors, sourceKey);
+  const target = getFixtureValue(selectors, targetKey);
+
+  await page.locator(source).dragTo(page.locator(target));
+  console.log(`🔀 Dragged "${source}" to "${target}"`);
+}
+
+/**
+ * Continues a drag operation from a previously selected element to a target.
+ * This is meant to be used after selecting an element to drag.
+ * Supports fixtures for reusable selectors.
+ * @example And I drag to "droppable.dropZone"
+ * @param targetKey - The selector of the drop target element.
+ */
+export async function dragToTarget(page: any, targetKey: string): Promise<void> {
+  const selectors = loadFixture("selectors.json");
+  const target = getFixtureValue(selectors, targetKey);
+
+  // Get the active element that was selected in a previous step
+  const { getActiveElement } = await import("../utils/state");
+  const sourceElement = getActiveElement(page);
+
+  // Perform the drag operation from the active element to the target
+  await sourceElement.dragTo(page.locator(target));
+  console.log(`🔀 Dragged active element to "${target}"`);
 }
 
 // ==================================================
@@ -84,4 +109,5 @@ Step("I click {string}", clickElement, "When");
 Step("I force click {string}", forceClickElement, "When");
 Step("I fill {string} with {string}", fillElement, "When");
 Step("I press {string}", pressKeyGlobal, "When");
-Step("I wait for {int} milliseconds", hardWait, "When");
+Step("I drag {string} to {string}", dragElementTo, "When");
+Step("I drag to {string}", dragToTarget, "And");

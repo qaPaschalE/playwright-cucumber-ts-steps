@@ -15,6 +15,8 @@ import {
 
 /**
  * Clicks on the currently stored (active) element.
+ * @param page - The Playwright page object
+ * @param table - Optional table data for click options
  * @example When I click
  */
 export async function clickStoredElement(page: any, table?: any): Promise<void> {
@@ -27,6 +29,9 @@ export async function clickStoredElement(page: any, table?: any): Promise<void> 
 /**
  * Clicks on an element matching the given CSS/XPath selector.
  * Supports fixtures for reusable selectors.
+ * @param page - The Playwright page object
+ * @param selectorKey - The selector key (can be a fixture key or raw CSS/XPath selector)
+ * @param table - Optional table data for click options
  * @example When I click on element ".my-element"
  *          When I click on element "login.submitButton"
  */
@@ -49,6 +54,9 @@ export async function clickElementBySelector(
 
 /**
  * Clicks on a button role element with the specified label.
+ * @param page - The Playwright page object
+ * @param label - The button label text
+ * @param table - Optional table data for click options
  * @example When I click on button "Submit"
  */
 export async function clickButtonByLabel(page: any, label: string, table?: any): Promise<void> {
@@ -60,7 +68,22 @@ export async function clickButtonByLabel(page: any, label: string, table?: any):
 }
 
 /**
+ * Clicks on a button role element with the EXACT specified text.
+ * @example When I click on exact button text "Submit"
+ */
+export async function clickButtonByExactText(page: any, exactText: string, table?: any): Promise<void> {
+  const options = parseClickOptions(table);
+  const button = page.getByRole("button", { name: exactText });
+  await button.click(options);
+  setActiveElement(page, button);
+  console.log(`🖱️ Clicked on exact button text "${exactText}"`);
+}
+
+/**
  * Clicks on a link role element with the specified text.
+ * @param page - The Playwright page object
+ * @param text - The link text
+ * @param table - Optional table data for click options
  * @example When I click on link "Home"
  */
 export async function clickLinkByText(page: any, text: string, table?: any): Promise<void> {
@@ -73,6 +96,9 @@ export async function clickLinkByText(page: any, text: string, table?: any): Pro
 
 /**
  * Clicks on a form label element.
+ * @param page - The Playwright page object
+ * @param labelText - The label text
+ * @param table - Optional table data for click options
  * @example When I click on label "Email"
  */
 export async function clickLabelByText(page: any, labelText: string, table?: any): Promise<void> {
@@ -85,6 +111,9 @@ export async function clickLabelByText(page: any, labelText: string, table?: any
 
 /**
  * Clicks on the first visible element containing the specified text (partial match).
+ * @param page - The Playwright page object
+ * @param rawText - The text to search for (can be a variable alias starting with @)
+ * @param table - Optional table data for click options
  * @example When I click on text "Login"
  */
 export async function clickByText(page: any, rawText: string, table?: any): Promise<void> {
@@ -111,6 +140,9 @@ export async function clickByText(page: any, rawText: string, table?: any): Prom
 
 /**
  * Clicks on an element containing the EXACT specified text.
+ * @param page - The Playwright page object
+ * @param exactText - The exact text to match
+ * @param table - Optional table data for click options
  * @example When I click on exact text "Submit"
  */
 export async function clickByExactText(page: any, exactText: string, table?: any): Promise<void> {
@@ -125,6 +157,8 @@ export async function clickByExactText(page: any, exactText: string, table?: any
 
 /**
  * Clicks on a selector provided via Regex match.
+ * @param page - The Playwright page object
+ * @param selector - The CSS selector string
  * @example When I click on selector "#btn-id"
  */
 export async function clickByRegexSelector(page: any, selector: string): Promise<void> {
@@ -136,6 +170,8 @@ export async function clickByRegexSelector(page: any, selector: string): Promise
 
 /**
  * Iterates through ALL currently stored active elements and clicks them one by one.
+ * @param page - The Playwright page object
+ * @param table - Optional table data for click options
  * @example When I click all
  */
 export async function clickAllStoredElements(page: any, table?: any): Promise<void> {
@@ -156,6 +192,8 @@ export async function clickAllStoredElements(page: any, table?: any): Promise<vo
 
 /**
  * Double-clicks on the currently stored (active) element.
+ * @param page - The Playwright page object
+ * @param table - Optional table data for click options
  * @example When I double click
  */
 export async function doubleClickStoredElement(page: any, table?: any): Promise<void> {
@@ -167,6 +205,9 @@ export async function doubleClickStoredElement(page: any, table?: any): Promise<
 
 /**
  * Double-clicks on the first element containing the specified text.
+ * @param page - The Playwright page object
+ * @param text - The text to search for
+ * @param table - Optional table data for click options
  * @example When I double click on text "Button"
  */
 export async function doubleClickByText(page: any, text: string, table?: any): Promise<void> {
@@ -177,7 +218,22 @@ export async function doubleClickByText(page: any, text: string, table?: any): P
 }
 
 /**
+ * Double-clicks on the first element containing the EXACT specified text.
+ * @example When I double click on exact text "Button"
+ */
+export async function doubleClickByExactText(page: any, exactText: string, table?: any): Promise<void> {
+  const options = parseClickOptions(table);
+  const element = page.getByText(exactText, { exact: true });
+  await element.dblclick(options);
+  console.log(`🖱️ Double-clicked on exact text "${exactText}"`);
+}
+
+/**
  * Double-clicks at specific X, Y coordinates on the page.
+ * @param page - The Playwright page object
+ * @param x - The X coordinate
+ * @param y - The Y coordinate
+ * @param table - Optional table data for click options
  * @example When I double click position 100 200
  */
 export async function doubleClickPosition(
@@ -193,6 +249,8 @@ export async function doubleClickPosition(
 
 /**
  * Right-clicks (Context Click) on the currently stored element.
+ * @param page - The Playwright page object
+ * @param table - Optional table data for click options
  * @example When I right click
  */
 export async function rightClickStoredElement(page: any, table?: any): Promise<void> {
@@ -204,6 +262,9 @@ export async function rightClickStoredElement(page: any, table?: any): Promise<v
 
 /**
  * Right-clicks on the first element containing the specified text.
+ * @param page - The Playwright page object
+ * @param text - The text to search for
+ * @param table - Optional table data for click options
  * @example When I right click on text "Menu"
  */
 export async function rightClickByText(page: any, text: string, table?: any): Promise<void> {
@@ -215,6 +276,10 @@ export async function rightClickByText(page: any, text: string, table?: any): Pr
 
 /**
  * Right-clicks at specific X, Y coordinates on the page.
+ * @param page - The Playwright page object
+ * @param x - The X coordinate
+ * @param y - The Y coordinate
+ * @param table - Optional table data for click options
  * @example When I right click position 100 200
  */
 export async function rightClickPosition(
@@ -231,6 +296,10 @@ export async function rightClickPosition(
 /**
  * Clicks on the Nth element containing the specified text.
  * Handles 1st, 2nd, 3rd, 4th, etc.
+ * @param page - The Playwright page object
+ * @param indexStr - The index string (1st, 2nd, 3rd, etc.)
+ * @param text - The text to search for
+ * @param table - Optional table data for click options
  * @example When I click on 1st element "Login"
  *          When I click on 2nd element "Submit"
  */
@@ -255,6 +324,10 @@ export async function clickNthElementByText(
 
 /**
  * Clicks on the Nth element matching a CSS or XPath selector.
+ * @param page - The Playwright page object
+ * @param indexStr - The index string (1st, 2nd, 3rd, etc.)
+ * @param selectorKey - The selector key (can be a fixture key or raw CSS/XPath selector)
+ * @param table - Optional table data for click options
  * @example When I click on 1st selector ".btn"
  */
 export async function clickNthElementBySelector(
@@ -279,6 +352,89 @@ export async function clickNthElementBySelector(
   console.log(`🖱️ Clicked on ${indexStr} selector "${selector}"`);
 }
 
+/**
+ * Clicks on a specific column in a specific row of a table.
+ * @param page - The Playwright page object
+ * @param columnIndex - The 1-based index of the column to click (1st, 2nd, 3rd, etc.)
+ * @param rowIndex - The selector key for the row (can be a fixture key or raw CSS selector)
+ * @param table - Optional table data for click options
+ * @example And I click on column 1 in row 1
+ * @example And I click on column 2 in row 3
+ * @example And I click on column 3 in row 2
+ * @example And I click on column 4 in row 5
+ */
+export async function clickOnColumnInRow(
+  page: any,
+  columnIndex: number,
+  rowIndex: number,
+  table?: any
+): Promise<void> {
+  const options = parseClickOptions(table);
+
+  // Adjust for 0-based indexing
+  const adjustedRowIndex = rowIndex - 1;
+  const adjustedColumnIndex = columnIndex - 1;
+
+  // Assuming standard table structure: table > tbody > tr > td/th
+  const cellLocator = page.locator(`tbody tr:nth-child(${adjustedRowIndex + 1}) td:nth-child(${adjustedColumnIndex + 1}), tbody tr:nth-child(${adjustedRowIndex + 1}) th:nth-child(${adjustedColumnIndex + 1})`);
+
+  await cellLocator.waitFor({ state: "visible", timeout: options.timeout || 5000 });
+  await cellLocator.click(options);
+
+  setActiveElement(page, cellLocator);
+  console.log(`🖱️ Clicked on column ${columnIndex} in row ${rowIndex}`);
+}
+
+/**
+ * Clicks on a specific column in a row identified by a selector.
+ * @param page - The Playwright page object
+ * @param columnIndex - The 1-based index of the column to click
+ * @param rowSelectorKey - The selector key for the row (can be a fixture key or raw CSS selector)
+ * @param table - Optional table data for click options
+ * @example When I click on 1st column in row "table#users tbody tr:first-child"
+ * @example When I click on 2nd column in row "tr.user-row"
+ * @example When I click on 3rd column in row ".data-table tbody tr:last-child"
+ * @example When I click on 4th column in row "tr[data-id='123']"
+ */
+export async function clickOnNthColumnInRow(
+  page: any,
+  columnIndex: number,
+  rowSelectorKey: string,
+  table?: any
+): Promise<void> {
+  const options = parseClickOptions(table);
+  
+  // Resolve selector from fixtures or use raw value
+  const selectors = loadFixture("selectors.json");
+  const rowSelector = getFixtureValue(selectors, rowSelectorKey);
+  
+  // Adjust for 0-based indexing
+  const adjustedColumnIndex = columnIndex - 1;
+  
+  // Find the specific row and then the nth column within that row
+  const rowLocator = page.locator(rowSelector);
+  const cellLocator = rowLocator.locator(`td:nth-child(${adjustedColumnIndex + 1}), th:nth-child(${adjustedColumnIndex + 1})`);
+  
+  await cellLocator.waitFor({ state: "visible", timeout: options.timeout || 5000 });
+  await cellLocator.click(options);
+  
+  setActiveElement(page, cellLocator);
+  console.log(`🖱️ Clicked on ${columnIndex}${getOrdinalSuffix(columnIndex)} column in row "${rowSelector}"`);
+}
+
+/**
+ * Helper function to get the ordinal suffix (st, nd, rd, th) for a number
+ */
+function getOrdinalSuffix(num: number): string {
+  if (num > 3 && num < 21) return 'th';
+  switch (num % 10) {
+    case 1: return 'st';
+    case 2: return 'nd';
+    case 3: return 'rd';
+    default: return 'th';
+  }
+}
+
 // ==================================================
 // GLUE STEPS
 // ==================================================
@@ -286,6 +442,7 @@ export async function clickNthElementBySelector(
 Step("I click", clickStoredElement, "When");
 Step("I click on element {string}", clickElementBySelector, "When");
 Step("I click on button {string}", clickButtonByLabel, "When");
+Step("I click on exact button text {string}", clickButtonByExactText, "When");
 Step("I click on link {string}", clickLinkByText, "When");
 Step("I click on label {string}", clickLabelByText, "When");
 Step("I click on text {string}", clickByText, "When");
@@ -294,9 +451,21 @@ Step("I click on selector {string}", clickByRegexSelector, "When");
 Step("I click all", clickAllStoredElements, "When");
 Step("I double click", doubleClickStoredElement, "When");
 Step("I double click on text {string}", doubleClickByText, "When");
+Step("I double click on exact text {string}", doubleClickByExactText, "When");
 Step("I double click position {int} {int}", doubleClickPosition, "When");
 Step("I right click", rightClickStoredElement, "When");
 Step("I right click on text {string}", rightClickByText, "When");
 Step("I right click position {int} {int}", rightClickPosition, "When");
-Step("I click on {int}(?:st|nd|rd|th) element {string}", clickNthElementByText, "When");
-Step("I click on {int}(?:st|nd|rd|th) selector {string}", clickNthElementBySelector, "When");
+Step("I click on {int}st element {string}", clickNthElementByText, "When");
+Step("I click on {int}nd element {string}", clickNthElementByText, "When");
+Step("I click on {int}rd element {string}", clickNthElementByText, "When");
+Step("I click on {int}th element {string}", clickNthElementByText, "When");
+Step("I click on {int}st selector {string}", clickNthElementBySelector, "When");
+Step("I click on {int}nd selector {string}", clickNthElementBySelector, "When");
+Step("I click on {int}rd selector {string}", clickNthElementBySelector, "When");
+Step("I click on {int}th selector {string}", clickNthElementBySelector, "When");
+Step("I click on column {int} in row {int}", clickOnColumnInRow, "And");
+Step("I click on {int}st column in row {string}", clickOnNthColumnInRow, "When");
+Step("I click on {int}nd column in row {string}", clickOnNthColumnInRow, "When");
+Step("I click on {int}rd column in row {string}", clickOnNthColumnInRow, "When");
+Step("I click on {int}th column in row {string}", clickOnNthColumnInRow, "When");

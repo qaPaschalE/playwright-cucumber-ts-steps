@@ -9,7 +9,7 @@ Feature: Search Engine Test
   Scenario: Advanced Elements -- Dropdown Test
     Given I visit "https://the-internet.herokuapp.com/dropdown"
     When I select option "Option 1" from "#dropdown"
-    Then I expect "#dropdown" to have value "1"
+    Then I get element by selector "#dropdown" to have value "1"
 
   @api
   Scenario: Fetch User Data

@@ -328,6 +328,7 @@ export async function findInputByName(page: any, name: string): Promise<void> {
 // ==================================================
 
 Step("I find element by selector {string}", findElementBySelector, "When");
+Step("I get element by selector {string}", findElementBySelector, "When");
 Step("I find element by text {string}", findElementByText, "When");
 Step("I find element by title {string}", findElementByTitle, "When");
 Step("I find element by testid {string}", findElementByTestId, "When");
@@ -339,6 +340,7 @@ Step("I find link by text {string}", findLinkByText, "When");
 Step("I find heading by text {string}", findHeadingByText, "When");
 Step("I find element by name {string}", findElementByName, "When");
 Step("I find elements by selector {string}", findElementsBySelector, "When");
+Step("I get elements by selector {string}", findElementsBySelector, "When");
 Step("I find buttons by text {string}", findButtonsByText, "When");
 Step("I get first element", getFirstElement, "When");
 Step("I get last element", getLastElement, "When");

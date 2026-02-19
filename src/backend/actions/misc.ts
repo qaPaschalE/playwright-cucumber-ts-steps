@@ -10,7 +10,7 @@ import {
 
 /**
  * Pauses execution for a specified number of milliseconds.
- * @example When I wait for 1000 milliseconds
+ * @example When I wait 1000 milliseconds
  */
 export async function waitMilliseconds(page: any, ms: number): Promise<void> {
   console.warn(`⚠️ Hard wait detected (${ms}ms). Consider replacing with dynamic waits.`);
@@ -20,7 +20,7 @@ export async function waitMilliseconds(page: any, ms: number): Promise<void> {
 
 /**
  * Pauses execution for a specified number of seconds.
- * @example When I wait for 5 seconds
+ * @example When I wait 5 seconds
  */
 export async function waitSeconds(page: any, seconds: number): Promise<void> {
   const ms = seconds * 1000;
@@ -149,12 +149,27 @@ export async function clearSessionStorage(page: any): Promise<void> {
   console.log("📦 Cleared session storage");
 }
 
+/**
+ * Stores the text content of the currently active element in a variable.
+ * This should be used after a step that selects an element (e.g., "I find element by text").
+ * @example When I store text as "extractedCode"
+ */
+export async function storeActiveElementText(page: any, alias: string): Promise<void> {
+  const { getActiveElement, setVariable } = await import("../utils/state");
+  const element = getActiveElement(page);
+  const text = await element.textContent();
+  const cleanText = text?.trim() || "";
+
+  setVariable(page, alias, cleanText);
+  console.log(`💾 Stored text "${cleanText}" as variable "@${alias}"`);
+}
+
 // ==================================================
 // GLUE STEPS
 // ==================================================
 
-Step("I wait for {int} milliseconds", waitMilliseconds, "When");
-Step("I wait for {int} seconds", waitSeconds, "When");
+Step("I wait {int} milliseconds", waitMilliseconds, "When");
+Step("I wait {int} seconds", waitSeconds, "When");
 Step("I pause", pauseExecution, "When");
 Step("I debug", debugExecution, "When");
 Step("I log {string}", logMessage, "When");
@@ -167,3 +182,4 @@ Step("I get local storage item {string}", getLocalStorageItem, "When");
 Step("I clear local storage", clearLocalStorage, "When");
 Step("I set session storage item {string} to {string}", setSessionStorageItem, "When");
 Step("I clear session storage", clearSessionStorage, "When");
+Step("I store text as {string}", storeActiveElementText, "When");
