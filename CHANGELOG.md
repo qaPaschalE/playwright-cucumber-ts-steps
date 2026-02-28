@@ -1,3 +1,29 @@
+# [1.3.2](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/compare/v1.3.1...v1.3.2) (2026-02-28)
+
+
+### ⚠️ BREAKING CHANGES
+
+* **steps:** added "pw" prefix to all step definitions for better namespacing. All Gherkin steps must now include "pw" after "I" (e.g., `I pw visit` instead of `I visit`). Migration required for existing feature files. ([6c2e315](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/6c2e315))
+
+
+### Features
+
+* **steps:** add "pw" prefix to 208 step definitions across 23 backend files for improved namespacing and clarity ([6c2e315](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/6c2e315))
+
+
+### Documentation
+
+* **examples:** update all 11 example feature files with new "pw" step syntax (133 steps updated) ([6c2e315](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/6c2e315))
+
+
+### Technical Changes
+
+* Updated 208 Step() patterns across 23 backend TypeScript files
+* Updated 133 steps across 11 example feature files
+* All tests passing with new step syntax
+
+
+
 # [1.2.0](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/compare/v1.0.0...v1.2.0) (2026-01-20)
 
 
