@@ -78,6 +78,6 @@ export async function switchToNewTab(page: any): Promise<void> {
 // GLUE STEPS
 // ==================================================
 
-Step("I switch to frame {string}", switchToFrame, "When");
-Step("I find element {string} in frame {string}", findElementInFrame, "When");
-Step("I switch to new tab", switchToNewTab, "When");
+Step("I pw switch to frame {string}", switchToFrame, "When");
+Step("I pw find element {string} in frame {string}", findElementInFrame, "When");
+Step("I pw switch to new tab", switchToNewTab, "When");

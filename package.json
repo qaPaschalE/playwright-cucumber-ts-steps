@@ -45,6 +45,7 @@
   "keywords": [
     "playwright",
     "cucumber",
+    "playwright-cucumber-ts-steps",
     "typescript",
     "e2e",
     "steps",

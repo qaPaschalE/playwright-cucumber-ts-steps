@@ -205,21 +205,21 @@ export async function uploadFile(page: any, filePath: string): Promise<void> {
 // GLUE STEPS
 // ==================================================
 
-Step("I type {string}", typeText, "When");
-Step("I fill {string}", typeText, "When");
-Step("I type stored {string}", typeStoredText, "When");
-Step("I fill stored {string}", typeStoredText, "When");
-Step("I slowly type {string}", typeSlowly, "When");
-Step("I slowly fill {string}", typeSlowly, "When");
-Step("I set value {string}", setInputValue, "When");
-Step("I clear", clearInput, "When");
-Step("I press {string}", pressKeyOnInput, "When");
-Step("I check", checkElement, "When");
-Step("I uncheck", uncheckElement, "When");
-Step("I check input", checkElement, "When");
-Step("I uncheck input", uncheckElement, "When");
-Step("I {string} {int}(?:st|nd|rd|th) selector {string}", checkNthElementBySelector, "When");
-Step("I select option {string}", selectOption, "When");
-Step("I submit", submitForm, "When");
-Step("I select file {string}", selectFile, "When");
-Step("I upload file {string}", uploadFile, "When");
+Step("I pw type {string}", typeText, "When");
+Step("I pw fill {string}", typeText, "When");
+Step("I pw type stored {string}", typeStoredText, "When");
+Step("I pw fill stored {string}", typeStoredText, "When");
+Step("I pw slowly type {string}", typeSlowly, "When");
+Step("I pw slowly fill {string}", typeSlowly, "When");
+Step("I pw set value {string}", setInputValue, "When");
+Step("I pw clear", clearInput, "When");
+Step("I pw press {string}", pressKeyOnInput, "When");
+Step("I pw check", checkElement, "When");
+Step("I pw uncheck", uncheckElement, "When");
+Step("I pw check input", checkElement, "When");
+Step("I pw uncheck input", uncheckElement, "When");
+Step("I pw {string} {int}(?:st|nd|rd|th) selector {string}", checkNthElementBySelector, "When");
+Step("I pw select option {string}", selectOption, "When");
+Step("I pw submit", submitForm, "When");
+Step("I pw select file {string}", selectFile, "When");
+Step("I pw upload file {string}", uploadFile, "When");

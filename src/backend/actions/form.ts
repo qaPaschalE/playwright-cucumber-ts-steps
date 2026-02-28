@@ -262,5 +262,5 @@ export async function selectReactOption(page: any, optionText: string, selectorK
 // GLUE STEPS
 // ==================================================
 
-Step("I fill the following {string} form data", fillFormData, "When");
-Step("I select react option {string} from {string}", selectReactOption, "When");
+Step("I pw fill the following {string} form data", fillFormData, "When");
+Step("I pw select react option {string} from {string}", selectReactOption, "When");

@@ -198,13 +198,13 @@ export async function expectLocation(
 // GLUE STEPS
 // ==================================================
 
-Step("I see document title {string}", expectDocumentTitle, "Then");
-Step("I see document title contains {string}", expectDocumentTitleContains, "Then");
-Step("I see URL {string}", expectUrl, "Then");
-Step("I see URL contains {string}", expectUrlContains, "Then");
-Step("I see pathname {string}", expectPathname, "Then");
-Step("I see pathname contains {string}", expectPathnameContains, "Then");
-Step("I see hash {string}", expectHash, "Then");
-Step("I see hash contains {string}", expectHashContains, "Then");
-Step("I see search contains {string}", expectSearchContains, "Then");
-Step("I see location {string}", expectLocation, "Then");
+Step("I pw see document title {string}", expectDocumentTitle, "Then");
+Step("I pw see document title contains {string}", expectDocumentTitleContains, "Then");
+Step("I pw see URL {string}", expectUrl, "Then");
+Step("I pw see URL contains {string}", expectUrlContains, "Then");
+Step("I pw see pathname {string}", expectPathname, "Then");
+Step("I pw see pathname contains {string}", expectPathnameContains, "Then");
+Step("I pw see hash {string}", expectHash, "Then");
+Step("I pw see hash contains {string}", expectHashContains, "Then");
+Step("I pw see search contains {string}", expectSearchContains, "Then");
+Step("I pw see location {string}", expectLocation, "Then");

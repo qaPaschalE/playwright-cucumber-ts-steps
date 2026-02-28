@@ -78,7 +78,7 @@ export async function fileUpload(page: any, fileNameKey: string, selectorKey: st
 // GLUE STEPS
 // ==================================================
 
-Step("I select option {string} from {string}", selectDropdownOption, "When");
-Step("I check {string}", checkInput, "When");
-Step("I uncheck {string}", uncheckInput, "When");
-Step("I upload file {string} to {string}", fileUpload, "When");
+Step("I pw select option {string} from {string}", selectDropdownOption, "When");
+Step("I pw check {string}", checkInput, "When");
+Step("I pw uncheck {string}", uncheckInput, "When");
+Step("I pw upload file {string} to {string}", fileUpload, "When");

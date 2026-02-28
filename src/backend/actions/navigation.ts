@@ -65,8 +65,8 @@ export async function navigateToPath(page: any, path: string): Promise<void> {
 // GLUE STEPS
 // ==================================================
 
-Step("I visit {string}", visitUrl, "Given");
-Step("I reload the page", reloadPage, "When");
-Step("I go back", goBack, "When");
-Step("I go forward", goForward, "When");
-Step("I navigate to {string}", navigateToPath, "When");
+Step("I pw visit {string}", visitUrl, "Given");
+Step("I pw reload the page", reloadPage, "When");
+Step("I pw go back", goBack, "When");
+Step("I pw go forward", goForward, "When");
+Step("I pw navigate to {string}", navigateToPath, "When");

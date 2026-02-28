@@ -118,10 +118,10 @@ export async function grantPermission(page: any, permission: string): Promise<vo
 // GLUE STEPS
 // ==================================================
 
-Step("I tap", tapStoredElement, "When");
-Step("I tap element {string}", tapElementBySelector, "When");
-Step("I tap coordinates x:{int} y:{int}", tapCoordinates, "When");
-Step("I resize window to width {int} and height {int}", resizeWindow, "When");
-Step("I simulate device {string}", simulateDevice, "When");
-Step("I set geolocation to lat: {float} long: {float}", setGeolocation, "When");
-Step("I grant permission {string}", grantPermission, "When");
+Step("I pw tap", tapStoredElement, "When");
+Step("I pw tap element {string}", tapElementBySelector, "When");
+Step("I pw tap coordinates x:{int} y:{int}", tapCoordinates, "When");
+Step("I pw resize window to width {int} and height {int}", resizeWindow, "When");
+Step("I pw simulate device {string}", simulateDevice, "When");
+Step("I pw set geolocation to lat: {float} long: {float}", setGeolocation, "When");
+Step("I pw grant permission {string}", grantPermission, "When");

@@ -66,7 +66,7 @@ export async function expectTitleToBe(page: any, titleKey: string): Promise<void
 // GLUE STEPS
 // ==================================================
 
-Step("I expect the url to contain {string}", expectUrlToContain, "Then");
-Step("I expect the url to be {string}", expectUrlToBe, "Then");
-Step("I expect the title to contain {string}", expectTitleToContain, "Then");
-Step("I expect the title to be {string}", expectTitleToBe, "Then");
+Step("I pw expect the url to contain {string}", expectUrlToContain, "Then");
+Step("I pw expect the url to be {string}", expectUrlToBe, "Then");
+Step("I pw expect the title to contain {string}", expectTitleToContain, "Then");
+Step("I pw expect the title to be {string}", expectTitleToBe, "Then");

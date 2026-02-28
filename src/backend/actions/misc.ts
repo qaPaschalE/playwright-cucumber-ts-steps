@@ -168,18 +168,18 @@ export async function storeActiveElementText(page: any, alias: string): Promise<
 // GLUE STEPS
 // ==================================================
 
-Step("I wait {int} milliseconds", waitMilliseconds, "When");
-Step("I wait {int} seconds", waitSeconds, "When");
-Step("I pause", pauseExecution, "When");
-Step("I debug", debugExecution, "When");
-Step("I log {string}", logMessage, "When");
-Step("I focus", focusElement, "When");
-Step("I blur", blurElement, "When");
-Step("I set cookie {string} to {string}", setCookie, "When");
-Step("I clear all cookies", clearAllCookies, "When");
-Step("I set local storage item {string} to {string}", setLocalStorageItem, "When");
-Step("I get local storage item {string}", getLocalStorageItem, "When");
-Step("I clear local storage", clearLocalStorage, "When");
-Step("I set session storage item {string} to {string}", setSessionStorageItem, "When");
-Step("I clear session storage", clearSessionStorage, "When");
-Step("I store text as {string}", storeActiveElementText, "When");
+Step("I pw wait {int} milliseconds", waitMilliseconds, "When");
+Step("I pw wait {int} seconds", waitSeconds, "When");
+Step("I pw pause", pauseExecution, "When");
+Step("I pw debug", debugExecution, "When");
+Step("I pw log {string}", logMessage, "When");
+Step("I pw focus", focusElement, "When");
+Step("I pw blur", blurElement, "When");
+Step("I pw set cookie {string} to {string}", setCookie, "When");
+Step("I pw clear all cookies", clearAllCookies, "When");
+Step("I pw set local storage item {string} to {string}", setLocalStorageItem, "When");
+Step("I pw get local storage item {string}", getLocalStorageItem, "When");
+Step("I pw clear local storage", clearLocalStorage, "When");
+Step("I pw set session storage item {string} to {string}", setSessionStorageItem, "When");
+Step("I pw clear session storage", clearSessionStorage, "When");
+Step("I pw store text as {string}", storeActiveElementText, "When");

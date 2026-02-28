@@ -105,9 +105,9 @@ export async function dragToTarget(page: any, targetKey: string): Promise<void> 
 // GLUE STEPS
 // ==================================================
 
-Step("I click {string}", clickElement, "When");
-Step("I force click {string}", forceClickElement, "When");
-Step("I fill {string} with {string}", fillElement, "When");
-Step("I press {string}", pressKeyGlobal, "When");
-Step("I drag {string} to {string}", dragElementTo, "When");
-Step("I drag to {string}", dragToTarget, "And");
+Step("I pw click {string}", clickElement, "When");
+Step("I pw force click {string}", forceClickElement, "When");
+Step("I pw fill {string} with {string}", fillElement, "When");
+Step("I pw press {string}", pressKeyGlobal, "When");
+Step("I pw drag {string} to {string}", dragElementTo, "When");
+Step("I pw drag to {string}", dragToTarget, "And");

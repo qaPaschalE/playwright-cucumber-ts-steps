@@ -225,18 +225,18 @@ export async function expectElementDoesNotExist(
 // GLUE STEPS
 // ==================================================
 
-Step("I expect element to be visible", expectActiveVisible, "Then");
-Step("I expect {string} to be visible", expectStringVisible, "Then");
-Step("I expect element to be hidden", expectActiveHidden, "Then");
-Step("I expect element to be enabled", expectActiveEnabled, "Then");
-Step("I expect element to be disabled", expectActiveDisabled, "Then");
-Step("I expect element to have text {string}", expectActiveText, "Then");
-Step("I expect element to contain text {string}", expectActiveContainText, "Then");
-Step("I expect element to have value {string}", expectActiveValue, "Then");
-Step("I expect element to have attribute {string}", expectActiveAttribute, "Then");
-Step("I expect element to have attribute {string} with value {string}", expectActiveAttributeValue, "Then");
-Step("I expect the page screenshot to match {string}", expectPageScreenshotMatch, "Then");
-Step("I expect the element screenshot to match {string}", expectElementScreenshotMatch, "Then");
-Step("I expect {string} to be not visible", expectElementToNotBeVisible, "Then");
-Step("I expect element {string} exists", expectElementExists, "Then");
-Step("I expect element {string} does not exist", expectElementDoesNotExist, "Then");
+Step("I pw expect element to be visible", expectActiveVisible, "Then");
+Step("I pw expect {string} to be visible", expectStringVisible, "Then");
+Step("I pw expect element to be hidden", expectActiveHidden, "Then");
+Step("I pw expect element to be enabled", expectActiveEnabled, "Then");
+Step("I pw expect element to be disabled", expectActiveDisabled, "Then");
+Step("I pw expect element to have text {string}", expectActiveText, "Then");
+Step("I pw expect element to contain text {string}", expectActiveContainText, "Then");
+Step("I pw expect element to have value {string}", expectActiveValue, "Then");
+Step("I pw expect element to have attribute {string}", expectActiveAttribute, "Then");
+Step("I pw expect element to have attribute {string} with value {string}", expectActiveAttributeValue, "Then");
+Step("I pw expect the page screenshot to match {string}", expectPageScreenshotMatch, "Then");
+Step("I pw expect the element screenshot to match {string}", expectElementScreenshotMatch, "Then");
+Step("I pw expect {string} to be not visible", expectElementToNotBeVisible, "Then");
+Step("I pw expect element {string} exists", expectElementExists, "Then");
+Step("I pw expect element {string} does not exist", expectElementDoesNotExist, "Then");

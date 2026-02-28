@@ -197,9 +197,9 @@ export async function browserFetchRequest(
 // GLUE STEPS
 // ==================================================
 
-Step("I intercept URL {string} and stub body:", interceptStubJson, "When"); // Handles DocString
-Step("I intercept URL {string} and stub body {string}", interceptStubRaw, "When");
-Step("I intercept URL {string}", interceptSpy, "When");
-Step("I make request to {string}", apiGetRequest, "When");
-Step("I make a POST request to {string} with JSON body:", apiPostRequest, "When"); // Handles DocString
-Step("I make a {word} request to {string}", browserFetchRequest, "When");
+Step("I pw intercept URL {string} and stub body:", interceptStubJson, "When"); // Handles DocString
+Step("I pw intercept URL {string} and stub body {string}", interceptStubRaw, "When");
+Step("I pw intercept URL {string}", interceptSpy, "When");
+Step("I pw make request to {string}", apiGetRequest, "When");
+Step("I pw make a POST request to {string} with JSON body:", apiPostRequest, "When"); // Handles DocString
+Step("I pw make a {word} request to {string}", browserFetchRequest, "When");

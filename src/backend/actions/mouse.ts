@@ -191,12 +191,12 @@ export async function hoverNthElementBySelector(
 // GLUE STEPS
 // ==================================================
 
-Step("I scroll {string} into view", scrollIntoView, "When");
-Step("I scroll {string} to position x:{int} y:{int}", scrollElementToPosition, "When");
-Step("I scroll to coordinates x:{int} y:{int}", scrollWindowToCoordinates, "When");
-Step("I scroll mouse window to position top:{int} left:{int}", scrollWindowSmoothly, "When");
-Step("I scroll to {string}", scrollToDirection, "When");
-Step("I hover over the element {string}", hoverElement, "When");
-Step("I move mouse to coordinates {int}, {int}", moveMouseToCoordinates, "When");
-Step("I hover on {int}(?:st|nd|rd|th) element {string}", hoverNthElementByText, "When");
-Step("I hover on {int}(?:st|nd|rd|th) selector {string}", hoverNthElementBySelector, "When");
+Step("I pw scroll {string} into view", scrollIntoView, "When");
+Step("I pw scroll {string} to position x:{int} y:{int}", scrollElementToPosition, "When");
+Step("I pw scroll to coordinates x:{int} y:{int}", scrollWindowToCoordinates, "When");
+Step("I pw scroll mouse window to position top:{int} left:{int}", scrollWindowSmoothly, "When");
+Step("I pw scroll to {string}", scrollToDirection, "When");
+Step("I pw hover over the element {string}", hoverElement, "When");
+Step("I pw move mouse to coordinates {int}, {int}", moveMouseToCoordinates, "When");
+Step("I pw hover on {int}(?:st|nd|rd|th) element {string}", hoverNthElementByText, "When");
+Step("I pw hover on {int}(?:st|nd|rd|th) selector {string}", hoverNthElementBySelector, "When");

@@ -79,6 +79,6 @@ export async function expectTextInsideFrame(
 // GLUE STEPS
 // ==================================================
 
-Step("I click {string} inside frame {string}", clickInsideFrame, "When");
-Step("I fill {string} inside frame {string} with {string}", fillInsideFrame, "When");
-Step("I expect {string} inside frame {string} to have text {string}", expectTextInsideFrame, "Then");
+Step("I pw click {string} inside frame {string}", clickInsideFrame, "When");
+Step("I pw fill {string} inside frame {string} with {string}", fillInsideFrame, "When");
+Step("I pw expect {string} inside frame {string} to have text {string}", expectTextInsideFrame, "Then");

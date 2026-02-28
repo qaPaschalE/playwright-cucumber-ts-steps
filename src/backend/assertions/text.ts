@@ -287,21 +287,21 @@ export async function getElementBySelectorToBeHidden(page: any, selectorKey: str
 // GLUE STEPS
 // ==================================================
 
-Step("I see button text {string}", iSeeButtonText, "Then");
-Step("I see heading text {string}", iSeeHeadingText, "Then");
-Step("I see link text {string}", iSeeLinkText, "Then");
-Step("I see label text {string}", iSeeLabelText, "Then");
-Step("I do not see button text {string}", iDoNotSeeButtonText, "Then");
-Step("I do not see heading text {string}", iDoNotSeeHeadingText, "Then");
-Step("I do not see link text {string}", iDoNotSeeLinkText, "Then");
-Step("I do not see label text {string}", iDoNotSeeLabelText, "Then");
-Step("I see exact element text {string}", expectElementToHaveExactText, "Then");
-Step("I see exact value {string}", expectElementToHaveExactValue, "Then");
-Step("I do not see exact value {string}", expectElementToNotHaveExactValue, "Then");
-Step("I see exact attribute {string} with value {string}", expectElementToHaveExactAttribute, "Then");
-Step("I do not see exact attribute {string} with value {string}", expectElementToNotHaveExactAttribute, "Then");
+Step("I pw see button text {string}", iSeeButtonText, "Then");
+Step("I pw see heading text {string}", iSeeHeadingText, "Then");
+Step("I pw see link text {string}", iSeeLinkText, "Then");
+Step("I pw see label text {string}", iSeeLabelText, "Then");
+Step("I pw do not see button text {string}", iDoNotSeeButtonText, "Then");
+Step("I pw do not see heading text {string}", iDoNotSeeHeadingText, "Then");
+Step("I pw do not see link text {string}", iDoNotSeeLinkText, "Then");
+Step("I pw do not see label text {string}", iDoNotSeeLabelText, "Then");
+Step("I pw see exact element text {string}", expectElementToHaveExactText, "Then");
+Step("I pw see exact value {string}", expectElementToHaveExactValue, "Then");
+Step("I pw do not see exact value {string}", expectElementToNotHaveExactValue, "Then");
+Step("I pw see exact attribute {string} with value {string}", expectElementToHaveExactAttribute, "Then");
+Step("I pw do not see exact attribute {string} with value {string}", expectElementToNotHaveExactAttribute, "Then");
 // Global Text Assertions (No selector needed)
-Step("I see text {string}", expectGlobalTextVisible, "Then");
-Step("I see exact text {string}", expectGlobalTextVisible, "Then"); // Maps to same logic
-Step("I do not see text {string}", expectGlobalTextNotVisible, "Then");
-Step("I do not see exact text {string}", expectGlobalTextNotVisible, "Then");
+Step("I pw see text {string}", expectGlobalTextVisible, "Then");
+Step("I pw see exact text {string}", expectGlobalTextVisible, "Then"); // Maps to same logic
+Step("I pw do not see text {string}", expectGlobalTextNotVisible, "Then");
+Step("I pw do not see exact text {string}", expectGlobalTextNotVisible, "Then");

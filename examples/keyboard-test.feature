@@ -2,12 +2,12 @@
 Feature: Keyboard Interaction Test
 
   Scenario: Search using Keyboard
-    Given I visit "https://google.com"
+    Given I pw visit "https://google.com"
     # 1. Focus Search Box
-    When I find element by selector "textarea[name='q']"
-    When I focus
+    When I pw find element by selector "textarea[name='q']"
+    When I pw focus
     # 2. Type and Press Enter
-    When I press keys "Playwright Testing"
-    When I press key "Enter"
+    When I pw press keys "Playwright Testing"
+    When I pw press key "Enter"
     # 3. Verify Results
-    Then I expect the url to contain "search"
+    Then I pw expect the url to contain "search"

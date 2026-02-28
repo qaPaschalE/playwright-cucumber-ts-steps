@@ -2,25 +2,25 @@
 Feature: Miscellaneous Utilities
 
   Scenario: Timers and Focus
-    Given I visit "https://the-internet.herokuapp.com/login"
+    Given I pw visit "https://the-internet.herokuapp.com/login"
     # 1. Test Focus
-    When I find input by ID "username"
-    When I focus
+    When I pw find input by ID "username"
+    When I pw focus
     # (Visual check: The cursor should be in the box)
     # 2. Test Wait (The test should pause here for 2 seconds)
-    When I log "Starting wait..."
-    When I wait for 2 seconds
-    When I log "Wait finished."
+    When I pw log "Starting wait..."
+    When I pw wait for 2 seconds
+    When I pw log "Wait finished."
     # 3. Test Blur (Unfocus)
-    When I blur
+    When I pw blur
 
   Scenario: Browser Storage
-    Given I visit "https://the-internet.herokuapp.com/"
+    Given I pw visit "https://the-internet.herokuapp.com/"
     # 4. Test Local Storage
-    When I set local storage item "theme" to "dark_mode"
-    When I get local storage item "theme"
-    When I clear local storage
+    When I pw set local storage item "theme" to "dark_mode"
+    When I pw get local storage item "theme"
+    When I pw clear local storage
     # 5. Test Cookies
-    When I set cookie "session_test" to "active"
+    When I pw set cookie "session_test" to "active"
     # We can verify cookies by clearing them (logs will confirm execution)
-    When I clear all cookies
+    When I pw clear all cookies

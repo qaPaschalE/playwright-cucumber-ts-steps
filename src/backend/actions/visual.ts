@@ -92,9 +92,9 @@ export async function captureScreenshotForReport(page: any, name: string): Promi
 // GLUE STEPS
 // ==================================================
 
-Step("I take a screenshot of the page {string}", takePageScreenshot, "When");
-Step("I take a screenshot of element {string} as {string}", takeElementScreenshot, "When");
-Step("I take a viewport screenshot {string}", takeViewportScreenshot, "When");
-Step("I expect page {string} to closely match {string}", expectPageToCloselyMatch, "Then");
-Step("I expect element {string} screenshot {string} to closely match {string}", expectElementToCloselyMatch, "Then");
-Step("I capture screenshot {string} for the report", captureScreenshotForReport, "When");
+Step("I pw take a screenshot of the page {string}", takePageScreenshot, "When");
+Step("I pw take a screenshot of element {string} as {string}", takeElementScreenshot, "When");
+Step("I pw take a viewport screenshot {string}", takeViewportScreenshot, "When");
+Step("I pw expect page {string} to closely match {string}", expectPageToCloselyMatch, "Then");
+Step("I pw expect element {string} screenshot {string} to closely match {string}", expectElementToCloselyMatch, "Then");
+Step("I pw capture screenshot {string} for the report", captureScreenshotForReport, "When");

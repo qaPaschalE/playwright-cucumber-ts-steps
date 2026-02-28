@@ -69,5 +69,5 @@ export async function loadBrowserState(page: any, filenameKey: string): Promise<
 // GLUE STEPS
 // ==================================================
 
-Step("I save the browser state to {string}", saveBrowserState);
-Step("I load the browser state from {string}", loadBrowserState);
+Step("I pw save the browser state to {string}", saveBrowserState);
+Step("I pw load the browser state from {string}", loadBrowserState);

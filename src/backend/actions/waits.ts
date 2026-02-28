@@ -82,9 +82,9 @@ export async function waitForUrlContain(page: any, urlPartKey: string): Promise<
 // GLUE STEPS
 // ==================================================
 
-Step("I wait for network idle", waitForNetworkIdle, "When");
-Step("I wait for load state {string}", waitForLoadState, "When");
-Step("I wait for element to be visible", waitForElementVisible, "When");
-Step("I wait for {string} to be visible", waitForElementVisibleBySelector, "When");
-Step("I wait for element to be hidden", waitForElementHidden, "When");
-Step("I wait for URL to contain {string}", waitForUrlContain, "When");
+Step("I pw wait for network idle", waitForNetworkIdle, "When");
+Step("I pw wait for load state {string}", waitForLoadState, "When");
+Step("I pw wait for element to be visible", waitForElementVisible, "When");
+Step("I pw wait for {string} to be visible", waitForElementVisibleBySelector, "When");
+Step("I pw wait for element to be hidden", waitForElementHidden, "When");
+Step("I pw wait for URL to contain {string}", waitForUrlContain, "When");

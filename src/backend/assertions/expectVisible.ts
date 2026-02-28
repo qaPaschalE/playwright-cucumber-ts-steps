@@ -32,4 +32,4 @@ export async function expectVisible(page: any, selectorKey: string, timeout = 20
 // GLUE STEPS
 // ==================================================
 
-Step("I expect the element {string} to be visible", expectVisible, "Then");
+Step("I pw expect the element {string} to be visible", expectVisible, "Then");

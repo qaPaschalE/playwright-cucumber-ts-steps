@@ -281,12 +281,12 @@ export async function expectDbColumnType(
 // GLUE STEPS
 // ==================================================
 
-Step("I run the database query {string}", runDbQuery, "When");
-Step("I expect the database to return {int} record(s)", expectDbRecordCount, "Then");
-Step("I expect the database to return no records", expectDbNoRecords, "Then");
-Step("I expect the first database record to contain", expectFirstDbRecordToContain, "Then");
-Step("I expect database row {int} to contain", expectDbRowToContain, "Then");
-Step("I expect all database records to contain", expectAllDbRecordsToContain, "Then");
-Step("I expect database column {string} to exist", expectDbColumnExists, "Then");
-Step("I expect database column {string} to contain {string}", expectDbColumnContains, "Then");
-Step("I expect database column {string} to be of type {string}", expectDbColumnType, "Then");
+Step("I pw run the database query {string}", runDbQuery, "When");
+Step("I pw expect the database to return {int} record(s)", expectDbRecordCount, "Then");
+Step("I pw expect the database to return no records", expectDbNoRecords, "Then");
+Step("I pw expect the first database record to contain", expectFirstDbRecordToContain, "Then");
+Step("I pw expect database row {int} to contain", expectDbRowToContain, "Then");
+Step("I pw expect all database records to contain", expectAllDbRecordsToContain, "Then");
+Step("I pw expect database column {string} to exist", expectDbColumnExists, "Then");
+Step("I pw expect database column {string} to contain {string}", expectDbColumnContains, "Then");
+Step("I pw expect database column {string} to be of type {string}", expectDbColumnType, "Then");

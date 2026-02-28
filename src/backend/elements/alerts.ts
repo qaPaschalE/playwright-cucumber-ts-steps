@@ -51,6 +51,6 @@ export async function typeAndAcceptPrompt(page: any, textKey: string): Promise<v
 // GLUE STEPS
 // ==================================================
 
-Step("I accept the next dialog", acceptNextDialog, "Given");
-Step("I dismiss the next dialog", dismissNextDialog, "Given");
-Step("I type {string} into the next prompt and accept", typeAndAcceptPrompt, "Given");
+Step("I pw accept the next dialog", acceptNextDialog, "Given");
+Step("I pw dismiss the next dialog", dismissNextDialog, "Given");
+Step("I pw type {string} into the next prompt and accept", typeAndAcceptPrompt, "Given");

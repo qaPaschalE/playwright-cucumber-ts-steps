@@ -65,6 +65,6 @@ export async function expectResponseProperty(
 // GLUE STEPS
 // ==================================================
 
-Step("I expect the response status to be {int}", expectResponseStatus, "Then");
-Step("I expect the response body to contain {string}", expectResponseBodyContain, "Then");
-Step("I expect the response property {string} to be {string}", expectResponseProperty, "Then");
+Step("I pw expect the response status to be {int}", expectResponseStatus, "Then");
+Step("I pw expect the response body to contain {string}", expectResponseBodyContain, "Then");
+Step("I pw expect the response property {string} to be {string}", expectResponseProperty, "Then");

@@ -2,9 +2,9 @@
 Feature: Data Table Form Step
 
   Scenario: Login using Data Table
-    Given I visit "https://the-internet.herokuapp.com/login"
+    Given I pw visit "https://the-internet.herokuapp.com/login"
     # One step to rule them all:
-    When I fill the following "Login Action" form data:
+    When I pw fill the following "Login Action" form data:
       | Target        | Value                                                                         |
       | #username     | tomsmith                                                                      |
       | #password     | SuperSecretPassword!                                                          |

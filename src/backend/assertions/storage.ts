@@ -295,14 +295,14 @@ export async function expectSessionStorageItemDoesNotExist(
 // GLUE STEPS
 // ==================================================
 
-Step("I see cookie {string} has value {string}", expectCookieHasValue, "Then");
-Step("I see cookie {string} contains value {string}", expectCookieContainsValue, "Then");
-Step("I do not see cookie {string}", expectCookieDoesNotExist, "Then");
-Step("I see local storage item {string} equals {string}", expectLocalStorageItemEquals, "Then");
-Step("I see local storage item {string} contains {string}", expectLocalStorageItemContains, "Then");
-Step("I see local storage item {string}", expectLocalStorageItem, "Then");
-Step("I do not see local storage item {string}", expectLocalStorageItemDoesNotExist, "Then");
-Step("I see session storage item {string} equals {string}", expectSessionStorageItemEquals, "Then");
-Step("I see session storage item {string} contains {string}", expectSessionStorageItemContains, "Then");
-Step("I see session storage item {string}", expectSessionStorageItem, "Then");
-Step("I do not see session storage item {string}", expectSessionStorageItemDoesNotExist, "Then");
+Step("I pw see cookie {string} has value {string}", expectCookieHasValue, "Then");
+Step("I pw see cookie {string} contains value {string}", expectCookieContainsValue, "Then");
+Step("I pw do not see cookie {string}", expectCookieDoesNotExist, "Then");
+Step("I pw see local storage item {string} equals {string}", expectLocalStorageItemEquals, "Then");
+Step("I pw see local storage item {string} contains {string}", expectLocalStorageItemContains, "Then");
+Step("I pw see local storage item {string}", expectLocalStorageItem, "Then");
+Step("I pw do not see local storage item {string}", expectLocalStorageItemDoesNotExist, "Then");
+Step("I pw see session storage item {string} equals {string}", expectSessionStorageItemEquals, "Then");
+Step("I pw see session storage item {string} contains {string}", expectSessionStorageItemContains, "Then");
+Step("I pw see session storage item {string}", expectSessionStorageItem, "Then");
+Step("I pw do not see session storage item {string}", expectSessionStorageItemDoesNotExist, "Then");

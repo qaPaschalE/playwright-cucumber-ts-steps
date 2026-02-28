@@ -104,7 +104,7 @@ export async function makePostRequestWithFile(
 // GLUE STEPS
 // ==================================================
 
-Step("I make a GET request to {string}", makeGetRequest, "When");
-Step("I make a DELETE request to {string}", makeDeleteRequest, "When");
-Step("I make a POST request to {string} with data", makePostRequestWithTable, "When");
-Step("I make a POST request to {string} with payload from {string}", makePostRequestWithFile, "When");
+Step("I pw make a GET request to {string}", makeGetRequest, "When");
+Step("I pw make a DELETE request to {string}", makeDeleteRequest, "When");
+Step("I pw make a POST request to {string} with data", makePostRequestWithTable, "When");
+Step("I pw make a POST request to {string} with payload from {string}", makePostRequestWithFile, "When");

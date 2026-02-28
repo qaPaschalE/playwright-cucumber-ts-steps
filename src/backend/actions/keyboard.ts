@@ -69,9 +69,9 @@ export async function releaseKey(page: any, key: string): Promise<void> {
 // GLUE STEPS
 // ==================================================
 
-Step("I press key {string}", pressKey, "When");
-Step("I press key {string} on element", pressKeyOnElement, "When");
-Step("I press keys {string}", typeKeysGlobal, "When");
-Step("I press shortcut {string}", pressShortcut, "When");
-Step("I hold down key {string}", holdDownKey, "When");
-Step("I release key {string}", releaseKey, "When");
+Step("I pw press key {string}", pressKey, "When");
+Step("I pw press key {string} on element", pressKeyOnElement, "When");
+Step("I pw press keys {string}", typeKeysGlobal, "When");
+Step("I pw press shortcut {string}", pressShortcut, "When");
+Step("I pw hold down key {string}", holdDownKey, "When");
+Step("I pw release key {string}", releaseKey, "When");

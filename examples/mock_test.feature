@@ -17,6 +17,6 @@ Feature: Advanced API & Mocking
   #   And I expect the response property "title" to be "My New Post"
 
   Scenario: API POST with File Payload
-    When I make a POST request to "https://jsonplaceholder.typicode.com/posts" with payload from "examples/data/post.json"
-    Then I expect the response status to be 201
-    And I expect the response property "title" to be "File Payload"
+    When I pw make a POST request to "https://jsonplaceholder.typicode.com/posts" with payload from "examples/data/post.json"
+    Then I pw expect the response status to be 201
+    And I pw expect the response property "title" to be "File Payload"
