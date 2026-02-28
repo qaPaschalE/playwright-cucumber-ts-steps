@@ -64,7 +64,16 @@ Update `playwright.config.ts` to use the built-in reporting helper.
 
 ```typescript
 import { defineConfig } from "@playwright/test";
-import { getReporters } from "playwright-cucumber-ts-steps";
+import { getReporters, setFixtureConfig } from "playwright-cucumber-ts-steps";
+
+// Optional: Configure custom fixture directory and file names
+setFixtureConfig({
+  fixturesDir: "fixtures", // Default: "fixtures"
+  selectorsFile: "selectors.json", // Custom selectors file name
+  textsFile: "texts.json", // Custom texts file name
+  valuesFile: "values.json", // Custom values file name
+  // ... other fixture files
+});
 
 export default defineConfig({
   testDir: "./tests",
@@ -77,6 +86,24 @@ export default defineConfig({
   },
 });
 ```
+
+**Configurable Fixture Files:**
+- `fixturesDir` - Base directory for all fixtures (default: `"fixtures"`)
+- `selectorsFile` - UI selectors fixture file
+- `textsFile` - Text content fixture file
+- `valuesFile` - Test values fixture file
+- `optionsFile` - Dropdown options fixture file
+- `endpointsFile` - API endpoints fixture file
+- `filesFile` - File paths fixture file
+- `pathsFile` - JSON paths fixture file
+- `responsesFile` - API responses fixture file
+- `queriesFile` - Database queries fixture file
+- `columnsFile` - Database columns fixture file
+- `typesFile` - Data types fixture file
+- `titlesFile` - Page titles fixture file
+- `urlsFile` - URLs fixture file
+- `attributesFile` - HTML attributes fixture file
+- `promptsFile` - Dialog prompts fixture file
 
 ### 2. Create the Runner
 
