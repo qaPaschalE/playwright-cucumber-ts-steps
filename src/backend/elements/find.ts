@@ -18,7 +18,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
 /**
  * Finds a single element using a CSS or XPath selector.
  * Asserts that exactly one element is found.
- * @example When I find element by selector ".nav-bar"
+ * @example When I pw find element by selector ".nav-bar"
  */
 export async function findElementBySelector(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -32,7 +32,7 @@ export async function findElementBySelector(page: any, selectorKey: string): Pro
 
 /**
  * Finds an element containing the exact text provided.
- * @example When I find element by text "Submit Order"
+ * @example When I pw find element by text "Submit Order"
  */
 export async function findElementByText(page: any, text: string): Promise<void> {
   const element = page.getByText(text, { exact: true });
@@ -43,7 +43,7 @@ export async function findElementByText(page: any, text: string): Promise<void> 
 
 /**
  * Finds an element by its `title` attribute.
- * @example When I find element by title "Close Modal"
+ * @example When I pw find element by title "Close Modal"
  */
 export async function findElementByTitle(page: any, title: string): Promise<void> {
   const element = page.getByTitle(title);
@@ -54,7 +54,7 @@ export async function findElementByTitle(page: any, title: string): Promise<void
 
 /**
  * Finds an element by its test ID (usually `data-testid`).
- * @example When I find element by testid "login-form"
+ * @example When I pw find element by testid "login-form"
  */
 export async function findElementByTestId(page: any, testid: string): Promise<void> {
   const element = page.getByTestId(testid);
@@ -65,7 +65,7 @@ export async function findElementByTestId(page: any, testid: string): Promise<vo
 
 /**
  * Finds an element by its ARIA role.
- * @example When I find element by role "button"
+ * @example When I pw find element by role "button"
  */
 export async function findElementByRole(page: any, role: string): Promise<void> {
   const element = page.getByRole(role as any);
@@ -76,7 +76,7 @@ export async function findElementByRole(page: any, role: string): Promise<void> 
 
 /**
  * Finds an input element by its placeholder text.
- * @example When I find element by placeholder text "Enter your email"
+ * @example When I pw find element by placeholder text "Enter your email"
  */
 export async function findElementByPlaceholder(page: any, text: string): Promise<void> {
   const element = page.getByPlaceholder(text);
@@ -87,7 +87,7 @@ export async function findElementByPlaceholder(page: any, text: string): Promise
 
 /**
  * Finds a form control associated with a specific label text.
- * @example When I find element by label text "Password"
+ * @example When I pw find element by label text "Password"
  */
 export async function findElementByLabel(page: any, label: string): Promise<void> {
 
@@ -99,7 +99,7 @@ export async function findElementByLabel(page: any, label: string): Promise<void
 
 /**
  * Finds an element (usually an image) by its alt text.
- * @example When I find element by alt text "Company Logo"
+ * @example When I pw find element by alt text "Company Logo"
  */
 export async function findElementByAltText(page: any, alt: string): Promise<void> {
   const element = page.getByAltText(alt);
@@ -110,7 +110,7 @@ export async function findElementByAltText(page: any, alt: string): Promise<void
 
 /**
  * Finds a specific link by its visible text.
- * @example When I find link by text "Read More"
+ * @example When I pw find link by text "Read More"
  */
 export async function findLinkByText(page: any, text: string): Promise<void> {
   const element = page.getByRole("link", { name: text });
@@ -120,7 +120,7 @@ export async function findLinkByText(page: any, text: string): Promise<void> {
 
 /**
  * Finds a heading (h1-h6) by its text content.
- * @example When I find heading by text "Dashboard"
+ * @example When I pw find heading by text "Dashboard"
  */
 export async function findHeadingByText(page: any, text: string): Promise<void> {
   const element = page.getByRole("heading", { name: text });
@@ -130,7 +130,7 @@ export async function findHeadingByText(page: any, text: string): Promise<void> 
 
 /**
  * Finds an element by its `name` attribute.
- * @example When I find element by name "csrf_token"
+ * @example When I pw find element by name "csrf_token"
  */
 export async function findElementByName(page: any, name: string): Promise<void> {
   const element = page.locator(`[name="${name}"]`);
@@ -141,7 +141,7 @@ export async function findElementByName(page: any, name: string): Promise<void> 
 
 /**
  * Finds all elements matching a CSS selector and stores them as a list.
- * @example When I find elements by selector "ul > li"
+ * @example When I pw find elements by selector "ul > li"
  */
 export async function findElementsBySelector(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -156,7 +156,7 @@ export async function findElementsBySelector(page: any, selectorKey: string): Pr
 /**
  * Finds all buttons matching specific text.
  * Supports variable aliasing (e.g., "@buttonName").
- * @example When I find buttons by text "Add to Cart"
+ * @example When I pw find buttons by text "Add to Cart"
  */
 export async function findButtonsByText(page: any, text: string): Promise<void> {
   let searchText = text;
@@ -176,7 +176,7 @@ export async function findButtonsByText(page: any, text: string): Promise<void> 
 /**
  * Selects the nth element from the currently stored list.
  * Uses 1-based indexing (e.g., 1st, 2nd, 3rd).
- * @example When I get 2nd element
+ * @example When I pw get 2nd element
  */
 export async function getNthElement(page: any, indexStr: string): Promise<void> {
   const index = parseInt(indexStr, 10);
@@ -227,7 +227,7 @@ export async function getLastElement(page: any): Promise<void> {
 }
 /**
  * Stores the text content of the currently active element in a variable.
- * @example When I store element text as "confirmationCode"
+ * @example When I pw store element text as "confirmationCode"
  */
 export async function storeElementText(page: any, alias: string): Promise<void> {
   const element = getActiveElement(page);

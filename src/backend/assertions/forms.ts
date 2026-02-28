@@ -13,7 +13,7 @@ import {
 /**
  * Asserts that an input element has the expected value.
  * Supports fixtures for reusable selectors and values.
- * @example Then I see input value "login.username" equals "testuser"
+ * @example Then I pw see input value "login.username" equals "testuser"
  */
 export async function expectInputValue(
   page: any,
@@ -33,7 +33,7 @@ export async function expectInputValue(
 /**
  * Asserts that an input element has a value containing the expected substring.
  * Supports fixtures for reusable selectors and values.
- * @example Then I see input value "login.username" contains "test"
+ * @example Then I pw see input value "login.username" contains "test"
  */
 export async function expectInputValueContains(
   page: any,
@@ -56,7 +56,7 @@ export async function expectInputValueContains(
 /**
  * Asserts that a textarea element has the expected value.
  * Supports fixtures for reusable selectors and values.
- * @example Then I see textarea value "comments.textarea" equals "This is my comment"
+ * @example Then I pw see textarea value "comments.textarea" equals "This is my comment"
  */
 export async function expectTextareaValue(
   page: any,
@@ -76,7 +76,7 @@ export async function expectTextareaValue(
 /**
  * Asserts that a textarea element has a value containing the expected substring.
  * Supports fixtures for reusable selectors and values.
- * @example Then I see textarea value "comments.textarea" contains "comment"
+ * @example Then I pw see textarea value "comments.textarea" contains "comment"
  */
 export async function expectTextareaValueContains(
   page: any,
@@ -99,7 +99,7 @@ export async function expectTextareaValueContains(
 /**
  * Asserts that an element has the expected text content.
  * Supports fixtures for reusable selectors and text values.
- * @example Then I see text "header.title" equals "Welcome to our site"
+ * @example Then I pw see text "header.title" equals "Welcome to our site"
  */
 export async function expectText(
   page: any,
@@ -119,7 +119,7 @@ export async function expectText(
 /**
  * Asserts that an element has text content containing the expected substring.
  * Supports fixtures for reusable selectors and text values.
- * @example Then I see text "header.title" contains "Welcome"
+ * @example Then I pw see text "header.title" contains "Welcome"
  */
 export async function expectTextContains(
   page: any,
@@ -142,7 +142,7 @@ export async function expectTextContains(
 /**
  * Asserts that an element has the expected value (for form elements).
  * Supports fixtures for reusable selectors and values.
- * @example Then I see value "input.amount" equals "100"
+ * @example Then I pw see value "input.amount" equals "100"
  */
 export async function expectValue(
   page: any,

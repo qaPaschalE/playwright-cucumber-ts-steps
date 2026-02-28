@@ -98,11 +98,11 @@ Feature: User Authentication
 
   @smoke
   Scenario: Successful Login
-    Given I visit "[https://the-internet.herokuapp.com/login](https://the-internet.herokuapp.com/login)"
-    When I fill "#username" with "tomsmith"
-    And I fill "#password" with "SuperSecretPassword!"
-    And I click "button[type='submit']"
-    Then I expect "#flash" to contain text "You logged into a secure area!"
+    Given I pw visit "[https://the-internet.herokuapp.com/login](https://the-internet.herokuapp.com/login)"
+    When I pw fill "#username" with "tomsmith"
+    And I pw fill "#password" with "SuperSecretPassword!"
+    And I pw click "button[type='submit']"
+    Then I pw expect "#flash" to contain text "You logged into a secure area!"
 
 ```
 
@@ -166,9 +166,9 @@ Feature: User API
 
   @api
   Scenario: Create and Verify User
-    When I make a POST request to "[https://reqres.in/api/users](https://reqres.in/api/users)" with body '{"name": "Morpheus", "job": "Leader"}'
-    Then I expect the response status to be 201
-    And I expect the response property "name" to be "Morpheus"
+    When I pw make a POST request to "[https://reqres.in/api/users](https://reqres.in/api/users)" with body '{"name": "Morpheus", "job": "Leader"}'
+    Then I pw expect the response status to be 201
+    And I pw expect the response property "name" to be "Morpheus"
 
 ```
 
@@ -180,11 +180,11 @@ Handling complex HTML elements is built-in.
 Feature: File Upload and Iframes
 
   Scenario: Upload Document inside Iframe
-    Given I visit "[https://example.com/upload](https://example.com/upload)"
+    Given I pw visit "[https://example.com/upload](https://example.com/upload)"
     # Switch context to the iframe
-    When I upload file "data/resume.pdf" to "#file-input" inside frame "#upload-iframe"
-    And I click "#submit-btn" inside frame "#upload-iframe"
-    Then I expect "div.success" inside frame "#upload-iframe" to be visible
+    When I pw upload file "data/resume.pdf" to "#file-input" inside frame "#upload-iframe"
+    And I pw click "#submit-btn" inside frame "#upload-iframe"
+    Then I pw expect "div.success" inside frame "#upload-iframe" to be visible
 
 ```
 
@@ -199,13 +199,13 @@ Feature: Setup
 
   @setup
   Scenario: Admin Login
-    Given I visit "/login"
-    When I fill "#user" with "admin"
-    And I fill "#pass" with "1234"
-    And I click "#login-btn"
-    And I expect "#dashboard" to be visible
+    Given I pw visit "/login"
+    When I pw fill "#user" with "admin"
+    And I pw fill "#pass" with "1234"
+    And I pw click "#login-btn"
+    And I pw expect "#dashboard" to be visible
     # Saves session to ./auth/admin.json
-    And I save the browser state to "admin.json"
+    And I pw save the browser state to "admin.json"
 
 ```
 
@@ -216,9 +216,9 @@ Feature: Admin Panel
 
   Scenario: Check Reports
     # Loads cookies instantly - No login UI needed!
-    Given I load the browser state from "admin.json"
-    When I visit "/admin/reports"
-    Then I expect "h1" to have text "Weekly Reports"
+    Given I pw load the browser state from "admin.json"
+    When I pw visit "/admin/reports"
+    Then I pw expect "h1" to have text "Weekly Reports"
 
 ```
 
@@ -228,7 +228,7 @@ Fill out entire forms in a single step using a Data Table. You can type, click, 
 
 ```gherkin
 Scenario: Registration
-  When I fill the following "Registration" form data:
+  When I pw fill the following "Registration" form data:
     | #first-name | John           |
     | #last-name  | Doe            |
     | #email      | john@test.com  |
@@ -245,11 +245,11 @@ Validate your backend directly. You can send payloads via Tables or JSON Files.
 
 ```gherkin
 Scenario: Create User (Table)
-  When I make a POST request to "[https://reqres.in/api/users](https://reqres.in/api/users)" with data:
+  When I pw make a POST request to "[https://reqres.in/api/users](https://reqres.in/api/users)" with data:
     | name | Neo        |
     | job  | The Chosen |
-  Then I expect the response status to be 201
-  And I expect the response property "name" to be "Neo"
+  Then I pw expect the response status to be 201
+  And I pw expect the response property "name" to be "Neo"
 ```
 
 #### Option B: File Payload
@@ -257,8 +257,8 @@ Scenario: Create User (Table)
 ```gherkin
 Scenario: Create User (File)
   # Reads from 'data/user.json' in your project root
-  When I make a POST request to "/api/users" with payload from "data/user.json"
-  Then I expect the response status to be 201
+  When I pw make a POST request to "/api/users" with payload from "data/user.json"
+  Then I pw expect the response status to be 201
 ```
 
 ### 6. Network Mocking
@@ -268,11 +268,11 @@ Simulate backend responses to test UI behavior without relying on real APIs.
 ```gherkin
 Scenario: Mocking User Profile
   # Intercept calls to /api/user/1 and return fake data
-  Given I mock the API endpoint "*/**/api/user/1" with body '{"name": "Mocked User"}'
+  Given I pw mock the API endpoint "*/**/api/user/1" with body '{"name": "Mocked User"}'
 
   # When the UI calls the API, it gets our fake data
-  When I visit "/profile"
-  Then I expect "#username-display" to have text "Mocked User"
+  When I pw visit "/profile"
+  Then I pw expect "#username-display" to have text "Mocked User"
 
 ```
 
@@ -302,9 +302,9 @@ runTests("features/*.feature", { dbQuery: queryDb });
 
 ```gherkin
 Scenario: Create User
-  When I run the database query "INSERT INTO users (name) VALUES ('Bob')"
-  Then I expect the database to return 1 record
-  And I expect the first database record to contain:
+  When I pw run the database query "INSERT INTO users (name) VALUES ('Bob')"
+  Then I pw expect the database to return 1 record
+  And I pw expect the first database record to contain:
     | name | Bob |
 ```
 
@@ -385,8 +385,8 @@ Then use it in your feature:
 
 ```gherkin
 Scenario: Scroll Test
-  Given I visit "[https://infinite-scroll.com](https://infinite-scroll.com)"
-  When I scroll to the bottom of the page
+  Given I pw visit "[https://infinite-scroll.com](https://infinite-scroll.com)"
+  When I pw scroll to the bottom of the page
 
 ```
 
@@ -400,7 +400,7 @@ Scenario: Scroll Test
 
 
 ```gherkin
-When I click
+When I pw click
 ```
 
 ---
@@ -410,7 +410,7 @@ When I click
 
 
 ```gherkin
-When I click on element {string}
+When I pw click on element {string}
 ```
 
 ---
@@ -420,7 +420,7 @@ When I click on element {string}
 
 
 ```gherkin
-When I click on button {string}
+When I pw click on button {string}
 ```
 
 ---
@@ -430,7 +430,7 @@ When I click on button {string}
 
 
 ```gherkin
-When I click on link {string}
+When I pw click on link {string}
 ```
 
 ---
@@ -440,7 +440,7 @@ When I click on link {string}
 
 
 ```gherkin
-When I click on label {string}
+When I pw click on label {string}
 ```
 
 ---
@@ -450,7 +450,7 @@ When I click on label {string}
 
 
 ```gherkin
-When I click on text {string}
+When I pw click on text {string}
 ```
 
 ---
@@ -460,7 +460,7 @@ When I click on text {string}
 
 
 ```gherkin
-When I click on exact text {string}
+When I pw click on exact text {string}
 ```
 
 ---
@@ -470,7 +470,7 @@ When I click on exact text {string}
 
 
 ```gherkin
-When I click on selector ([^]+)
+When I pw click on selector ([^]+)
 ```
 
 ---
@@ -480,7 +480,7 @@ When I click on selector ([^]+)
 
 
 ```gherkin
-When I click all
+When I pw click all
 ```
 
 ---
@@ -490,7 +490,7 @@ When I click all
 
 
 ```gherkin
-When I double click
+When I pw double click
 ```
 
 ---
@@ -500,7 +500,7 @@ When I double click
 
 
 ```gherkin
-When I double click on text {string}
+When I pw double click on text {string}
 ```
 
 ---
@@ -510,7 +510,7 @@ When I double click on text {string}
 
 
 ```gherkin
-When I double click position {int} {int}
+When I pw double click position {int} {int}
 ```
 
 ---
@@ -520,7 +520,7 @@ When I double click position {int} {int}
 
 
 ```gherkin
-When I right click
+When I pw right click
 ```
 
 ---
@@ -530,7 +530,7 @@ When I right click
 
 
 ```gherkin
-When I right click on text {string}
+When I pw right click on text {string}
 ```
 
 ---
@@ -540,7 +540,7 @@ When I right click on text {string}
 
 
 ```gherkin
-When I right click position {int} {int}
+When I pw right click position {int} {int}
 ```
 
 ---
@@ -550,7 +550,7 @@ When I right click position {int} {int}
 
 
 ```gherkin
-When I click on ({int})(?:st|nd|rd|th) element ([^]+)
+When I pw click on ({int})(?:st|nd|rd|th) element ([^]+)
 ```
 
 ---
@@ -560,7 +560,7 @@ When I click on ({int})(?:st|nd|rd|th) element ([^]+)
 
 
 ```gherkin
-When I click on ({int})(?:st|nd|rd|th) selector ([^]+)
+When I pw click on ({int})(?:st|nd|rd|th) selector ([^]+)
 ```
 
 ---
@@ -570,7 +570,7 @@ When I click on ({int})(?:st|nd|rd|th) selector ([^]+)
 
 
 ```gherkin
-When I find element by selector {string}
+When I pw find element by selector {string}
 ```
 
 ---
@@ -580,7 +580,7 @@ When I find element by selector {string}
 
 
 ```gherkin
-When I find element by text {string}
+When I pw find element by text {string}
 ```
 
 ---
@@ -590,7 +590,7 @@ When I find element by text {string}
 
 
 ```gherkin
-When I find element by title {string}
+When I pw find element by title {string}
 ```
 
 ---
@@ -600,7 +600,7 @@ When I find element by title {string}
 
 
 ```gherkin
-When I find element by testid {string}
+When I pw find element by testid {string}
 ```
 
 ---
@@ -610,7 +610,7 @@ When I find element by testid {string}
 
 
 ```gherkin
-When I find element by role {string}
+When I pw find element by role {string}
 ```
 
 ---
@@ -620,7 +620,7 @@ When I find element by role {string}
 
 
 ```gherkin
-When I find element by placeholder text {string}
+When I pw find element by placeholder text {string}
 ```
 
 ---
@@ -630,7 +630,7 @@ When I find element by placeholder text {string}
 
 
 ```gherkin
-When I find element by label text {string}
+When I pw find element by label text {string}
 ```
 
 ---
@@ -640,7 +640,7 @@ When I find element by label text {string}
 
 
 ```gherkin
-When I find element by alt text {string}
+When I pw find element by alt text {string}
 ```
 
 ---
@@ -650,7 +650,7 @@ When I find element by alt text {string}
 
 
 ```gherkin
-When I find link by text {string}
+When I pw find link by text {string}
 ```
 
 ---
@@ -660,7 +660,7 @@ When I find link by text {string}
 
 
 ```gherkin
-When I find heading by text {string}
+When I pw find heading by text {string}
 ```
 
 ---
@@ -670,7 +670,7 @@ When I find heading by text {string}
 
 
 ```gherkin
-When I find element by name {string}
+When I pw find element by name {string}
 ```
 
 ---
@@ -680,7 +680,7 @@ When I find element by name {string}
 
 
 ```gherkin
-When I find elements by selector {string}
+When I pw find elements by selector {string}
 ```
 
 ---
@@ -690,7 +690,7 @@ When I find elements by selector {string}
 
 
 ```gherkin
-When I find headings by text {string}
+When I pw find headings by text {string}
 ```
 
 ---
@@ -700,7 +700,7 @@ When I find headings by text {string}
 
 
 ```gherkin
-When I find buttons by text {string}
+When I pw find buttons by text {string}
 ```
 
 ---
@@ -710,7 +710,7 @@ When I find buttons by text {string}
 
 
 ```gherkin
-When I get first element
+When I pw get first element
 ```
 
 ---
@@ -720,7 +720,7 @@ When I get first element
 
 
 ```gherkin
-When I get last element
+When I pw get last element
 ```
 
 ---
@@ -730,7 +730,7 @@ When I get last element
 
 
 ```gherkin
-When I get ({int})(?:st|nd|rd|th) element
+When I pw get ({int})(?:st|nd|rd|th) element
 ```
 
 ---
@@ -740,7 +740,7 @@ When I get ({int})(?:st|nd|rd|th) element
 
 
 ```gherkin
-When I get focused element
+When I pw get focused element
 ```
 
 ---
@@ -750,7 +750,7 @@ When I get focused element
 
 
 ```gherkin
-When I find input by ID {string}
+When I pw find input by ID {string}
 ```
 
 ---
@@ -760,7 +760,7 @@ When I find input by ID {string}
 
 
 ```gherkin
-When I find input by name {string}
+When I pw find input by name {string}
 ```
 
 ---
@@ -770,7 +770,7 @@ When I find input by name {string}
 
 
 ```gherkin
-When I find input by placeholder text {string}
+When I pw find input by placeholder text {string}
 ```
 
 ---
@@ -780,7 +780,7 @@ When I find input by placeholder text {string}
 
 
 ```gherkin
-When I find input by display value {string}
+When I pw find input by display value {string}
 ```
 
 ---
@@ -790,7 +790,7 @@ When I find input by display value {string}
 
 
 ```gherkin
-When I find textarea by label text {string}
+When I pw find textarea by label text {string}
 ```
 
 ---
@@ -800,7 +800,7 @@ When I find textarea by label text {string}
 
 
 ```gherkin
-When I store element text as {string}
+When I pw store element text as {string}
 ```
 
 ---
@@ -810,7 +810,7 @@ When I store element text as {string}
 
 
 ```gherkin
-When I fill the following {string} form data
+When I pw fill the following {string} form data
 ```
 
 ---
@@ -820,7 +820,7 @@ When I fill the following {string} form data
 
 
 ```gherkin
-When I fill the following {string} test form data
+When I pw fill the following {string} test form data
 ```
 
 ---
@@ -830,7 +830,7 @@ When I fill the following {string} test form data
 
 
 ```gherkin
-When I switch to frame {string}
+When I pw switch to frame {string}
 ```
 
 ---
@@ -840,7 +840,7 @@ When I switch to frame {string}
 
 
 ```gherkin
-When I find element {string} in frame {string}
+When I pw find element {string} in frame {string}
 ```
 
 ---
@@ -850,7 +850,7 @@ When I find element {string} in frame {string}
 
 
 ```gherkin
-When I switch to new tab
+When I pw switch to new tab
 ```
 
 ---
@@ -860,7 +860,7 @@ When I switch to new tab
 
 
 ```gherkin
-When I type {string}
+When I pw type {string}
 ```
 
 ---
@@ -870,7 +870,7 @@ When I type {string}
 
 
 ```gherkin
-When I type stored {string}
+When I pw type stored {string}
 ```
 
 ---
@@ -880,7 +880,7 @@ When I type stored {string}
 
 
 ```gherkin
-When I slowly type {string}
+When I pw slowly type {string}
 ```
 
 ---
@@ -890,7 +890,7 @@ When I slowly type {string}
 
 
 ```gherkin
-When I set value {string}
+When I pw set value {string}
 ```
 
 ---
@@ -900,7 +900,7 @@ When I set value {string}
 
 
 ```gherkin
-When I clear
+When I pw clear
 ```
 
 ---
@@ -910,7 +910,7 @@ When I clear
 
 
 ```gherkin
-When I press {string}
+When I pw press {string}
 ```
 
 ---
@@ -920,7 +920,7 @@ When I press {string}
 
 
 ```gherkin
-When I check
+When I pw check
 ```
 
 ---
@@ -930,7 +930,7 @@ When I check
 
 
 ```gherkin
-When I uncheck
+When I pw uncheck
 ```
 
 ---
@@ -940,7 +940,7 @@ When I uncheck
 
 
 ```gherkin
-When I check input
+When I pw check input
 ```
 
 ---
@@ -950,7 +950,7 @@ When I check input
 
 
 ```gherkin
-When I uncheck input
+When I pw uncheck input
 ```
 
 ---
@@ -960,7 +960,7 @@ When I uncheck input
 
 
 ```gherkin
-When I (check|uncheck) ({int})(?:st|nd|rd|th) selector ([^]+)
+When I pw (check|uncheck) ({int})(?:st|nd|rd|th) selector ([^]+)
 ```
 
 ---
@@ -970,7 +970,7 @@ When I (check|uncheck) ({int})(?:st|nd|rd|th) selector ([^]+)
 
 
 ```gherkin
-When I select option {string}
+When I pw select option {string}
 ```
 
 ---
@@ -980,7 +980,7 @@ When I select option {string}
 
 
 ```gherkin
-When I submit
+When I pw submit
 ```
 
 ---
@@ -990,7 +990,7 @@ When I submit
 
 
 ```gherkin
-When I select file {string}
+When I pw select file {string}
 ```
 
 ---
@@ -1000,7 +1000,7 @@ When I select file {string}
 
 
 ```gherkin
-When I upload file {string}
+When I pw upload file {string}
 ```
 
 ---
@@ -1010,7 +1010,7 @@ When I upload file {string}
 
 
 ```gherkin
-When I click {string}
+When I pw click {string}
 ```
 
 ---
@@ -1020,7 +1020,7 @@ When I click {string}
 
 
 ```gherkin
-When I force click {string}
+When I pw force click {string}
 ```
 
 ---
@@ -1030,7 +1030,7 @@ When I force click {string}
 
 
 ```gherkin
-When I fill {string} with {string}
+When I pw fill {string} with {string}
 ```
 
 ---
@@ -1040,7 +1040,7 @@ When I fill {string} with {string}
 
 
 ```gherkin
-When I press {string}
+When I pw press {string}
 ```
 
 ---
@@ -1050,7 +1050,7 @@ When I press {string}
 
 
 ```gherkin
-When I wait for {int} milliseconds
+When I pw wait for {int} milliseconds
 ```
 
 ---
@@ -1060,7 +1060,7 @@ When I wait for {int} milliseconds
 
 
 ```gherkin
-When I press key {string}
+When I pw press key {string}
 ```
 
 ---
@@ -1070,7 +1070,7 @@ When I press key {string}
 
 
 ```gherkin
-When I press key {string} on element
+When I pw press key {string} on element
 ```
 
 ---
@@ -1080,7 +1080,7 @@ When I press key {string} on element
 
 
 ```gherkin
-When I press keys {string}
+When I pw press keys {string}
 ```
 
 ---
@@ -1090,7 +1090,7 @@ When I press keys {string}
 
 
 ```gherkin
-When I press shortcut {string}
+When I pw press shortcut {string}
 ```
 
 ---
@@ -1100,7 +1100,7 @@ When I press shortcut {string}
 
 
 ```gherkin
-When I hold down key {string}
+When I pw hold down key {string}
 ```
 
 ---
@@ -1110,7 +1110,7 @@ When I hold down key {string}
 
 
 ```gherkin
-When I release key {string}
+When I pw release key {string}
 ```
 
 ---
@@ -1120,7 +1120,7 @@ When I release key {string}
 
 
 ```gherkin
-When I wait for {int} milliseconds
+When I pw wait for {int} milliseconds
 ```
 
 ---
@@ -1130,7 +1130,7 @@ When I wait for {int} milliseconds
 
 
 ```gherkin
-When I wait for {int} seconds
+When I pw wait for {int} seconds
 ```
 
 ---
@@ -1140,7 +1140,7 @@ When I wait for {int} seconds
 
 
 ```gherkin
-When I pause
+When I pw pause
 ```
 
 ---
@@ -1150,7 +1150,7 @@ When I pause
 
 
 ```gherkin
-When I debug
+When I pw debug
 ```
 
 ---
@@ -1160,7 +1160,7 @@ When I debug
 
 
 ```gherkin
-When I log {string}
+When I pw log {string}
 ```
 
 ---
@@ -1170,7 +1170,7 @@ When I log {string}
 
 
 ```gherkin
-When I focus
+When I pw focus
 ```
 
 ---
@@ -1180,7 +1180,7 @@ When I focus
 
 
 ```gherkin
-When I blur
+When I pw blur
 ```
 
 ---
@@ -1190,7 +1190,7 @@ When I blur
 
 
 ```gherkin
-When I set cookie {string} to {string}
+When I pw set cookie {string} to {string}
 ```
 
 ---
@@ -1200,7 +1200,7 @@ When I set cookie {string} to {string}
 
 
 ```gherkin
-When I clear all cookies
+When I pw clear all cookies
 ```
 
 ---
@@ -1210,7 +1210,7 @@ When I clear all cookies
 
 
 ```gherkin
-When I set local storage item {string} to {string}
+When I pw set local storage item {string} to {string}
 ```
 
 ---
@@ -1220,7 +1220,7 @@ When I set local storage item {string} to {string}
 
 
 ```gherkin
-When I get local storage item {string}
+When I pw get local storage item {string}
 ```
 
 ---
@@ -1230,7 +1230,7 @@ When I get local storage item {string}
 
 
 ```gherkin
-When I clear local storage
+When I pw clear local storage
 ```
 
 ---
@@ -1240,7 +1240,7 @@ When I clear local storage
 
 
 ```gherkin
-When I set session storage item {string} to {string}
+When I pw set session storage item {string} to {string}
 ```
 
 ---
@@ -1250,7 +1250,7 @@ When I set session storage item {string} to {string}
 
 
 ```gherkin
-When I clear session storage
+When I pw clear session storage
 ```
 
 ---
@@ -1260,7 +1260,7 @@ When I clear session storage
 
 
 ```gherkin
-When I tap
+When I pw tap
 ```
 
 ---
@@ -1270,7 +1270,7 @@ When I tap
 
 
 ```gherkin
-When I tap element {string}
+When I pw tap element {string}
 ```
 
 ---
@@ -1280,7 +1280,7 @@ When I tap element {string}
 
 
 ```gherkin
-When I tap coordinates x:{int} y:{int}
+When I pw tap coordinates x:{int} y:{int}
 ```
 
 ---
@@ -1290,7 +1290,7 @@ When I tap coordinates x:{int} y:{int}
 
 
 ```gherkin
-When I resize window to width {int} and height {int}
+When I pw resize window to width {int} and height {int}
 ```
 
 ---
@@ -1300,7 +1300,7 @@ When I resize window to width {int} and height {int}
 
 
 ```gherkin
-When I simulate device {string}
+When I pw simulate device {string}
 ```
 
 ---
@@ -1310,7 +1310,7 @@ When I simulate device {string}
 
 
 ```gherkin
-When I set geolocation to lat: {float} long: {float}
+When I pw set geolocation to lat: {float} long: {float}
 ```
 
 ---
@@ -1320,7 +1320,7 @@ When I set geolocation to lat: {float} long: {float}
 
 
 ```gherkin
-When I grant permission {string}
+When I pw grant permission {string}
 ```
 
 ---
@@ -1330,7 +1330,7 @@ When I grant permission {string}
 
 
 ```gherkin
-When I scroll {string} into view
+When I pw scroll {string} into view
 ```
 
 ---
@@ -1340,7 +1340,7 @@ When I scroll {string} into view
 
 
 ```gherkin
-When I scroll {string} to position x:{int} y:{int}
+When I pw scroll {string} to position x:{int} y:{int}
 ```
 
 ---
@@ -1350,7 +1350,7 @@ When I scroll {string} to position x:{int} y:{int}
 
 
 ```gherkin
-When I scroll to coordinates x:{int} y:{int}
+When I pw scroll to coordinates x:{int} y:{int}
 ```
 
 ---
@@ -1360,7 +1360,7 @@ When I scroll to coordinates x:{int} y:{int}
 
 
 ```gherkin
-When I scroll mouse window to position top:{int} left:{int}
+When I pw scroll mouse window to position top:{int} left:{int}
 ```
 
 ---
@@ -1370,7 +1370,7 @@ When I scroll mouse window to position top:{int} left:{int}
 
 
 ```gherkin
-When I scroll to {string}
+When I pw scroll to {string}
 ```
 
 ---
@@ -1380,7 +1380,7 @@ When I scroll to {string}
 
 
 ```gherkin
-When I hover over the element {string}
+When I pw hover over the element {string}
 ```
 
 ---
@@ -1390,7 +1390,7 @@ When I hover over the element {string}
 
 
 ```gherkin
-When I move mouse to coordinates {int}, {int}
+When I pw move mouse to coordinates {int}, {int}
 ```
 
 ---
@@ -1400,7 +1400,7 @@ When I move mouse to coordinates {int}, {int}
 
 
 ```gherkin
-When I hover on ({int})(?:st|nd|rd|th) element ([^]+)
+When I pw hover on ({int})(?:st|nd|rd|th) element ([^]+)
 ```
 
 ---
@@ -1410,7 +1410,7 @@ When I hover on ({int})(?:st|nd|rd|th) element ([^]+)
 
 
 ```gherkin
-When I hover on ({int})(?:st|nd|rd|th) selector ([^]+)
+When I pw hover on ({int})(?:st|nd|rd|th) selector ([^]+)
 ```
 
 ---
@@ -1420,7 +1420,7 @@ When I hover on ({int})(?:st|nd|rd|th) selector ([^]+)
 
 
 ```gherkin
-When I visit {string}
+When I pw visit {string}
 ```
 
 ---
@@ -1430,7 +1430,7 @@ When I visit {string}
 
 
 ```gherkin
-When I reload the page
+When I pw reload the page
 ```
 
 ---
@@ -1440,7 +1440,7 @@ When I reload the page
 
 
 ```gherkin
-When I go back
+When I pw go back
 ```
 
 ---
@@ -1450,7 +1450,7 @@ When I go back
 
 
 ```gherkin
-When I go forward
+When I pw go forward
 ```
 
 ---
@@ -1460,7 +1460,7 @@ When I go forward
 
 
 ```gherkin
-When I navigate to {string}
+When I pw navigate to {string}
 ```
 
 ---
@@ -1470,7 +1470,7 @@ When I navigate to {string}
 
 
 ```gherkin
-When I wait for network idle
+When I pw wait for network idle
 ```
 
 ---
@@ -1480,7 +1480,7 @@ When I wait for network idle
 
 
 ```gherkin
-When I wait for load state {string}
+When I pw wait for load state {string}
 ```
 
 ---
@@ -1490,7 +1490,7 @@ When I wait for load state {string}
 
 
 ```gherkin
-When I wait for element to be visible
+When I pw wait for element to be visible
 ```
 
 ---
@@ -1500,7 +1500,7 @@ When I wait for element to be visible
 
 
 ```gherkin
-When I wait for element to be hidden
+When I pw wait for element to be hidden
 ```
 
 ---
@@ -1510,7 +1510,7 @@ When I wait for element to be hidden
 
 
 ```gherkin
-When I wait for URL to contain {string}
+When I pw wait for URL to contain {string}
 ```
 
 ---
@@ -1520,7 +1520,7 @@ When I wait for URL to contain {string}
 
 
 ```gherkin
-When I expect the response status to be {int}
+When I pw expect the response status to be {int}
 ```
 
 ---
@@ -1530,7 +1530,7 @@ When I expect the response status to be {int}
 
 
 ```gherkin
-When I expect the response body to contain {string}
+When I pw expect the response body to contain {string}
 ```
 
 ---
@@ -1540,7 +1540,7 @@ When I expect the response body to contain {string}
 
 
 ```gherkin
-When I expect the response property {string} to be {string}
+When I pw expect the response property {string} to be {string}
 ```
 
 ---
@@ -1550,7 +1550,7 @@ When I expect the response property {string} to be {string}
 
 
 ```gherkin
-When I mock the API endpoint {string} with body {string}
+When I pw mock the API endpoint {string} with body {string}
 ```
 
 ---
@@ -1560,7 +1560,7 @@ When I mock the API endpoint {string} with body {string}
 
 
 ```gherkin
-When I mock the API endpoint {string} with response from {string}
+When I pw mock the API endpoint {string} with response from {string}
 ```
 
 ---
@@ -1570,7 +1570,7 @@ When I mock the API endpoint {string} with response from {string}
 
 
 ```gherkin
-When I mock the API endpoint {string} with status {int}
+When I pw mock the API endpoint {string} with status {int}
 ```
 
 ---
@@ -1580,7 +1580,7 @@ When I mock the API endpoint {string} with status {int}
 
 
 ```gherkin
-When I intercept URL ([^]+) and stub body:?
+When I pw intercept URL ([^]+) and stub body:?
 ```
 
 ---
@@ -1590,7 +1590,7 @@ When I intercept URL ([^]+) and stub body:?
 
 
 ```gherkin
-When I intercept URL {string} and stub body {string}
+When I pw intercept URL {string} and stub body {string}
 ```
 
 ---
@@ -1600,7 +1600,7 @@ When I intercept URL {string} and stub body {string}
 
 
 ```gherkin
-When I intercept URL {string}
+When I pw intercept URL {string}
 ```
 
 ---
@@ -1610,7 +1610,7 @@ When I intercept URL {string}
 
 
 ```gherkin
-When I make request to {string}
+When I pw make request to {string}
 ```
 
 ---
@@ -1620,7 +1620,7 @@ When I make request to {string}
 
 
 ```gherkin
-When I make a POST request to ([^]+) with JSON body:?
+When I pw make a POST request to ([^]+) with JSON body:?
 ```
 
 ---
@@ -1630,7 +1630,7 @@ When I make a POST request to ([^]+) with JSON body:?
 
 
 ```gherkin
-When I make a {word} request to {string}
+When I pw make a {word} request to {string}
 ```
 
 ---
@@ -1640,7 +1640,7 @@ When I make a {word} request to {string}
 
 
 ```gherkin
-When I make a GET request to {string}
+When I pw make a GET request to {string}
 ```
 
 ---
@@ -1650,7 +1650,7 @@ When I make a GET request to {string}
 
 
 ```gherkin
-When I make a DELETE request to {string}
+When I pw make a DELETE request to {string}
 ```
 
 ---
@@ -1660,7 +1660,7 @@ When I make a DELETE request to {string}
 
 
 ```gherkin
-When I make a POST request to {string} with data
+When I pw make a POST request to {string} with data
 ```
 
 ---
@@ -1670,7 +1670,7 @@ When I make a POST request to {string} with data
 
 
 ```gherkin
-When I make a POST request to {string} with payload from {string}
+When I pw make a POST request to {string} with payload from {string}
 ```
 
 ---
@@ -1680,7 +1680,7 @@ When I make a POST request to {string} with payload from {string}
 
 
 ```gherkin
-When I expect the url to contain {string}
+When I pw expect the url to contain {string}
 ```
 
 ---
@@ -1690,7 +1690,7 @@ When I expect the url to contain {string}
 
 
 ```gherkin
-When I expect the url to be {string}
+When I pw expect the url to be {string}
 ```
 
 ---
@@ -1700,7 +1700,7 @@ When I expect the url to be {string}
 
 
 ```gherkin
-When I expect the title to contain {string}
+When I pw expect the title to contain {string}
 ```
 
 ---
@@ -1710,7 +1710,7 @@ When I expect the title to contain {string}
 
 
 ```gherkin
-When I expect the title to be {string}
+When I pw expect the title to be {string}
 ```
 
 ---
@@ -1720,7 +1720,7 @@ When I expect the title to be {string}
 
 
 ```gherkin
-When I expect {string} to have text {string}
+When I pw expect {string} to have text {string}
 ```
 
 ---
@@ -1730,7 +1730,7 @@ When I expect {string} to have text {string}
 
 
 ```gherkin
-When I expect {string} to contain text {string}
+When I pw expect {string} to contain text {string}
 ```
 
 ---
@@ -1740,7 +1740,7 @@ When I expect {string} to contain text {string}
 
 
 ```gherkin
-When I expect {string} to have value {string}
+When I pw expect {string} to have value {string}
 ```
 
 ---
@@ -1750,7 +1750,7 @@ When I expect {string} to have value {string}
 
 
 ```gherkin
-When I expect {string} to have attribute {string} with value {string}
+When I pw expect {string} to have attribute {string} with value {string}
 ```
 
 ---
@@ -1760,7 +1760,7 @@ When I expect {string} to have attribute {string} with value {string}
 
 
 ```gherkin
-When I expect element to be visible
+When I pw expect element to be visible
 ```
 
 ---
@@ -1770,7 +1770,7 @@ When I expect element to be visible
 
 
 ```gherkin
-When I expect {string} to be visible
+When I pw expect {string} to be visible
 ```
 
 ---
@@ -1780,7 +1780,7 @@ When I expect {string} to be visible
 
 
 ```gherkin
-When I expect element to be hidden
+When I pw expect element to be hidden
 ```
 
 ---
@@ -1790,7 +1790,7 @@ When I expect element to be hidden
 
 
 ```gherkin
-When I expect element to be enabled
+When I pw expect element to be enabled
 ```
 
 ---
@@ -1800,7 +1800,7 @@ When I expect element to be enabled
 
 
 ```gherkin
-When I expect element to be disabled
+When I pw expect element to be disabled
 ```
 
 ---
@@ -1810,7 +1810,7 @@ When I expect element to be disabled
 
 
 ```gherkin
-When I expect element to have text {string}
+When I pw expect element to have text {string}
 ```
 
 ---
@@ -1820,7 +1820,7 @@ When I expect element to have text {string}
 
 
 ```gherkin
-When I expect element to contain text {string}
+When I pw expect element to contain text {string}
 ```
 
 ---
@@ -1830,7 +1830,7 @@ When I expect element to contain text {string}
 
 
 ```gherkin
-When I expect element to have value {string}
+When I pw expect element to have value {string}
 ```
 
 ---
@@ -1840,7 +1840,7 @@ When I expect element to have value {string}
 
 
 ```gherkin
-When I expect element to have attribute {string}
+When I pw expect element to have attribute {string}
 ```
 
 ---
@@ -1850,7 +1850,7 @@ When I expect element to have attribute {string}
 
 
 ```gherkin
-When I expect element to have attribute {string} with value {string}
+When I pw expect element to have attribute {string} with value {string}
 ```
 
 ---
@@ -1860,7 +1860,7 @@ When I expect element to have attribute {string} with value {string}
 
 
 ```gherkin
-When I expect the page screenshot to match {string}
+When I pw expect the page screenshot to match {string}
 ```
 
 ---
@@ -1870,7 +1870,7 @@ When I expect the page screenshot to match {string}
 
 
 ```gherkin
-When I expect the element screenshot to match {string}
+When I pw expect the element screenshot to match {string}
 ```
 
 ---
@@ -1880,7 +1880,7 @@ When I expect the element screenshot to match {string}
 
 
 ```gherkin
-When I save the browser state to {string}
+When I pw save the browser state to {string}
 ```
 
 ---
@@ -1890,7 +1890,7 @@ When I save the browser state to {string}
 
 
 ```gherkin
-When I load the browser state from {string}
+When I pw load the browser state from {string}
 ```
 
 ---
@@ -1900,7 +1900,7 @@ When I load the browser state from {string}
 
 
 ```gherkin
-When I run the database query {string}
+When I pw run the database query {string}
 ```
 
 ---
@@ -1910,7 +1910,7 @@ When I run the database query {string}
 
 
 ```gherkin
-When I expect the database to return {int} record(s)
+When I pw expect the database to return {int} record(s)
 ```
 
 ---
@@ -1920,7 +1920,7 @@ When I expect the database to return {int} record(s)
 
 
 ```gherkin
-When I expect the database to return no records
+When I pw expect the database to return no records
 ```
 
 ---
@@ -1930,7 +1930,7 @@ When I expect the database to return no records
 
 
 ```gherkin
-When I expect the first database record to contain
+When I pw expect the first database record to contain
 ```
 
 ---
@@ -1940,7 +1940,7 @@ When I expect the first database record to contain
 
 
 ```gherkin
-When I expect database row {int} to contain
+When I pw expect database row {int} to contain
 ```
 
 ---
@@ -1950,7 +1950,7 @@ When I expect database row {int} to contain
 
 
 ```gherkin
-When I expect all database records to contain
+When I pw expect all database records to contain
 ```
 
 ---
@@ -1960,7 +1960,7 @@ When I expect all database records to contain
 
 
 ```gherkin
-When I expect database column {string} to exist
+When I pw expect database column {string} to exist
 ```
 
 ---
@@ -1970,7 +1970,7 @@ When I expect database column {string} to exist
 
 
 ```gherkin
-When I expect database column {string} to contain {string}
+When I pw expect database column {string} to contain {string}
 ```
 
 ---
@@ -1980,7 +1980,7 @@ When I expect database column {string} to contain {string}
 
 
 ```gherkin
-When I expect database column {string} to be of type {string}
+When I pw expect database column {string} to be of type {string}
 ```
 
 ---
@@ -1990,7 +1990,7 @@ When I expect database column {string} to be of type {string}
 
 
 ```gherkin
-When I accept the next dialog
+When I pw accept the next dialog
 ```
 
 ---
@@ -2000,7 +2000,7 @@ When I accept the next dialog
 
 
 ```gherkin
-When I dismiss the next dialog
+When I pw dismiss the next dialog
 ```
 
 ---
@@ -2010,7 +2010,7 @@ When I dismiss the next dialog
 
 
 ```gherkin
-When I type {string} into the next prompt and accept
+When I pw type {string} into the next prompt and accept
 ```
 
 ---
@@ -2020,7 +2020,7 @@ When I type {string} into the next prompt and accept
 
 
 ```gherkin
-When I select option {string} from {string}
+When I pw select option {string} from {string}
 ```
 
 ---
@@ -2030,7 +2030,7 @@ When I select option {string} from {string}
 
 
 ```gherkin
-When I check {string}
+When I pw check {string}
 ```
 
 ---
@@ -2040,7 +2040,7 @@ When I check {string}
 
 
 ```gherkin
-When I uncheck {string}
+When I pw uncheck {string}
 ```
 
 ---
@@ -2050,7 +2050,7 @@ When I uncheck {string}
 
 
 ```gherkin
-When I upload file {string} to {string}
+When I pw upload file {string} to {string}
 ```
 
 ---
@@ -2060,7 +2060,7 @@ When I upload file {string} to {string}
 
 
 ```gherkin
-When I click {string} inside frame {string}
+When I pw click {string} inside frame {string}
 ```
 
 ---
@@ -2070,7 +2070,7 @@ When I click {string} inside frame {string}
 
 
 ```gherkin
-When I fill {string} inside frame {string} with {string}
+When I pw fill {string} inside frame {string} with {string}
 ```
 
 ---
@@ -2080,7 +2080,7 @@ When I fill {string} inside frame {string} with {string}
 
 
 ```gherkin
-When I expect {string} inside frame {string} to have text {string}
+When I pw expect {string} inside frame {string} to have text {string}
 ```
 
 ---

@@ -10,7 +10,7 @@ import { loadFixture, getFixtureValue, } from "../utils/fixtures";
 /**
  * Clicks an element located inside a specific `<iframe>`.
  * Supports fixtures for reusable selectors.
- * @example When I click "selectors.paymentSubmitButton" inside frame "selectors.paymentIframe"
+ * @example When I pw click "selectors.paymentSubmitButton" inside frame "selectors.paymentIframe"
  */
 export async function clickInsideFrame(
   page: any,
@@ -30,7 +30,7 @@ export async function clickInsideFrame(
 /**
  * Fills an input field located inside a specific `<iframe>`.
  * Supports fixtures for reusable selectors and values.
- * @example When I fill "selectors.cardNumberInput" inside frame "selectors.checkoutFrame" with "values.cardNumber"
+ * @example When I pw fill "selectors.cardNumberInput" inside frame "selectors.checkoutFrame" with "values.cardNumber"
  */
 export async function fillInsideFrame(
   page: any,
@@ -54,7 +54,7 @@ export async function fillInsideFrame(
  * Asserts that an element inside a specific `<iframe>` contains the expected text.
  * Supports fixtures for reusable selectors and text.
  * Uses Playwright's web-first assertions for automatic retries.
- * @example Then I expect "selectors.successMessage" inside frame "selectors.uploadFrame" to have text "texts.uploadComplete"
+ * @example Then I pw expect "selectors.successMessage" inside frame "selectors.uploadFrame" to have text "texts.uploadComplete"
  */
 export async function expectTextInsideFrame(
   page: any,

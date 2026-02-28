@@ -9,7 +9,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
 /**
  * Scrolls a specific element into the visible viewport.
  * Supports fixtures for reusable selectors.
- * @example When I scroll "footer.footerSection" into view
+ * @example When I pw scroll "footer.footerSection" into view
  */
 export async function scrollIntoView(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -23,7 +23,7 @@ export async function scrollIntoView(page: any, selectorKey: string): Promise<vo
 /**
  * Scrolls the internal content of a specific element (overflow container) to X, Y coordinates.
  * Supports fixtures for reusable selectors.
- * @example When I scroll "chat.chatBox" to position x:0 y:500
+ * @example When I pw scroll "chat.chatBox" to position x:0 y:500
  */
 export async function scrollElementToPosition(
   page: any,
@@ -46,7 +46,7 @@ export async function scrollElementToPosition(
 
 /**
  * Scrolls the entire main browser window to specific X, Y coordinates immediately.
- * @example When I scroll to coordinates x:0 y:0
+ * @example When I pw scroll to coordinates x:0 y:0
  */
 export async function scrollWindowToCoordinates(page: any, x: number, y: number): Promise<void> {
   await page.evaluate(
@@ -60,7 +60,7 @@ export async function scrollWindowToCoordinates(page: any, x: number, y: number)
 
 /**
  * Scrolls the entire main browser window smoothly to specific coordinates.
- * @example When I scroll mouse window to position top:0 left:0
+ * @example When I pw scroll mouse window to position top:0 left:0
  */
 export async function scrollWindowSmoothly(page: any, top: number, left: number): Promise<void> {
   await page.evaluate(
@@ -79,7 +79,7 @@ export async function scrollWindowSmoothly(page: any, top: number, left: number)
 /**
  * Scrolls the window to a general direction edge (top, bottom, left, right).
  * Includes a short wait for smooth scrolling animation to complete.
- * @example When I scroll to "bottom"
+ * @example When I pw scroll to "bottom"
  */
 export async function scrollToDirection(page: any, direction: string): Promise<void> {
   const validDirections = ["top", "bottom", "left", "right"];
@@ -119,7 +119,7 @@ export async function scrollToDirection(page: any, direction: string): Promise<v
  * Simulates a mouse hover over an element.
  * Sets the hovered element as the "Active Element" for subsequent steps.
  * Supports fixtures for reusable selectors.
- * @example When I hover over the element "dropdown.toggleButton"
+ * @example When I pw hover over the element "dropdown.toggleButton"
  */
 export async function hoverElement(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -134,7 +134,7 @@ export async function hoverElement(page: any, selectorKey: string): Promise<void
 /**
  * Moves the mouse cursor to specific absolute screen coordinates.
  * Useful for canvas interactions or testing mouse tracking.
- * @example When I move mouse to coordinates 100, 200
+ * @example When I pw move mouse to coordinates 100, 200
  */
 export async function moveMouseToCoordinates(page: any, x: number, y: number): Promise<void> {
   await page.mouse.move(x, y);
@@ -143,7 +143,7 @@ export async function moveMouseToCoordinates(page: any, x: number, y: number): P
 
 /**
  * Hovers over the Nth element containing the specified text.
- * @example When I hover on 1st element "Profile"
+ * @example When I pw hover on 1st element "Profile"
  */
 export async function hoverNthElementByText(
   page: any,
@@ -165,7 +165,7 @@ export async function hoverNthElementByText(
 /**
  * Hovers over the Nth element matching a CSS or XPath selector.
  * Supports fixtures for reusable selectors.
- * @example When I hover on 1st selector "user.avatar"
+ * @example When I pw hover on 1st selector "user.avatar"
  */
 export async function hoverNthElementBySelector(
   page: any,

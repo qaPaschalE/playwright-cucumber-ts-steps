@@ -12,7 +12,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
  * Saves the current browser context's storage state (cookies, localStorage, etc.) to a file.
  * Supports fixtures for reusable auth state filenames.
  * Use this after a successful login to persist the authenticated session.
- * @example And I save the browser state to "adminState"
+ * @example And I pw save the browser state to "adminState"
  */
 export async function saveBrowserState(page: any, filenameKey: string): Promise<void> {
   const files = loadFixture("files.json");
@@ -33,7 +33,7 @@ export async function saveBrowserState(page: any, filenameKey: string): Promise<
  * Loads a previously saved browser context state (cookies, localStorage, etc.) from a file.
  * Supports fixtures for reusable auth state filenames.
  * Use this at the start of other scenarios to restore an authenticated session.
- * @example Given I load the browser state from "adminState"
+ * @example Given I pw load the browser state from "adminState"
  */
 export async function loadBrowserState(page: any, filenameKey: string): Promise<void> {
   const files = loadFixture("files.json");

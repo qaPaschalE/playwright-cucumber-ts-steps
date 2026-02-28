@@ -13,7 +13,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
  * Iterates through a provided Data Table to fill inputs, click elements, or perform assertions.
  * This function is designed for bulk form interaction without writing repetitive "When I..." steps.
  * @example
- * When I fill the following "Login" test form data:
+ * When I pw fill the following "Login" test form data:
  * ```gherkin
  * | Target                  | Value                |
  * | login.usernameField     | myuser               |

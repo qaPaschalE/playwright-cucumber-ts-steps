@@ -32,7 +32,7 @@ async function safeTap(target: any): Promise<string> {
 /**
  * Taps on the currently stored (active) element.
  * Uses a "Hybrid Tap" strategy: tries to tap, falls back to click if touch is unsupported.
- * @example When I tap
+ * @example When I pw tap
  */
 export async function tapStoredElement(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -43,7 +43,7 @@ export async function tapStoredElement(page: any): Promise<void> {
 /**
  * Finds an element by selector and taps it.
  * Supports fixtures for reusable selectors.
- * @example When I tap element "menu.toggleButton"
+ * @example When I pw tap element "menu.toggleButton"
  */
 export async function tapElementBySelector(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -56,7 +56,7 @@ export async function tapElementBySelector(page: any, selectorKey: string): Prom
 
 /**
  * Taps at specific X, Y coordinates on the screen.
- * @example When I tap coordinates x:50 y:200
+ * @example When I pw tap coordinates x:50 y:200
  */
 export async function tapCoordinates(page: any, x: number, y: number): Promise<void> {
   await page.mouse.click(x, y);
@@ -65,7 +65,7 @@ export async function tapCoordinates(page: any, x: number, y: number): Promise<v
 
 /**
  * Resizes the browser window/viewport to specific dimensions.
- * @example When I resize window to width 375 and height 812
+ * @example When I pw resize window to width 375 and height 812
  */
 export async function resizeWindow(page: any, width: number, height: number): Promise<void> {
   await page.setViewportSize({ width, height });
@@ -74,7 +74,7 @@ export async function resizeWindow(page: any, width: number, height: number): Pr
 
 /**
  * Resizes the viewport to match a specific device preset.
- * @example When I simulate device "iPhone 12"
+ * @example When I pw simulate device "iPhone 12"
  */
 export async function simulateDevice(page: any, deviceName: string): Promise<void> {
   const devices: Record<string, { width: number; height: number }> = {
@@ -97,7 +97,7 @@ export async function simulateDevice(page: any, deviceName: string): Promise<voi
 
 /**
  * Sets the geolocation coordinates for the browser context and auto-grants permission.
- * @example When I set geolocation to lat: 37.7749 long: -122.4194
+ * @example When I pw set geolocation to lat: 37.7749 long: -122.4194
  */
 export async function setGeolocation(page: any, lat: number, long: number): Promise<void> {
   await page.context().setGeolocation({ latitude: lat, longitude: long });
@@ -107,7 +107,7 @@ export async function setGeolocation(page: any, lat: number, long: number): Prom
 
 /**
  * Grants a specific browser permission to the current context.
- * @example When I grant permission "notifications"
+ * @example When I pw grant permission "notifications"
  */
 export async function grantPermission(page: any, permission: string): Promise<void> {
   await page.context().grantPermissions([permission]);

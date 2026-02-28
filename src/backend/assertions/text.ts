@@ -25,7 +25,7 @@ import { resolveParam } from "../utils/resolver";
  * @param page - The Playwright page object
  * @param selectorKey - The selector key (can be a fixture key or raw CSS selector)
  * @param textKey - The text key (can be a fixture key or raw text)
- * @example Then I see exact element text "Welcome Home"
+ * @example Then I pw see exact element text "Welcome Home"
  */
 export async function expectElementToHaveExactText(
   page: any,
@@ -48,7 +48,7 @@ export async function expectElementToHaveExactText(
  * Supports fixtures for reusable selectors and text values.
  * @param page - The Playwright page object
  * @param textKey - The text key (can be a fixture key or raw text)
- * @example Then I see text "Welcome" (will match "Welcome Home" or "Welcome!")
+ * @example Then I pw see text "Welcome" (will match "Welcome Home" or "Welcome!")
  *
  * Global Visibility Check: Finds text anywhere on the page without needing a selector.
  */
@@ -65,7 +65,7 @@ export async function expectGlobalTextVisible(page: any, textKey: string) {
  * Supports fixtures for reusable selectors and text values.
  * @param page - The Playwright page object
  * @param textKey - The text key (can be a fixture key or raw text)
- * @example Then I do not see text "error"
+ * @example Then I pw do not see text "error"
  */
 export async function expectGlobalTextNotVisible(page: any, textKey: string) {
   const text = resolveParam(textKey, "texts.json");
@@ -80,7 +80,7 @@ export async function expectGlobalTextNotVisible(page: any, textKey: string) {
  * @param page - The Playwright page object
  * @param selectorKey - The selector key (can be a fixture key or raw CSS selector)
  * @param valueKey - The value key (can be a fixture key or raw value)
- * @example Then I see exact value "john_doe"
+ * @example Then I pw see exact value "john_doe"
  */
 export async function expectElementToHaveExactValue(
   page: any,
@@ -103,7 +103,7 @@ export async function expectElementToHaveExactValue(
  * @param page - The Playwright page object
  * @param selectorKey - The selector key (can be a fixture key or raw CSS selector)
  * @param valueKey - The value key (can be a fixture key or raw value)
- * @example Then I do not see exact value "john_doe"
+ * @example Then I pw do not see exact value "john_doe"
  */
 export async function expectElementToNotHaveExactValue(
   page: any,
@@ -130,7 +130,7 @@ export async function expectElementToNotHaveExactValue(
  * @param selectorKey - The selector key (can be a fixture key or raw CSS selector)
  * @param attrKey - The attribute key (can be a fixture key or raw attribute name)
  * @param valueKey - The value key (can be a fixture key or raw value)
- * @example Then I see exact attribute "href" with value "/terms-and-conditions"
+ * @example Then I pw see exact attribute "href" with value "/terms-and-conditions"
  */
 export async function expectElementToHaveExactAttribute(
   page: any,
@@ -157,7 +157,7 @@ export async function expectElementToHaveExactAttribute(
  * @param selectorKey - The selector key (can be a fixture key or raw CSS selector)
  * @param attrKey - The attribute key (can be a fixture key or raw attribute name)
  * @param valueKey - The value key (can be a fixture key or raw value)
- * @example Then I do not see exact attribute "href" with value "/wrong-url"
+ * @example Then I pw do not see exact attribute "href" with value "/wrong-url"
  */
 export async function expectElementToNotHaveExactAttribute(
   page: any,
@@ -183,8 +183,8 @@ export async function expectElementToNotHaveExactAttribute(
  * Asserts that a button with specific text is visible.
  * @param page - The Playwright page object
  * @param textKey - The text key (can be a fixture key or raw text)
- * @example Then I see button text "Submit"
- * @example Then I see button text "buttons.saveKey" (fixture)
+ * @example Then I pw see button text "Submit"
+ * @example Then I pw see button text "buttons.saveKey" (fixture)
  */
 export async function iSeeButtonText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -196,7 +196,7 @@ export async function iSeeButtonText(page: any, textKey: string): Promise<void> 
  * Asserts that a heading with specific text is visible.
  * @param page - The Playwright page object
  * @param textKey - The text key (can be a fixture key or raw text)
- * @example Then I see heading text "Welcome"
+ * @example Then I pw see heading text "Welcome"
  */
 export async function iSeeHeadingText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -206,7 +206,7 @@ export async function iSeeHeadingText(page: any, textKey: string): Promise<void>
 
 /**
  * Asserts that a link with specific text is visible.
- * @example Then I see link text "Read More"
+ * @example Then I pw see link text "Read More"
  */
 export async function iSeeLinkText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -216,7 +216,7 @@ export async function iSeeLinkText(page: any, textKey: string): Promise<void> {
 
 /**
  * Asserts that a label with specific text is visible.
- * @example Then I see label text "Email Address"
+ * @example Then I pw see label text "Email Address"
  */
 export async function iSeeLabelText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -226,7 +226,7 @@ export async function iSeeLabelText(page: any, textKey: string): Promise<void> {
 
 /**
  * Asserts that a button with specific text is NOT visible or does not exist.
- * @example Then I do not see button text "Delete"
+ * @example Then I pw do not see button text "Delete"
  */
 export async function iDoNotSeeButtonText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -236,7 +236,7 @@ export async function iDoNotSeeButtonText(page: any, textKey: string): Promise<v
 
 /**
  * Asserts that a heading with specific text is NOT visible or does not exist.
- * @example Then I do not see heading text "Old Title"
+ * @example Then I pw do not see heading text "Old Title"
  */
 export async function iDoNotSeeHeadingText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -246,7 +246,7 @@ export async function iDoNotSeeHeadingText(page: any, textKey: string): Promise<
 
 /**
  * Asserts that a link with specific text is NOT visible or does not exist.
- * @example Then I do not see link text "Expired Offer"
+ * @example Then I pw do not see link text "Expired Offer"
  */
 export async function iDoNotSeeLinkText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -256,7 +256,7 @@ export async function iDoNotSeeLinkText(page: any, textKey: string): Promise<voi
 
 /**
  * Asserts that a label with specific text is NOT visible or does not exist.
- * @example Then I do not see label text "Secret Info"
+ * @example Then I pw do not see label text "Secret Info"
  */
 export async function iDoNotSeeLabelText(page: any, textKey: string): Promise<void> {
   const text = resolveParam(textKey, "texts.json");
@@ -274,7 +274,7 @@ export async function iDoNotSeeLabelText(page: any, textKey: string): Promise<vo
 
 /**
  * Gets an element by selector and asserts it is hidden.
- * @example When I get element by selector "div.loader" to be hidden
+ * @example When I pw get element by selector "div.loader" to be hidden
  */
 export async function getElementBySelectorToBeHidden(page: any, selectorKey: string): Promise<void> {
   const selector = resolveParam(selectorKey, "selectors.json");

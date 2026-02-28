@@ -8,7 +8,7 @@ import { Step } from "../../core/registry";
 /**
  * Navigates the browser to a specific absolute URL.
  * @example
- * Given I visit "https://www.google.com"
+ * Given I pw visit "https://www.google.com"
  * @param url - The full URL string (must include http/https).
  */
 export async function visitUrl(page: any, url: string): Promise<void> {
@@ -19,7 +19,7 @@ export async function visitUrl(page: any, url: string): Promise<void> {
 /**
  * Reloads the current page (simulates hitting the Refresh button).
  * @example
- * When I reload the page
+ * When I pw reload the page
  */
 export async function reloadPage(page: any): Promise<void> {
   await page.reload();
@@ -30,7 +30,7 @@ export async function reloadPage(page: any): Promise<void> {
  * Navigates back one step in the browser history.
  * Simulates clicking the browser's "Back" button.
  * @example
- * When I go back
+ * When I pw go back
  */
 export async function goBack(page: any): Promise<void> {
   await page.goBack();
@@ -41,7 +41,7 @@ export async function goBack(page: any): Promise<void> {
  * Navigates forward one step in the browser history.
  * Simulates clicking the browser's "Forward" button.
  * @example
- * When I go forward
+ * When I pw go forward
  */
 export async function goForward(page: any): Promise<void> {
   await page.goForward();
@@ -53,7 +53,7 @@ export async function goForward(page: any): Promise<void> {
  * If a `baseURL` is configured in your Playwright config, this is relative to it.
  * Otherwise, it treats the string as a direct URL.
  * @example
- * When I navigate to "/dashboard/login"
+ * When I pw navigate to "/dashboard/login"
  * @param path - The relative path or URL to navigate to.
  */
 export async function navigateToPath(page: any, path: string): Promise<void> {

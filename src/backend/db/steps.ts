@@ -10,7 +10,7 @@ import { dbState } from "../utils/state";
 /**
  * Executes a raw SQL query against the configured database.
  * Supports fixtures for reusable queries.
- * @example When I run the database query "selectUsersByEmail"
+ * @example When I pw run the database query "selectUsersByEmail"
  */
 export async function runDbQuery(_page: any, queryKey: string): Promise<void> {
   const queries = loadFixture("queries.json");
@@ -22,7 +22,7 @@ export async function runDbQuery(_page: any, queryKey: string): Promise<void> {
 
 /**
  * Asserts that the last executed database query returned a specific number of records.
- * @example Then I expect the database to return 1 record
+ * @example Then I pw expect the database to return 1 record
  */
 export async function expectDbRecordCount(page: any, count: number): Promise<void> {
   const result = dbState.getLastResult();
@@ -36,7 +36,7 @@ export async function expectDbRecordCount(page: any, count: number): Promise<voi
 
 /**
  * Asserts that the database query returned no records (empty result set).
- * @example Then I expect the database to return no records
+ * @example Then I pw expect the database to return no records
  */
 export async function expectDbNoRecords(_page: any): Promise<void> {
   const result = dbState.getLastResult();
@@ -51,7 +51,7 @@ export async function expectDbNoRecords(_page: any): Promise<void> {
  * Asserts that the first record of the last database result set contains specific column values.
  * Performs a loose equality check (converts values to strings) to handle type mismatches.
  * Supports fixtures for reusable table data.
- * @example Then I expect the first database record to contain
+ * @example Then I pw expect the first database record to contain
  * | username | admin             |
  * | is_active| 1                 |
  * | role     | superuser         |
@@ -89,7 +89,7 @@ export async function expectFirstDbRecordToContain(
 /**
  * Asserts that a specific row (by index) contains expected column values.
  * Supports fixtures for reusable table data.
- * @example Then I expect database row 2 to contain
+ * @example Then I pw expect database row 2 to contain
  * | username | bob              |
  * | status   | active           |
  */
@@ -135,7 +135,7 @@ export async function expectDbRowToContain(
  * Asserts that all records in the result set contain specific column values.
  * Useful for verifying uniform data across multiple rows.
  * Supports fixtures for reusable table data.
- * @example Then I expect all database records to contain
+ * @example Then I pw expect all database records to contain
  * | status | active |
  */
 export async function expectAllDbRecordsToContain(page: any, tableData: string[][]): Promise<void> {
@@ -175,7 +175,7 @@ export async function expectAllDbRecordsToContain(page: any, tableData: string[]
 /**
  * Asserts that a specific column exists in the database result set.
  * Supports fixtures for reusable column names.
- * @example Then I expect database column "email" to exist
+ * @example Then I pw expect database column "email" to exist
  */
 export async function expectDbColumnExists(page: any, columnNameKey: string): Promise<void> {
   const columns = loadFixture("columns.json");
@@ -201,7 +201,7 @@ export async function expectDbColumnExists(page: any, columnNameKey: string): Pr
  * Asserts that a specific column in any row contains the expected value.
  * Searches through all rows to find a match.
  * Supports fixtures for reusable column names and values.
- * @example Then I expect database column "email" to contain "test@example.com"
+ * @example Then I pw expect database column "email" to contain "test@example.com"
  */
 export async function expectDbColumnContains(
   page: any,
@@ -244,7 +244,7 @@ export async function expectDbColumnContains(
 /**
  * Asserts the data type of a column's value in the first record.
  * Supports fixtures for reusable column names and types.
- * @example Then I expect database column "age" to be of type "number"
+ * @example Then I pw expect database column "age" to be of type "number"
  */
 export async function expectDbColumnType(
   page: any,

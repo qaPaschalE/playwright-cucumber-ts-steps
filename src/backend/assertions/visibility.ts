@@ -9,7 +9,7 @@ import { getActiveElement, getVariable, } from "../utils/state";
 
 /**
  * Asserts that the currently stored (active) element is visible in the viewport.
- * @example Then I expect element to be visible
+ * @example Then I pw expect element to be visible
  */
 export async function expectActiveVisible(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -20,7 +20,7 @@ export async function expectActiveVisible(page: any): Promise<void> {
 /**
  * Asserts that an element with a given selector or description is visible in the viewport.
  * Supports fixtures for reusable selectors.
- * @example Then I expect "login.submitButton" to be visible
+ * @example Then I pw expect "login.submitButton" to be visible
  */
 export async function expectStringVisible(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -33,7 +33,7 @@ export async function expectStringVisible(page: any, selectorKey: string): Promi
 
 /**
  * Asserts that the currently stored (active) element is hidden or detached from the DOM.
- * @example Then I expect element to be hidden
+ * @example Then I pw expect element to be hidden
  */
 export async function expectActiveHidden(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -43,7 +43,7 @@ export async function expectActiveHidden(page: any): Promise<void> {
 
 /**
  * Asserts that the currently stored (active) element is enabled (not disabled).
- * @example Then I expect element to be enabled
+ * @example Then I pw expect element to be enabled
  */
 export async function expectActiveEnabled(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -53,7 +53,7 @@ export async function expectActiveEnabled(page: any): Promise<void> {
 
 /**
  * Asserts that the currently stored (active) element is disabled.
- * @example Then I expect element to be disabled
+ * @example Then I pw expect element to be disabled
  */
 export async function expectActiveDisabled(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -64,7 +64,7 @@ export async function expectActiveDisabled(page: any): Promise<void> {
 /**
  * Asserts that the currently stored (active) element has the exact text specified.
  * Supports fixtures for reusable texts.
- * @example Then I expect element to have text "login.submitButtonText"
+ * @example Then I pw expect element to have text "login.submitButtonText"
  */
 export async function expectActiveText(page: any, textKey: string): Promise<void> {
   const texts = loadFixture("texts.json");
@@ -78,7 +78,7 @@ export async function expectActiveText(page: any, textKey: string): Promise<void
 /**
  * Asserts that the currently stored (active) element contains the specified partial text.
  * Supports fixtures for reusable texts.
- * @example Then I expect element to contain text "login.partialText"
+ * @example Then I pw expect element to contain text "login.partialText"
  */
 export async function expectActiveContainText(page: any, textKey: string): Promise<void> {
   const texts = loadFixture("texts.json");
@@ -93,7 +93,7 @@ export async function expectActiveContainText(page: any, textKey: string): Promi
  * Asserts that the currently stored (active) element (input/select) has a specific value.
  * Supports aliases (e.g., `@orderId`) to compare against stored variables.
  * Supports fixtures for reusable values.
- * @example Then I expect element to have value "@savedUserEmail"
+ * @example Then I pw expect element to have value "@savedUserEmail"
  */
 export async function expectActiveValue(page: any, valueKey: string): Promise<void> {
   let resolvedValue = valueKey;
@@ -115,7 +115,7 @@ export async function expectActiveValue(page: any, valueKey: string): Promise<vo
 /**
  * Asserts that the currently stored (active) element possesses a specific attribute.
  * Supports fixtures for reusable attributes.
- * @example Then I expect element to have attribute "attributes.required"
+ * @example Then I pw expect element to have attribute "attributes.required"
  */
 export async function expectActiveAttribute(page: any, attrKey: string): Promise<void> {
   const attributes = loadFixture("attributes.json");
@@ -129,7 +129,7 @@ export async function expectActiveAttribute(page: any, attrKey: string): Promise
 /**
  * Asserts that the currently stored (active) element has an attribute with a specific value.
  * Supports fixtures for reusable attributes and values.
- * @example Then I expect element to have attribute "attributes.type" with value "input.passwordType"
+ * @example Then I pw expect element to have attribute "attributes.type" with value "input.passwordType"
  */
 export async function expectActiveAttributeValue(
   page: any,
@@ -149,7 +149,7 @@ export async function expectActiveAttributeValue(
 
 /**
  * Performs a visual comparison of the entire page against a baseline screenshot.
- * @example Then I expect the page screenshot to match "landing-page.png"
+ * @example Then I pw expect the page screenshot to match "landing-page.png"
  */
 export async function expectPageScreenshotMatch(page: any, filename: string): Promise<void> {
   await expect(page).toHaveScreenshot(filename);
@@ -158,7 +158,7 @@ export async function expectPageScreenshotMatch(page: any, filename: string): Pr
 
 /**
  * Performs a visual comparison of the active element against a baseline screenshot.
- * @example Then I expect the element screenshot to match "login-button.png"
+ * @example Then I pw expect the element screenshot to match "login-button.png"
  */
 export async function expectElementScreenshotMatch(page: any, filename: string): Promise<void> {
   const element = getActiveElement(page);
@@ -170,7 +170,7 @@ export async function expectElementScreenshotMatch(page: any, filename: string):
 /**
  * Asserts that an element is not visible.
  * Supports fixtures for reusable selectors.
- * @example Then I expect "modal.overlay" to be not visible
+ * @example Then I pw expect "modal.overlay" to be not visible
  */
 export async function expectElementToNotBeVisible(
   page: any,
@@ -186,7 +186,7 @@ export async function expectElementToNotBeVisible(
 /**
  * Asserts that an element exists in the DOM.
  * Supports fixtures for reusable selectors.
- * @example Then I expect element "header.logo" exists
+ * @example Then I pw expect element "header.logo" exists
  */
 export async function expectElementExists(
   page: any,
@@ -205,7 +205,7 @@ export async function expectElementExists(
 /**
  * Asserts that an element does not exist in the DOM.
  * Supports fixtures for reusable selectors.
- * @example Then I expect element "modal.deleted" does not exist
+ * @example Then I pw expect element "modal.deleted" does not exist
  */
 export async function expectElementDoesNotExist(
   page: any,

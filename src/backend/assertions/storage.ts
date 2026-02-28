@@ -12,7 +12,7 @@ import {
 /**
  * Asserts that a cookie exists and has the expected value.
  * Supports fixtures for reusable cookie names and values.
- * @example Then I see cookie "session_id" has value "abc123"
+ * @example Then I pw see cookie "session_id" has value "abc123"
  */
 export async function expectCookieHasValue(
   page: any,
@@ -42,7 +42,7 @@ export async function expectCookieHasValue(
 /**
  * Asserts that a cookie exists and contains the expected substring.
  * Supports fixtures for reusable cookie names and values.
- * @example Then I see cookie "session_id" contains value "abc"
+ * @example Then I pw see cookie "session_id" contains value "abc"
  */
 export async function expectCookieContainsValue(
   page: any,
@@ -72,7 +72,7 @@ export async function expectCookieContainsValue(
 /**
  * Asserts that a cookie does not exist.
  * Supports fixtures for reusable cookie names.
- * @example Then I do not see cookie "old_session"
+ * @example Then I pw do not see cookie "old_session"
  */
 export async function expectCookieDoesNotExist(
   page: any,
@@ -94,7 +94,7 @@ export async function expectCookieDoesNotExist(
 /**
  * Asserts that a local storage item exists and has the expected value.
  * Supports fixtures for reusable storage keys and values.
- * @example Then I see local storage item "user_prefs" equals "dark_theme"
+ * @example Then I pw see local storage item "user_prefs" equals "dark_theme"
  */
 export async function expectLocalStorageItemEquals(
   page: any,
@@ -123,7 +123,7 @@ export async function expectLocalStorageItemEquals(
 /**
  * Asserts that a local storage item exists and contains the expected substring.
  * Supports fixtures for reusable storage keys and values.
- * @example Then I see local storage item "user_prefs" contains "theme"
+ * @example Then I pw see local storage item "user_prefs" contains "theme"
  */
 export async function expectLocalStorageItemContains(
   page: any,
@@ -152,7 +152,7 @@ export async function expectLocalStorageItemContains(
 /**
  * Asserts that a local storage item exists.
  * Supports fixtures for reusable storage keys.
- * @example Then I see local storage item "user_id"
+ * @example Then I pw see local storage item "user_id"
  */
 export async function expectLocalStorageItem(
   page: any,
@@ -173,7 +173,7 @@ export async function expectLocalStorageItem(
 /**
  * Asserts that a local storage item does not exist.
  * Supports fixtures for reusable storage keys.
- * @example Then I do not see local storage item "old_data"
+ * @example Then I pw do not see local storage item "old_data"
  */
 export async function expectLocalStorageItemDoesNotExist(
   page: any,
@@ -194,7 +194,7 @@ export async function expectLocalStorageItemDoesNotExist(
 /**
  * Asserts that a session storage item exists and has the expected value.
  * Supports fixtures for reusable storage keys and values.
- * @example Then I see session storage item "temp_data" equals "abc123"
+ * @example Then I pw see session storage item "temp_data" equals "abc123"
  */
 export async function expectSessionStorageItemEquals(
   page: any,
@@ -223,7 +223,7 @@ export async function expectSessionStorageItemEquals(
 /**
  * Asserts that a session storage item exists and contains the expected substring.
  * Supports fixtures for reusable storage keys and values.
- * @example Then I see session storage item "temp_data" contains "abc"
+ * @example Then I pw see session storage item "temp_data" contains "abc"
  */
 export async function expectSessionStorageItemContains(
   page: any,
@@ -252,7 +252,7 @@ export async function expectSessionStorageItemContains(
 /**
  * Asserts that a session storage item exists.
  * Supports fixtures for reusable storage keys.
- * @example Then I see session storage item "temp_token"
+ * @example Then I pw see session storage item "temp_token"
  */
 export async function expectSessionStorageItem(
   page: any,
@@ -273,7 +273,7 @@ export async function expectSessionStorageItem(
 /**
  * Asserts that a session storage item does not exist.
  * Supports fixtures for reusable storage keys.
- * @example Then I do not see session storage item "expired_token"
+ * @example Then I pw do not see session storage item "expired_token"
  */
 export async function expectSessionStorageItemDoesNotExist(
   page: any,

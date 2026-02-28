@@ -11,7 +11,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
  * Takes a screenshot of the entire page.
  * @param page - The Playwright page object
  * @param filename - The filename to save the screenshot as
- * @example When I take a screenshot of the page "dashboard-view.png"
+ * @example When I pw take a screenshot of the page "dashboard-view.png"
  */
 export async function takePageScreenshot(page: any, filename: string): Promise<void> {
   await page.screenshot({ path: `screenshots/${filename}`, fullPage: true });
@@ -23,7 +23,7 @@ export async function takePageScreenshot(page: any, filename: string): Promise<v
  * @param page - The Playwright page object
  * @param selectorKey - The selector key (can be a fixture key or raw CSS selector)
  * @param filename - The filename to save the screenshot as
- * @example When I take a screenshot of element "header.navbar" as "navbar.png"
+ * @example When I pw take a screenshot of element "header.navbar" as "navbar.png"
  */
 export async function takeElementScreenshot(page: any, selectorKey: string, filename: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -38,7 +38,7 @@ export async function takeElementScreenshot(page: any, selectorKey: string, file
  * Takes a screenshot of the viewport area.
  * @param page - The Playwright page object
  * @param filename - The filename to save the screenshot as
- * @example When I take a viewport screenshot "login-area.png"
+ * @example When I pw take a viewport screenshot "login-area.png"
  */
 export async function takeViewportScreenshot(page: any, filename: string): Promise<void> {
   await page.screenshot({ path: `screenshots/${filename}` });
@@ -50,7 +50,7 @@ export async function takeViewportScreenshot(page: any, filename: string): Promi
  * @param page - The Playwright page object
  * @param currentFilename - The filename of the current page screenshot
  * @param referenceFilename - The filename of the reference screenshot to compare with
- * @example Then I expect page "current-view.png" to closely match "reference-view.png"
+ * @example Then I pw expect page "current-view.png" to closely match "reference-view.png"
  */
 export async function expectPageToCloselyMatch(page: any, currentFilename: string, referenceFilename: string): Promise<void> {
   // Playwright's screenshot comparison is already pixel-perfect by default
@@ -65,7 +65,7 @@ export async function expectPageToCloselyMatch(page: any, currentFilename: strin
  * @param selectorKey - The selector key (can be a fixture key or raw CSS selector)
  * @param currentFilename - The filename of the current element screenshot
  * @param referenceFilename - The filename of the reference screenshot to compare with
- * @example Then I expect element "div.content" screenshot "content-current.png" to closely match "content-reference.png"
+ * @example Then I pw expect element "div.content" screenshot "content-current.png" to closely match "content-reference.png"
  */
 export async function expectElementToCloselyMatch(page: any, selectorKey: string, currentFilename: string, referenceFilename: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -80,7 +80,7 @@ export async function expectElementToCloselyMatch(page: any, selectorKey: string
  * Takes a screenshot and attaches it to the test report.
  * @param page - The Playwright page object
  * @param name - The name to identify the screenshot in the report
- * @example When I capture screenshot "error-state" for the report
+ * @example When I pw capture screenshot "error-state" for the report
  */
 export async function captureScreenshotForReport(page: any, name: string): Promise<void> {
   await page.screenshot();

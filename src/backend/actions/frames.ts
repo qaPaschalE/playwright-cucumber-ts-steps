@@ -12,7 +12,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
 /**
  * Attempts to switch the logical context to a specific iframe.
  * Verifies the frame exists and logs a warning about frame scope limitations.
- * @example When I switch to frame "payment-iframe"
+ * @example When I pw switch to frame "payment-iframe"
  * @param selectorKey - The key of the iframe selector in the fixtures or a raw CSS selector.
  */
 export async function switchToFrame(page: any, selectorKey: string): Promise<void> {
@@ -34,7 +34,7 @@ export async function switchToFrame(page: any, selectorKey: string): Promise<voi
 /**
  * Finds an element inside a specific iframe and sets it as the active element.
  * This is the robust way to interact with iframe content (e.g., Stripe forms, embedded videos).
- * @example When I find element "card-number" in frame "stripe-element"
+ * @example When I pw find element "card-number" in frame "stripe-element"
  * @param elementSelectorKey - The key of the element selector in the fixtures or a raw CSS selector.
  * @param frameSelectorKey - The key of the iframe selector in the fixtures or a raw CSS selector.
  */
@@ -60,7 +60,7 @@ export async function findElementInFrame(
 /**
  * Waits for a new browser tab (popup) to open.
  * Useful for validating `target="_blank"` links.
- * @example When I click on link "Open Dashboard" And I switch to new tab
+ * @example When I pw click on link "Open Dashboard" And I pw switch to new tab
  */
 export async function switchToNewTab(page: any): Promise<void> {
   console.log("⚠️ Multi-tab support requires Runner updates. Verifying popup event only.");

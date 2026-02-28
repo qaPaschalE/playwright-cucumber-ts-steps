@@ -11,7 +11,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
 /**
  * Performs a standard HTTP GET request and stores the response in the global API state.
  * Supports fixtures for reusable API endpoints.
- * @example When I make a GET request to "users.list"
+ * @example When I pw make a GET request to "users.list"
  */
 export async function makeGetRequest(page: any, urlKey: string): Promise<void> {
   const endpoints = loadFixture("endpoints.json");
@@ -25,7 +25,7 @@ export async function makeGetRequest(page: any, urlKey: string): Promise<void> {
 /**
  * Performs a standard HTTP DELETE request and stores the response in the global API state.
  * Supports fixtures for reusable API endpoints.
- * @example When I make a DELETE request to "users.delete"
+ * @example When I pw make a DELETE request to "users.delete"
  */
 export async function makeDeleteRequest(page: any, urlKey: string): Promise<void> {
   const endpoints = loadFixture("endpoints.json");
@@ -38,7 +38,7 @@ export async function makeDeleteRequest(page: any, urlKey: string): Promise<void
 
 /**
  * Performs an HTTP POST request using a Gherkin Data Table as the JSON payload.
- * @example When I make a POST request to "users.create" with data
+ * @example When I pw make a POST request to "users.create" with data
  * | name | John |
  * | job  | Dev  |
  */
@@ -69,7 +69,7 @@ export async function makePostRequestWithTable(
 /**
  * Performs an HTTP POST request using the contents of a local JSON file as the payload.
  * Supports fixtures for reusable API endpoints and payloads.
- * @example When I make a POST request to "users.create" with payload from "user.newUser"
+ * @example When I pw make a POST request to "users.create" with payload from "user.newUser"
  */
 export async function makePostRequestWithFile(
   page: any,

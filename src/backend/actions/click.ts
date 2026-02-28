@@ -17,7 +17,7 @@ import {
  * Clicks on the currently stored (active) element.
  * @param page - The Playwright page object
  * @param table - Optional table data for click options
- * @example When I click
+ * @example When I pw click
  */
 export async function clickStoredElement(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -32,8 +32,8 @@ export async function clickStoredElement(page: any, table?: any): Promise<void> 
  * @param page - The Playwright page object
  * @param selectorKey - The selector key (can be a fixture key or raw CSS/XPath selector)
  * @param table - Optional table data for click options
- * @example When I click on element ".my-element"
- *          When I click on element "login.submitButton"
+ * @example When I pw click on element ".my-element"
+ *          When I pw click on element "login.submitButton"
  */
 export async function clickElementBySelector(
   page: any,
@@ -57,7 +57,7 @@ export async function clickElementBySelector(
  * @param page - The Playwright page object
  * @param label - The button label text
  * @param table - Optional table data for click options
- * @example When I click on button "Submit"
+ * @example When I pw click on button "Submit"
  */
 export async function clickButtonByLabel(page: any, label: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -69,7 +69,7 @@ export async function clickButtonByLabel(page: any, label: string, table?: any):
 
 /**
  * Clicks on a button role element with the EXACT specified text.
- * @example When I click on exact button text "Submit"
+ * @example When I pw click on exact button text "Submit"
  */
 export async function clickButtonByExactText(page: any, exactText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -84,7 +84,7 @@ export async function clickButtonByExactText(page: any, exactText: string, table
  * @param page - The Playwright page object
  * @param text - The link text
  * @param table - Optional table data for click options
- * @example When I click on link "Home"
+ * @example When I pw click on link "Home"
  */
 export async function clickLinkByText(page: any, text: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -99,7 +99,7 @@ export async function clickLinkByText(page: any, text: string, table?: any): Pro
  * @param page - The Playwright page object
  * @param labelText - The label text
  * @param table - Optional table data for click options
- * @example When I click on label "Email"
+ * @example When I pw click on label "Email"
  */
 export async function clickLabelByText(page: any, labelText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -114,7 +114,7 @@ export async function clickLabelByText(page: any, labelText: string, table?: any
  * @param page - The Playwright page object
  * @param rawText - The text to search for (can be a variable alias starting with @)
  * @param table - Optional table data for click options
- * @example When I click on text "Login"
+ * @example When I pw click on text "Login"
  */
 export async function clickByText(page: any, rawText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -143,7 +143,7 @@ export async function clickByText(page: any, rawText: string, table?: any): Prom
  * @param page - The Playwright page object
  * @param exactText - The exact text to match
  * @param table - Optional table data for click options
- * @example When I click on exact text "Submit"
+ * @example When I pw click on exact text "Submit"
  */
 export async function clickByExactText(page: any, exactText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -159,7 +159,7 @@ export async function clickByExactText(page: any, exactText: string, table?: any
  * Clicks on a selector provided via Regex match.
  * @param page - The Playwright page object
  * @param selector - The CSS selector string
- * @example When I click on selector "#btn-id"
+ * @example When I pw click on selector "#btn-id"
  */
 export async function clickByRegexSelector(page: any, selector: string): Promise<void> {
   const locator = page.locator(selector);
@@ -172,7 +172,7 @@ export async function clickByRegexSelector(page: any, selector: string): Promise
  * Iterates through ALL currently stored active elements and clicks them one by one.
  * @param page - The Playwright page object
  * @param table - Optional table data for click options
- * @example When I click all
+ * @example When I pw click all
  */
 export async function clickAllStoredElements(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -194,7 +194,7 @@ export async function clickAllStoredElements(page: any, table?: any): Promise<vo
  * Double-clicks on the currently stored (active) element.
  * @param page - The Playwright page object
  * @param table - Optional table data for click options
- * @example When I double click
+ * @example When I pw double click
  */
 export async function doubleClickStoredElement(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -208,7 +208,7 @@ export async function doubleClickStoredElement(page: any, table?: any): Promise<
  * @param page - The Playwright page object
  * @param text - The text to search for
  * @param table - Optional table data for click options
- * @example When I double click on text "Button"
+ * @example When I pw double click on text "Button"
  */
 export async function doubleClickByText(page: any, text: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -219,7 +219,7 @@ export async function doubleClickByText(page: any, text: string, table?: any): P
 
 /**
  * Double-clicks on the first element containing the EXACT specified text.
- * @example When I double click on exact text "Button"
+ * @example When I pw double click on exact text "Button"
  */
 export async function doubleClickByExactText(page: any, exactText: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -234,7 +234,7 @@ export async function doubleClickByExactText(page: any, exactText: string, table
  * @param x - The X coordinate
  * @param y - The Y coordinate
  * @param table - Optional table data for click options
- * @example When I double click position 100 200
+ * @example When I pw double click position 100 200
  */
 export async function doubleClickPosition(
   page: any,
@@ -251,7 +251,7 @@ export async function doubleClickPosition(
  * Right-clicks (Context Click) on the currently stored element.
  * @param page - The Playwright page object
  * @param table - Optional table data for click options
- * @example When I right click
+ * @example When I pw right click
  */
 export async function rightClickStoredElement(page: any, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -265,7 +265,7 @@ export async function rightClickStoredElement(page: any, table?: any): Promise<v
  * @param page - The Playwright page object
  * @param text - The text to search for
  * @param table - Optional table data for click options
- * @example When I right click on text "Menu"
+ * @example When I pw right click on text "Menu"
  */
 export async function rightClickByText(page: any, text: string, table?: any): Promise<void> {
   const options = parseClickOptions(table);
@@ -280,7 +280,7 @@ export async function rightClickByText(page: any, text: string, table?: any): Pr
  * @param x - The X coordinate
  * @param y - The Y coordinate
  * @param table - Optional table data for click options
- * @example When I right click position 100 200
+ * @example When I pw right click position 100 200
  */
 export async function rightClickPosition(
   page: any,
@@ -300,8 +300,8 @@ export async function rightClickPosition(
  * @param indexStr - The index string (1st, 2nd, 3rd, etc.)
  * @param text - The text to search for
  * @param table - Optional table data for click options
- * @example When I click on 1st element "Login"
- *          When I click on 2nd element "Submit"
+ * @example When I pw click on 1st element "Login"
+ *          When I pw click on 2nd element "Submit"
  */
 export async function clickNthElementByText(
   page: any,
@@ -328,7 +328,7 @@ export async function clickNthElementByText(
  * @param indexStr - The index string (1st, 2nd, 3rd, etc.)
  * @param selectorKey - The selector key (can be a fixture key or raw CSS/XPath selector)
  * @param table - Optional table data for click options
- * @example When I click on 1st selector ".btn"
+ * @example When I pw click on 1st selector ".btn"
  */
 export async function clickNthElementBySelector(
   page: any,
@@ -358,10 +358,10 @@ export async function clickNthElementBySelector(
  * @param columnIndex - The 1-based index of the column to click (1st, 2nd, 3rd, etc.)
  * @param rowIndex - The selector key for the row (can be a fixture key or raw CSS selector)
  * @param table - Optional table data for click options
- * @example And I click on column 1 in row 1
- * @example And I click on column 2 in row 3
- * @example And I click on column 3 in row 2
- * @example And I click on column 4 in row 5
+ * @example And I pw click on column 1 in row 1
+ * @example And I pw click on column 2 in row 3
+ * @example And I pw click on column 3 in row 2
+ * @example And I pw click on column 4 in row 5
  */
 export async function clickOnColumnInRow(
   page: any,
@@ -391,10 +391,10 @@ export async function clickOnColumnInRow(
  * @param columnIndex - The 1-based index of the column to click
  * @param rowSelectorKey - The selector key for the row (can be a fixture key or raw CSS selector)
  * @param table - Optional table data for click options
- * @example When I click on 1st column in row "table#users tbody tr:first-child"
- * @example When I click on 2nd column in row "tr.user-row"
- * @example When I click on 3rd column in row ".data-table tbody tr:last-child"
- * @example When I click on 4th column in row "tr[data-id='123']"
+ * @example When I pw click on 1st column in row "table#users tbody tr:first-child"
+ * @example When I pw click on 2nd column in row "tr.user-row"
+ * @example When I pw click on 3rd column in row ".data-table tbody tr:last-child"
+ * @example When I pw click on 4th column in row "tr[data-id='123']"
  */
 export async function clickOnNthColumnInRow(
   page: any,

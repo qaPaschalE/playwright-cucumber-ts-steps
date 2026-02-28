@@ -13,7 +13,7 @@ import {
 /**
  * Asserts that the document title equals the expected value.
  * Supports fixtures for reusable title values.
- * @example Then I see document title "My Website - Home"
+ * @example Then I pw see document title "My Website - Home"
  */
 export async function expectDocumentTitle(
   page: any,
@@ -29,7 +29,7 @@ export async function expectDocumentTitle(
 /**
  * Asserts that the document title contains the expected substring.
  * Supports fixtures for reusable title values.
- * @example Then I see document title contains "Website"
+ * @example Then I pw see document title contains "Website"
  */
 export async function expectDocumentTitleContains(
   page: any,
@@ -48,7 +48,7 @@ export async function expectDocumentTitleContains(
 /**
  * Asserts that the current URL equals the expected value.
  * Supports fixtures for reusable URL values.
- * @example Then I see URL "https://example.com/dashboard"
+ * @example Then I pw see URL "https://example.com/dashboard"
  */
 export async function expectUrl(
   page: any,
@@ -64,7 +64,7 @@ export async function expectUrl(
 /**
  * Asserts that the current URL contains the expected substring.
  * Supports fixtures for reusable URL values.
- * @example Then I see URL contains "dashboard"
+ * @example Then I pw see URL contains "dashboard"
  */
 export async function expectUrlContains(
   page: any,
@@ -83,7 +83,7 @@ export async function expectUrlContains(
 /**
  * Asserts that the current pathname equals the expected value.
  * Supports fixtures for reusable pathname values.
- * @example Then I see pathname "/dashboard"
+ * @example Then I pw see pathname "/dashboard"
  */
 export async function expectPathname(
   page: any,
@@ -102,7 +102,7 @@ export async function expectPathname(
 /**
  * Asserts that the current pathname contains the expected substring.
  * Supports fixtures for reusable pathname values.
- * @example Then I see pathname contains "dashboard"
+ * @example Then I pw see pathname contains "dashboard"
  */
 export async function expectPathnameContains(
   page: any,
@@ -121,7 +121,7 @@ export async function expectPathnameContains(
 /**
  * Asserts that the current hash equals the expected value.
  * Supports fixtures for reusable hash values.
- * @example Then I see hash "#section1"
+ * @example Then I pw see hash "#section1"
  */
 export async function expectHash(
   page: any,
@@ -140,7 +140,7 @@ export async function expectHash(
 /**
  * Asserts that the current hash contains the expected substring.
  * Supports fixtures for reusable hash values.
- * @example Then I see hash contains "section"
+ * @example Then I pw see hash contains "section"
  */
 export async function expectHashContains(
   page: any,
@@ -159,7 +159,7 @@ export async function expectHashContains(
 /**
  * Asserts that the current search parameters contain the expected substring.
  * Supports fixtures for reusable search values.
- * @example Then I see search contains "query=test"
+ * @example Then I pw see search contains "query=test"
  */
 export async function expectSearchContains(
   page: any,
@@ -178,7 +178,7 @@ export async function expectSearchContains(
 /**
  * Asserts that the current location equals the expected value.
  * Supports fixtures for reusable location values.
- * @example Then I see location "https://example.com/dashboard#top"
+ * @example Then I pw see location "https://example.com/dashboard#top"
  */
 export async function expectLocation(
   page: any,

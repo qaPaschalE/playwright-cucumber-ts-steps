@@ -13,7 +13,7 @@ import { resolveParam } from "../utils/resolver";
 /**
  * Counts the number of elements matching the selector.
  * Supports fixtures for reusable selectors.
- * @example Then I count elements "li.item"
+ * @example Then I pw count elements "li.item"
  */
 export async function countElements(
   page: any,
@@ -29,7 +29,7 @@ export async function countElements(
 /**
  * Asserts that a button element does not exist or is not visible.
  * Supports fixtures for reusable selectors.
- * @example Then I do not see button element "nav.logoutBtn"
+ * @example Then I pw do not see button element "nav.logoutBtn"
  */
 export async function expectButtonNotVisible(
   page: any, selectorKey: string) {
@@ -41,7 +41,7 @@ export async function expectButtonNotVisible(
 /**
  * Asserts that a heading element does not exist or is not visible.
  * Supports fixtures for reusable selectors.
- * @example Then I do not see heading element "h1.main-title"
+ * @example Then I pw do not see heading element "h1.main-title"
  */
 export async function expectHeadingNotVisible(
   page: any,
@@ -64,7 +64,7 @@ export async function expectHeadingNotVisible(
 /**
  * Asserts that a label element does not exist or is not visible.
  * Supports fixtures for reusable selectors.
- * @example Then I do not see label element "label.username-label"
+ * @example Then I pw do not see label element "label.username-label"
  */
 export async function expectLabelNotVisible(
   page: any,
@@ -87,7 +87,7 @@ export async function expectLabelNotVisible(
 /**
  * Asserts that a link element does not exist or is not visible.
  * Supports fixtures for reusable selectors.
- * @example Then I do not see link element "a.privacy-link"
+ * @example Then I pw do not see link element "a.privacy-link"
  */
 export async function expectLinkNotVisible(
   page: any,
@@ -110,7 +110,7 @@ export async function expectLinkNotVisible(
 /**
  * Asserts that an element with a specific test ID does not exist or is not visible.
  * Supports fixtures for reusable test IDs.
- * @example Then I do not see testid element "data-testid=my-component"
+ * @example Then I pw do not see testid element "data-testid=my-component"
  */
 export async function expectTestIdNotVisible(
   page: any,
@@ -133,7 +133,7 @@ export async function expectTestIdNotVisible(
 /**
  * Asserts that an element with a specific role does not exist or is not visible.
  * Supports fixtures for reusable roles.
- * @example Then I do not see role element "button"
+ * @example Then I pw do not see role element "button"
  */
 export async function expectRoleNotVisible(
   page: any,
@@ -156,7 +156,7 @@ export async function expectRoleNotVisible(
 /**
  * Asserts that an option element does not exist or is not visible.
  * Supports fixtures for reusable selectors.
- * @example Then I do not see option element "option[value='disabled']"
+ * @example Then I pw do not see option element "option[value='disabled']"
  */
 export async function expectOptionNotVisible(
   page: any,
@@ -181,7 +181,7 @@ export async function expectOptionNotVisible(
 /**
  * Asserts that an element with a specific attribute does not exist or is not visible.
  * Supports fixtures for reusable selectors and attribute values.
- * @example Then I do not see element with attribute "aria-hidden" having value "false"
+ * @example Then I pw do not see element with attribute "aria-hidden" having value "false"
  */
 export async function expectElementWithAttributeNotVisible(
   page: any,
@@ -209,7 +209,7 @@ export async function expectElementWithAttributeNotVisible(
 /**
  * Asserts that an element has an attribute containing the specified value.
  * Supports fixtures for reusable selectors, attributes and values.
- * @example Then I see element attribute "class" contains "active"
+ * @example Then I pw see element attribute "class" contains "active"
  */
 export async function expectElementAttributeContains(
   page: any,
@@ -238,7 +238,7 @@ export async function expectElementAttributeContains(
 /**
  * Asserts that an element has an attribute equal to the specified value.
  * Supports fixtures for reusable selectors, attributes and values.
- * @example Then I see element attribute "class" equals "btn-primary"
+ * @example Then I pw see element attribute "class" equals "btn-primary"
  */
 export async function expectElementAttributeEquals(
   page: any,
@@ -267,7 +267,7 @@ export async function expectElementAttributeEquals(
 /**
  * Asserts that an element has a specific attribute.
  * Supports fixtures for reusable selectors and attributes.
- * @example Then I see element has attribute "aria-label"
+ * @example Then I pw see element has attribute "aria-label"
  */
 export async function expectElementHasAttribute(
   page: any,
@@ -293,7 +293,7 @@ export async function expectElementHasAttribute(
 /**
  * Asserts that a button element exists and is visible.
  * Supports fixtures for reusable selectors.
- * @example Then I see button element "nav.loginBtn"
+ * @example Then I pw see button element "nav.loginBtn"
  */
 export async function expectButtonVisible(
   page: any, selectorKey: string) {
@@ -303,7 +303,7 @@ export async function expectButtonVisible(
 }
 /**
  * Gets an element by selector and asserts it has a class containing the specified text.
- * @example Then I get element by selector "button.primary" to have class containing "active"
+ * @example Then I pw get element by selector "button.primary" to have class containing "active"
  */
 export async function expectElementToHaveClassContaining(page: any, selectorKey: string, classKey: string): Promise<void> {
   const selector = resolveParam(selectorKey, "selectors.json");
@@ -320,7 +320,7 @@ export async function expectElementToHaveClassContaining(page: any, selectorKey:
 /**
  * Asserts that an element does NOT contain the specified text.
  * Supports fixtures for reusable selectors and text values.
- * @example Then I get element by selector "error.message" to not contain text "success"
+ * @example Then I pw get element by selector "error.message" to not contain text "success"
  */
 export async function expectElementToNotContainText(
   page: any,
@@ -339,7 +339,7 @@ export async function expectElementToNotContainText(
 
 /**
  * Gets an element by selector and asserts it has the exact text specified.
- * @example Then I get element by selector "header.title" to have text "Welcome Home"
+ * @example Then I pw get element by selector "header.title" to have text "Welcome Home"
  */
 export async function expectElementToHaveText(page: any, selectorKey: string, textKey: string): Promise<void> {
   const selector = resolveParam(selectorKey, "selectors.json");
@@ -351,7 +351,7 @@ export async function expectElementToHaveText(page: any, selectorKey: string, te
 
 /**
  * Gets an element by selector and asserts it contains the specified text.
- * @example Then I get element by selector "error.message" to contain text "invalid credentials"
+ * @example Then I pw get element by selector "error.message" to contain text "invalid credentials"
  */
 export async function expectElementToContainText(page: any, selectorKey: string, textKey: string): Promise<void> {
   const selector = resolveParam(selectorKey, "selectors.json");
@@ -362,7 +362,7 @@ export async function expectElementToContainText(page: any, selectorKey: string,
 }
 /**
  * Gets an element by selector and asserts it has the specified value.
- * @example Then I get element by selector "login.usernameField" to have value "john_doe"
+ * @example Then I pw get element by selector "login.usernameField" to have value "john_doe"
  */
 export async function expectElementToHaveValue(page: any, selectorKey: string, valueKey: string): Promise<void> {
   const selector = resolveParam(selectorKey, "selectors.json");
@@ -374,7 +374,7 @@ export async function expectElementToHaveValue(page: any, selectorKey: string, v
 
 /**
  * Gets an element by selector and asserts it has the specified attribute with value.
- * @example Then I get element by selector "terms.link" to have attribute "href" with value "/terms-and-conditions"
+ * @example Then I pw get element by selector "terms.link" to have attribute "href" with value "/terms-and-conditions"
  */
 export async function expectElementAttributeValue(page: any, selectorKey: string, attrKey: string, valueKey: string): Promise<void> {
   const selector = resolveParam(selectorKey, "selectors.json");
@@ -387,7 +387,7 @@ export async function expectElementAttributeValue(page: any, selectorKey: string
 
 /**
  * Gets an element by selector and asserts it is visible.
- * @example When I get element by selector "div.modal" to be visible
+ * @example When I pw get element by selector "div.modal" to be visible
  */
 export async function getElementBySelectorToBeVisible(page: any, selectorKey: string): Promise<void> {
   const selector = resolveParam(selectorKey, "selectors.json");
@@ -399,7 +399,7 @@ export async function getElementBySelectorToBeVisible(page: any, selectorKey: st
 /**
  * Asserts that a heading element exists and is visible.
  * Supports fixtures for reusable selectors.
- * @example Then I see heading element "h1.main-title"
+ * @example Then I pw see heading element "h1.main-title"
  */
 export async function expectHeadingVisible(
   page: any,
@@ -415,7 +415,7 @@ export async function expectHeadingVisible(
 /**
  * Asserts that a label element exists and is visible.
  * Supports fixtures for reusable selectors.
- * @example Then I see label element "label.username-label"
+ * @example Then I pw see label element "label.username-label"
  */
 export async function expectLabelVisible(
   page: any,
@@ -431,7 +431,7 @@ export async function expectLabelVisible(
 /**
  * Asserts that a link element exists and is visible.
  * Supports fixtures for reusable selectors.
- * @example Then I see link element "a.privacy-link"
+ * @example Then I pw see link element "a.privacy-link"
  */
 export async function expectLinkVisible(
   page: any,
@@ -447,7 +447,7 @@ export async function expectLinkVisible(
 /**
  * Asserts that an element with a specific test ID exists and is visible.
  * Supports fixtures for reusable test IDs.
- * @example Then I see testid element "data-testid=my-component"
+ * @example Then I pw see testid element "data-testid=my-component"
  */
 export async function expectTestIdVisible(
   page: any,
@@ -463,7 +463,7 @@ export async function expectTestIdVisible(
 /**
  * Asserts that an element with a specific role exists and is visible.
  * Supports fixtures for reusable roles.
- * @example Then I see role element "button"
+ * @example Then I pw see role element "button"
  */
 export async function expectRoleVisible(
   page: any,
@@ -479,7 +479,7 @@ export async function expectRoleVisible(
 /**
  * Asserts that an option element exists and is visible.
  * Supports fixtures for reusable selectors.
- * @example Then I see option element "option[value='enabled']"
+ * @example Then I pw see option element "option[value='enabled']"
  */
 export async function expectOptionVisible(
   page: any,
@@ -494,7 +494,7 @@ export async function expectOptionVisible(
 /**
  * Asserts that an element has a specific count of occurrences.
  * Supports fixtures for reusable selectors.
- * @example Then I expect "li.item" to have count 5
+ * @example Then I pw expect "li.item" to have count 5
  */
 export async function expectElementToHaveCount(
   page: any,
@@ -515,7 +515,7 @@ export async function expectElementToHaveCount(
 /**
  * Asserts that an element is hidden (not visible).
  * Supports fixtures for reusable selectors.
- * @example Then I expect "modal.overlay" to be hidden
+ * @example Then I pw expect "modal.overlay" to be hidden
  */
 export async function expectElementToBeHidden(
   page: any,

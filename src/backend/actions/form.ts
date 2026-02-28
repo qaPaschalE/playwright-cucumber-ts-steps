@@ -94,7 +94,7 @@ function resolveValue(page: any, rawValue: string): string {
  * A "Swiss Army Knife" function for filling forms, performing assertions, and executing mixed workflows.
  * Iterates through a Data Table and performs actions based on the Target and Value columns.
  * @example
- * When I fill the following "Login Flow" form data:
+ * When I pw fill the following "Login Flow" form data:
  * ```gherkin
  * | Target                  | Value                |
  * | login.usernameField     | myuser               |
@@ -243,7 +243,7 @@ export async function fillFormData(page: any, formName: string, table: any): Pro
 /**
  * Selects an option from a React select component.
  * This handles React's custom select implementations that may not use standard <select> elements.
- * @example When I select react option "Option 3" from "#react-select-id"
+ * @example When I pw select react option "Option 3" from "#react-select-id"
  */
 export async function selectReactOption(page: any, optionText: string, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");

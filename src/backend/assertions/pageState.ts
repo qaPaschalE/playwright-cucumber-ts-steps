@@ -13,7 +13,7 @@ import {
 /**
  * Asserts that the current browser URL contains a specific substring.
  * Supports fixtures for reusable URL parts.
- * @example Then I expect the url to contain "dashboard"
+ * @example Then I pw expect the url to contain "dashboard"
  */
 export async function expectUrlToContain(page: any, partKey: string): Promise<void> {
   const urls = loadFixture("urls.json");
@@ -26,7 +26,7 @@ export async function expectUrlToContain(page: any, partKey: string): Promise<vo
 /**
  * Asserts that the current browser URL exactly matches the provided string.
  * Supports fixtures for reusable URLs.
- * @example Then I expect the url to be "app.dashboardUrl"
+ * @example Then I pw expect the url to be "app.dashboardUrl"
  */
 export async function expectUrlToBe(page: any, urlKey: string): Promise<void> {
   const urls = loadFixture("urls.json");
@@ -39,7 +39,7 @@ export async function expectUrlToBe(page: any, urlKey: string): Promise<void> {
 /**
  * Asserts that the page's `<title>` tag contains a specific substring.
  * Supports fixtures for reusable title parts.
- * @example Then I expect the title to contain "Welcome"
+ * @example Then I pw expect the title to contain "Welcome"
  */
 export async function expectTitleToContain(page: any, partKey: string): Promise<void> {
   const titles = loadFixture("titles.json");
@@ -52,7 +52,7 @@ export async function expectTitleToContain(page: any, partKey: string): Promise<
 /**
  * Asserts that the page's `<title>` tag exactly matches the provided string.
  * Supports fixtures for reusable titles.
- * @example Then I expect the title to be "app.homeTitle"
+ * @example Then I pw expect the title to be "app.homeTitle"
  */
 export async function expectTitleToBe(page: any, titleKey: string): Promise<void> {
   const titles = loadFixture("titles.json");

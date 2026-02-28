@@ -9,7 +9,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
 
 /**
  * Asserts that the HTTP status code of the last API response matches the expected integer.
- * @example Then I expect the response status to be 200
+ * @example Then I pw expect the response status to be 200
  */
 export async function expectResponseStatus(page: any, statusCode: number): Promise<void> {
   const response = apiState.getResponse();
@@ -21,7 +21,7 @@ export async function expectResponseStatus(page: any, statusCode: number): Promi
 /**
  * Asserts that the body text of the last API response contains a specific substring.
  * Supports fixtures for reusable substrings.
- * @example Then I expect the response body to contain "success"
+ * @example Then I pw expect the response body to contain "success"
  */
 export async function expectResponseBodyContain(page: any, textKey: string): Promise<void> {
   const response = apiState.getResponse();
@@ -38,7 +38,7 @@ export async function expectResponseBodyContain(page: any, textKey: string): Pro
 /**
  * Asserts that a specific property in the JSON response matches a string value.
  * Supports dot notation for nested properties and fixtures for reusable keys/values.
- * @example Then I expect the response property "user.id" to be "12345"
+ * @example Then I pw expect the response property "user.id" to be "12345"
  */
 export async function expectResponseProperty(
   page: any,

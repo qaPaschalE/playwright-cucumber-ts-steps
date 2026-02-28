@@ -13,7 +13,7 @@ import {
 /**
  * Mocks a specific API endpoint with a hardcoded inline JSON response body.
  * Supports fixtures for reusable API endpoints.
- * @example Given I mock the API endpoint "/api/users" with body '{"id": 1, "name": "Fake"}'
+ * @example Given I pw mock the API endpoint "/api/users" with body '{"id": 1, "name": "Fake"}'
  */
 export async function mockApiWithInlineJson(
   page: any,
@@ -37,7 +37,7 @@ export async function mockApiWithInlineJson(
 /**
  * Mocks an API endpoint using the contents of a local JSON file.
  * Supports fixtures for reusable API endpoints and mock files.
- * @example Given I mock the API endpoint "/api/users" with response from "mocks/users.json"
+ * @example Given I pw mock the API endpoint "/api/users" with response from "mocks/users.json"
  */
 export async function mockApiWithFile(
   page: any,
@@ -72,7 +72,7 @@ export async function mockApiWithFile(
  * Mocks an API endpoint to return a specific HTTP status code only.
  * Useful for simulating server errors like 500 or 404.
  * Supports fixtures for reusable API endpoints.
- * @example Given I mock the API endpoint "/api/broken" with status 500
+ * @example Given I pw mock the API endpoint "/api/broken" with status 500
  */
 export async function mockApiStatus(
   page: any,

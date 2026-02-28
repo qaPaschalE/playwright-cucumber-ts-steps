@@ -11,7 +11,7 @@ import { loadFixture, getFixtureValue, } from "../utils/fixtures";
  * Selects an option from a `<select>` dropdown menu.
  * Supports fixtures for reusable selectors and options.
  * It first attempts to match by the visible label; if that fails, it tries to match by the underlying `value` attribute.
- * @example When I select option "options.country.canada" from "selectors.countrySelector"
+ * @example When I pw select option "options.country.canada" from "selectors.countrySelector"
  */
 export async function selectDropdownOption(
   page: any,
@@ -33,7 +33,7 @@ export async function selectDropdownOption(
 /**
  * Checks a checkbox or radio button.
  * Supports fixtures for reusable selectors.
- * @example When I check "selectors.termsCheckbox"
+ * @example When I pw check "selectors.termsCheckbox"
  */
 export async function checkInput(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -46,7 +46,7 @@ export async function checkInput(page: any, selectorKey: string): Promise<void> 
 /**
  * Unchecks a checkbox.
  * Supports fixtures for reusable selectors.
- * @example When I uncheck "selectors.subscribeCheckbox"
+ * @example When I pw uncheck "selectors.subscribeCheckbox"
  */
 export async function uncheckInput(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -60,7 +60,7 @@ export async function uncheckInput(page: any, selectorKey: string): Promise<void
  * Uploads a file to an `<input type="file">` element.
  * Supports fixtures for reusable selectors and file paths.
  * The file path is resolved relative to the current working directory of the project.
- * @example When I upload file "files.avatarImage" to "selectors.avatarUpload"
+ * @example When I pw upload file "files.avatarImage" to "selectors.avatarUpload"
  */
 export async function fileUpload(page: any, fileNameKey: string, selectorKey: string): Promise<void> {
   const files = loadFixture("files.json");

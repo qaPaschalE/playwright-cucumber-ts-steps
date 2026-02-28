@@ -10,7 +10,7 @@ import {
 
 /**
  * Pauses execution for a specified number of milliseconds.
- * @example When I wait 1000 milliseconds
+ * @example When I pw wait 1000 milliseconds
  */
 export async function waitMilliseconds(page: any, ms: number): Promise<void> {
   console.warn(`⚠️ Hard wait detected (${ms}ms). Consider replacing with dynamic waits.`);
@@ -20,7 +20,7 @@ export async function waitMilliseconds(page: any, ms: number): Promise<void> {
 
 /**
  * Pauses execution for a specified number of seconds.
- * @example When I wait 5 seconds
+ * @example When I pw wait 5 seconds
  */
 export async function waitSeconds(page: any, seconds: number): Promise<void> {
   const ms = seconds * 1000;
@@ -31,7 +31,7 @@ export async function waitSeconds(page: any, seconds: number): Promise<void> {
 
 /**
  * Pauses the test execution and opens the Playwright Inspector.
- * @example When I pause
+ * @example When I pw pause
  */
 export async function pauseExecution(page: any): Promise<void> {
   console.log("⏸️ Pausing test execution...");
@@ -40,7 +40,7 @@ export async function pauseExecution(page: any): Promise<void> {
 
 /**
  * Alias for pauseExecution. Pauses execution for debugging.
- * @example When I debug
+ * @example When I pw debug
  */
 export async function debugExecution(page: any): Promise<void> {
   console.log("🐞 Debugging...");
@@ -49,7 +49,7 @@ export async function debugExecution(page: any): Promise<void> {
 
 /**
  * Prints a custom message to the console logs.
- * @example When I log "Starting Login Flow"
+ * @example When I pw log "Starting Login Flow"
  */
 export async function logMessage(page: any, message: string): Promise<void> {
   console.log(`📝 LOG: ${message}`);
@@ -57,7 +57,7 @@ export async function logMessage(page: any, message: string): Promise<void> {
 
 /**
  * Focuses on the currently stored (active) element.
- * @example When I focus
+ * @example When I pw focus
  */
 export async function focusElement(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -67,7 +67,7 @@ export async function focusElement(page: any): Promise<void> {
 
 /**
  * Blurs (removes focus from) the currently stored element.
- * @example When I blur
+ * @example When I pw blur
  */
 export async function blurElement(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -79,7 +79,7 @@ export async function blurElement(page: any): Promise<void> {
 
 /**
  * Sets a cookie for the current context/URL.
- * @example When I set cookie "session_id" to "12345ABC"
+ * @example When I pw set cookie "session_id" to "12345ABC"
  */
 export async function setCookie(page: any, name: string, value: string): Promise<void> {
   const context = page.context();
@@ -90,7 +90,7 @@ export async function setCookie(page: any, name: string, value: string): Promise
 
 /**
  * Clears all cookies for the current browser context.
- * @example When I clear all cookies
+ * @example When I pw clear all cookies
  */
 export async function clearAllCookies(page: any): Promise<void> {
   const context = page.context();
@@ -100,7 +100,7 @@ export async function clearAllCookies(page: any): Promise<void> {
 
 /**
  * Sets an item in Local Storage.
- * @example When I set local storage item "theme" to "dark"
+ * @example When I pw set local storage item "theme" to "dark"
  */
 export async function setLocalStorageItem(page: any, key: string, value: string): Promise<void> {
   await page.evaluate((args: { k: string; v: string }) => localStorage.setItem(args.k, args.v), {
@@ -112,7 +112,7 @@ export async function setLocalStorageItem(page: any, key: string, value: string)
 
 /**
  * Retrieves a Local Storage item and logs it to the console.
- * @example When I get local storage item "authToken"
+ * @example When I pw get local storage item "authToken"
  */
 export async function getLocalStorageItem(page: any, key: string): Promise<void> {
   const value = await page.evaluate((k: string) => localStorage.getItem(k), key);
@@ -121,7 +121,7 @@ export async function getLocalStorageItem(page: any, key: string): Promise<void>
 
 /**
  * Clears all data from Local Storage.
- * @example When I clear local storage
+ * @example When I pw clear local storage
  */
 export async function clearLocalStorage(page: any): Promise<void> {
   await page.evaluate(() => localStorage.clear());
@@ -130,7 +130,7 @@ export async function clearLocalStorage(page: any): Promise<void> {
 
 /**
  * Sets an item in Session Storage.
- * @example When I set session storage item "user_role" to "admin"
+ * @example When I pw set session storage item "user_role" to "admin"
  */
 export async function setSessionStorageItem(page: any, key: string, value: string): Promise<void> {
   await page.evaluate((args: { k: string; v: string }) => sessionStorage.setItem(args.k, args.v), {
@@ -142,7 +142,7 @@ export async function setSessionStorageItem(page: any, key: string, value: strin
 
 /**
  * Clears all data from Session Storage.
- * @example When I clear session storage
+ * @example When I pw clear session storage
  */
 export async function clearSessionStorage(page: any): Promise<void> {
   await page.evaluate(() => sessionStorage.clear());
@@ -152,7 +152,7 @@ export async function clearSessionStorage(page: any): Promise<void> {
 /**
  * Stores the text content of the currently active element in a variable.
  * This should be used after a step that selects an element (e.g., "I find element by text").
- * @example When I store text as "extractedCode"
+ * @example When I pw store text as "extractedCode"
  */
 export async function storeActiveElementText(page: any, alias: string): Promise<void> {
   const { getActiveElement, setVariable } = await import("../utils/state");

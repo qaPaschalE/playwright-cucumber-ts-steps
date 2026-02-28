@@ -12,7 +12,7 @@ import {
 /**
  * Asserts that a specific element is visible on the page.
  * Supports fixtures for reusable selectors.
- * @example When I expect the element "header.logo" to be visible
+ * @example When I pw expect the element "header.logo" to be visible
  */
 export async function expectVisible(page: any, selectorKey: string, timeout = 2000): Promise<void> {
   const selectors = loadFixture("selectors.json");

@@ -14,8 +14,8 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
 /**
  * Fills the currently stored (active) input element with specific text.
  * Supports variable aliases using the "@" prefix.
- * @example When I type "hello world"
- *          When I type "@storedPassword"
+ * @example When I pw type "hello world"
+ *          When I pw type "@storedPassword"
  */
 export async function typeText(page: any, textOrAlias: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -37,7 +37,7 @@ export async function typeText(page: any, textOrAlias: string, table?: any): Pro
 
 /**
  * Fills the active input with a value explicitly retrieved from the variable store.
- * @example When I type stored "userEmail"
+ * @example When I pw type stored "userEmail"
  */
 export async function typeStoredText(page: any, alias: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -52,7 +52,7 @@ export async function typeStoredText(page: any, alias: string, table?: any): Pro
 
 /**
  * Types text character-by-character with a 100ms delay.
- * @example When I slowly type "Playwright"
+ * @example When I pw slowly type "Playwright"
  */
 export async function typeSlowly(page: any, text: string): Promise<void> {
   const element = getActiveElement(page);
@@ -62,7 +62,7 @@ export async function typeSlowly(page: any, text: string): Promise<void> {
 
 /**
  * Sets the value of an input directly (alias for filling).
- * @example When I set value "12345"
+ * @example When I pw set value "12345"
  */
 export async function setInputValue(page: any, value: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -73,7 +73,7 @@ export async function setInputValue(page: any, value: string, table?: any): Prom
 
 /**
  * Clears the text content of the active input field.
- * @example When I clear
+ * @example When I pw clear
  */
 export async function clearInput(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -83,7 +83,7 @@ export async function clearInput(page: any): Promise<void> {
 
 /**
  * Simulates pressing a specific keyboard key on the active element.
- * @example When I press "Enter"
+ * @example When I pw press "Enter"
  */
 export async function pressKeyOnInput(page: any, key: string): Promise<void> {
   const element = getActiveElement(page);
@@ -93,7 +93,7 @@ export async function pressKeyOnInput(page: any, key: string): Promise<void> {
 
 /**
  * Checks the currently active checkbox or radio button.
- * @example When I check
+ * @example When I pw check
  */
 export async function checkElement(page: any, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -104,7 +104,7 @@ export async function checkElement(page: any, table?: any): Promise<void> {
 
 /**
  * Unchecks the currently active checkbox.
- * @example When I uncheck
+ * @example When I pw uncheck
  */
 export async function uncheckElement(page: any, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -115,7 +115,7 @@ export async function uncheckElement(page: any, table?: any): Promise<void> {
 
 /**
  * Checks/Unchecks the Nth checkbox or radio button matching a selector.
- * @example When I check 1st selector "input[type='checkbox']"
+ * @example When I pw check 1st selector "input[type='checkbox']"
  */
 export async function checkNthElementBySelector(
   page: any,
@@ -148,7 +148,7 @@ export async function checkNthElementBySelector(
 
 /**
  * Selects an option in a `<select>` dropdown by its visible label.
- * @example When I select option "California"
+ * @example When I pw select option "California"
  */
 export async function selectOption(page: any, option: string, table?: any): Promise<void> {
   const element = getActiveElement(page);
@@ -160,7 +160,7 @@ export async function selectOption(page: any, option: string, table?: any): Prom
 
 /**
  * Submits the form related to the active element.
- * @example When I submit
+ * @example When I pw submit
  */
 export async function submitForm(page: any): Promise<void> {
   let formLocator;
@@ -183,7 +183,7 @@ export async function submitForm(page: any): Promise<void> {
 
 /**
  * Uploads a file to the active file input element.
- * @example When I select file "data/invoice.pdf"
+ * @example When I pw select file "data/invoice.pdf"
  */
 export async function selectFile(page: any, filePath: string): Promise<void> {
   const element = getActiveElement(page);
@@ -193,7 +193,7 @@ export async function selectFile(page: any, filePath: string): Promise<void> {
 
 /**
  * Uploads a file to the active file input element (alias for selectFile).
- * @example When I upload file "images/logo.png"
+ * @example When I pw upload file "images/logo.png"
  */
 export async function uploadFile(page: any, filePath: string): Promise<void> {
   const element = getActiveElement(page);

@@ -8,7 +8,7 @@ import { loadFixture, getFixtureValue } from "../utils/fixtures";
 /**
  * Waits for the network to reach an "idle" state.
  * In Playwright terms, this means there are no new network connections for at least 500ms.
- * @example When I wait for network idle
+ * @example When I pw wait for network idle
  */
 export async function waitForNetworkIdle(page: any): Promise<void> {
   await page.waitForLoadState("networkidle");
@@ -17,7 +17,7 @@ export async function waitForNetworkIdle(page: any): Promise<void> {
 
 /**
  * Waits for the page to reach a specific load lifecycle event.
- * @example When I wait for load state "domcontentloaded"
+ * @example When I pw wait for load state "domcontentloaded"
  */
 export async function waitForLoadState(page: any, state: string): Promise<void> {
   const validStates = ["load", "domcontentloaded", "networkidle"];
@@ -33,7 +33,7 @@ export async function waitForLoadState(page: any, state: string): Promise<void> 
 /**
  * Explicitly waits for the currently stored (active) element to become visible.
  * Useful for ensuring animations complete or modals appear before proceeding.
- * @example When I wait for element to be visible
+ * @example When I pw wait for element to be visible
  */
 export async function waitForElementVisible(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -44,7 +44,7 @@ export async function waitForElementVisible(page: any): Promise<void> {
 /**
  * Explicitly waits for a specific element to become visible.
  * Useful for ensuring animations complete or modals appear before proceeding.
- * @example When I wait for "#modal" to be visible
+ * @example When I pw wait for "#modal" to be visible
  */
 export async function waitForElementVisibleBySelector(page: any, selectorKey: string): Promise<void> {
   const selectors = loadFixture("selectors.json");
@@ -57,7 +57,7 @@ export async function waitForElementVisibleBySelector(page: any, selectorKey: st
 /**
  * Explicitly waits for the currently stored (active) element to become hidden or detached from the DOM.
  * Useful for verifying that loading spinners have disappeared.
- * @example When I wait for element to be hidden
+ * @example When I pw wait for element to be hidden
  */
 export async function waitForElementHidden(page: any): Promise<void> {
   const element = getActiveElement(page);
@@ -68,7 +68,7 @@ export async function waitForElementHidden(page: any): Promise<void> {
 /**
  * Waits until the page URL contains the specified substring (Regex match).
  * Supports fixtures for reusable URL parts.
- * @example When I wait for URL to contain "dashboard"
+ * @example When I pw wait for URL to contain "dashboard"
  */
 export async function waitForUrlContain(page: any, urlPartKey: string): Promise<void> {
   const urls = loadFixture("urls.json");
