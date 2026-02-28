@@ -88,6 +88,7 @@ export default defineConfig({
 ```
 
 **Configurable Fixture Files:**
+
 - `fixturesDir` - Base directory for all fixtures (default: `"fixtures"`)
 - `selectorsFile` - UI selectors fixture file
 - `textsFile` - Text content fixture file
@@ -341,53 +342,53 @@ Scenario: Create User
 
 ### 🖱️ Actions
 
-| Step             | Usage Example                          |
-| ---------------- | -------------------------------------- |
-| **Visit**        | `I visit "https://google.com"`         |
-| **Click**        | `I click "#submit-btn"`                |
-| **Force Click**  | `I force click "#hidden-btn"`          |
-| **Double Click** | `I double click ".icon"`               |
-| **Fill Input**   | `I fill "#email" with "user@test.com"` |
-| **Press Key**    | `I press "Enter"` (or "Tab", "Escape") |
-| **Wait**         | `I wait for 2000 milliseconds`         |
-| **Reload**       | `I reload the page`                    |
-| **Go Back**      | `I go back`                            |
+| Step             | Usage Example                             |
+| ---------------- | ----------------------------------------- |
+| **Visit**        | `I pw visit "https://google.com"`         |
+| **Click**        | `I pw click "#submit-btn"`                |
+| **Force Click**  | `I pw force click "#hidden-btn"`          |
+| **Double Click** | `I pw double click ".icon"`               |
+| **Fill Input**   | `I pw fill "#email" with "user@test.com"` |
+| **Press Key**    | `I pw press "Enter"` (or "Tab", "Escape") |
+| **Wait**         | `I pw wait for 2000 milliseconds`         |
+| **Reload**       | `I pw reload the page`                    |
+| **Go Back**      | `I pw go back`                            |
 
 ### ✅ Assertions
 
-| Step             | Usage Example                                                  |
-| ---------------- | -------------------------------------------------------------- |
-| **Visibility**   | `I expect "#modal" to be visible`                              |
-| **Hidden**       | `I expect "#loader" to be hidden`                              |
-| **Exact Text**   | `I expect "#header" to have text "Welcome"`                    |
-| **Partial Text** | `I expect ".error" to contain text "Failed"`                   |
-| **Input Value**  | `I expect "#username" to have value "admin"`                   |
-| **Exact URL**    | `I expect the url to be "https://site.com/home"`               |
-| **Partial URL**  | `I expect the url to contain "/dashboard"`                     |
-| **Title**        | `I expect the title to contain "Home Page"`                    |
-| **Attribute**    | `I expect "img" to have attribute "src" with value "logo.png"` |
-| **Screenshot**   | `I expect the page screenshot to match "home.png"`             |
+| Step             | Usage Example                                                     |
+| ---------------- | ----------------------------------------------------------------- |
+| **Visibility**   | `I pw expect "#modal" to be visible`                              |
+| **Hidden**       | `I pw expect "#loader" to be hidden`                              |
+| **Exact Text**   | `I pw expect "#header" to have text "Welcome"`                    |
+| **Partial Text** | `I pw expect ".error" to contain text "Failed"`                   |
+| **Input Value**  | `I pw expect "#username" to have value "admin"`                   |
+| **Exact URL**    | `I pw expect the url to be "https://site.com/home"`               |
+| **Partial URL**  | `I pw expect the url to contain "/dashboard"`                     |
+| **Title**        | `I pw expect the title to contain "Home Page"`                    |
+| **Attribute**    | `I pw expect "img" to have attribute "src" with value "logo.png"` |
+| **Screenshot**   | `I pw expect the page screenshot to match "home.png"`             |
 
 ### 🧩 Forms & Elements
 
-| Step                  | Usage Example                                  |
-| --------------------- | ---------------------------------------------- |
-| **Select (Dropdown)** | `I select option "Canada" from "#country"`     |
-| **Check Box**         | `I check "#terms-checkbox"`                    |
-| **Uncheck**           | `I uncheck "#newsletter"`                      |
-| **Upload File**       | `I upload file "data.csv" to "#upload"`        |
-| **Handle Alert**      | `I accept the next dialog`                     |
-| **Frame Click**       | `I click "#btn" inside frame "#payment-frame"` |
+| Step                  | Usage Example                                     |
+| --------------------- | ------------------------------------------------- |
+| **Select (Dropdown)** | `I pw select option "Canada" from "#country"`     |
+| **Check Box**         | `I pw check "#terms-checkbox"`                    |
+| **Uncheck**           | `I pw uncheck "#newsletter"`                      |
+| **Upload File**       | `I pw upload file "data.csv" to "#upload"`        |
+| **Handle Alert**      | `I pw accept the next dialog`                     |
+| **Frame Click**       | `I pw click "#btn" inside frame "#payment-frame"` |
 
 ### 🌐 API
 
-| Step             | Usage Example                                                 |
-| ---------------- | ------------------------------------------------------------- |
-| **GET**          | `I make a GET request to "/api/users"`                        |
-| **DELETE**       | `I make a DELETE request to "/api/users/1"`                   |
-| **POST**         | `I make a POST request to "/api/login" with body '{"u":"1"}'` |
-| **Status Check** | `I expect the response status to be 200`                      |
-| **JSON Check**   | `I expect the response property "data.id" to be "99"`         |
+| Step             | Usage Example                                                    |
+| ---------------- | ---------------------------------------------------------------- |
+| **GET**          | `I pw make a GET request to "/api/users"`                        |
+| **DELETE**       | `I pw make a DELETE request to "/api/users/1"`                   |
+| **POST**         | `I pw make a POST request to "/api/login" with body '{"u":"1"}'` |
+| **Status Check** | `I pw expect the response status to be 200`                      |
+| **JSON Check**   | `I pw expect the response property "data.id" to be "99"`         |
 
 ---
 
@@ -400,7 +401,7 @@ Need a step that isn't included? You can easily register your own in your spec f
 import { runTests, Step } from "playwright-cucumber-ts-steps";
 
 // 1. Define custom step
-Step("I scroll to the bottom of the page", async (page) => {
+Step("I pw scroll to the bottom of the page", async (page) => {
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 });
 
@@ -421,10 +422,7 @@ Scenario: Scroll Test
 
 ## 📘 Step Definition Documentation
 
-
-### **When** I click
-
-
+### **When** I pw click
 
 ```gherkin
 When I pw click
@@ -432,9 +430,7 @@ When I pw click
 
 ---
 
-### **When** I click on element {string}
-
-
+### **When** I pw click on element {string}
 
 ```gherkin
 When I pw click on element {string}
@@ -442,9 +438,7 @@ When I pw click on element {string}
 
 ---
 
-### **When** I click on button {string}
-
-
+### **When** I pw click on button {string}
 
 ```gherkin
 When I pw click on button {string}
@@ -452,9 +446,7 @@ When I pw click on button {string}
 
 ---
 
-### **When** I click on link {string}
-
-
+### **When** I pw click on link {string}
 
 ```gherkin
 When I pw click on link {string}
@@ -462,9 +454,7 @@ When I pw click on link {string}
 
 ---
 
-### **When** I click on label {string}
-
-
+### **When** I pw click on label {string}
 
 ```gherkin
 When I pw click on label {string}
@@ -472,9 +462,7 @@ When I pw click on label {string}
 
 ---
 
-### **When** I click on text {string}
-
-
+### **When** I pw click on text {string}
 
 ```gherkin
 When I pw click on text {string}
@@ -482,9 +470,7 @@ When I pw click on text {string}
 
 ---
 
-### **When** I click on exact text {string}
-
-
+### **When** I pw click on exact text {string}
 
 ```gherkin
 When I pw click on exact text {string}
@@ -492,9 +478,7 @@ When I pw click on exact text {string}
 
 ---
 
-### **When** I click on selector ([^]+)
-
-
+### **When** I pw click on selector ([^]+)
 
 ```gherkin
 When I pw click on selector ([^]+)
@@ -502,9 +486,7 @@ When I pw click on selector ([^]+)
 
 ---
 
-### **When** I click all
-
-
+### **When** I pw click all
 
 ```gherkin
 When I pw click all
@@ -512,9 +494,7 @@ When I pw click all
 
 ---
 
-### **When** I double click
-
-
+### **When** I pw double click
 
 ```gherkin
 When I pw double click
@@ -522,9 +502,7 @@ When I pw double click
 
 ---
 
-### **When** I double click on text {string}
-
-
+### **When** I pw double click on text {string}
 
 ```gherkin
 When I pw double click on text {string}
@@ -532,9 +510,7 @@ When I pw double click on text {string}
 
 ---
 
-### **When** I double click position {int} {int}
-
-
+### **When** I pw double click position {int} {int}
 
 ```gherkin
 When I pw double click position {int} {int}
@@ -542,9 +518,7 @@ When I pw double click position {int} {int}
 
 ---
 
-### **When** I right click
-
-
+### **When** I pw right click
 
 ```gherkin
 When I pw right click
@@ -552,9 +526,7 @@ When I pw right click
 
 ---
 
-### **When** I right click on text {string}
-
-
+### **When** I pw right click on text {string}
 
 ```gherkin
 When I pw right click on text {string}
@@ -562,9 +534,7 @@ When I pw right click on text {string}
 
 ---
 
-### **When** I right click position {int} {int}
-
-
+### **When** I pw right click position {int} {int}
 
 ```gherkin
 When I pw right click position {int} {int}
@@ -572,9 +542,7 @@ When I pw right click position {int} {int}
 
 ---
 
-### **When** I click on ({int})(?:st|nd|rd|th) element ([^]+)
-
-
+### **When** I pw click on ({int})(?:st|nd|rd|th) element ([^]+)
 
 ```gherkin
 When I pw click on ({int})(?:st|nd|rd|th) element ([^]+)
@@ -582,9 +550,7 @@ When I pw click on ({int})(?:st|nd|rd|th) element ([^]+)
 
 ---
 
-### **When** I click on ({int})(?:st|nd|rd|th) selector ([^]+)
-
-
+### **When** I pw click on ({int})(?:st|nd|rd|th) selector ([^]+)
 
 ```gherkin
 When I pw click on ({int})(?:st|nd|rd|th) selector ([^]+)
@@ -592,9 +558,7 @@ When I pw click on ({int})(?:st|nd|rd|th) selector ([^]+)
 
 ---
 
-### **When** I find element by selector {string}
-
-
+### **When** I pw find element by selector {string}
 
 ```gherkin
 When I pw find element by selector {string}
@@ -602,9 +566,7 @@ When I pw find element by selector {string}
 
 ---
 
-### **When** I find element by text {string}
-
-
+### **When** I pw find element by text {string}
 
 ```gherkin
 When I pw find element by text {string}
@@ -612,9 +574,7 @@ When I pw find element by text {string}
 
 ---
 
-### **When** I find element by title {string}
-
-
+### **When** I pw find element by title {string}
 
 ```gherkin
 When I pw find element by title {string}
@@ -622,9 +582,7 @@ When I pw find element by title {string}
 
 ---
 
-### **When** I find element by testid {string}
-
-
+### **When** I pw find element by testid {string}
 
 ```gherkin
 When I pw find element by testid {string}
@@ -632,9 +590,7 @@ When I pw find element by testid {string}
 
 ---
 
-### **When** I find element by role {string}
-
-
+### **When** I pw find element by role {string}
 
 ```gherkin
 When I pw find element by role {string}
@@ -642,9 +598,7 @@ When I pw find element by role {string}
 
 ---
 
-### **When** I find element by placeholder text {string}
-
-
+### **When** I pw find element by placeholder text {string}
 
 ```gherkin
 When I pw find element by placeholder text {string}
@@ -652,9 +606,7 @@ When I pw find element by placeholder text {string}
 
 ---
 
-### **When** I find element by label text {string}
-
-
+### **When** I pw find element by label text {string}
 
 ```gherkin
 When I pw find element by label text {string}
@@ -662,9 +614,7 @@ When I pw find element by label text {string}
 
 ---
 
-### **When** I find element by alt text {string}
-
-
+### **When** I pw find element by alt text {string}
 
 ```gherkin
 When I pw find element by alt text {string}
@@ -672,9 +622,7 @@ When I pw find element by alt text {string}
 
 ---
 
-### **When** I find link by text {string}
-
-
+### **When** I pw find link by text {string}
 
 ```gherkin
 When I pw find link by text {string}
@@ -682,9 +630,7 @@ When I pw find link by text {string}
 
 ---
 
-### **When** I find heading by text {string}
-
-
+### **When** I pw find heading by text {string}
 
 ```gherkin
 When I pw find heading by text {string}
@@ -692,9 +638,7 @@ When I pw find heading by text {string}
 
 ---
 
-### **When** I find element by name {string}
-
-
+### **When** I pw find element by name {string}
 
 ```gherkin
 When I pw find element by name {string}
@@ -702,9 +646,7 @@ When I pw find element by name {string}
 
 ---
 
-### **When** I find elements by selector {string}
-
-
+### **When** I pw find elements by selector {string}
 
 ```gherkin
 When I pw find elements by selector {string}
@@ -712,9 +654,7 @@ When I pw find elements by selector {string}
 
 ---
 
-### **When** I find headings by text {string}
-
-
+### **When** I pw find headings by text {string}
 
 ```gherkin
 When I pw find headings by text {string}
@@ -722,9 +662,7 @@ When I pw find headings by text {string}
 
 ---
 
-### **When** I find buttons by text {string}
-
-
+### **When** I pw find buttons by text {string}
 
 ```gherkin
 When I pw find buttons by text {string}
@@ -732,9 +670,7 @@ When I pw find buttons by text {string}
 
 ---
 
-### **When** I get first element
-
-
+### **When** I pw get first element
 
 ```gherkin
 When I pw get first element
@@ -742,9 +678,7 @@ When I pw get first element
 
 ---
 
-### **When** I get last element
-
-
+### **When** I pw get last element
 
 ```gherkin
 When I pw get last element
@@ -752,9 +686,7 @@ When I pw get last element
 
 ---
 
-### **When** I get ({int})(?:st|nd|rd|th) element
-
-
+### **When** I pw get ({int})(?:st|nd|rd|th) element
 
 ```gherkin
 When I pw get ({int})(?:st|nd|rd|th) element
@@ -762,9 +694,7 @@ When I pw get ({int})(?:st|nd|rd|th) element
 
 ---
 
-### **When** I get focused element
-
-
+### **When** I pw get focused element
 
 ```gherkin
 When I pw get focused element
@@ -772,9 +702,7 @@ When I pw get focused element
 
 ---
 
-### **When** I find input by ID {string}
-
-
+### **When** I pw find input by ID {string}
 
 ```gherkin
 When I pw find input by ID {string}
@@ -782,9 +710,7 @@ When I pw find input by ID {string}
 
 ---
 
-### **When** I find input by name {string}
-
-
+### **When** I pw find input by name {string}
 
 ```gherkin
 When I pw find input by name {string}
@@ -792,9 +718,7 @@ When I pw find input by name {string}
 
 ---
 
-### **When** I find input by placeholder text {string}
-
-
+### **When** I pw find input by placeholder text {string}
 
 ```gherkin
 When I pw find input by placeholder text {string}
@@ -802,9 +726,7 @@ When I pw find input by placeholder text {string}
 
 ---
 
-### **When** I find input by display value {string}
-
-
+### **When** I pw find input by display value {string}
 
 ```gherkin
 When I pw find input by display value {string}
@@ -812,9 +734,7 @@ When I pw find input by display value {string}
 
 ---
 
-### **When** I find textarea by label text {string}
-
-
+### **When** I pw find textarea by label text {string}
 
 ```gherkin
 When I pw find textarea by label text {string}
@@ -824,17 +744,13 @@ When I pw find textarea by label text {string}
 
 ### **When** I store element text as {string}
 
-
-
 ```gherkin
 When I pw store element text as {string}
 ```
 
 ---
 
-### **When** I fill the following {string} form data
-
-
+### **When** I pw fill the following {string} form data
 
 ```gherkin
 When I pw fill the following {string} form data
@@ -842,9 +758,7 @@ When I pw fill the following {string} form data
 
 ---
 
-### **When** I fill the following {string} test form data
-
-
+### **When** I pw fill the following {string} test form data
 
 ```gherkin
 When I pw fill the following {string} test form data
@@ -854,17 +768,13 @@ When I pw fill the following {string} test form data
 
 ### **When** I switch to frame {string}
 
-
-
 ```gherkin
 When I pw switch to frame {string}
 ```
 
 ---
 
-### **When** I find element {string} in frame {string}
-
-
+### **When** I pw find element {string} in frame {string}
 
 ```gherkin
 When I pw find element {string} in frame {string}
@@ -874,8 +784,6 @@ When I pw find element {string} in frame {string}
 
 ### **When** I switch to new tab
 
-
-
 ```gherkin
 When I pw switch to new tab
 ```
@@ -883,8 +791,6 @@ When I pw switch to new tab
 ---
 
 ### **When** I type {string}
-
-
 
 ```gherkin
 When I pw type {string}
@@ -894,8 +800,6 @@ When I pw type {string}
 
 ### **When** I type stored {string}
 
-
-
 ```gherkin
 When I pw type stored {string}
 ```
@@ -903,8 +807,6 @@ When I pw type stored {string}
 ---
 
 ### **When** I slowly type {string}
-
-
 
 ```gherkin
 When I pw slowly type {string}
@@ -914,8 +816,6 @@ When I pw slowly type {string}
 
 ### **When** I set value {string}
 
-
-
 ```gherkin
 When I pw set value {string}
 ```
@@ -923,8 +823,6 @@ When I pw set value {string}
 ---
 
 ### **When** I clear
-
-
 
 ```gherkin
 When I pw clear
@@ -934,8 +832,6 @@ When I pw clear
 
 ### **When** I press {string}
 
-
-
 ```gherkin
 When I pw press {string}
 ```
@@ -943,8 +839,6 @@ When I pw press {string}
 ---
 
 ### **When** I check
-
-
 
 ```gherkin
 When I pw check
@@ -954,8 +848,6 @@ When I pw check
 
 ### **When** I uncheck
 
-
-
 ```gherkin
 When I pw uncheck
 ```
@@ -963,8 +855,6 @@ When I pw uncheck
 ---
 
 ### **When** I check input
-
-
 
 ```gherkin
 When I pw check input
@@ -974,8 +864,6 @@ When I pw check input
 
 ### **When** I uncheck input
 
-
-
 ```gherkin
 When I pw uncheck input
 ```
@@ -984,17 +872,13 @@ When I pw uncheck input
 
 ### **When** I (check|uncheck) ({int})(?:st|nd|rd|th) selector ([^]+)
 
-
-
 ```gherkin
 When I pw (check|uncheck) ({int})(?:st|nd|rd|th) selector ([^]+)
 ```
 
 ---
 
-### **When** I select option {string}
-
-
+### **When** I pw select option {string}
 
 ```gherkin
 When I pw select option {string}
@@ -1002,9 +886,7 @@ When I pw select option {string}
 
 ---
 
-### **When** I submit
-
-
+### **When** I pw submit
 
 ```gherkin
 When I pw submit
@@ -1012,9 +894,7 @@ When I pw submit
 
 ---
 
-### **When** I select file {string}
-
-
+### **When** I pw select file {string}
 
 ```gherkin
 When I pw select file {string}
@@ -1022,9 +902,7 @@ When I pw select file {string}
 
 ---
 
-### **When** I upload file {string}
-
-
+### **When** I pw upload file {string}
 
 ```gherkin
 When I pw upload file {string}
@@ -1032,9 +910,7 @@ When I pw upload file {string}
 
 ---
 
-### **When** I click {string}
-
-
+### **When** I pw click {string}
 
 ```gherkin
 When I pw click {string}
@@ -1042,9 +918,7 @@ When I pw click {string}
 
 ---
 
-### **When** I force click {string}
-
-
+### **When** I pw force click {string}
 
 ```gherkin
 When I pw force click {string}
@@ -1052,9 +926,7 @@ When I pw force click {string}
 
 ---
 
-### **When** I fill {string} with {string}
-
-
+### **When** I pw fill {string} with {string}
 
 ```gherkin
 When I pw fill {string} with {string}
@@ -1064,8 +936,6 @@ When I pw fill {string} with {string}
 
 ### **When** I press {string}
 
-
-
 ```gherkin
 When I pw press {string}
 ```
@@ -1073,8 +943,6 @@ When I pw press {string}
 ---
 
 ### **When** I wait for {int} milliseconds
-
-
 
 ```gherkin
 When I pw wait for {int} milliseconds
@@ -1084,8 +952,6 @@ When I pw wait for {int} milliseconds
 
 ### **When** I press key {string}
 
-
-
 ```gherkin
 When I pw press key {string}
 ```
@@ -1093,8 +959,6 @@ When I pw press key {string}
 ---
 
 ### **When** I press key {string} on element
-
-
 
 ```gherkin
 When I pw press key {string} on element
@@ -1104,8 +968,6 @@ When I pw press key {string} on element
 
 ### **When** I press keys {string}
 
-
-
 ```gherkin
 When I pw press keys {string}
 ```
@@ -1113,8 +975,6 @@ When I pw press keys {string}
 ---
 
 ### **When** I press shortcut {string}
-
-
 
 ```gherkin
 When I pw press shortcut {string}
@@ -1124,8 +984,6 @@ When I pw press shortcut {string}
 
 ### **When** I hold down key {string}
 
-
-
 ```gherkin
 When I pw hold down key {string}
 ```
@@ -1133,8 +991,6 @@ When I pw hold down key {string}
 ---
 
 ### **When** I release key {string}
-
-
 
 ```gherkin
 When I pw release key {string}
@@ -1144,8 +1000,6 @@ When I pw release key {string}
 
 ### **When** I wait for {int} milliseconds
 
-
-
 ```gherkin
 When I pw wait for {int} milliseconds
 ```
@@ -1153,8 +1007,6 @@ When I pw wait for {int} milliseconds
 ---
 
 ### **When** I wait for {int} seconds
-
-
 
 ```gherkin
 When I pw wait for {int} seconds
@@ -1164,8 +1016,6 @@ When I pw wait for {int} seconds
 
 ### **When** I pause
 
-
-
 ```gherkin
 When I pw pause
 ```
@@ -1173,8 +1023,6 @@ When I pw pause
 ---
 
 ### **When** I debug
-
-
 
 ```gherkin
 When I pw debug
@@ -1184,8 +1032,6 @@ When I pw debug
 
 ### **When** I log {string}
 
-
-
 ```gherkin
 When I pw log {string}
 ```
@@ -1193,8 +1039,6 @@ When I pw log {string}
 ---
 
 ### **When** I focus
-
-
 
 ```gherkin
 When I pw focus
@@ -1204,8 +1048,6 @@ When I pw focus
 
 ### **When** I blur
 
-
-
 ```gherkin
 When I pw blur
 ```
@@ -1213,8 +1055,6 @@ When I pw blur
 ---
 
 ### **When** I set cookie {string} to {string}
-
-
 
 ```gherkin
 When I pw set cookie {string} to {string}
@@ -1224,8 +1064,6 @@ When I pw set cookie {string} to {string}
 
 ### **When** I clear all cookies
 
-
-
 ```gherkin
 When I pw clear all cookies
 ```
@@ -1234,17 +1072,13 @@ When I pw clear all cookies
 
 ### **When** I set local storage item {string} to {string}
 
-
-
 ```gherkin
 When I pw set local storage item {string} to {string}
 ```
 
 ---
 
-### **When** I get local storage item {string}
-
-
+### **When** I pw get local storage item {string}
 
 ```gherkin
 When I pw get local storage item {string}
@@ -1254,8 +1088,6 @@ When I pw get local storage item {string}
 
 ### **When** I clear local storage
 
-
-
 ```gherkin
 When I pw clear local storage
 ```
@@ -1263,8 +1095,6 @@ When I pw clear local storage
 ---
 
 ### **When** I set session storage item {string} to {string}
-
-
 
 ```gherkin
 When I pw set session storage item {string} to {string}
@@ -1274,8 +1104,6 @@ When I pw set session storage item {string} to {string}
 
 ### **When** I clear session storage
 
-
-
 ```gherkin
 When I pw clear session storage
 ```
@@ -1283,8 +1111,6 @@ When I pw clear session storage
 ---
 
 ### **When** I tap
-
-
 
 ```gherkin
 When I pw tap
@@ -1294,8 +1120,6 @@ When I pw tap
 
 ### **When** I tap element {string}
 
-
-
 ```gherkin
 When I pw tap element {string}
 ```
@@ -1303,8 +1127,6 @@ When I pw tap element {string}
 ---
 
 ### **When** I tap coordinates x:{int} y:{int}
-
-
 
 ```gherkin
 When I pw tap coordinates x:{int} y:{int}
@@ -1314,8 +1136,6 @@ When I pw tap coordinates x:{int} y:{int}
 
 ### **When** I resize window to width {int} and height {int}
 
-
-
 ```gherkin
 When I pw resize window to width {int} and height {int}
 ```
@@ -1323,8 +1143,6 @@ When I pw resize window to width {int} and height {int}
 ---
 
 ### **When** I simulate device {string}
-
-
 
 ```gherkin
 When I pw simulate device {string}
@@ -1334,8 +1152,6 @@ When I pw simulate device {string}
 
 ### **When** I set geolocation to lat: {float} long: {float}
 
-
-
 ```gherkin
 When I pw set geolocation to lat: {float} long: {float}
 ```
@@ -1343,8 +1159,6 @@ When I pw set geolocation to lat: {float} long: {float}
 ---
 
 ### **When** I grant permission {string}
-
-
 
 ```gherkin
 When I pw grant permission {string}
@@ -1354,8 +1168,6 @@ When I pw grant permission {string}
 
 ### **When** I scroll {string} into view
 
-
-
 ```gherkin
 When I pw scroll {string} into view
 ```
@@ -1363,8 +1175,6 @@ When I pw scroll {string} into view
 ---
 
 ### **When** I scroll {string} to position x:{int} y:{int}
-
-
 
 ```gherkin
 When I pw scroll {string} to position x:{int} y:{int}
@@ -1374,8 +1184,6 @@ When I pw scroll {string} to position x:{int} y:{int}
 
 ### **When** I scroll to coordinates x:{int} y:{int}
 
-
-
 ```gherkin
 When I pw scroll to coordinates x:{int} y:{int}
 ```
@@ -1383,8 +1191,6 @@ When I pw scroll to coordinates x:{int} y:{int}
 ---
 
 ### **When** I scroll mouse window to position top:{int} left:{int}
-
-
 
 ```gherkin
 When I pw scroll mouse window to position top:{int} left:{int}
@@ -1394,8 +1200,6 @@ When I pw scroll mouse window to position top:{int} left:{int}
 
 ### **When** I scroll to {string}
 
-
-
 ```gherkin
 When I pw scroll to {string}
 ```
@@ -1403,8 +1207,6 @@ When I pw scroll to {string}
 ---
 
 ### **When** I hover over the element {string}
-
-
 
 ```gherkin
 When I pw hover over the element {string}
@@ -1414,8 +1216,6 @@ When I pw hover over the element {string}
 
 ### **When** I move mouse to coordinates {int}, {int}
 
-
-
 ```gherkin
 When I pw move mouse to coordinates {int}, {int}
 ```
@@ -1423,8 +1223,6 @@ When I pw move mouse to coordinates {int}, {int}
 ---
 
 ### **When** I hover on ({int})(?:st|nd|rd|th) element ([^]+)
-
-
 
 ```gherkin
 When I pw hover on ({int})(?:st|nd|rd|th) element ([^]+)
@@ -1434,8 +1232,6 @@ When I pw hover on ({int})(?:st|nd|rd|th) element ([^]+)
 
 ### **When** I hover on ({int})(?:st|nd|rd|th) selector ([^]+)
 
-
-
 ```gherkin
 When I pw hover on ({int})(?:st|nd|rd|th) selector ([^]+)
 ```
@@ -1443,8 +1239,6 @@ When I pw hover on ({int})(?:st|nd|rd|th) selector ([^]+)
 ---
 
 ### **When** I visit {string}
-
-
 
 ```gherkin
 When I pw visit {string}
@@ -1454,8 +1248,6 @@ When I pw visit {string}
 
 ### **When** I reload the page
 
-
-
 ```gherkin
 When I pw reload the page
 ```
@@ -1463,8 +1255,6 @@ When I pw reload the page
 ---
 
 ### **When** I go back
-
-
 
 ```gherkin
 When I pw go back
@@ -1474,8 +1264,6 @@ When I pw go back
 
 ### **When** I go forward
 
-
-
 ```gherkin
 When I pw go forward
 ```
@@ -1483,8 +1271,6 @@ When I pw go forward
 ---
 
 ### **When** I navigate to {string}
-
-
 
 ```gherkin
 When I pw navigate to {string}
@@ -1494,8 +1280,6 @@ When I pw navigate to {string}
 
 ### **When** I wait for network idle
 
-
-
 ```gherkin
 When I pw wait for network idle
 ```
@@ -1503,8 +1287,6 @@ When I pw wait for network idle
 ---
 
 ### **When** I wait for load state {string}
-
-
 
 ```gherkin
 When I pw wait for load state {string}
@@ -1514,8 +1296,6 @@ When I pw wait for load state {string}
 
 ### **When** I wait for element to be visible
 
-
-
 ```gherkin
 When I pw wait for element to be visible
 ```
@@ -1523,8 +1303,6 @@ When I pw wait for element to be visible
 ---
 
 ### **When** I wait for element to be hidden
-
-
 
 ```gherkin
 When I pw wait for element to be hidden
@@ -1534,17 +1312,13 @@ When I pw wait for element to be hidden
 
 ### **When** I wait for URL to contain {string}
 
-
-
 ```gherkin
 When I pw wait for URL to contain {string}
 ```
 
 ---
 
-### **When** I expect the response status to be {int}
-
-
+### **When** I pw expect the response status to be {int}
 
 ```gherkin
 When I pw expect the response status to be {int}
@@ -1552,9 +1326,7 @@ When I pw expect the response status to be {int}
 
 ---
 
-### **When** I expect the response body to contain {string}
-
-
+### **When** I pw expect the response body to contain {string}
 
 ```gherkin
 When I pw expect the response body to contain {string}
@@ -1562,9 +1334,7 @@ When I pw expect the response body to contain {string}
 
 ---
 
-### **When** I expect the response property {string} to be {string}
-
-
+### **When** I pw expect the response property {string} to be {string}
 
 ```gherkin
 When I pw expect the response property {string} to be {string}
@@ -1574,8 +1344,6 @@ When I pw expect the response property {string} to be {string}
 
 ### **When** I mock the API endpoint {string} with body {string}
 
-
-
 ```gherkin
 When I pw mock the API endpoint {string} with body {string}
 ```
@@ -1583,8 +1351,6 @@ When I pw mock the API endpoint {string} with body {string}
 ---
 
 ### **When** I mock the API endpoint {string} with response from {string}
-
-
 
 ```gherkin
 When I pw mock the API endpoint {string} with response from {string}
@@ -1594,8 +1360,6 @@ When I pw mock the API endpoint {string} with response from {string}
 
 ### **When** I mock the API endpoint {string} with status {int}
 
-
-
 ```gherkin
 When I pw mock the API endpoint {string} with status {int}
 ```
@@ -1603,8 +1367,6 @@ When I pw mock the API endpoint {string} with status {int}
 ---
 
 ### **When** I intercept URL ([^]+) and stub body:?
-
-
 
 ```gherkin
 When I pw intercept URL ([^]+) and stub body:?
@@ -1614,8 +1376,6 @@ When I pw intercept URL ([^]+) and stub body:?
 
 ### **When** I intercept URL {string} and stub body {string}
 
-
-
 ```gherkin
 When I pw intercept URL {string} and stub body {string}
 ```
@@ -1623,8 +1383,6 @@ When I pw intercept URL {string} and stub body {string}
 ---
 
 ### **When** I intercept URL {string}
-
-
 
 ```gherkin
 When I pw intercept URL {string}
@@ -1634,8 +1392,6 @@ When I pw intercept URL {string}
 
 ### **When** I make request to {string}
 
-
-
 ```gherkin
 When I pw make request to {string}
 ```
@@ -1643,8 +1399,6 @@ When I pw make request to {string}
 ---
 
 ### **When** I make a POST request to ([^]+) with JSON body:?
-
-
 
 ```gherkin
 When I pw make a POST request to ([^]+) with JSON body:?
@@ -1654,8 +1408,6 @@ When I pw make a POST request to ([^]+) with JSON body:?
 
 ### **When** I make a {word} request to {string}
 
-
-
 ```gherkin
 When I pw make a {word} request to {string}
 ```
@@ -1663,8 +1415,6 @@ When I pw make a {word} request to {string}
 ---
 
 ### **When** I make a GET request to {string}
-
-
 
 ```gherkin
 When I pw make a GET request to {string}
@@ -1674,8 +1424,6 @@ When I pw make a GET request to {string}
 
 ### **When** I make a DELETE request to {string}
 
-
-
 ```gherkin
 When I pw make a DELETE request to {string}
 ```
@@ -1683,8 +1431,6 @@ When I pw make a DELETE request to {string}
 ---
 
 ### **When** I make a POST request to {string} with data
-
-
 
 ```gherkin
 When I pw make a POST request to {string} with data
@@ -1694,17 +1440,13 @@ When I pw make a POST request to {string} with data
 
 ### **When** I make a POST request to {string} with payload from {string}
 
-
-
 ```gherkin
 When I pw make a POST request to {string} with payload from {string}
 ```
 
 ---
 
-### **When** I expect the url to contain {string}
-
-
+### **When** I pw expect the url to contain {string}
 
 ```gherkin
 When I pw expect the url to contain {string}
@@ -1712,9 +1454,7 @@ When I pw expect the url to contain {string}
 
 ---
 
-### **When** I expect the url to be {string}
-
-
+### **When** I pw expect the url to be {string}
 
 ```gherkin
 When I pw expect the url to be {string}
@@ -1722,9 +1462,7 @@ When I pw expect the url to be {string}
 
 ---
 
-### **When** I expect the title to contain {string}
-
-
+### **When** I pw expect the title to contain {string}
 
 ```gherkin
 When I pw expect the title to contain {string}
@@ -1732,9 +1470,7 @@ When I pw expect the title to contain {string}
 
 ---
 
-### **When** I expect the title to be {string}
-
-
+### **When** I pw expect the title to be {string}
 
 ```gherkin
 When I pw expect the title to be {string}
@@ -1742,9 +1478,7 @@ When I pw expect the title to be {string}
 
 ---
 
-### **When** I expect {string} to have text {string}
-
-
+### **When** I pw expect {string} to have text {string}
 
 ```gherkin
 When I pw expect {string} to have text {string}
@@ -1752,9 +1486,7 @@ When I pw expect {string} to have text {string}
 
 ---
 
-### **When** I expect {string} to contain text {string}
-
-
+### **When** I pw expect {string} to contain text {string}
 
 ```gherkin
 When I pw expect {string} to contain text {string}
@@ -1762,9 +1494,7 @@ When I pw expect {string} to contain text {string}
 
 ---
 
-### **When** I expect {string} to have value {string}
-
-
+### **When** I pw expect {string} to have value {string}
 
 ```gherkin
 When I pw expect {string} to have value {string}
@@ -1772,9 +1502,7 @@ When I pw expect {string} to have value {string}
 
 ---
 
-### **When** I expect {string} to have attribute {string} with value {string}
-
-
+### **When** I pw expect {string} to have attribute {string} with value {string}
 
 ```gherkin
 When I pw expect {string} to have attribute {string} with value {string}
@@ -1782,9 +1510,7 @@ When I pw expect {string} to have attribute {string} with value {string}
 
 ---
 
-### **When** I expect element to be visible
-
-
+### **When** I pw expect element to be visible
 
 ```gherkin
 When I pw expect element to be visible
@@ -1792,9 +1518,7 @@ When I pw expect element to be visible
 
 ---
 
-### **When** I expect {string} to be visible
-
-
+### **When** I pw expect {string} to be visible
 
 ```gherkin
 When I pw expect {string} to be visible
@@ -1802,9 +1526,7 @@ When I pw expect {string} to be visible
 
 ---
 
-### **When** I expect element to be hidden
-
-
+### **When** I pw expect element to be hidden
 
 ```gherkin
 When I pw expect element to be hidden
@@ -1812,9 +1534,7 @@ When I pw expect element to be hidden
 
 ---
 
-### **When** I expect element to be enabled
-
-
+### **When** I pw expect element to be enabled
 
 ```gherkin
 When I pw expect element to be enabled
@@ -1822,9 +1542,7 @@ When I pw expect element to be enabled
 
 ---
 
-### **When** I expect element to be disabled
-
-
+### **When** I pw expect element to be disabled
 
 ```gherkin
 When I pw expect element to be disabled
@@ -1832,9 +1550,7 @@ When I pw expect element to be disabled
 
 ---
 
-### **When** I expect element to have text {string}
-
-
+### **When** I pw expect element to have text {string}
 
 ```gherkin
 When I pw expect element to have text {string}
@@ -1842,9 +1558,7 @@ When I pw expect element to have text {string}
 
 ---
 
-### **When** I expect element to contain text {string}
-
-
+### **When** I pw expect element to contain text {string}
 
 ```gherkin
 When I pw expect element to contain text {string}
@@ -1852,9 +1566,7 @@ When I pw expect element to contain text {string}
 
 ---
 
-### **When** I expect element to have value {string}
-
-
+### **When** I pw expect element to have value {string}
 
 ```gherkin
 When I pw expect element to have value {string}
@@ -1862,9 +1574,7 @@ When I pw expect element to have value {string}
 
 ---
 
-### **When** I expect element to have attribute {string}
-
-
+### **When** I pw expect element to have attribute {string}
 
 ```gherkin
 When I pw expect element to have attribute {string}
@@ -1872,9 +1582,7 @@ When I pw expect element to have attribute {string}
 
 ---
 
-### **When** I expect element to have attribute {string} with value {string}
-
-
+### **When** I pw expect element to have attribute {string} with value {string}
 
 ```gherkin
 When I pw expect element to have attribute {string} with value {string}
@@ -1882,9 +1590,7 @@ When I pw expect element to have attribute {string} with value {string}
 
 ---
 
-### **When** I expect the page screenshot to match {string}
-
-
+### **When** I pw expect the page screenshot to match {string}
 
 ```gherkin
 When I pw expect the page screenshot to match {string}
@@ -1892,9 +1598,7 @@ When I pw expect the page screenshot to match {string}
 
 ---
 
-### **When** I expect the element screenshot to match {string}
-
-
+### **When** I pw expect the element screenshot to match {string}
 
 ```gherkin
 When I pw expect the element screenshot to match {string}
@@ -1904,8 +1608,6 @@ When I pw expect the element screenshot to match {string}
 
 ### **When** I save the browser state to {string}
 
-
-
 ```gherkin
 When I pw save the browser state to {string}
 ```
@@ -1913,8 +1615,6 @@ When I pw save the browser state to {string}
 ---
 
 ### **When** I load the browser state from {string}
-
-
 
 ```gherkin
 When I pw load the browser state from {string}
@@ -1924,17 +1624,13 @@ When I pw load the browser state from {string}
 
 ### **When** I run the database query {string}
 
-
-
 ```gherkin
 When I pw run the database query {string}
 ```
 
 ---
 
-### **When** I expect the database to return {int} record(s)
-
-
+### **When** I pw expect the database to return {int} record(s)
 
 ```gherkin
 When I pw expect the database to return {int} record(s)
@@ -1942,9 +1638,7 @@ When I pw expect the database to return {int} record(s)
 
 ---
 
-### **When** I expect the database to return no records
-
-
+### **When** I pw expect the database to return no records
 
 ```gherkin
 When I pw expect the database to return no records
@@ -1952,9 +1646,7 @@ When I pw expect the database to return no records
 
 ---
 
-### **When** I expect the first database record to contain
-
-
+### **When** I pw expect the first database record to contain
 
 ```gherkin
 When I pw expect the first database record to contain
@@ -1962,9 +1654,7 @@ When I pw expect the first database record to contain
 
 ---
 
-### **When** I expect database row {int} to contain
-
-
+### **When** I pw expect database row {int} to contain
 
 ```gherkin
 When I pw expect database row {int} to contain
@@ -1972,9 +1662,7 @@ When I pw expect database row {int} to contain
 
 ---
 
-### **When** I expect all database records to contain
-
-
+### **When** I pw expect all database records to contain
 
 ```gherkin
 When I pw expect all database records to contain
@@ -1982,9 +1670,7 @@ When I pw expect all database records to contain
 
 ---
 
-### **When** I expect database column {string} to exist
-
-
+### **When** I pw expect database column {string} to exist
 
 ```gherkin
 When I pw expect database column {string} to exist
@@ -1992,9 +1678,7 @@ When I pw expect database column {string} to exist
 
 ---
 
-### **When** I expect database column {string} to contain {string}
-
-
+### **When** I pw expect database column {string} to contain {string}
 
 ```gherkin
 When I pw expect database column {string} to contain {string}
@@ -2002,9 +1686,7 @@ When I pw expect database column {string} to contain {string}
 
 ---
 
-### **When** I expect database column {string} to be of type {string}
-
-
+### **When** I pw expect database column {string} to be of type {string}
 
 ```gherkin
 When I pw expect database column {string} to be of type {string}
@@ -2014,8 +1696,6 @@ When I pw expect database column {string} to be of type {string}
 
 ### **When** I accept the next dialog
 
-
-
 ```gherkin
 When I pw accept the next dialog
 ```
@@ -2023,8 +1703,6 @@ When I pw accept the next dialog
 ---
 
 ### **When** I dismiss the next dialog
-
-
 
 ```gherkin
 When I pw dismiss the next dialog
@@ -2034,17 +1712,13 @@ When I pw dismiss the next dialog
 
 ### **When** I type {string} into the next prompt and accept
 
-
-
 ```gherkin
 When I pw type {string} into the next prompt and accept
 ```
 
 ---
 
-### **When** I select option {string} from {string}
-
-
+### **When** I pw select option {string} from {string}
 
 ```gherkin
 When I pw select option {string} from {string}
@@ -2054,8 +1728,6 @@ When I pw select option {string} from {string}
 
 ### **When** I check {string}
 
-
-
 ```gherkin
 When I pw check {string}
 ```
@@ -2063,8 +1735,6 @@ When I pw check {string}
 ---
 
 ### **When** I uncheck {string}
-
-
 
 ```gherkin
 When I pw uncheck {string}
@@ -2074,17 +1744,13 @@ When I pw uncheck {string}
 
 ### **When** I upload file {string} to {string}
 
-
-
 ```gherkin
 When I pw upload file {string} to {string}
 ```
 
 ---
 
-### **When** I click {string} inside frame {string}
-
-
+### **When** I pw click {string} inside frame {string}
 
 ```gherkin
 When I pw click {string} inside frame {string}
@@ -2092,9 +1758,7 @@ When I pw click {string} inside frame {string}
 
 ---
 
-### **When** I fill {string} inside frame {string} with {string}
-
-
+### **When** I pw fill {string} inside frame {string} with {string}
 
 ```gherkin
 When I pw fill {string} inside frame {string} with {string}
@@ -2102,17 +1766,13 @@ When I pw fill {string} inside frame {string} with {string}
 
 ---
 
-### **When** I expect {string} inside frame {string} to have text {string}
-
-
+### **When** I pw expect {string} inside frame {string} to have text {string}
 
 ```gherkin
 When I pw expect {string} inside frame {string} to have text {string}
 ```
 
 ---
-
-
 
 ## 📄 License
 
