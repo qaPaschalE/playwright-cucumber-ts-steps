@@ -1,3 +1,27 @@
+# [1.3.3](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/compare/v1.3.2...v1.3.3) (2026-03-02)
+
+
+### Features
+
+* **fixtures:** add `setFixtureConfig()` function for configurable fixture directory and file names ([bd9581f](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/bd9581f))
+* **fixtures:** support custom paths for all 16 fixture file types (selectors, texts, values, endpoints, queries, etc.) ([bd9581f](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/bd9581f))
+
+
+### Documentation
+
+* **readme:** add `setFixtureConfig()` usage examples and configuration options table ([18900f3](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/18900f3))
+
+
+### Technical Changes
+
+* Added global fixture configuration state with `setFixtureConfig()` function
+* Updated `loadFixture()` to resolve custom directory and file names
+* Supports 16 configurable fixture file types
+* Default `fixturesDir` is "fixtures" (backward compatible)
+* All tests passing with new configuration feature
+
+
+
 # [1.3.2](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/compare/v1.3.1...v1.3.2) (2026-02-28)
 
 
