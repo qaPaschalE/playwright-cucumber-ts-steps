@@ -8,6 +8,7 @@ import dotenv from "dotenv";
  * Can be overridden via setFixtureConfig() from playwright.config.ts
  */
 let fixtureConfig: {
+    projectRoot?: string;
     fixturesDir: string;
     selectorsFile?: string;
     textsFile?: string;
@@ -26,6 +27,7 @@ let fixtureConfig: {
     promptsFile?: string;
     envFile?: string;
 } = {
+    projectRoot: undefined,
     fixturesDir: "fixtures",
 };
 
@@ -39,6 +41,7 @@ let envVariables: Record<string, string> = {};
  * @param config - The fixture configuration object
  */
 export function setFixtureConfig(config: {
+    projectRoot?: string;
     fixturesDir?: string;
     selectorsFile?: string;
     textsFile?: string;
@@ -57,6 +60,9 @@ export function setFixtureConfig(config: {
     promptsFile?: string;
     envFile?: string;
 }): void {
+    if (config.projectRoot) {
+        fixtureConfig.projectRoot = config.projectRoot;
+    }
     if (config.fixturesDir) {
         fixtureConfig.fixturesDir = config.fixturesDir;
     }
@@ -108,7 +114,8 @@ export function setFixtureConfig(config: {
     if (config.envFile) {
         fixtureConfig.envFile = config.envFile;
         // Load environment variables from custom .env file
-        const envPath = resolve(process.cwd(), config.envFile);
+        const baseDir = fixtureConfig.projectRoot || process.cwd();
+        const envPath = resolve(baseDir, config.envFile);
         try {
             const envConfig = dotenv.config({ path: envPath });
             if (envConfig.parsed) {
@@ -120,10 +127,10 @@ export function setFixtureConfig(config: {
                         }
                         return acc;
                     }, {} as Record<string, string>);
-                console.log(`✅ Loaded environment variables from "${config.envFile}"`);
+                console.log(`✅ Loaded environment variables from "${envPath}"`);
             }
         } catch (_error: any) {
-            console.warn(`⚠️ Failed to load .env file from "${config.envFile}". Using process.env only.`);
+            console.warn(`⚠️ Failed to load .env file from "${envPath}". Using process.env only.`);
             // Filter out undefined values
             envVariables = Object.entries(process.env)
                 .reduce((acc, [key, value]) => {
@@ -135,7 +142,8 @@ export function setFixtureConfig(config: {
         }
     } else {
         // Load default .env file from project root
-        const defaultEnvPath = resolve(process.cwd(), ".env");
+        const baseDir = fixtureConfig.projectRoot || process.cwd();
+        const defaultEnvPath = resolve(baseDir, ".env");
         try {
             const envConfig = dotenv.config({ path: defaultEnvPath });
             if (envConfig.parsed) {
@@ -212,19 +220,22 @@ function resolveFileName(fileName: string): string {
 
 /**
  * Loads a JSON fixture file from the test project's fixtures directory.
- * Looks in the current working directory (test project root).
+ * Looks in the current working directory (test project root) or custom projectRoot if configured.
  * @param fileName - Name of the fixture file (e.g., "selectors.json").
  * @returns Parsed JSON object.
  */
 export function loadFixture(fileName: string): Record<string, any> {
     try {
         const actualFileName = resolveFileName(fileName);
-        const fixturePath = resolve(process.cwd(), fixtureConfig.fixturesDir, actualFileName);
+        // Use projectRoot if configured (for monorepo support), otherwise use cwd
+        const baseDir = fixtureConfig.projectRoot || process.cwd();
+        const fixturePath = resolve(baseDir, fixtureConfig.fixturesDir, actualFileName);
         const content = readFileSync(fixturePath, "utf8");
         return JSON.parse(content);
     } catch (_error: any) {
         // Return empty object for optional fixtures
-        console.warn(`⚠️ Fixture "${fileName}" not found in "${fixtureConfig.fixturesDir}". Proceeding with empty object.`);
+        const baseDir = fixtureConfig.projectRoot || process.cwd();
+        console.warn(`⚠️ Fixture "${fileName}" not found in "${baseDir}/${fixtureConfig.fixturesDir}". Proceeding with empty object.`);
         return {};
     }
 }
