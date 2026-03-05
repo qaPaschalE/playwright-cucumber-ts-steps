@@ -166,6 +166,17 @@ Step("I pw generate number between {int} and {int} as {string}", async (page: an
 });
 
 /**
+ * Generates a random number with specified digit count.
+ * @example When I pw generate 5 digit number as "fiveDigitNumber"
+ */
+Step("I pw generate {int} digit number as {string}", async (page: any, digitCount: number, alias: string) => {
+    const min = Math.pow(10, digitCount - 1);
+    const max = Math.pow(10, digitCount) - 1;
+    const value = faker.number.int({ min, max }).toString();
+    storeGeneratedValue(page, alias, value, `${digitCount} digit number`);
+});
+
+/**
  * Generates multiple random numbers.
  * @example When I pw generate {int} numbers as "randomNumbers"
  */
@@ -340,9 +351,6 @@ Step("I pw generate phone number as {string}", async (page: any, alias: string) 
 Step("I pw generate country code {string} with random {int} digits as {string}", async (page: any, countryCode: string, digitCount: number, alias: string) => {
     let phoneNumber = countryCode + ' ';
     for (let i = 0; i < digitCount; i++) {
-        if (i > 0 && i % 3 === 0) {
-            phoneNumber += '-';
-        }
         phoneNumber += faker.number.int({ min: 0, max: 9 });
     }
     storeGeneratedValue(page, alias, phoneNumber, `phone number (${countryCode})`);

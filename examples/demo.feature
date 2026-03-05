@@ -61,7 +61,7 @@ Feature: Search Engine Test
   Scenario: Faker - Generate Numbers and Strings
     When I pw generate number as "number"
     And I pw generate number between 10 and 100 as "randomNumber"
-    And I pw generate 5 numbers as "multipleNumbers"
+    And I pw generate 5 digit number as "fiveDigitNumber"
     And I pw generate digit as "digit"
     And I pw generate 5 digits as "digits"
     And I pw generate float as "floatNumber"
