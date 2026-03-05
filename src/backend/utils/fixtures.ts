@@ -232,6 +232,7 @@ export function loadFixture(fileName: string): Record<string, any> {
  * Retrieves a specific value from a loaded fixture.
  * Returns the raw key if fixture or key is not found (fallback to raw selector).
  * Also resolves environment variable placeholders {{VARIABLE_NAME}} in the returned value.
+ * For @alias resolution, use resolveAliasInValue() after getting the value.
  * @param fixture - The loaded fixture object.
  * @param keyPath - Dot-separated path to the desired value (e.g., "login.usernameField").
  * @returns The value at the specified key path with env vars resolved, or the keyPath itself if not found.
@@ -263,10 +264,107 @@ export function getFixtureValue(fixture: Record<string, any>, keyPath: string): 
         }
     }
 
-    // If the value is a string, resolve any environment variable placeholders
+    // Resolve environment variable placeholders in the value (supports strings, objects, and arrays)
+    return resolveEnvVarsInValue(value);
+}
+
+/**
+ * Resolves environment variables in a value recursively (supports strings, objects, and arrays).
+ * @param value - The value to resolve
+ * @returns The value with {{ENV_VAR}} placeholders resolved
+ */
+function resolveEnvVarsInValue(value: any): any {
+    // Handle strings
     if (typeof value === 'string') {
         return resolveEnvVariable(value);
     }
 
+    // Handle arrays
+    if (Array.isArray(value)) {
+        return value.map(item => resolveEnvVarsInValue(item));
+    }
+
+    // Handle objects
+    if (value !== null && typeof value === 'object') {
+        const resolved: any = {};
+        for (const [key, val] of Object.entries(value)) {
+            resolved[key] = resolveEnvVarsInValue(val);
+        }
+        return resolved;
+    }
+
+    // Return primitives as-is
+    return value;
+}
+
+/**
+ * Resolves @alias references in a string value using runtime variables from page state.
+ * This should be called after getFixtureValue() when you need @alias support.
+ * @param value - The value that may contain @alias references
+ * @param page - The Playwright page object
+ * @returns The value with @alias placeholders resolved
+ */
+export async function resolveAliasInValue(value: any, page: any): Promise<any> {
+    // Handle strings
+    if (typeof value === 'string') {
+        // Match @alias pattern (word characters after @)
+        const aliasPattern = /@([a-zA-Z_][a-zA-Z0-9_]*)/g;
+        const matches = [...value.matchAll(aliasPattern)];
+        let result = value;
+        
+        // Process in reverse to preserve indices
+        for (const match of matches.reverse()) {
+            const aliasKey = match[1];
+            let replacement: string | null = null;
+            
+            // Try to get from page state
+            try {
+                const stateModule = await import('./state');
+                const storedValue = stateModule.getVariable(page, aliasKey);
+                if (storedValue !== undefined) {
+                    replacement = String(storedValue);
+                }
+            } catch (_error) {
+                // Continue with env var check
+            }
+            
+            // Check environment variables if not found in page state
+            if (replacement === null) {
+                const envValue = envVariables[aliasKey];
+                if (envValue !== undefined) {
+                    replacement = envValue;
+                }
+            }
+            
+            // Replace if found
+            if (replacement !== null) {
+                result = result.substring(0, match.index) + 
+                        replacement + 
+                        result.substring(match.index! + match[0].length);
+            }
+        }
+        
+        return result;
+    }
+
+    // Handle arrays
+    if (Array.isArray(value)) {
+        const resolvedArray = [];
+        for (const item of value) {
+            resolvedArray.push(await resolveAliasInValue(item, page));
+        }
+        return resolvedArray;
+    }
+
+    // Handle objects
+    if (value !== null && typeof value === 'object') {
+        const resolved: any = {};
+        for (const [key, val] of Object.entries(value)) {
+            resolved[key] = await resolveAliasInValue(val, page);
+        }
+        return resolved;
+    }
+
+    // Return primitives as-is
     return value;
 }
