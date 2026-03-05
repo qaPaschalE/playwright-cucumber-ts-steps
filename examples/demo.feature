@@ -14,7 +14,7 @@ Feature: Search Engine Test
   @api
   Scenario: Fetch User Data
     When I pw make a GET request to "https://jsonplaceholder.typicode.com/users/1"
-    Then I pw expect the response status to be 200
+    Then I pw expect the response status to be "200"
     And I pw expect the response property "name" to be "Leanne Graham"
     And I pw expect the response property "address.city" to be "Gwenborough"
 
@@ -24,19 +24,19 @@ Feature: Search Engine Test
       | title | My New Post        |
       | body  | This is the content|
       | userId| 1                  |
-    Then I pw expect the response status to be 201
+    Then I pw expect the response status to be "201"
     And I pw expect the response property "title" to be "My New Post"
     And I pw expect the response property "id" to be "101"
 
   @api
   Scenario: API Testing - DELETE Request
     When I pw make a DELETE request to "https://jsonplaceholder.typicode.com/posts/1"
-    Then I pw expect the response status to be 200
+    Then I pw expect the response status to be "200"
 
   @api
   Scenario: API Testing - Response Body Contains
     When I pw make a GET request to "https://jsonplaceholder.typicode.com/users/1"
-    Then I pw expect the response status to be 200
+    Then I pw expect the response status to be "200"
     And I pw expect the response body to contain "Leanne Graham"
     And I pw expect the response body to contain "Sincere"
 
