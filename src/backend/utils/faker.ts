@@ -135,7 +135,11 @@ Step("I pw generate text with {int} characters as {string}", async (page: any, l
     while (value.length < length) {
         value += faker.lorem.word() + ' ';
     }
-    value = value.substring(0, length).trim();
+    value = value.trim().substring(0, length);
+    // Ensure exact length by padding if needed
+    while (value.length < length) {
+        value += 'x';
+    }
     storeGeneratedValue(page, alias, value, `text (${length} chars)`);
 });
 
@@ -159,6 +163,19 @@ Step("I pw generate number as {string}", async (page: any, alias: string) => {
 Step("I pw generate number between {int} and {int} as {string}", async (page: any, min: number, max: number, alias: string) => {
     const value = faker.number.int({ min, max }).toString();
     storeGeneratedValue(page, alias, value, `number (${min}-${max})`);
+});
+
+/**
+ * Generates multiple random numbers.
+ * @example When I pw generate {int} numbers as "randomNumbers"
+ */
+Step("I pw generate {int} numbers as {string}", async (page: any, count: number, alias: string) => {
+    const numbers = [];
+    for (let i = 0; i < count; i++) {
+        numbers.push(faker.number.int({ min: 0, max: 999999 }));
+    }
+    const value = numbers.join(',');
+    storeGeneratedValue(page, alias, value, `${count} numbers`);
 });
 
 /**
@@ -314,6 +331,21 @@ Step("I pw generate password with {int} characters as {string}", async (page: an
 Step("I pw generate phone number as {string}", async (page: any, alias: string) => {
     const value = faker.phone.number();
     storeGeneratedValue(page, alias, value, "phone number");
+});
+
+/**
+ * Generates a phone number with country code and specified digit count.
+ * @example When I pw generate country code "+1" with random 10 digits as "randomPhoneNumber"
+ */
+Step("I pw generate country code {string} with random {int} digits as {string}", async (page: any, countryCode: string, digitCount: number, alias: string) => {
+    let phoneNumber = countryCode + ' ';
+    for (let i = 0; i < digitCount; i++) {
+        if (i > 0 && i % 3 === 0) {
+            phoneNumber += '-';
+        }
+        phoneNumber += faker.number.int({ min: 0, max: 9 });
+    }
+    storeGeneratedValue(page, alias, phoneNumber, `phone number (${countryCode})`);
 });
 
 // ==================================================
@@ -521,7 +553,8 @@ Step("I pw get length of {string} as {string}", async (page: any, sourceAlias: s
  * @example Then I pw expect "@username" to have length {int}
  */
 Step("I pw expect {string} to have length {int}", async (page: any, alias: string, expectedLength: number) => {
-    const value = getVariable(page, alias.startsWith('@') ? alias.slice(1) : alias);
+    const cleanAlias = alias.startsWith('@') ? alias.slice(1) : alias;
+    const value = getVariable(page, cleanAlias);
     if (value === undefined) {
         throw new Error(`❌ No value found for alias "${alias}"`);
     }
@@ -529,5 +562,5 @@ Step("I pw expect {string} to have length {int}", async (page: any, alias: strin
     if (actualLength !== expectedLength) {
         throw new Error(`Expected length ${expectedLength}, but got ${actualLength}`);
     }
-    console.log(`✅ "@${alias}" has length ${expectedLength}`);
+    console.log(`✅ "@${cleanAlias}" has length ${expectedLength}`);
 });

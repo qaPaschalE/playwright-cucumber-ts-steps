@@ -61,6 +61,7 @@ Feature: Search Engine Test
   Scenario: Faker - Generate Numbers and Strings
     When I pw generate number as "number"
     And I pw generate number between 10 and 100 as "randomNumber"
+    And I pw generate 5 numbers as "multipleNumbers"
     And I pw generate digit as "digit"
     And I pw generate 5 digits as "digits"
     And I pw generate float as "floatNumber"
@@ -80,6 +81,7 @@ Feature: Search Engine Test
     And I pw generate password as "password"
     And I pw generate password with 12 characters as "password12"
     And I pw generate phone number as "phoneNumber"
+    And I pw generate country code "+1" with random 10 digits as "randomPhoneNumber"
 
   @faker
   Scenario: Faker - Generate Address Data
