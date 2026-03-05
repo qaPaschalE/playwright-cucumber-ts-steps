@@ -11,6 +11,7 @@ import "../backend/elements/index";
 import "../backend/api/index";
 import "../backend/auth/index";
 import "../backend/utils/state";
+import "../backend/utils/faker";
 import "../backend/db/index";
 
 // ✅ Move interfaces to the correct position
