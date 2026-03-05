@@ -1,6 +1,7 @@
 //src/backend/utils/fixtures.ts
 import { readFileSync } from "fs";
 import { resolve } from "path";
+import dotenv from "dotenv";
 
 /**
  * Global fixture configuration.
@@ -23,9 +24,15 @@ let fixtureConfig: {
     urlsFile?: string;
     attributesFile?: string;
     promptsFile?: string;
+    envFile?: string;
 } = {
     fixturesDir: "fixtures",
 };
+
+/**
+ * Cached environment variables loaded from .env file
+ */
+let envVariables: Record<string, string> = {};
 
 /**
  * Sets the fixture configuration from playwright.config.ts
@@ -48,6 +55,7 @@ export function setFixtureConfig(config: {
     urlsFile?: string;
     attributesFile?: string;
     promptsFile?: string;
+    envFile?: string;
 }): void {
     if (config.fixturesDir) {
         fixtureConfig.fixturesDir = config.fixturesDir;
@@ -97,6 +105,97 @@ export function setFixtureConfig(config: {
     if (config.promptsFile) {
         fixtureConfig.promptsFile = config.promptsFile;
     }
+    if (config.envFile) {
+        fixtureConfig.envFile = config.envFile;
+        // Load environment variables from custom .env file
+        const envPath = resolve(process.cwd(), config.envFile);
+        try {
+            const envConfig = dotenv.config({ path: envPath });
+            if (envConfig.parsed) {
+                // Filter out undefined values
+                envVariables = Object.entries({ ...process.env, ...envConfig.parsed })
+                    .reduce((acc, [key, value]) => {
+                        if (value !== undefined) {
+                            acc[key] = value;
+                        }
+                        return acc;
+                    }, {} as Record<string, string>);
+                console.log(`✅ Loaded environment variables from "${config.envFile}"`);
+            }
+        } catch (_error: any) {
+            console.warn(`⚠️ Failed to load .env file from "${config.envFile}". Using process.env only.`);
+            // Filter out undefined values
+            envVariables = Object.entries(process.env)
+                .reduce((acc, [key, value]) => {
+                    if (value !== undefined) {
+                        acc[key] = value;
+                    }
+                    return acc;
+                }, {} as Record<string, string>);
+        }
+    } else {
+        // Load default .env file from project root
+        const defaultEnvPath = resolve(process.cwd(), ".env");
+        try {
+            const envConfig = dotenv.config({ path: defaultEnvPath });
+            if (envConfig.parsed) {
+                // Filter out undefined values
+                envVariables = Object.entries({ ...process.env, ...envConfig.parsed })
+                    .reduce((acc, [key, value]) => {
+                        if (value !== undefined) {
+                            acc[key] = value;
+                        }
+                        return acc;
+                    }, {} as Record<string, string>);
+            } else {
+                // Filter out undefined values
+                envVariables = Object.entries(process.env)
+                    .reduce((acc, [key, value]) => {
+                        if (value !== undefined) {
+                            acc[key] = value;
+                        }
+                        return acc;
+                    }, {} as Record<string, string>);
+            }
+        } catch (_error: any) {
+            // Filter out undefined values
+            envVariables = Object.entries(process.env)
+                .reduce((acc, [key, value]) => {
+                    if (value !== undefined) {
+                        acc[key] = value;
+                    }
+                    return acc;
+                }, {} as Record<string, string>);
+        }
+    }
+}
+
+/**
+ * Resolves environment variable placeholders in a string.
+ * Supports {{VARIABLE_NAME}} syntax for environment variables.
+ * Also supports @alias syntax for runtime variables stored in page state.
+ * @param value - The value that may contain placeholders
+ * @returns The resolved value with placeholders replaced
+ */
+export function resolveEnvVariable(value: string): string {
+    if (typeof value !== 'string') {
+        return value;
+    }
+
+    // Match {{VARIABLE_NAME}} pattern
+    const envVarPattern = /\{\{([^}]+)\}\}/g;
+    
+    return value.replace(envVarPattern, (match, varName) => {
+        const trimmedVarName = varName.trim();
+        const envValue = envVariables[trimmedVarName];
+        
+        if (envValue === undefined) {
+            console.warn(`⚠️ Environment variable "${trimmedVarName}" not found. Using literal value.`);
+            return match; // Return original placeholder if not found
+        }
+        
+        return envValue;
+    });
 }
 
 /**
@@ -132,13 +231,18 @@ export function loadFixture(fileName: string): Record<string, any> {
 /**
  * Retrieves a specific value from a loaded fixture.
  * Returns the raw key if fixture or key is not found (fallback to raw selector).
+ * Also resolves environment variable placeholders {{VARIABLE_NAME}} in the returned value.
  * @param fixture - The loaded fixture object.
  * @param keyPath - Dot-separated path to the desired value (e.g., "login.usernameField").
- * @returns The value at the specified key path, or the keyPath itself if not found.
+ * @returns The value at the specified key path with env vars resolved, or the keyPath itself if not found.
  */
 export function getFixtureValue(fixture: Record<string, any>, keyPath: string): any {
-    // If fixture is empty, return the keyPath as-is (fallback to raw selector)
+    // If fixture is empty, check if keyPath is an env variable placeholder
     if (Object.keys(fixture).length === 0) {
+        // Check if it's an env variable placeholder {{VAR}}
+        if (keyPath.includes('{{') && keyPath.includes('}}')) {
+            return resolveEnvVariable(keyPath);
+        }
         return keyPath;
     }
 
@@ -149,10 +253,19 @@ export function getFixtureValue(fixture: Record<string, any>, keyPath: string): 
         if (value && typeof value === 'object' && key in value) {
             value = value[key];
         } else {
+            // If key not found in fixture, check if keyPath is an env variable
+            if (keyPath.includes('{{') && keyPath.includes('}}')) {
+                return resolveEnvVariable(keyPath);
+            }
             // If key not found in fixture, return the original keyPath (fallback)
             console.warn(`⚠️ Key "${keyPath}" not found in fixture. Using raw value.`);
             return keyPath;
         }
+    }
+
+    // If the value is a string, resolve any environment variable placeholders
+    if (typeof value === 'string') {
+        return resolveEnvVariable(value);
     }
 
     return value;

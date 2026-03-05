@@ -2,7 +2,7 @@ export { runTests } from "./core/runner";
 export { Step } from "./core/registry";
 export { getReporters } from "./reporting/index";
 export { runComponentTests } from "./component/index";
-export { setFixtureConfig } from "./backend/utils/fixtures";
+export { setFixtureConfig, resolveEnvVariable } from "./backend/utils/fixtures";
 
 // Now these should work since they're properly exported from their respective files
 export type { RunnerOptions } from "./core/runner";
