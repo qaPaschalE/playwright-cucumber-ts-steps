@@ -1,3 +1,40 @@
+# [1.3.4](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/compare/v1.3.3...v1.3.4) (2026-03-05)
+
+
+### Features
+
+* **api:** add 13 new API assertion steps including property existence, null checks, array validations, and value storage ([bf79c92](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/bf79c92))
+* **faker:** add generate number with exact digit count and phone number with country code steps ([3a0d271](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/3a0d271))
+* **fixtures:** add `projectRoot` configuration option for monorepo support ([d778883](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/d778883))
+
+
+### Bug Fixes
+
+* **api:** fix status code comparison to handle both string and number inputs ([bf79c92](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/bf79c92))
+* **fixtures:** improve warning messages to show full path for better debugging ([d778883](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/commit/d778883))
+
+
+### Technical Changes
+
+* Added `projectRoot` option to `setFixtureConfig()` for monorepo structures
+* Fixtures and .env files now load from configured `projectRoot` instead of always using `cwd`
+* Added 13 new API assertion steps:
+  - `expect the response status to be successful`
+  - `expect the response body to not contain`
+  - `expect the response body to equal`
+  - `store response property {string} value as {string}`
+  - `expect response property {string} to exist/not exist`
+  - `expect response property {string} to be null/not be null`
+  - `expect response property {string} to contain {string}`
+  - `expect response property {string} array length to be {int}`
+  - `expect response property {string} array to not be empty`
+  - `fill {string} with stored value {string}`
+* Added faker steps for exact digit count numbers and phone numbers with country codes
+* All tests passing (15/15)
+* Backward compatible - no breaking changes
+
+
+
 # [1.3.3](https://github.com/qaPaschalE/playwright-cucumber-ts-steps/compare/v1.3.2...v1.3.3) (2026-03-02)
 
 
