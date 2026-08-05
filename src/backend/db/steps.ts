@@ -12,11 +12,11 @@ import { dbState } from "../utils/state";
  * Supports fixtures for reusable queries.
  * @example When I pw run the database query "selectUsersByEmail"
  */
-export async function runDbQuery(_page: any, queryKey: string): Promise<void> {
+export async function runDbQuery(page: any, queryKey: string): Promise<void> {
   const queries = loadFixture("queries.json");
   const query = getFixtureValue(queries, queryKey);
 
-  await dbState.executeQuery(query);
+  await dbState.executeQuery(page, query);
   console.log(`🗄️ Executed DB Query: ${query}`);
 }
 
@@ -25,7 +25,7 @@ export async function runDbQuery(_page: any, queryKey: string): Promise<void> {
  * @example Then I pw expect the database to return 1 record
  */
 export async function expectDbRecordCount(page: any, count: number): Promise<void> {
-  const result = dbState.getLastResult();
+  const result = dbState.getLastResult(page);
   if (Array.isArray(result)) {
     expect(result.length).toBe(count);
     console.log(`✅ Database returned exactly ${count} record(s).`);
@@ -38,8 +38,8 @@ export async function expectDbRecordCount(page: any, count: number): Promise<voi
  * Asserts that the database query returned no records (empty result set).
  * @example Then I pw expect the database to return no records
  */
-export async function expectDbNoRecords(_page: any): Promise<void> {
-  const result = dbState.getLastResult();
+export async function expectDbNoRecords(page: any): Promise<void> {
+  const result = dbState.getLastResult(page);
   if (!Array.isArray(result)) {
     throw new Error(`Expected array result from database but got: ${typeof result}`);
   }
@@ -58,9 +58,9 @@ export async function expectDbNoRecords(_page: any): Promise<void> {
  */
 export async function expectFirstDbRecordToContain(
   page: any,
-  tableData: string[][]
+  tableData: any
 ): Promise<void> {
-  const result = dbState.getLastResult();
+  const result = dbState.getLastResult(page);
 
   if (!Array.isArray(result) || result.length === 0) {
     throw new Error("❌ Database returned no records to check.");
@@ -70,8 +70,9 @@ export async function expectFirstDbRecordToContain(
   }
 
   const firstRow = result[0];
+  const rawData = tableData.raw ? tableData.raw() : tableData;
 
-  for (const row of tableData) {
+  for (const row of rawData) {
     const key = row[0];
     const expectedValue = row[1];
 
@@ -96,9 +97,9 @@ export async function expectFirstDbRecordToContain(
 export async function expectDbRowToContain(
   page: any,
   index: number,
-  tableData: string[][]
+  tableData: any
 ): Promise<void> {
-  const result = dbState.getLastResult();
+  const result = dbState.getLastResult(page);
 
   if (!Array.isArray(result)) {
     throw new Error(`Expected array result from database but got: ${typeof result}`);
@@ -115,8 +116,9 @@ export async function expectDbRowToContain(
   }
 
   const targetRow = result[index - 1]; // Convert 1-based to 0-based index
+  const rawData = tableData.raw ? tableData.raw() : tableData;
 
-  for (const row of tableData) {
+  for (const row of rawData) {
     const key = row[0];
     const expectedValue = row[1];
 
@@ -138,8 +140,8 @@ export async function expectDbRowToContain(
  * @example Then I pw expect all database records to contain
  * | status | active |
  */
-export async function expectAllDbRecordsToContain(page: any, tableData: string[][]): Promise<void> {
-  const result = dbState.getLastResult();
+export async function expectAllDbRecordsToContain(page: any, tableData: any): Promise<void> {
+  const result = dbState.getLastResult(page);
 
   if (!Array.isArray(result)) {
     throw new Error(`Expected array result from database but got: ${typeof result}`);
@@ -153,10 +155,12 @@ export async function expectAllDbRecordsToContain(page: any, tableData: string[]
     throw new Error("❌ This step requires a Data Table.");
   }
 
+  const rawData = tableData.raw ? tableData.raw() : tableData;
+
   for (let i = 0; i < result.length; i++) {
     const row = result[i];
 
-    for (const tableRow of tableData) {
+    for (const tableRow of rawData) {
       const key = tableRow[0];
       const expectedValue = tableRow[1];
 
@@ -181,7 +185,7 @@ export async function expectDbColumnExists(page: any, columnNameKey: string): Pr
   const columns = loadFixture("columns.json");
   const columnName = getFixtureValue(columns, columnNameKey);
 
-  const result = dbState.getLastResult();
+  const result = dbState.getLastResult(page);
 
   if (!Array.isArray(result) || result.length === 0) {
     throw new Error("❌ Database returned no records to check for columns.");
@@ -214,7 +218,7 @@ export async function expectDbColumnContains(
   const columnName = getFixtureValue(columns, columnNameKey);
   const expectedValue = getFixtureValue(values, expectedValueKey);
 
-  const result = dbState.getLastResult();
+  const result = dbState.getLastResult(page);
 
   if (!Array.isArray(result)) {
     throw new Error(`Expected array result from database but got: ${typeof result}`);
@@ -257,7 +261,7 @@ export async function expectDbColumnType(
   const columnName = getFixtureValue(columns, columnNameKey);
   const dataType = getFixtureValue(types, dataTypeKey);
 
-  const result = dbState.getLastResult();
+  const result = dbState.getLastResult(page);
 
   if (!Array.isArray(result) || result.length === 0) {
     throw new Error("❌ Database returned no records to check.");

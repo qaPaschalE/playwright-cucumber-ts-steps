@@ -344,7 +344,7 @@ Step("I pw get elements by selector {string}", findElementsBySelector, "When");
 Step("I pw find buttons by text {string}", findButtonsByText, "When");
 Step("I pw get first element", getFirstElement, "When");
 Step("I pw get last element", getLastElement, "When");
-Step("I pw get {int}(?:st|nd|rd|th) element", getNthElement, "When");
+Step(/^I pw get (\d+)(?:st|nd|rd|th) element$/, getNthElement, "When");
 Step("I pw store element text as {string}", storeElementText, "When");
 Step("I pw get focused element", getFocusedElement, "When");
 Step("I pw find textarea by label text {string}", findTextareaByLabel, "When");

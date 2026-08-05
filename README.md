@@ -169,16 +169,24 @@ npx playwright test -g "@smoke|@critical"
 
 _(On Windows PowerShell, use `$env:TAGS="@smoke"; npx playwright test`)_
 
-**In your Test Runner (`tests/bdd.spec.ts`):**
+The `runTests()` function acts as the bridge between your Cucumber feature files and the Playwright test runner.
 
 ```typescript
-import { runTests } from "playwright-cucumber-ts-steps";
+import { runTests } from 'playwright-cucumber-ts-steps';
 
-// OPTION 1: Run Everything
-// runTests('features/*.feature');
+// 1. Basic usage - runs all features in a directory
+runTests('e2e/features/**/*.feature');
 
-// OPTION 2: Run only Smoke tests
-runTests("features/*.feature", { tags: "@smoke" });
+// 2. With options
+runTests('e2e/features/**/*.feature', {
+  // Filter by tags
+  tags: '@smoke or @fast',
+  
+  // Custom prefix for steps (defaults to "pw", which makes "pw" optional)
+  // For example, if you set prefix: "qa", you can write: `I qa click "button"`
+  // If you omit this or set prefix: "", you can write: `I click "button"`
+  prefix: 'qa'
+});
 ```
 
 ---

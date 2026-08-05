@@ -73,27 +73,95 @@ export function parseClickOptions(table: any): {
   }
 
   const options: any = {};
+  const warn = (msg: string) => console.warn(`⚠️ parseClickOptions: ${msg}`);
 
   // Parse specific boolean/number values
   if (hash["force"] === "true") options.force = true;
-  if (hash["button"]) options.button = hash["button"];
-  if (hash["timeout"]) options.timeout = parseInt(hash["timeout"], 10);
 
-  // Handle modifiers (comma separated)
-  if (hash["modifiers"]) {
-    options.modifiers = hash["modifiers"].split(",").map((m) => m.trim());
+  // Validate mouse button
+  if (hash["button"]) {
+    const btn = hash["button"];
+    if (btn === "left" || btn === "right" || btn === "middle") {
+      options.button = btn;
+    } else {
+      warn(`invalid button "${btn}" (expected left|right|middle); ignoring.` );
+    }
   }
 
-  // Handle position (x,y)
-  if (hash["x"] && hash["y"]) {
-    options.position = {
-      x: parseInt(hash["x"], 10),
-      y: parseInt(hash["y"], 10),
-    };
+  // Validate and parse timeout (must be a finite positive integer)
+  if (hash["timeout"]) {
+    const parsed = parseInt(hash["timeout"], 10);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      options.timeout = parsed;
+    } else {
+      warn(`invalid timeout "${hash["timeout"]}" (expected a positive integer); ignoring.`);
+    }
+  }
+
+  // Handle modifiers (comma separated) — validate against Playwright's accepted set.
+  // Playwright accepts: "Alt", "Control", "ControlLeft", "ControlRight", "Meta", "Shift".
+  if (hash["modifiers"]) {
+    const ALLOWED = new Set(["Alt", "Control", "ControlLeft", "ControlRight", "Meta", "Shift"]);
+    const modifiers = hash["modifiers"]
+      .split(",")
+      .map((m) => m.trim())
+      .filter(Boolean);
+    const valid = modifiers.filter((m) => ALLOWED.has(m));
+    const invalid = modifiers.filter((m) => !ALLOWED.has(m));
+    if (invalid.length > 0) {
+      warn(`invalid modifiers [${invalid.join(", ")}] (allowed: ${[...ALLOWED].join(", ")}); ignoring.`);
+    }
+    if (valid.length > 0) {
+      options.modifiers = valid as any;
+    }
+  }
+
+  // Handle position (x,y) — both must be finite numbers
+  if (hash["x"] !== undefined && hash["y"] !== undefined) {
+    const x = Number(hash["x"]);
+    const y = Number(hash["y"]);
+    if (Number.isFinite(x) && Number.isFinite(y)) {
+      options.position = { x, y };
+    } else {
+      warn(`invalid position x="${hash["x"]}" y="${hash["y"]}" (expected numbers); ignoring.`);
+    }
   }
 
   return options;
 }
+
+// ==================================================
+// PLAYWRIGHT CONTEXT UTILS
+// ==================================================
+
+export interface BddContext {
+    page: any;
+    request: any;
+    browser: any;
+    context: any;
+    testInfo: any;
+}
+
+/**
+ * Retrieves the Playwright context objects (request, browser, context, testInfo) 
+ * that are injected during test execution.
+ * @param page - The Playwright page object
+ * @returns The BddContext containing Playwright fixtures
+ */
+export function getBddContext(page: any): BddContext {
+    if (!page.__bdd_context) {
+        // Fallback for tests running outside the runner
+        return {
+            page,
+            request: page.request,
+            browser: page.context()?.browser(),
+            context: page.context(),
+            testInfo: null
+        };
+    }
+    return page.__bdd_context;
+}
+
 /**
  * Resolves a raw value, handling variable aliases.
  * If a value starts with "@", it retrieves it from the global state.
@@ -121,49 +189,84 @@ export function resolveValue(page: any, rawValue: string): string {
 
 
 // API RESPONSE STORAGE
-// We use this to store the last API response for assertions in "Then" steps.
-// A simple storage to hold the response between the "When" and "Then" steps
-let lastResponse: APIResponse | null = null;
+// Stored per-page so responses don't leak across scenarios within a worker.
+// Steps set/get via `page.__bdd_apiresponse` instead of a module singleton.
+const API_RESPONSE_KEY = "__bdd_apiresponse";
 
 export const apiState = {
-  setResponse: (response: APIResponse) => {
-    lastResponse = response;
+  setResponse: (page: Page, response: APIResponse) => {
+    (page as any)[API_RESPONSE_KEY] = response;
   },
-  getResponse: () => {
-    if (!lastResponse)
+  getResponse: (page: Page) => {
+    const stored = (page as any)[API_RESPONSE_KEY] as APIResponse | undefined;
+    if (!stored)
       throw new Error(
         "No API response found. Did you run a 'When I make a request' step first?"
       );
-    return lastResponse;
+    return stored;
+  },
+  // Deprecated: legacy single-arg accessors. Prefer the page-aware versions above.
+  // Kept for backward compatibility with any consumer that called the module-singleton API.
+  setResponseGlobal: (response: APIResponse) => {
+    console.warn(
+      "⚠️ apiState.setResponseGlobal is deprecated; use apiState.setResponse(page, response) to avoid cross-scenario state leakage."
+    );
+    lastResponseGlobal = response;
+  },
+  getResponseGlobal: () => {
+    if (!lastResponseGlobal)
+      throw new Error(
+        "No API response found. Did you run a 'When I make a request' step first?"
+      );
+    return lastResponseGlobal;
   },
 };
+// Legacy module-global response (only used by the deprecated *Global accessors).
+let lastResponseGlobal: APIResponse | null = null;
 
 
 // DATABASE QUERY STATE
-// We use this to store a user-provided DB query function and the last result.
+// The DB *adapter* is user config set once before tests run, so it stays a module singleton.
+// The *result* is per-test: stored on `page.__bdd_dbresult` so it doesn't leak across scenarios.
+const DB_RESULT_KEY = "__bdd_dbresult";
+
 // Holds the user's custom DB function
 let dbAdapter: ((query: string) => Promise<any>) | null = null;
-let lastResult: any = null;
 
 export const dbState = {
-  // Runner calls this to register the user's function
+  // Runner calls this to register the user's function (no page available at registration time)
   setAdapter: (fn: (query: string) => Promise<any>) => {
     dbAdapter = fn;
   },
 
   // Step calls this to run a query
-  executeQuery: async (query: string) => {
+  executeQuery: async (page: Page, query: string) => {
     if (!dbAdapter) {
       throw new Error(
         "❌ No Database Adapter found. Pass a 'dbQuery' function to runTests()."
       );
     }
     const result = await dbAdapter(query);
-    lastResult = result;
-    console.log(`🗄️ DB Result:`, JSON.stringify(lastResult));
+    (page as any)[DB_RESULT_KEY] = result;
+    console.log(`🗄️ DB Result:`, JSON.stringify(result));
     return result;
   },
 
   // Assertions use this to check results
-  getLastResult: () => lastResult,
+  getLastResult: (page: Page) => (page as any)[DB_RESULT_KEY],
+
+  // Deprecated single-arg wrappers retained for backward compatibility.
+  executeQueryGlobal: async (query: string) => {
+    if (!dbAdapter) {
+      throw new Error(
+        "❌ No Database Adapter found. Pass a 'dbQuery' function to runTests()."
+      );
+    }
+    const result = await dbAdapter(query);
+    lastResultGlobal = result;
+    console.log(`🗄️ DB Result:`, JSON.stringify(result));
+    return result;
+  },
+  getLastResultGlobal: () => lastResultGlobal,
 };
+let lastResultGlobal: any = null;

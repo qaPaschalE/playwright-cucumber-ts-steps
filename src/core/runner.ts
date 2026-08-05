@@ -3,6 +3,7 @@ import * as fs from "fs";
 import { test } from "@playwright/test";
 import { globSync } from "glob";
 import { stepRegistry } from "./registry";
+import { DataTable } from "./dataTable";
 
 // LOAD BACKEND LIBRARIES
 import "../backend/actions/index";
@@ -18,6 +19,7 @@ import "../backend/db/index";
 export interface RunnerOptions {
   tags?: string;
   dbQuery?: (query: string) => Promise<any>;
+  prefix?: string;
 }
 
 interface ParsedStep {
@@ -54,6 +56,10 @@ function parseSteps(block: string): ParsedStep[] {
     if (isDocStringOpen) {
       docStringBuffer.push(line);
       continue;
+    }
+
+    if (/^Examples:/.test(trimmedLine)) {
+      break;
     }
 
     // C. Skip Empty Lines, Comments, Tags, and section headers
@@ -110,6 +116,50 @@ function extractBackgroundBlock(content: string): string | null {
   const blockEnd =
     nextSection === -1 ? content.length : startIndex + nextSection;
   return content.slice(startIndex, blockEnd);
+}
+
+/**
+ * Extracts Examples from a Scenario Outline block.
+ * Returns an array of objects mapping headers to row values.
+ */
+function extractExamples(block: string): Record<string, string>[] | null {
+  const lines = block.split("\n");
+  let inExamples = false;
+  let headers: string[] | null = null;
+  const examples: Record<string, string>[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!inExamples) {
+      if (/^Examples:/.test(trimmed)) {
+        inExamples = true;
+      }
+      continue;
+    }
+
+    // We are inside Examples block
+    if (trimmed.startsWith("|")) {
+      const cells = trimmed
+        .split("|")
+        .slice(1, -1)
+        .map((c) => c.trim());
+      
+      if (!headers) {
+        headers = cells;
+      } else {
+        const row: Record<string, string> = {};
+        headers.forEach((header, index) => {
+          row[header] = cells[index] || "";
+        });
+        examples.push(row);
+      }
+    } else if (trimmed && !trimmed.startsWith("#")) {
+      // End of Examples table
+      if (headers) break;
+    }
+  }
+
+  return examples.length > 0 ? examples : null;
 }
 
 export function runTests(featureGlob: string, options?: RunnerOptions) {
@@ -243,56 +293,99 @@ export function runTests(featureGlob: string, options?: RunnerOptions) {
             const blockEnd =
               nextMatchIndex === -1 ? content.length : startIndex + nextMatchIndex;
             const scenarioBlock = content.slice(startIndex, blockEnd);
+            const examples = extractExamples(scenarioBlock);
+            const isOutline = scenarioStartMatch[0].includes("Scenario Outline");
+            const iterations = isOutline && examples ? examples : [{}]; // default to 1 iteration
 
-            test(fullName, async ({ page }, testInfo) => {
-              // ==================================================
-              // PHASE 1: PARSE GHERKIN (Preserve Formatting)
-              // ==================================================
-              const scenarioSteps = parseSteps(scenarioBlock);
-              const steps = [...backgroundSteps, ...scenarioSteps];
+            for (let i = 0; i < iterations.length; i++) {
+              const row = iterations[i];
+              const testSuffix = (isOutline && examples) ? ` (Example ${i + 1})` : "";
+              const testName = fullName + testSuffix;
 
-              // ==================================================
-              // PHASE 2: EXECUTE STEPS
-              // ==================================================
-              console.log(`\n🔹 Scenario: ${scenarioName}`);
+              test(testName, async ({ page, request, browser, context }, testInfo) => {
+                // ==================================================
+                // PHASE 1: PARSE GHERKIN (Preserve Formatting)
+                // ==================================================
+                const scenarioSteps = parseSteps(scenarioBlock);
+                const steps = [...backgroundSteps, ...scenarioSteps];
 
-              for (const step of steps) {
-                const matchResult = findMatchingStep(step.cleanText);
+                // ==================================================
+                // PHASE 2: EXECUTE STEPS
+                // ==================================================
+                console.log(`\n🔹 Scenario: ${scenarioName}${testSuffix}`);
 
-                if (!matchResult) {
-                  throw new Error(`❌ Undefined Step: "${step.cleanText}"`);
-                }
+                // Inject Playwright fixtures into page for custom steps to access
+                (page as any).__bdd_context = { page, request, browser, context, testInfo };
 
-                try {
-                  console.log(`   executing: ${step.text.trim()}`);
+                for (const step of steps) {
+                  // Interpolate Example values into the step text
+                  let stepText = step.cleanText;
+                  let docString = step.docString;
+                  let dataTable = step.dataTable ? step.dataTable.map(r => [...r]) : undefined;
 
-                  const args = [...matchResult.args];
-
-                  // Append Data Table if present
-                  if (step.dataTable && step.dataTable.length > 0) {
-                    args.push(step.dataTable);
+                  if (isOutline && examples) {
+                    for (const [key, value] of Object.entries(row)) {
+                      const regex = new RegExp(`<${key}>`, "g");
+                      stepText = stepText.replace(regex, value);
+                      if (docString) {
+                        docString = docString.replace(regex, value);
+                      }
+                      if (dataTable) {
+                        for (let r = 0; r < dataTable.length; r++) {
+                          for (let c = 0; c < dataTable[r].length; c++) {
+                            dataTable[r][c] = dataTable[r][c].replace(regex, value);
+                          }
+                        }
+                      }
+                    }
                   }
 
-                  // Append DocString if present
-                  if (step.docString) {
-                    args.push(step.docString);
-                  }
+                  let matchResult: any;
+                  try {
+                    matchResult = findMatchingStep(stepText, options);
 
-                  await matchResult.fn(page, ...args);
-                } catch (error: any) {
-                  console.error(`❌ Failed at step: "${step.text.trim()}"`);
-                  const screenshot = await page.screenshot({
-                    fullPage: true,
-                    type: "png",
-                  });
-                  await testInfo.attach("failure-screenshot", {
-                    body: screenshot,
-                    contentType: "image/png",
-                  });
-                  throw error;
+                    if (!matchResult) {
+                      throw new Error(`❌ Undefined Step: "${stepText}"`);
+                    }
+
+                    // Log the interpolated text for better debugging
+                    const logText = isOutline && examples ? stepText : step.text.trim();
+                    console.log(`   executing: ${logText}`);
+
+                    const args = [...matchResult.args];
+
+                    // Append Data Table if present
+                    if (dataTable && dataTable.length > 0) {
+                      args.push(new DataTable(dataTable));
+                    }
+
+                    // Append DocString if present
+                    if (docString) {
+                      args.push(docString);
+                    }
+
+                    await matchResult.fn(page, ...args);
+                  } catch (error) {
+                    console.error(`❌ Failed at step: "${step.text.trim()}"`);
+                    if (!page.isClosed()) {
+                      try {
+                        const screenshot = await page.screenshot({
+                            fullPage: true,
+                            type: "png",
+                        });
+                        await testInfo.attach("failure-screenshot", {
+                          body: screenshot,
+                          contentType: "image/png",
+                        });
+                      } catch (screenshotError: any) {
+                        console.error("⚠️ Failed to take screenshot (page might be closed):", screenshotError.message);
+                      }
+                    }
+                    throw error;
+                  }
                 }
-              }
-            });
+              });
+            }
           }
         }
       }
@@ -315,39 +408,66 @@ function escapeRegExp(string: string): string {
  * Finds the matching step definition from the registry.
  * Supports: RegExp (with capture groups) and CucumberExpressions.
  */
-function findMatchingStep(text: string) {
-  for (const step of stepRegistry) {
-    // 1. Cucumber Expression Match (NEW - Proper way)
-    if (step.expression && typeof (step.expression as any).match === "function") {
-      try {
-        const match = (step.expression as any).match(text);
-        if (match) {
-          return {
-            fn: step.fn,
-            args: match.map((arg: any) => arg.getValue(null)),
-          };
-        }
-      } catch (_e) {
-        // Continue to next step if Cucumber Expression fails
-        continue;
-      }
-    }
+function findMatchingStep(text: string, options?: RunnerOptions) {
+  let alternativeText = text;
 
-    // 2. RegExp Match
-    if (step.expression instanceof RegExp) {
-      const match = step.expression.exec(text);
-      if (match) {
-        // match[0] is full string, slice(1) are capture groups
-        return { fn: step.fn, args: match.slice(1) };
-      }
+  if (options?.prefix) {
+    // If they have a custom prefix, map "I <prefix> " to "I pw "
+    const prefixRegex = new RegExp(`^I ${escapeRegExp(options.prefix)} `);
+    if (prefixRegex.test(text)) {
+      alternativeText = text.replace(prefixRegex, "I pw ");
     }
-
-    // 3. String Match (Legacy/Simple)
-    else if (typeof step.expression === "string") {
-      if (step.expression === text) {
-        return { fn: step.fn, args: [] };
-      }
+  } else {
+    // Default (or prefix=""): 'pw' is optional. If it's missing, add it to try matching built-in steps.
+    if (/^I (?!pw )/.test(text)) {
+      alternativeText = text.replace(/^I /, "I pw ");
     }
   }
+
+  const tryMatch = (targetText: string) => {
+    for (const step of stepRegistry) {
+      // 1. Cucumber Expression Match (NEW - Proper way)
+      if (step.expression && typeof (step.expression as any).match === "function") {
+        try {
+          const match = (step.expression as any).match(targetText);
+          if (match) {
+            return {
+              fn: step.fn,
+              args: match.map((arg: any) => arg.getValue(null)),
+            };
+          }
+        } catch (_e) {
+          continue;
+        }
+      }
+
+      // 2. RegExp Match
+      if (step.expression instanceof RegExp) {
+        const match = step.expression.exec(targetText);
+        if (match) {
+          return { fn: step.fn, args: match.slice(1) };
+        }
+      }
+
+      // 3. String Match (Legacy/Simple)
+      else if (typeof step.expression === "string") {
+        if (step.expression === targetText) {
+          return { fn: step.fn, args: [] };
+        }
+      }
+    }
+    return null;
+  };
+
+  // Try matching original text first (allows overriding built-in steps)
+  let match = tryMatch(text);
+  if (match) return match;
+
+  // Try matching with the mapped built-in text
+  if (text !== alternativeText) {
+    match = tryMatch(alternativeText);
+    if (match) return match;
+  }
+
   return null;
 }

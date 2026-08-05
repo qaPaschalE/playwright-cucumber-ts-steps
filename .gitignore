@@ -157,3 +157,4 @@ RELEASE_NOTES_*
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+firebase-debug.log

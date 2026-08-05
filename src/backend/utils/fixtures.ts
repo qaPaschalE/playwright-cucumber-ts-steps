@@ -31,6 +31,15 @@ let fixtureConfig: {
     fixturesDir: "fixtures",
 };
 
+// Initialize from environment variable if running in a Playwright worker
+if (process.env.BDD_FIXTURE_CONFIG) {
+    try {
+        fixtureConfig = { ...fixtureConfig, ...JSON.parse(process.env.BDD_FIXTURE_CONFIG) };
+    } catch (e) {
+        console.warn("⚠️ Failed to parse BDD_FIXTURE_CONFIG from environment variables.");
+    }
+}
+
 /**
  * Cached environment variables loaded from .env file
  */
@@ -60,12 +69,11 @@ export function setFixtureConfig(config: {
     promptsFile?: string;
     envFile?: string;
 }): void {
-    if (config.projectRoot) {
-        fixtureConfig.projectRoot = config.projectRoot;
-    }
-    if (config.fixturesDir) {
-        fixtureConfig.fixturesDir = config.fixturesDir;
-    }
+    // Update local object
+    Object.assign(fixtureConfig, config);
+
+    // Persist to environment so Playwright worker processes inherit the config
+    process.env.BDD_FIXTURE_CONFIG = JSON.stringify(fixtureConfig);
     if (config.selectorsFile) {
         fixtureConfig.selectorsFile = config.selectorsFile;
     }
@@ -198,8 +206,7 @@ export function resolveEnvVariable(value: string): string {
         const envValue = envVariables[trimmedVarName];
         
         if (envValue === undefined) {
-            console.warn(`⚠️ Environment variable "${trimmedVarName}" not found. Using literal value.`);
-            return match; // Return original placeholder if not found
+            throw new Error(`❌ Environment variable "${trimmedVarName}" not found in .env file or process.env!`);
         }
         
         return envValue;
@@ -239,21 +246,18 @@ export function loadFixture(fileName: string): Record<string, any> {
         return {};
     }
 }
-/**
- * Retrieves a specific value from a loaded fixture.
- * Returns the raw key if fixture or key is not found (fallback to raw selector).
- * Also resolves environment variable placeholders {{VARIABLE_NAME}} in the returned value.
- * For @alias resolution, use resolveAliasInValue() after getting the value.
- * @param fixture - The loaded fixture object.
- * @param keyPath - Dot-separated path to the desired value (e.g., "login.usernameField").
- * @returns The value at the specified key path with env vars resolved, or the keyPath itself if not found.
- */
 export function getFixtureValue(fixture: Record<string, any>, keyPath: string): any {
+    // Determine if the keyPath looks like a fixture key (e.g., "login.submitBtn") 
+    // rather than a raw CSS/XPath selector (e.g., "#submit", "//div", "button[type='submit']")
+    const isFixtureKey = /^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*$/.test(keyPath);
+
     // If fixture is empty, check if keyPath is an env variable placeholder
-    if (Object.keys(fixture).length === 0) {
-        // Check if it's an env variable placeholder {{VAR}}
+    if (!fixture || Object.keys(fixture).length === 0) {
         if (keyPath.includes('{{') && keyPath.includes('}}')) {
             return resolveEnvVariable(keyPath);
+        }
+        if (isFixtureKey) {
+            console.warn(`⚠️ Fixture is empty or not loaded, but "${keyPath}" looks like a fixture key. Falling back to raw value.`);
         }
         return keyPath;
     }
@@ -269,8 +273,11 @@ export function getFixtureValue(fixture: Record<string, any>, keyPath: string): 
             if (keyPath.includes('{{') && keyPath.includes('}}')) {
                 return resolveEnvVariable(keyPath);
             }
-            // If key not found in fixture, return the original keyPath (fallback)
-            console.warn(`⚠️ Key "${keyPath}" not found in fixture. Using raw value.`);
+            // If it looks like a fixture key but is missing, throw an error to prevent silent failures!
+            if (isFixtureKey) {
+                throw new Error(`❌ Key "${keyPath}" not found in fixture! Ensure the key exists in your JSON file or use a raw CSS/XPath selector.`);
+            }
+            // Otherwise, it's likely a raw selector, so we return it
             return keyPath;
         }
     }

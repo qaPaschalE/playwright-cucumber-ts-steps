@@ -108,6 +108,6 @@ export async function dragToTarget(page: any, targetKey: string): Promise<void> 
 Step("I pw click {string}", clickElement, "When");
 Step("I pw force click {string}", forceClickElement, "When");
 Step("I pw fill {string} with {string}", fillElement, "When");
-Step("I pw press {string}", pressKeyGlobal, "When");
+Step("I pw press global key {string}", pressKeyGlobal, "When");
 Step("I pw drag {string} to {string}", dragElementTo, "When");
 Step("I pw drag to {string}", dragToTarget, "And");

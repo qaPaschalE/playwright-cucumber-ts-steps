@@ -13,7 +13,7 @@ import { setVariable, getVariable } from "../utils/state";
  * @example Then I pw expect the response status to be 200
  */
 export async function expectResponseStatus(page: any, statusCode: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
   expect(String(response.status())).toBe(String(statusCode));
   console.log(`✅ Response status is ${statusCode}`);
@@ -23,8 +23,8 @@ export async function expectResponseStatus(page: any, statusCode: string): Promi
  * Asserts that the HTTP status code of the last API response is successful (2xx).
  * @example Then I pw expect the response status to be successful
  */
-export async function expectResponseStatusSuccess(_page: any): Promise<void> {
-  const response = apiState.getResponse();
+export async function expectResponseStatusSuccess(page: any): Promise<void> {
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
   const status = response.status();
   expect(status).toBeGreaterThanOrEqual(200);
@@ -38,7 +38,7 @@ export async function expectResponseStatusSuccess(_page: any): Promise<void> {
  * @example Then I pw expect the response body to contain "success"
  */
 export async function expectResponseBodyContain(page: any, textKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const texts = loadFixture("responses.json");
@@ -54,7 +54,7 @@ export async function expectResponseBodyContain(page: any, textKey: string): Pro
  * @example Then I pw expect the response body to not contain "error"
  */
 export async function expectResponseBodyNotContain(page: any, textKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const texts = loadFixture("responses.json");
@@ -70,7 +70,7 @@ export async function expectResponseBodyNotContain(page: any, textKey: string): 
  * @example Then I pw expect the response body to equal "OK"
  */
 export async function expectResponseBodyEqual(page: any, textKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const texts = loadFixture("responses.json");
@@ -91,7 +91,7 @@ export async function expectResponseProperty(
   jsonPathKey: string,
   valueKey: string
 ): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -112,7 +112,7 @@ export async function expectResponseProperty(
  * @example When I pw store response property "user.id" value as "userId"
  */
 export async function storeResponseProperty(page: any, jsonPathKey: string, alias: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -130,7 +130,7 @@ export async function storeResponseProperty(page: any, jsonPathKey: string, alia
  * @example Then I pw expect response property "user.email" to exist
  */
 export async function expectResponsePropertyExists(page: any, jsonPathKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -148,7 +148,7 @@ export async function expectResponsePropertyExists(page: any, jsonPathKey: strin
  * @example Then I pw expect response property "user.deletedAt" to not exist
  */
 export async function expectResponsePropertyNotExists(page: any, jsonPathKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -166,7 +166,7 @@ export async function expectResponsePropertyNotExists(page: any, jsonPathKey: st
  * @example Then I pw expect response property "user.deletedAt" to be null
  */
 export async function expectResponsePropertyBeNull(page: any, jsonPathKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -184,7 +184,7 @@ export async function expectResponsePropertyBeNull(page: any, jsonPathKey: strin
  * @example Then I pw expect response property "user.id" to not be null
  */
 export async function expectResponsePropertyNotNull(page: any, jsonPathKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -202,7 +202,7 @@ export async function expectResponsePropertyNotNull(page: any, jsonPathKey: stri
  * @example Then I pw expect response property "user.email" to contain "@example.com"
  */
 export async function expectResponsePropertyContains(page: any, jsonPathKey: string, substring: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -220,7 +220,7 @@ export async function expectResponsePropertyContains(page: any, jsonPathKey: str
  * @example Then I pw expect response property "users" array length to be 10
  */
 export async function expectResponseArrayLength(page: any, jsonPathKey: string, expectedLength: number): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");
@@ -239,7 +239,7 @@ export async function expectResponseArrayLength(page: any, jsonPathKey: string, 
  * @example Then I pw expect response property "users" array to not be empty
  */
 export async function expectResponseArrayNotEmpty(page: any, jsonPathKey: string): Promise<void> {
-  const response = apiState.getResponse();
+  const response = apiState.getResponse(page);
   if (!response) throw new Error("❌ No API response found. Did you forget to make a request?");
 
   const paths = loadFixture("paths.json");

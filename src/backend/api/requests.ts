@@ -18,7 +18,7 @@ export async function makeGetRequest(page: any, urlKey: string): Promise<void> {
   const url = getFixtureValue(endpoints, urlKey);
 
   const response = await page.request.get(url);
-  apiState.setResponse(response);
+  apiState.setResponse(page, response);
   console.log(`GET ${url} - Status: ${response.status()}`);
 }
 
@@ -32,7 +32,7 @@ export async function makeDeleteRequest(page: any, urlKey: string): Promise<void
   const url = getFixtureValue(endpoints, urlKey);
 
   const response = await page.request.delete(url);
-  apiState.setResponse(response);
+  apiState.setResponse(page, response);
   console.log(`DELETE ${url} - Status: ${response.status()}`);
 }
 
@@ -42,17 +42,16 @@ export async function makeDeleteRequest(page: any, urlKey: string): Promise<void
  * | name | John |
  * | job  | Dev  |
  */
-export async function makePostRequestWithTable(
+export async function postRequestWithTable(
   page: any,
   urlKey: string,
-  tableData: string[][]
+  tableData: any
 ): Promise<void> {
   if (!tableData) throw new Error("This step requires a Data Table.");
 
   const endpoints = loadFixture("endpoints.json");
   const url = getFixtureValue(endpoints, urlKey);
-
-  const payload = tableData.reduce((acc: any, row: string[]) => {
+  const payload = tableData.rowsHash ? tableData.rowsHash() : tableData.reduce((acc: any, row: string[]) => {
     acc[row[0]] = row[1];
     return acc;
   }, {});
@@ -62,7 +61,7 @@ export async function makePostRequestWithTable(
     headers: { "Content-Type": "application/json" },
   });
 
-  apiState.setResponse(response);
+  apiState.setResponse(page, response);
   console.log(`POST ${url} (Table) - Status: ${response.status()}`);
 }
 
@@ -96,7 +95,7 @@ export async function makePostRequestWithFile(
     headers: { "Content-Type": "application/json" },
   });
 
-  apiState.setResponse(response);
+  apiState.setResponse(page, response);
   console.log(`POST ${url} (File: ${filePath}) - Status: ${response.status()}`);
 }
 
@@ -106,5 +105,5 @@ export async function makePostRequestWithFile(
 
 Step("I pw make a GET request to {string}", makeGetRequest, "When");
 Step("I pw make a DELETE request to {string}", makeDeleteRequest, "When");
-Step("I pw make a POST request to {string} with data", makePostRequestWithTable, "When");
+Step("I pw make a POST request to {string} with data", postRequestWithTable, "When");
 Step("I pw make a POST request to {string} with payload from {string}", makePostRequestWithFile, "When");

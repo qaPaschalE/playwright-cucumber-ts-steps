@@ -88,3 +88,25 @@ Step("I pw wait for element to be visible", waitForElementVisible, "When");
 Step("I pw wait for {string} to be visible", waitForElementVisibleBySelector, "When");
 Step("I pw wait for element to be hidden", waitForElementHidden, "When");
 Step("I pw wait for URL to contain {string}", waitForUrlContain, "When");
+
+/**
+ * Pauses execution for a specified number of milliseconds.
+ * @example When I pw wait for 2000 milliseconds
+ */
+export async function waitForMilliseconds(page: any, msStr: string): Promise<void> {
+  const ms = parseInt(msStr, 10);
+  await page.waitForTimeout(ms);
+  console.log(`⏱️ Waited for ${ms} milliseconds`);
+}
+Step("I pw wait for {int} milliseconds", waitForMilliseconds, "When");
+
+/**
+ * Pauses execution for a specified number of seconds.
+ * @example When I pw wait for 2 seconds
+ */
+export async function waitForSeconds(page: any, secStr: string): Promise<void> {
+  const seconds = parseInt(secStr, 10);
+  await page.waitForTimeout(seconds * 1000);
+  console.log(`⏱️ Waited for ${seconds} seconds`);
+}
+Step("I pw wait for {int} seconds", waitForSeconds, "When");
