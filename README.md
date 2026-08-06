@@ -189,6 +189,8 @@ runTests('e2e/features/**/*.feature', {
 });
 ```
 
+> **Tip:** The `prefix` option is particularly useful if you are writing shared feature files that are also executed by other test runners, such as [k6-cucumber-steps](https://www.npmjs.com/package/k6-cucumber-steps) for performance testing. By configuring a custom prefix (or leaving it empty), you can ensure both runners can execute the exact same `.feature` files seamlessly!
+
 ---
 
 ## 💡 Various Usage Examples
